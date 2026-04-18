@@ -3,6 +3,7 @@ package com.examensw1.backend.modules.workflow.service;
 import com.examensw1.backend.modules.workflow.domain.*;
 import com.examensw1.backend.modules.workflow.dto.*;
 
+import com.examensw1.backend.modules.notification.service.NotificationService;
 import com.examensw1.backend.modules.workflow.repository.ProcesoInstanciaRepository;
 import com.examensw1.backend.modules.workflow.repository.WorkflowRepository;
 import com.examensw1.backend.shared.enums.NodeType;
@@ -21,6 +22,7 @@ public class WorkflowEngineService {
 
     private final WorkflowRepository workflowRepository;
     private final ProcesoInstanciaRepository procesoInstanciaRepository;
+    private final NotificationService notificationService;
 
     public ProcesoInstanciaDTO iniciarProceso(IniciarProcesoRequest request, String usuarioId) {
         Workflow template = workflowRepository.findById(request.getTemplateId())
@@ -88,7 +90,17 @@ public class WorkflowEngineService {
         }
 
         instancia.setUpdatedAt(LocalDateTime.now());
-        return toDTO(procesoInstanciaRepository.save(instancia));
+        ProcesoInstanciaDTO resultado = toDTO(procesoInstanciaRepository.save(instancia));
+
+        notificationService.enviarNotificacion(
+                usuarioId,
+                "Trámite avanzado",
+                "El trámite " + instancia.getCodigo() + " avanzó al nodo: " + instancia.getNodoActual().getNombre(),
+                "WORKFLOW_AVANCE",
+                instanciaId
+        );
+
+        return resultado;
     }
 
     public ProcesoInstanciaDTO rechazarNodo(String instanciaId, String usuarioId, String motivo) {
@@ -100,7 +112,17 @@ public class WorkflowEngineService {
         instancia.setUpdatedAt(LocalDateTime.now());
         registrarHistorial(instancia, instancia.getNodoActual(), usuarioId, "RECHAZO", motivo);
 
-        return toDTO(procesoInstanciaRepository.save(instancia));
+        ProcesoInstanciaDTO resultado = toDTO(procesoInstanciaRepository.save(instancia));
+
+        notificationService.enviarNotificacion(
+                usuarioId,
+                "Trámite rechazado",
+                "El trámite " + instancia.getCodigo() + " fue rechazado. Motivo: " + motivo,
+                "WORKFLOW_RECHAZO",
+                instanciaId
+        );
+
+        return resultado;
     }
 
     public List<ProcesoInstanciaDTO> listarInstancias() {
