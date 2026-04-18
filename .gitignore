@@ -1,0 +1,36 @@
+# Ambientes virtuales
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependencias
+node_modules/
+
+# Compilación
+target/
+dist/
+build/
+*.class
+*.jar
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Cachés
+.gradle/
+.m2/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
