@@ -1,0 +1,46 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <div class="login-logo">
+        <span class="logo-wt">WT</span>
+        <h2>Workflow Trámites</h2>
+        <p>Sistema de Gestión de Procesos</p>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Ingresa tu usuario">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password"
+                 [type]="hidePassword ? 'password' : 'text'">
+          <button mat-icon-button matSuffix type="button"
+                  (click)="hidePassword = !hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        @if (error) {
+          <p class="error-msg">{{ error }}</p>
+        }
+
+        <button mat-raised-button color="primary"
+                type="submit" class="full-width submit-btn"
+                [disabled]="loading">
+          @if (loading) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            Iniciar Sesión
+          }
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
