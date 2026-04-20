@@ -52,7 +52,7 @@ public class WorkflowEngineService {
         return toDTO(procesoInstanciaRepository.save(instancia));
     }
 
-    public ProcesoInstanciaDTO avanzarNodo(String instanciaId, String usuarioId, String observacion) {
+    public ProcesoInstanciaDTO avanzarNodo(String instanciaId, String usuarioId, String observacion, String condicion) {
         ProcesoInstancia instancia = procesoInstanciaRepository.findById(instanciaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Instancia", instanciaId));
 
@@ -66,27 +66,26 @@ public class WorkflowEngineService {
         String nodoActualId = instancia.getNodoActual().getId();
         WorkflowEdge conexion = template.getConexiones().stream()
                 .filter(e -> e.getNodoOrigenId().equals(nodoActualId))
+                .filter(e -> condicion == null || condicion.isBlank() || condicion.equals(e.getCondicion()))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new BusinessException(
+                        condicion != null && !condicion.isBlank()
+                                ? "No existe una conexión con la condición: " + condicion
+                                : "No existe conexión desde el nodo actual"));
 
-        if (conexion == null) {
-            instancia.setEstadoActual("COMPLETADO");
+        WorkflowNode siguienteNodo = template.getNodos().stream()
+                .filter(n -> n.getId().equals(conexion.getNodoDestinoId()))
+                .findFirst()
+                .orElseThrow(() -> new BusinessException("Nodo destino no encontrado"));
+
+        registrarHistorial(instancia, instancia.getNodoActual(), usuarioId, "AVANCE",
+                (condicion != null && !condicion.isBlank() ? "[" + condicion + "] " : "") + observacion);
+        instancia.setNodoActual(siguienteNodo);
+        instancia.setResponsableActualId(null);
+        instancia.setEstadoActual(NodeType.FIN.equals(siguienteNodo.getTipo()) ? "COMPLETADO" : "EN_PROCESO");
+
+        if ("COMPLETADO".equals(instancia.getEstadoActual())) {
             instancia.setFinishedAt(LocalDateTime.now());
-            registrarHistorial(instancia, instancia.getNodoActual(), usuarioId, "FIN", "Trámite completado");
-        } else {
-            WorkflowNode siguienteNodo = template.getNodos().stream()
-                    .filter(n -> n.getId().equals(conexion.getNodoDestinoId()))
-                    .findFirst()
-                    .orElseThrow(() -> new BusinessException("Nodo destino no encontrado"));
-
-            registrarHistorial(instancia, instancia.getNodoActual(), usuarioId, "AVANCE", observacion);
-            instancia.setNodoActual(siguienteNodo);
-            instancia.setResponsableActualId(null);
-            instancia.setEstadoActual(NodeType.FIN.equals(siguienteNodo.getTipo()) ? "COMPLETADO" : "EN_PROCESO");
-
-            if ("COMPLETADO".equals(instancia.getEstadoActual())) {
-                instancia.setFinishedAt(LocalDateTime.now());
-            }
         }
 
         instancia.setUpdatedAt(LocalDateTime.now());

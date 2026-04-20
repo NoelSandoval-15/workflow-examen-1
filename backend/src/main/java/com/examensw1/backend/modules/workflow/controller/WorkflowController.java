@@ -85,10 +85,11 @@ public class WorkflowController {
     @PutMapping("/instancias/{id}/avanzar")
     public ResponseEntity<ApiResponse<ProcesoInstanciaDTO>> avanzar(
             @PathVariable String id,
-            @RequestParam(defaultValue = "") String observacion,
+            @RequestBody(required = false) AvanzarNodoRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
+        AvanzarNodoRequest req = request != null ? request : new AvanzarNodoRequest();
         return ResponseEntity.ok(ApiResponse.ok("Trámite avanzado",
-                workflowEngineService.avanzarNodo(id, userDetails.getUsername(), observacion)));
+                workflowEngineService.avanzarNodo(id, userDetails.getUsername(), req.getObservacion(), req.getCondicion())));
     }
 
     @PutMapping("/instancias/{id}/rechazar")
