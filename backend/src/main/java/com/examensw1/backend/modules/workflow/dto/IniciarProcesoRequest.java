@@ -14,7 +14,6 @@ public class IniciarProcesoRequest {
     @NotBlank(message = "El templateId es obligatorio")
     private String templateId;
 
-    @NotBlank(message = "El clienteId es obligatorio")
     private String clienteId;
 
     private String prioridad = "NORMAL";
