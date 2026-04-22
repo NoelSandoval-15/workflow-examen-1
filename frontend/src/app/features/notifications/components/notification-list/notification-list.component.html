@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h2>Notificaciones</h2>
+  <button mat-stroked-button (click)="marcarTodas()">
+    <mat-icon>done_all</mat-icon> Marcar todas como leídas
+  </button>
+</div>
+
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else {
+  <div class="notif-list">
+    @for (n of notificaciones; track n.id) {
+      <mat-card class="notif-card" [class.unread]="!n.leida" (click)="marcarLeida(n)">
+        <mat-card-header>
+          <mat-icon mat-card-avatar [class.icon-unread]="!n.leida">{{ getIcono(n.tipo) }}</mat-icon>
+          <mat-card-title>{{ n.titulo }}</mat-card-title>
+          <mat-card-subtitle>{{ n.createdAt | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ n.mensaje }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (notificaciones.length === 0) {
+      <div class="empty-state">
+        <mat-icon>notifications_none</mat-icon>
+        <p>Sin notificaciones</p>
+      </div>
+    }
+  </div>
+}

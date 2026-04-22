@@ -2,9 +2,11 @@
   <span class="spacer"></span>
 
   <button mat-icon-button [routerLink]="'/notificaciones'">
-    <mat-icon [matBadge]="unreadCount > 0 ? unreadCount : null" matBadgeColor="warn">
-      notifications
-    </mat-icon>
+    @if (unreadCount > 0) {
+      <mat-icon [matBadge]="unreadCount" matBadgeColor="warn">notifications</mat-icon>
+    } @else {
+      <mat-icon>notifications</mat-icon>
+    }
   </button>
 
   <button mat-icon-button [matMenuTriggerFor]="userMenu">

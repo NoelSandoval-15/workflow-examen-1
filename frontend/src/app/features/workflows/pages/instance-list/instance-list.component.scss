@@ -1,0 +1,25 @@
+.page-header {
+  margin-bottom: 20px;
+  h2 { margin: 0; font-size: 22px; color: #1e293b; }
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+}
+
+.full-width { width: 100%; }
+
+.clickable-row {
+  cursor: pointer;
+  &:hover { background: #f8fafc; }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  color: #94a3b8;
+  mat-icon { font-size: 48px; width: 48px; height: 48px; }
+  p { margin-top: 8px; }
+}

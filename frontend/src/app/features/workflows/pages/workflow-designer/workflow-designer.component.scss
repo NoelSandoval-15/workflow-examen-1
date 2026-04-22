@@ -1,0 +1,60 @@
+.designer-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.meta-card {
+  margin-bottom: 20px;
+
+  .meta-form {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      flex: 1;
+      min-width: 240px;
+    }
+  }
+}
+
+.modeler-card {
+  mat-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  .spacer { flex: 1; }
+
+  .hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 12px;
+
+    mat-icon { font-size: 16px; width: 16px; height: 16px; color: #3b82f6; }
+  }
+}

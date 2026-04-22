@@ -1,0 +1,167 @@
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else if (instancia) {
+
+  <!-- HEADER -->
+  <div class="detail-header">
+    <button mat-icon-button (click)="volver()"><mat-icon>arrow_back</mat-icon></button>
+    <div class="header-info">
+      <h2>{{ instancia.codigo }}</h2>
+      <span class="estado-badge" [class]="'estado-' + instancia.estadoActual.toLowerCase()">
+        {{ instancia.estadoActual }}
+      </span>
+    </div>
+    <span class="spacer"></span>
+    <div class="header-meta">
+      <span><mat-icon>schedule</mat-icon> {{ instancia.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      <span><mat-icon>flag</mat-icon> {{ instancia.prioridad ?? 'NORMAL' }}</span>
+    </div>
+  </div>
+
+  <!-- STEPPER DE PROGRESO -->
+  @if (template) {
+    <mat-card class="stepper-card">
+      <mat-card-content>
+        <div class="stepper">
+          @for (nodo of template.nodos; track nodo.id; let last = $last) {
+            <div class="step" [class.active]="nodo.id === instancia.nodoActual?.id"
+                             [class.done]="esPasado(nodo.id)"
+                             [class.rejected]="instancia.estadoActual === 'RECHAZADO' && nodo.id === instancia.nodoActual?.id">
+              <div class="step-circle">
+                @if (esPasado(nodo.id)) {
+                  <mat-icon>check</mat-icon>
+                } @else if (instancia.estadoActual === 'RECHAZADO' && nodo.id === instancia.nodoActual?.id) {
+                  <mat-icon>close</mat-icon>
+                } @else {
+                  <span>{{ nodo.orden ?? ($index + 1) }}</span>
+                }
+              </div>
+              <div class="step-label">{{ nodo.nombre }}</div>
+              @if (!last) {
+                <div class="step-line" [class.done]="esPasado(nodo.id)"></div>
+              }
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <div class="detail-grid">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="left-col">
+
+      <!-- DIAGRAMA BPMN -->
+      @if (template) {
+        <mat-card class="bpmn-card">
+          <mat-card-header>
+            <mat-card-title><mat-icon>account_tree</mat-icon> Diagrama del Proceso</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-bpmn-viewer [template]="template" [nodoActualId]="instancia.nodoActual?.id">
+            </app-bpmn-viewer>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- ACCIONES -->
+      @if (!estaFinalizado) {
+        <mat-card class="actions-card">
+          <mat-card-header>
+            <mat-card-title><mat-icon>touch_app</mat-icon> Acciones</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (!mostrarFormAvanzar) {
+              <div class="action-buttons">
+                <button mat-raised-button color="primary" (click)="mostrarFormAvanzar = true">
+                  <mat-icon>arrow_forward</mat-icon> Avanzar al siguiente nodo
+                </button>
+                <button mat-raised-button color="warn" (click)="rechazar()" [disabled]="procesando">
+                  <mat-icon>cancel</mat-icon> Rechazar trámite
+                </button>
+              </div>
+            } @else {
+              <form [formGroup]="avanzarForm" (ngSubmit)="avanzar()">
+                @if (conexionesDelNodoActual.length > 1) {
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Selecciona el camino a seguir</mat-label>
+                    <mat-select formControlName="condicion">
+                      @for (c of conexionesDelNodoActual; track c.id) {
+                        <mat-option [value]="c.condicion">
+                          {{ c.etiqueta ?? c.condicion ?? 'Opción ' + ($index + 1) }}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                }
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Observación (opcional)</mat-label>
+                  <textarea matInput formControlName="observacion" rows="3"
+                            placeholder="Ej: Documentos verificados correctamente"></textarea>
+                </mat-form-field>
+                <div class="action-buttons">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="procesando">
+                    @if (procesando) { <mat-spinner diameter="18"></mat-spinner> }
+                    @else { <ng-container><mat-icon>check</mat-icon> Confirmar avance</ng-container> }
+                  </button>
+                  <button mat-stroked-button type="button" (click)="mostrarFormAvanzar = false">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+
+      @if (estaFinalizado) {
+        <mat-card class="finalizado-card" [class.completado]="instancia.estadoActual === 'COMPLETADO'"
+                                          [class.rechazado]="instancia.estadoActual === 'RECHAZADO'">
+          <mat-card-content class="finalizado-content">
+            <mat-icon>{{ instancia.estadoActual === 'COMPLETADO' ? 'check_circle' : 'cancel' }}</mat-icon>
+            <strong>Trámite {{ instancia.estadoActual === 'COMPLETADO' ? 'completado exitosamente' : 'rechazado' }}</strong>
+          </mat-card-content>
+        </mat-card>
+      }
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="right-col">
+
+      <!-- NODO ACTUAL -->
+      <mat-card class="nodo-card">
+        <mat-card-header>
+          <mat-card-title>Nodo Actual</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="nodo-info">
+            <mat-icon class="nodo-icon">location_on</mat-icon>
+            <div>
+              <div class="nodo-nombre">{{ instancia.nodoActual?.nombre ?? '—' }}</div>
+              <div class="nodo-tipo">{{ instancia.nodoActual?.tipo }}</div>
+              @if (instancia.nodoActual?.departamentoId) {
+                <div class="nodo-dep">
+                  <mat-icon>business</mat-icon> {{ instancia.nodoActual?.departamentoId }}
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- HISTORIAL -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><mat-icon>history</mat-icon> Historial de pasos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-history-timeline [historial]="instancia.historialResumen ?? []">
+          </app-history-timeline>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </div>
+}

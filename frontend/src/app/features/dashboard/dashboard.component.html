@@ -1,4 +1,54 @@
-<div class="dashboard-container">
-  <h1>Dashboard</h1>
-  <p>Panel principal — en construcción</p>
+<div class="dashboard-page">
+  <div class="page-header">
+    <h2>Dashboard</h2>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+  } @else {
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <mat-card class="stat-card" [routerLink]="stat.route">
+          <mat-card-content>
+            <div class="stat-icon" [style.background]="stat.color + '20'">
+              <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" [style.color]="stat.color">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+
+    <mat-card class="recent-card">
+      <mat-card-header>
+        <mat-card-title>Trámites Recientes</mat-card-title>
+        <span class="spacer"></span>
+        <button mat-button color="primary" routerLink="/tramites">Ver todos</button>
+      </mat-card-header>
+      <mat-card-content>
+        @for (inst of recentInstancias; track inst.id) {
+          <div class="recent-item" [routerLink]="['/tramites', inst.id]">
+            <mat-icon class="recent-icon">description</mat-icon>
+            <div class="recent-info">
+              <span class="recent-codigo">{{ inst.codigo }}</span>
+              <span class="recent-nodo">{{ inst.nodoActual?.nombre ?? '—' }}</span>
+            </div>
+            <span class="recent-estado"
+                  [class.estado-proceso]="inst.estadoActual === 'EN_PROCESO'"
+                  [class.estado-ok]="inst.estadoActual === 'COMPLETADO'"
+                  [class.estado-error]="inst.estadoActual === 'RECHAZADO'">
+              {{ inst.estadoActual }}
+            </span>
+            <span class="recent-fecha">{{ inst.createdAt | date:'dd/MM' }}</span>
+          </div>
+        }
+        @if (recentInstancias.length === 0) {
+          <p class="empty">No hay trámites registrados aún</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
 </div>

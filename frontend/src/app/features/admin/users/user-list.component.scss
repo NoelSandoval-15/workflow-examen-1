@@ -1,0 +1,38 @@
+.page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+  h2 { margin: 0; font-size: 1.4rem; }
+}
+
+.form-card { margin-bottom: 20px; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+  .full-col { grid-column: 1/-1; }
+}
+
+.form-actions { grid-column: 1/-1; display: flex; gap: 12px; margin-top: 8px; }
+
+.loading-center { display: flex; justify-content: center; padding: 60px; }
+.full-width { width: 100%; }
+
+.user-cell {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0;
+  .avatar-icon { font-size: 32px; width: 32px; height: 32px; color: #94a3b8; }
+  .user-nombre { font-weight: 500; }
+  .user-sub { font-size: 12px; color: #94a3b8; }
+}
+
+.rol-badge {
+  padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600;
+  &.rol-admin       { background: #fde68a; color: #92400e; }
+  &.rol-supervisor  { background: #bfdbfe; color: #1e40af; }
+  &.rol-funcionario { background: #d1fae5; color: #065f46; }
+}
+
+.empty-state {
+  text-align: center; padding: 40px; color: #94a3b8;
+  mat-icon { font-size: 48px; width: 48px; height: 48px; display: block; margin: 0 auto 8px; }
+}

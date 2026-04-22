@@ -1,0 +1,53 @@
+<div class="designer-page">
+
+  <div class="page-header">
+    <button mat-icon-button (click)="volver()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Diseñar Flujo de Trabajo</h2>
+  </div>
+
+  <mat-card class="meta-card">
+    <mat-card-content>
+      <form [formGroup]="form" class="meta-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre del flujo</mat-label>
+          <input matInput formControlName="nombre" placeholder="Ej: Instalación de Medidor CREE">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo de solicitud</mat-label>
+          <input matInput formControlName="tipoSolicitud" placeholder="Ej: INSTALACION_MEDIDOR">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="modeler-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>account_tree</mat-icon> Canvas BPMN
+      </mat-card-title>
+      <span class="spacer"></span>
+      <button mat-raised-button color="primary"
+              [disabled]="guardando"
+              (click)="guardar()">
+        @if (guardando) {
+          <mat-spinner diameter="18"></mat-spinner>
+        } @else {
+          <mat-icon>save</mat-icon>
+        }
+        Guardar Flujo
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p class="hint">
+        <mat-icon>info</mat-icon>
+        Arrastra elementos desde la paleta izquierda. Usa <strong>StartEvent</strong> como inicio y <strong>EndEvent</strong> como fin.
+      </p>
+      <app-bpmn-modeler #modeler></app-bpmn-modeler>
+    </mat-card-content>
+  </mat-card>
+
+</div>

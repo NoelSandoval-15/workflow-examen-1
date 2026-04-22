@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h2>Mis Tareas</h2>
+</div>
+
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else {
+  <div class="tasks-list">
+    @for (tarea of tareas; track tarea.id) {
+      <mat-card class="task-card" [class.expanded]="expandedId === tarea.id">
+        <mat-card-header (click)="toggleExpand(tarea.id)">
+          <mat-icon mat-card-avatar>task_alt</mat-icon>
+          <mat-card-title>{{ tarea.nombre }}</mat-card-title>
+          <mat-card-subtitle>Trámite: {{ tarea.procesoInstanciaId }}</mat-card-subtitle>
+          <span class="spacer"></span>
+          <mat-chip [color]="getEstadoColor(tarea.estado)" highlighted>{{ tarea.estado }}</mat-chip>
+          @if (tarea.fechaLimite) {
+            <small class="fecha-limite">Límite: {{ tarea.fechaLimite | date:'dd/MM/yyyy' }}</small>
+          }
+        </mat-card-header>
+
+        @if (expandedId === tarea.id && tarea.estado === 'PENDIENTE') {
+          <mat-card-content>
+            <form [formGroup]="observacionForm">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Observación (opcional)</mat-label>
+                <textarea matInput formControlName="observacion" rows="2"></textarea>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-raised-button color="primary"
+                    [disabled]="completandoId === tarea.id"
+                    (click)="completar(tarea)">
+              @if (completandoId === tarea.id) {
+                <mat-spinner diameter="18"></mat-spinner>
+              } @else {
+                <ng-container>
+                  <mat-icon>check</mat-icon> Completar
+                </ng-container>
+              }
+            </button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+
+    @if (tareas.length === 0) {
+      <div class="empty-state">
+        <mat-icon>task_alt</mat-icon>
+        <p>No tienes tareas pendientes</p>
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,168 @@
+<div class="page-header">
+  <h2>Gestión de Usuarios</h2>
+  <button mat-raised-button color="primary" (click)="mostrarForm = !mostrarForm">
+    <mat-icon>person_add</mat-icon> Nuevo Usuario
+  </button>
+</div>
+
+@if (mostrarForm) {
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Crear Usuario</mat-card-title>
+      <mat-card-subtitle>Completa todos los campos requeridos</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="form-grid">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre *</mat-label>
+          <input matInput formControlName="nombre" placeholder="Ej: Juan">
+          @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+            <mat-error>El nombre es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido *</mat-label>
+          <input matInput formControlName="apellido" placeholder="Ej: Pérez">
+          @if (form.get('apellido')?.hasError('required') && form.get('apellido')?.touched) {
+            <mat-error>El apellido es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electrónico *</mat-label>
+          <input matInput formControlName="correo" type="email" placeholder="usuario@cree.com">
+          @if (form.get('correo')?.hasError('required') && form.get('correo')?.touched) {
+            <mat-error>El correo es obligatorio</mat-error>
+          }
+          @if (form.get('correo')?.hasError('email') && form.get('correo')?.touched) {
+            <mat-error>Formato de correo inválido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username *</mat-label>
+          <input matInput formControlName="username" placeholder="Ej: jperez">
+          @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
+            <mat-error>El username es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña *</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Mínimo 6 caracteres">
+          @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+            <mat-error>Mínimo 6 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rol *</mat-label>
+          <mat-select formControlName="rolId">
+            @for (rol of roles; track rol.id) {
+              <mat-option [value]="rol.id">
+                <strong>{{ rol.label }}</strong> — {{ rol.descripcion }}
+              </mat-option>
+            }
+          </mat-select>
+          @if (form.get('rolId')?.hasError('required') && form.get('rolId')?.touched) {
+            <mat-error>Selecciona un rol</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-col">
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="departamentoId">
+            <mat-option value="">Sin departamento</mat-option>
+            @for (dep of departamentos; track dep.id) {
+              <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit"
+                  [disabled]="guardando || form.invalid">
+            @if (guardando) {
+              <mat-spinner diameter="18"></mat-spinner>
+            } @else {
+              <ng-container><mat-icon>save</mat-icon> Guardar</ng-container>
+            }
+          </button>
+          <button mat-stroked-button type="button" (click)="mostrarForm = false">
+            Cancelar
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+}
+
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else {
+  <mat-card>
+    <mat-card-content>
+      <table mat-table [dataSource]="usuarios" class="full-width">
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let u">
+            <div class="user-cell">
+              <mat-icon class="avatar-icon">account_circle</mat-icon>
+              <div>
+                <div class="user-nombre">{{ u.nombre }} {{ u.apellido }}</div>
+                <div class="user-sub">{{ u.correo }}</div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Username</th>
+          <td mat-cell *matCellDef="let u"><code>{{ u.username }}</code></td>
+        </ng-container>
+
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef>Correo</th>
+          <td mat-cell *matCellDef="let u">{{ u.correo }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="rolId">
+          <th mat-header-cell *matHeaderCellDef>Rol</th>
+          <td mat-cell *matCellDef="let u">
+            <span class="rol-badge" [class]="'rol-' + u.rolId?.toLowerCase()">
+              {{ getRolLabel(u.rolId) }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="departamento">
+          <th mat-header-cell *matHeaderCellDef>Departamento</th>
+          <td mat-cell *matCellDef="let u">{{ getNombreDepartamento(u.departamentoId) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="activo">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let u">
+            <mat-icon [style.color]="u.activo ? '#10b981' : '#ef4444'">
+              {{ u.activo ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+      </table>
+
+      @if (usuarios.length === 0) {
+        <div class="empty-state">
+          <mat-icon>people</mat-icon>
+          <p>No hay usuarios registrados</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+}

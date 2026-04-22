@@ -1,0 +1,25 @@
+.page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+  h2 { margin: 0; font-size: 22px; color: #1e293b; }
+}
+.loading-center { display: flex; justify-content: center; padding: 60px; }
+.notif-list { display: flex; flex-direction: column; gap: 10px; }
+
+.notif-card {
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: border-color 0.2s;
+  p { margin: 0; color: #475569; font-size: 14px; }
+
+  &.unread {
+    border-left-color: #3b82f6;
+    background: #f0f7ff;
+    .icon-unread { color: #3b82f6; }
+  }
+}
+
+.empty-state {
+  text-align: center; padding: 60px; color: #94a3b8;
+  mat-icon { font-size: 48px; width: 48px; height: 48px; }
+}

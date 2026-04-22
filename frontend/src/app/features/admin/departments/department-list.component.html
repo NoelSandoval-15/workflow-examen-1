@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h2>Departamentos</h2>
+  <button mat-raised-button color="primary" (click)="mostrarForm = !mostrarForm">
+    <mat-icon>add</mat-icon> Nuevo
+  </button>
+</div>
+
+@if (mostrarForm) {
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="guardar()" class="form-row">
+        <mat-form-field appearance="outline"><mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre"></mat-form-field>
+        <mat-form-field appearance="outline"><mat-label>Descripción</mat-label>
+          <input matInput formControlName="descripcion"></mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="guardando || form.invalid">Guardar</button>
+        <button mat-button type="button" (click)="mostrarForm = false">Cancelar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+}
+
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else {
+  <mat-card>
+    <table mat-table [dataSource]="departamentos" class="full-width">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let d">{{ d.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let d">{{ d.descripcion ?? '—' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef>Activo</th>
+        <td mat-cell *matCellDef="let d">
+          <mat-icon [style.color]="d.activo ? '#10b981' : '#ef4444'">{{ d.activo ? 'check_circle' : 'cancel' }}</mat-icon>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="cols"></tr>
+      <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+    </table>
+  </mat-card>
+}

@@ -1,0 +1,67 @@
+<div class="page-header">
+  <h2>Trámites Activos</h2>
+</div>
+
+@if (loading) {
+  <div class="loading-center">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+} @else {
+  <mat-card>
+    <table mat-table [dataSource]="instancias" class="full-width">
+
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef>Código</th>
+        <td mat-cell *matCellDef="let row">
+          <strong>{{ row.codigo }}</strong>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nodoActual">
+        <th mat-header-cell *matHeaderCellDef>Nodo Actual</th>
+        <td mat-cell *matCellDef="let row">{{ row.nodoActual?.nombre ?? '—' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estadoActual">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [color]="getEstadoColor(row.estadoActual)" highlighted>
+            {{ row.estadoActual }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prioridad">
+        <th mat-header-cell *matHeaderCellDef>Prioridad</th>
+        <td mat-cell *matCellDef="let row">{{ row.prioridad ?? '—' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+        <td mat-cell *matCellDef="let row">{{ row.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary"
+                  matTooltip="Ver detalle"
+                  (click)="verDetalle(row.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          class="clickable-row" (click)="verDetalle(row.id)"></tr>
+    </table>
+
+    @if (instancias.length === 0) {
+      <div class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <p>No hay trámites registrados</p>
+      </div>
+    }
+  </mat-card>
+}

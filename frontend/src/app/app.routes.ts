@@ -29,6 +29,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/workflows/pages/template-list/template-list.component').then(m => m.TemplateListComponent)
       },
       {
+        path: 'flujos/nuevo',
+        loadComponent: () => import('./features/workflows/pages/workflow-designer/workflow-designer.component').then(m => m.WorkflowDesignerComponent)
+      },
+      {
         path: 'tareas',
         loadComponent: () => import('./features/tasks/pages/task-list.component').then(m => m.TaskListComponent)
       },

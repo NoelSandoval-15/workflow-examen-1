@@ -1,0 +1,66 @@
+<div class="page-header">
+  <h2>Flujos de Trabajo</h2>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="crearFlujo()">
+    <mat-icon>add</mat-icon> Crear Flujo
+  </button>
+</div>
+
+@if (loading) {
+  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+} @else {
+  <div class="templates-grid">
+    @for (t of templates; track t.id) {
+      <mat-card class="template-card" [class.selected]="selectedTemplate?.id === t.id"
+                (click)="seleccionar(t)">
+        <mat-card-header>
+          <mat-card-title>{{ t.nombre }}</mat-card-title>
+          <mat-card-subtitle>{{ t.nodos.length }} nodos · {{ t.conexiones.length }} conexiones</mat-card-subtitle>
+          <span class="spacer"></span>
+          <mat-chip [color]="getEstadoColor(t.estado)" highlighted>{{ t.estado }}</mat-chip>
+        </mat-card-header>
+
+        @if (t.descripcion) {
+          <mat-card-content>
+            <p class="descripcion">{{ t.descripcion }}</p>
+          </mat-card-content>
+        }
+
+        <mat-card-actions align="end">
+          @if (t.estado === 'BORRADOR') {
+            <button mat-stroked-button color="primary"
+                    [disabled]="procesando === t.id"
+                    (click)="activar(t, $event)">
+              <mat-icon>publish</mat-icon> Publicar
+            </button>
+          }
+          @if (t.estado === 'ACTIVO') {
+            <button mat-raised-button color="primary"
+                    [disabled]="procesando === t.id"
+                    (click)="iniciarTramite(t, $event)">
+              <mat-icon>play_arrow</mat-icon> Iniciar Trámite
+            </button>
+          }
+        </mat-card-actions>
+      </mat-card>
+    }
+
+    @if (templates.length === 0) {
+      <div class="empty-state">
+        <mat-icon>account_tree</mat-icon>
+        <p>No hay flujos registrados</p>
+      </div>
+    }
+  </div>
+
+  @if (selectedTemplate) {
+    <mat-card class="bpmn-card">
+      <mat-card-header>
+        <mat-card-title>{{ selectedTemplate.nombre }} — Diagrama</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-bpmn-viewer [template]="selectedTemplate"></app-bpmn-viewer>
+      </mat-card-content>
+    </mat-card>
+  }
+}

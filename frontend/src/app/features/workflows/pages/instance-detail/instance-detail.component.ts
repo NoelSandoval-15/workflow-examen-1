@@ -1,10 +1,121 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { WorkflowInstanceService } from '../../services/workflow-instance.service';
+import { WorkflowTemplateService } from '../../services/workflow-template.service';
+import { BpmnViewerComponent } from '../../components/bpmn-viewer/bpmn-viewer.component';
+import { HistoryTimelineComponent } from '../../components/history-timeline/history-timeline.component';
+import { ProcesoInstancia, WorkflowTemplate, WorkflowEdge } from '../../models/workflow.model';
 
 @Component({
   selector: 'app-instance-detail',
   standalone: true,
-  imports: [CommonModule],
-  template: '<div><h2>InstanceDetailComponent</h2></div>'
+  imports: [
+    CommonModule, ReactiveFormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatChipsModule,
+    MatDividerModule, MatProgressSpinnerModule, MatDialogModule,
+    MatFormFieldModule, MatInputModule, MatSelectModule,
+    BpmnViewerComponent, HistoryTimelineComponent
+  ],
+  templateUrl: './instance-detail.component.html',
+  styleUrl: './instance-detail.component.scss'
 })
-export class InstanceDetailComponent {}
+export class InstanceDetailComponent implements OnInit {
+  instancia?: ProcesoInstancia;
+  template?: WorkflowTemplate;
+  loading = true;
+  procesando = false;
+
+  avanzarForm: FormGroup;
+  mostrarFormAvanzar = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private instanceService: WorkflowInstanceService,
+    private templateService: WorkflowTemplateService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.avanzarForm = this.fb.group({
+      condicion: [''],
+      observacion: ['']
+    });
+  }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id')!;
+    this.instanceService.obtener(id).subscribe({
+      next: inst => {
+        this.instancia = inst;
+        this.loading = false;
+        this.cdr.detectChanges();
+        if (inst.templateId) {
+          this.templateService.obtener(inst.templateId).subscribe({
+            next: tmpl => { this.template = tmpl; this.cdr.detectChanges(); },
+            error: () => {}
+          });
+        }
+      },
+      error: () => { this.loading = false; this.cdr.detectChanges(); }
+    });
+  }
+
+  get conexionesDelNodoActual(): WorkflowEdge[] {
+    if (!this.template || !this.instancia?.nodoActual) return [];
+    return this.template.conexiones.filter(
+      c => c.nodoOrigenId === this.instancia!.nodoActual!.id
+    );
+  }
+
+  get estaFinalizado(): boolean {
+    return ['COMPLETADO', 'RECHAZADO', 'CANCELADO'].includes(this.instancia?.estadoActual ?? '');
+  }
+
+  esPasado(nodoId: string): boolean {
+    if (!this.instancia?.historialResumen) return false;
+    const enHistorial = this.instancia.historialResumen.some(h => h.nodoId === nodoId);
+    const esActual = this.instancia.nodoActual?.id === nodoId;
+    return enHistorial && !esActual;
+  }
+
+  avanzar(): void {
+    if (!this.instancia) return;
+    this.procesando = true;
+    this.instanceService.avanzar(this.instancia.id, this.avanzarForm.value).subscribe({
+      next: actualizada => {
+        this.instancia = actualizada;
+        this.mostrarFormAvanzar = false;
+        this.procesando = false;
+        this.cdr.detectChanges();
+        this.templateService.obtener(actualizada.templateId).subscribe(t => { this.template = t; this.cdr.detectChanges(); });
+      },
+      error: () => { this.procesando = false; this.cdr.detectChanges(); }
+    });
+  }
+
+  rechazar(): void {
+    if (!this.instancia) return;
+    const motivo = this.avanzarForm.get('observacion')?.value || 'Sin motivo';
+    this.procesando = true;
+    this.instanceService.rechazar(this.instancia.id, motivo).subscribe({
+      next: actualizada => { this.instancia = actualizada; this.procesando = false; this.cdr.detectChanges(); },
+      error: () => { this.procesando = false; this.cdr.detectChanges(); }
+    });
+  }
+
+  volver(): void {
+    this.router.navigate(['/tramites']);
+  }
+}
