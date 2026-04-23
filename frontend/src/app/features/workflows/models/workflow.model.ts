@@ -26,6 +26,8 @@ export interface WorkflowTemplate {
   nodos: WorkflowNode[];
   conexiones: WorkflowEdge[];
   createdAt?: string;
+  bpmnXml?: string;
+  camundaProcessDefinitionKey?: string;
 }
 
 export interface HistorialEntry {
@@ -51,6 +53,10 @@ export interface ProcesoInstancia {
   createdAt?: string;
   updatedAt?: string;
   finishedAt?: string;
+  /** ID de tarea activa en Camunda — usar para completar desde el detalle del trámite */
+  camundaTaskId?: string;
+  /** ID de instancia de proceso en Camunda */
+  camundaProcessInstanceId?: string;
 }
 
 export interface CreateWorkflowRequest {
@@ -59,6 +65,8 @@ export interface CreateWorkflowRequest {
   formularioId?: string;
   nodos: WorkflowNode[];
   conexiones: WorkflowEdge[];
+  /** BPMN 2.0 XML exportado por bpmn.js — el motor Camunda lo usará para ejecutar */
+  bpmnXml?: string;
 }
 
 export interface IniciarProcesoRequest {

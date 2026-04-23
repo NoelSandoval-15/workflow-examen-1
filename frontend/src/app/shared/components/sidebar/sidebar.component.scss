@@ -1,27 +1,98 @@
+/* ── Header ── */
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 20px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  gap: 10px;
+  padding: 22px 18px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 
-  .logo-icon { color: #3b82f6; font-size: 28px; }
-  .logo-text  { color: #fff; font-weight: 700; font-size: 18px; }
-  .logo-subtitle { color: #94a3b8; font-size: 11px; }
-}
-
-mat-nav-list a {
-  color: #cbd5e1;
-  border-radius: 8px;
-  margin: 2px 8px;
-
-  mat-icon { color: #64748b; }
-
-  &.active-link {
-    background: rgba(59,130,246,0.15);
-    color: #3b82f6;
-    mat-icon { color: #3b82f6; }
+  .logo-icon {
+    color: #fff;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
   }
 
-  &:hover { background: rgba(255,255,255,0.05); }
+  .logo-text {
+    color: #fff;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .logo-subtitle {
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+  }
+}
+
+/* ── Override Material nav list ── */
+::ng-deep .sidebar-nav {
+  padding: 12px 0 !important;
+
+  .mdc-list-item {
+    color: rgba(255,255,255,0.75) !important;
+    border-radius: 10px !important;
+    margin: 3px 10px !important;
+    height: 46px !important;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+
+    &::before { display: none !important; }
+
+    .mdc-list-item__primary-text,
+    span[matlistitemtitle] {
+      color: rgba(255,255,255,0.75) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+
+    mat-icon {
+      color: rgba(255,255,255,0.45) !important;
+      transition: color 0.2s ease, transform 0.2s ease !important;
+    }
+
+    &:hover {
+      background: rgba(255,255,255,0.09) !important;
+      transform: translateX(3px) !important;
+
+      .mdc-list-item__primary-text,
+      span[matlistitemtitle] {
+        color: #fff !important;
+      }
+
+      mat-icon {
+        color: #fff !important;
+        transform: scale(1.1) !important;
+      }
+    }
+
+    &.active-link {
+      background: rgba(255,255,255,0.13) !important;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 3px;
+        background: #fff;
+        border-radius: 0 3px 3px 0;
+      }
+
+      .mdc-list-item__primary-text,
+      span[matlistitemtitle] {
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+
+      mat-icon {
+        color: #fff !important;
+      }
+    }
+  }
 }

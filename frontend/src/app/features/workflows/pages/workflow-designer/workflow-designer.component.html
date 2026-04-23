@@ -1,53 +1,162 @@
 <div class="designer-page">
 
+  <!-- HEADER -->
   <div class="page-header">
-    <button mat-icon-button (click)="volver()">
+    <button mat-icon-button (click)="volver()" matTooltip="Volver a flujos">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h2>Diseñar Flujo de Trabajo</h2>
+    <div>
+      <h2>Diseñar Flujo de Trabajo</h2>
+      <p class="page-sub">Arrastra elementos y configura cada nodo con doble clic</p>
+    </div>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" [disabled]="guardando" (click)="guardar()">
+      @if (guardando) {
+        <mat-spinner diameter="18"></mat-spinner>
+      } @else {
+        <ng-container><mat-icon>save</mat-icon> Guardar Flujo</ng-container>
+      }
+    </button>
   </div>
 
+  <!-- META -->
   <mat-card class="meta-card">
     <mat-card-content>
       <form [formGroup]="form" class="meta-form">
         <mat-form-field appearance="outline">
-          <mat-label>Nombre del flujo</mat-label>
-          <input matInput formControlName="nombre" placeholder="Ej: Instalación de Medidor CREE">
+          <mat-label>Nombre del flujo *</mat-label>
+          <mat-icon matPrefix>account_tree</mat-icon>
+          <input matInput formControlName="nombre" placeholder="Ej: Instalación de Medidor Residencial">
+          @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+            <mat-error>Campo obligatorio</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Tipo de solicitud</mat-label>
+          <mat-label>Tipo de solicitud *</mat-label>
+          <mat-icon matPrefix>label</mat-icon>
           <input matInput formControlName="tipoSolicitud" placeholder="Ej: INSTALACION_MEDIDOR">
+          @if (form.get('tipoSolicitud')?.hasError('required') && form.get('tipoSolicitud')?.touched) {
+            <mat-error>Campo obligatorio</mat-error>
+          }
         </mat-form-field>
       </form>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="modeler-card">
-    <mat-card-header>
-      <mat-card-title>
-        <mat-icon>account_tree</mat-icon> Canvas BPMN
-      </mat-card-title>
-      <span class="spacer"></span>
-      <button mat-raised-button color="primary"
-              [disabled]="guardando"
-              (click)="guardar()">
-        @if (guardando) {
-          <mat-spinner diameter="18"></mat-spinner>
-        } @else {
-          <mat-icon>save</mat-icon>
-        }
-        Guardar Flujo
-      </button>
-    </mat-card-header>
+  <!-- LAYOUT PRINCIPAL -->
+  <div class="designer-layout">
 
-    <mat-card-content>
-      <p class="hint">
-        <mat-icon>info</mat-icon>
-        Arrastra elementos desde la paleta izquierda. Usa <strong>StartEvent</strong> como inicio y <strong>EndEvent</strong> como fin.
-      </p>
-      <app-bpmn-modeler #modeler></app-bpmn-modeler>
-    </mat-card-content>
-  </mat-card>
+    <!-- CANVAS -->
+    <mat-card class="modeler-card">
+      <mat-card-header>
+        <mat-card-title><mat-icon>schema</mat-icon> Canvas BPMN</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="canvas-hint">
+          <mat-icon>info</mat-icon>
+          <span>Arrastra elementos desde la paleta izquierda &nbsp;·&nbsp;
+            <strong>Doble clic</strong> en un nodo para configurar sus propiedades
+          </span>
+        </div>
+        <app-bpmn-modeler #modeler (elementoDobleClick)="onElementoSeleccionado($event)">
+        </app-bpmn-modeler>
+      </mat-card-content>
+    </mat-card>
 
+    <!-- PANEL DE PROPIEDADES -->
+    @if (nodoSeleccionado) {
+      <div class="props-panel">
+
+        <!-- Header con color según tipo -->
+        <div class="props-header" [style.background]="getTipoColor(nodoSeleccionado.tipo)">
+          <div class="props-header-icon">
+            <mat-icon>{{ getTipoIcono(nodoSeleccionado.tipo) }}</mat-icon>
+          </div>
+          <div class="props-header-info">
+            <div class="props-tipo">{{ getTipoLabel(nodoSeleccionado.tipo) }}</div>
+            <div class="props-id">{{ nodoSeleccionado.id }}</div>
+          </div>
+          <button mat-icon-button class="close-btn" (click)="cerrarPanel()" matTooltip="Cerrar">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Cuerpo del formulario -->
+        <div class="props-body">
+          <form [formGroup]="propForm">
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre del nodo</mat-label>
+              <mat-icon matPrefix>edit</mat-icon>
+              <input matInput formControlName="nombre">
+              <mat-hint>Se actualiza en el diagrama al aplicar</mat-hint>
+            </mat-form-field>
+
+            @if (!esSoloLectura(nodoSeleccionado.tipo)) {
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Departamento responsable</mat-label>
+                <mat-icon matPrefix>business</mat-icon>
+                <mat-select formControlName="departamentoId">
+                  <mat-option value="">Sin asignar</mat-option>
+                  @for (dep of departamentos; track dep.id) {
+                    <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
+                  }
+                </mat-select>
+                <mat-hint>Departamento que atiende este nodo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Rol requerido</mat-label>
+                <mat-icon matPrefix>badge</mat-icon>
+                <mat-select formControlName="rolRequerido">
+                  <mat-option value="">Sin restricción</mat-option>
+                  @for (rol of roles; track rol.id) {
+                    <mat-option [value]="rol.id">{{ rol.label }}</mat-option>
+                  }
+                </mat-select>
+                <mat-hint>Jerarquía mínima para ejecutar</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tiempo límite (horas)</mat-label>
+                <mat-icon matPrefix>schedule</mat-icon>
+                <input matInput type="number" formControlName="tiempoLimiteHoras" min="0">
+                <mat-hint>0 = sin límite de tiempo</mat-hint>
+              </mat-form-field>
+
+              <div class="evidencia-toggle">
+                <mat-checkbox formControlName="requiereEvidencia" color="primary">
+                  Requiere evidencia o documento adjunto
+                </mat-checkbox>
+              </div>
+
+            } @else {
+              <div class="readonly-notice">
+                <mat-icon>lock</mat-icon>
+                <span>Este nodo no tiene propiedades configurables</span>
+              </div>
+            }
+
+          </form>
+
+          <mat-divider></mat-divider>
+
+          <div class="props-actions">
+            <button mat-raised-button color="primary"
+                    [disabled]="propForm.invalid || esSoloLectura(nodoSeleccionado.tipo)"
+                    (click)="guardarPropiedades()">
+              <mat-icon>check</mat-icon> Aplicar
+            </button>
+            <button mat-stroked-button (click)="cerrarPanel()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
 </div>

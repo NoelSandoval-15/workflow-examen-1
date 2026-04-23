@@ -1,20 +1,22 @@
 .sidenav-container {
   height: 100vh;
 }
-
+//color de panel lateral 
 .sidenav {
-  width: 230px;
-  background: #1e293b;
+  width: 240px;
+  background: linear-gradient(180deg, #7218a3 0%, #130512 100%);
+  border-right: none;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.4);
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
 }
-
+//color de fondo del contenido principal
 .page-content {
   padding: 24px;
   flex: 1;
-  background: #f1f5f9;
+  background: #163c8c;
   min-height: calc(100vh - 64px);
 }
