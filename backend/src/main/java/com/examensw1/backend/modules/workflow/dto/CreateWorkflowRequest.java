@@ -20,4 +20,7 @@ public class CreateWorkflowRequest {
     private String formularioId;
     private List<WorkflowNodeDTO> nodos = new ArrayList<>();
     private List<WorkflowEdgeDTO> conexiones = new ArrayList<>();
+
+    /** BPMN 2.0 XML exportado por bpmn.js desde el diseñador */
+    private String bpmnXml;
 }

@@ -28,6 +28,15 @@ public class Workflow {
     private List<WorkflowNode> nodos = new ArrayList<>();
     private List<WorkflowEdge> conexiones = new ArrayList<>();
 
+    /** BPMN 2.0 XML generado por bpmn.js y guardado por el diseñador */
+    private String bpmnXml;
+
+    /** ID del deployment en Camunda (se asigna al activar el template) */
+    private String camundaDeploymentId;
+
+    /** Process definition key en Camunda = "proc_" + id */
+    private String camundaProcessDefinitionKey;
+
     @CreatedDate
     private LocalDateTime createdAt;
 }

@@ -23,4 +23,10 @@ public class ProcesoInstanciaDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime finishedAt;
+
+    /** ID de tarea activa en Camunda — el frontend lo usa para completar */
+    private String camundaTaskId;
+
+    /** ID de instancia en Camunda — referencia al motor */
+    private String camundaProcessInstanceId;
 }

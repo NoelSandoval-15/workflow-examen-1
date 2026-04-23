@@ -19,4 +19,10 @@ public class WorkflowDTO {
     private List<WorkflowNodeDTO> nodos;
     private List<WorkflowEdgeDTO> conexiones;
     private LocalDateTime createdAt;
+
+    /** BPMN XML guardado por el diseñador */
+    private String bpmnXml;
+
+    /** Clave del proceso en Camunda — presente solo si el template fue activado */
+    private String camundaProcessDefinitionKey;
 }

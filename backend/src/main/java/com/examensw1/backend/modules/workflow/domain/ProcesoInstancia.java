@@ -32,6 +32,12 @@ public class ProcesoInstancia {
     private Map<String, Object> datosFormulario = new HashMap<>();
     private List<HistorialEntry> historialResumen = new ArrayList<>();
 
+    /** ID de instancia de proceso en Camunda (enlace al motor) */
+    private String camundaProcessInstanceId;
+
+    /** ID de la tarea activa actual en Camunda (para completar desde frontend) */
+    private String camundaTaskId;
+
     @CreatedDate
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
