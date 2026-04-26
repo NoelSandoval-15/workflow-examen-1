@@ -13,11 +13,16 @@ import com.examensw1.backend.shared.exception.BusinessException;
 import com.examensw1.backend.shared.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -33,8 +38,10 @@ public class WorkflowEngineService {
     private final WorkflowRepository workflowRepository;
     private final ProcesoInstanciaRepository procesoInstanciaRepository;
     private final NotificationService notificationService;
+    private final RepositoryService repositoryService;
     private final RuntimeService runtimeService;
     private final TaskService taskService;
+    private final BpmnXmlGenerator bpmnXmlGenerator;
 
     // ───────────────────────────────────────────────────────────────
     // INICIAR PROCESO
@@ -48,8 +55,27 @@ public class WorkflowEngineService {
             throw new BusinessException("El template no está activo. Actívalo antes de iniciar un trámite.");
         }
 
+        // Templates activados antes de la integración Camunda: auto-desplegar ahora
         if (template.getCamundaProcessDefinitionKey() == null) {
-            throw new BusinessException("El template no está desplegado en el motor. Activa el template primero.");
+            String xml = (template.getBpmnXml() != null && !template.getBpmnXml().isBlank())
+                    ? template.getBpmnXml()
+                    : bpmnXmlGenerator.generate(template);
+            String processKey = bpmnXmlGenerator.sanitizeKey(template.getId());
+            try {
+                Deployment dep = repositoryService.createDeployment()
+                        .name(template.getNombre())
+                        .addInputStream(processKey + ".bpmn",
+                                new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)))
+                        .enableDuplicateFiltering(false)
+                        .deploy();
+                template.setCamundaDeploymentId(dep.getId());
+                template.setCamundaProcessDefinitionKey(processKey);
+                workflowRepository.save(template);
+                log.info("Auto-deploy de template legacy '{}' → key={}", template.getNombre(), processKey);
+            } catch (Exception e) {
+                log.error("Auto-deploy fallido para '{}': {}", template.getNombre(), e.getMessage(), e);
+                throw new BusinessException("No se pudo desplegar el flujo en el motor: " + e.getMessage());
+            }
         }
 
         WorkflowNode nodoInicio = template.getNodos().stream()
@@ -141,11 +167,14 @@ public class WorkflowEngineService {
         taskVars.put("observacion", observacion != null ? observacion : "");
 
         // Completar tarea en Camunda
+        boolean camundaCompleted = false;
         try {
             taskService.complete(task.getId(), taskVars);
+            camundaCompleted = true;
         } catch (Exception e) {
-            log.error("Error al completar tarea en Camunda: {}", e.getMessage(), e);
-            throw new BusinessException("Error al avanzar en el motor: " + e.getMessage());
+            // Camunda no pudo enrutar (gateway sin condiciones, flujo ambiguo, etc.)
+            // Usamos enrutamiento propio y dejamos Camunda como referencia histórica
+            log.warn("Camunda routing failed ({}), falling back to legacy routing", e.getMessage());
         }
 
         // Registrar en historial MongoDB
@@ -153,21 +182,49 @@ public class WorkflowEngineService {
                 (condicion != null && !condicion.isBlank() ? "[" + condicion + "] " : "") +
                 (observacion != null ? observacion : ""));
 
-        // Determinar si el proceso terminó en Camunda
-        boolean procesoActivo = runtimeService.createProcessInstanceQuery()
-                .processInstanceId(camundaProcId)
-                .count() > 0;
+        if (camundaCompleted) {
+            // Camunda avanzó correctamente → sincronizar estado desde Camunda
+            boolean procesoActivo = runtimeService.createProcessInstanceQuery()
+                    .processInstanceId(camundaProcId)
+                    .count() > 0;
 
-        if (!procesoActivo) {
-            // Proceso completado en Camunda → sincronizar MongoDB
-            instancia.setEstadoActual("COMPLETADO");
-            instancia.setFinishedAt(LocalDateTime.now());
-            instancia.setCamundaTaskId(null);
-            // Avanzar nodoActual al nodo FIN
-            actualizarNodoActualAlFin(instancia);
+            if (!procesoActivo) {
+                instancia.setEstadoActual("COMPLETADO");
+                instancia.setFinishedAt(LocalDateTime.now());
+                instancia.setCamundaTaskId(null);
+                actualizarNodoActualAlFin(instancia);
+            } else {
+                sincronizarTareaActiva(instancia, camundaProcId);
+            }
         } else {
-            // Sincronizar nueva tarea activa
-            sincronizarTareaActiva(instancia, camundaProcId);
+            // Fallback: enrutamiento manual usando nodos/conexiones de MongoDB
+            Workflow template = workflowRepository.findById(instancia.getTemplateId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Template", instancia.getTemplateId()));
+
+            String nodoActualId = instancia.getNodoActual().getId();
+            var conexion = template.getConexiones().stream()
+                    .filter(e -> e.getNodoOrigenId().equals(nodoActualId))
+                    .filter(e -> condicion == null || condicion.isBlank() || condicion.equals(e.getCondicion()))
+                    .findFirst()
+                    .orElse(
+                        // Si no hay match por condición, tomar la primera conexión disponible
+                        template.getConexiones().stream()
+                                .filter(e -> e.getNodoOrigenId().equals(nodoActualId))
+                                .findFirst()
+                                .orElseThrow(() -> new BusinessException("No existe conexión desde el nodo actual"))
+                    );
+
+            WorkflowNode siguiente = template.getNodos().stream()
+                    .filter(n -> n.getId().equals(conexion.getNodoDestinoId()))
+                    .findFirst()
+                    .orElseThrow(() -> new BusinessException("Nodo destino no encontrado"));
+
+            instancia.setNodoActual(siguiente);
+            instancia.setCamundaTaskId(null);
+            instancia.setEstadoActual(NodeType.FIN.equals(siguiente.getTipo()) ? "COMPLETADO" : "EN_PROCESO");
+            if ("COMPLETADO".equals(instancia.getEstadoActual())) {
+                instancia.setFinishedAt(LocalDateTime.now());
+            }
         }
 
         instancia.setUpdatedAt(LocalDateTime.now());

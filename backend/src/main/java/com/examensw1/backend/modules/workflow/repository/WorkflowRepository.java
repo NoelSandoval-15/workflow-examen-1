@@ -10,4 +10,5 @@ public interface WorkflowRepository extends MongoRepository<Workflow, String> {
     List<Workflow> findByEstado(String estado);
     Optional<Workflow> findByNombre(String nombre);
     boolean existsByNombreAndEstado(String nombre, String estado);
+    Optional<Workflow> findByCollaborationToken(String collaborationToken);
 }

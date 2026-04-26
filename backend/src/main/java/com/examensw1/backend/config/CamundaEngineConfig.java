@@ -5,7 +5,7 @@ import org.camunda.bpm.spring.boot.starter.configuration.impl.AbstractCamundaCon
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Ajustes del motor Camunda 7:
+ * Ajustes del motor Camunda 7
  * - History level FULL para tener trazabilidad completa.
  * - Job executor habilitado para tareas de tiempo.
  * - Sin despliegue automático de BPMN al arrancar (lo hacemos en activarTemplate).

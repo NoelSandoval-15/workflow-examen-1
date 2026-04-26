@@ -27,6 +27,7 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
             "/api/auth/**",
+            "/api/workflow/collaborate/**",   // acceso por token colaborativo, sin JWT
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/v3/api-docs/**",

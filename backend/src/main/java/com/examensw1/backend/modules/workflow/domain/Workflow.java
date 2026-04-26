@@ -37,6 +37,14 @@ public class Workflow {
     /** Process definition key en Camunda = "proc_" + id */
     private String camundaProcessDefinitionKey;
 
+    // Colaboración en tiempo real ──────────────────────────────
+    private Boolean collaborationEnabled = false;
+    private String  collaborationToken;
+    private Long    collaborationVersion = 0L;
+    private LocalDateTime collaborationUpdatedAt;
+    private LocalDateTime collaborationRevokedAt;
+    // ─────────────────────────────────────────────────────────────
+
     @CreatedDate
     private LocalDateTime createdAt;
 }

@@ -20,6 +20,7 @@ public class WorkflowNodeDTO {
     private String departamentoId;
     private String rolRequerido;
     private String formularioId;
+    private String funcionarioId;
     private boolean requiereEvidencia;
     private int tiempoLimiteHoras;
     private int orden;

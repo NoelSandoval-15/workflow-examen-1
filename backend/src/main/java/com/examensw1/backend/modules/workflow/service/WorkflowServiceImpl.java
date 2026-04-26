@@ -47,6 +47,7 @@ public class WorkflowServiceImpl implements WorkflowService {
                 node.setDepartamentoId(n.getDepartamentoId());
                 node.setRolRequerido(n.getRolRequerido());
                 node.setFormularioId(n.getFormularioId());
+                node.setFuncionarioId(n.getFuncionarioId());
                 node.setRequiereEvidencia(n.isRequiereEvidencia());
                 node.setTiempoLimiteHoras(n.getTiempoLimiteHoras());
                 node.setOrden(n.getOrden());
@@ -64,6 +65,51 @@ public class WorkflowServiceImpl implements WorkflowService {
                 edge.setEtiqueta(e.getEtiqueta());
                 workflow.getConexiones().add(edge);
             });
+        }
+
+        return toDTO(workflowRepository.save(workflow));
+    }
+
+    @Override
+    public WorkflowDTO actualizarTemplate(String id, CreateWorkflowRequest request) {
+        Workflow workflow = workflowRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Template", id));
+
+        workflow.setNombre(request.getNombre());
+        workflow.setTipoSolicitud(request.getTipoSolicitud());
+        if (request.getFormularioId() != null) workflow.setFormularioId(request.getFormularioId());
+        if (request.getBpmnXml() != null && !request.getBpmnXml().isBlank()) {
+            workflow.setBpmnXml(request.getBpmnXml());
+        }
+
+        if (request.getNodos() != null && !request.getNodos().isEmpty()) {
+            workflow.getNodos().clear();
+            request.getNodos().forEach(n -> {
+                WorkflowNode node = new WorkflowNode();
+                node.setId(n.getId()); node.setNombre(n.getNombre()); node.setTipo(n.getTipo());
+                node.setDepartamentoId(n.getDepartamentoId()); node.setRolRequerido(n.getRolRequerido());
+                node.setFormularioId(n.getFormularioId()); node.setRequiereEvidencia(n.isRequiereEvidencia());
+                node.setTiempoLimiteHoras(n.getTiempoLimiteHoras()); node.setOrden(n.getOrden());
+                workflow.getNodos().add(node);
+            });
+        }
+
+        if (request.getConexiones() != null && !request.getConexiones().isEmpty()) {
+            workflow.getConexiones().clear();
+            request.getConexiones().forEach(e -> {
+                WorkflowEdge edge = new WorkflowEdge();
+                edge.setId(e.getId()); edge.setNodoOrigenId(e.getNodoOrigenId());
+                edge.setNodoDestinoId(e.getNodoDestinoId()); edge.setCondicion(e.getCondicion());
+                edge.setEtiqueta(e.getEtiqueta());
+                workflow.getConexiones().add(edge);
+            });
+        }
+
+        // Si el template estaba ACTIVO y cambió el diseño, volver a BORRADOR para re-activar
+        if ("ACTIVO".equals(workflow.getEstado())) {
+            workflow.setEstado("BORRADOR");
+            workflow.setCamundaProcessDefinitionKey(null);
+            workflow.setCamundaDeploymentId(null);
         }
 
         return toDTO(workflowRepository.save(workflow));
@@ -165,14 +211,33 @@ public class WorkflowServiceImpl implements WorkflowService {
     private String normalizeBpmnXmlForCamunda(Workflow workflow) {
         String xml = workflow.getBpmnXml();
         String expectedKey = bpmnXmlGenerator.sanitizeKey(workflow.getId());
-        // Reemplazar el id del proceso con la clave esperada por Camunda
-        return xml.replaceFirst(
+
+        // 1. Reemplazar el id del proceso con la clave esperada por Camunda
+        xml = xml.replaceFirst(
                 "(<process[^>]*\\sid=\")[^\"]*\"",
                 "$1" + expectedKey + "\""
         ).replaceFirst(
                 "(<bpmndi:BPMNPlane[^>]*\\sbpmnElement=\")[^\"]*\"",
                 "$1" + expectedKey + "\""
         );
+
+        // 2. Agregar historyTimeToLive si no está presente (requerido desde Camunda 7.19)
+        if (!xml.contains("historyTimeToLive")) {
+            xml = xml.replaceFirst(
+                    "(<process[^>]*)(/>|>)",
+                    "$1 camunda:historyTimeToLive=\"P180D\"$2"
+            );
+        }
+
+        // 3. Asegurar que el proceso sea ejecutable
+        if (!xml.contains("isExecutable=\"true\"")) {
+            xml = xml.replaceFirst(
+                    "(<process[^>]*)(/>|>)",
+                    "$1 isExecutable=\"true\"$2"
+            );
+        }
+
+        return xml;
     }
 
     WorkflowDTO toDTO(Workflow w) {
@@ -195,6 +260,7 @@ public class WorkflowServiceImpl implements WorkflowService {
             nd.setTipo(n.getTipo());
             nd.setDepartamentoId(n.getDepartamentoId());
             nd.setRolRequerido(n.getRolRequerido());
+            nd.setFuncionarioId(n.getFuncionarioId());
             nd.setOrden(n.getOrden());
             nd.setRequiereEvidencia(n.isRequiereEvidencia());
             nd.setTiempoLimiteHoras(n.getTiempoLimiteHoras());

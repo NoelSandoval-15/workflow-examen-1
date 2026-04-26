@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface WorkflowService {
     WorkflowDTO crearTemplate(CreateWorkflowRequest request, String usuarioId);
+    WorkflowDTO actualizarTemplate(String id, CreateWorkflowRequest request);
     WorkflowDTO obtenerTemplate(String id);
     List<WorkflowDTO> listarTemplates();
     WorkflowDTO activarTemplate(String id);

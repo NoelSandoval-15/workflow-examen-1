@@ -13,6 +13,7 @@ public class WorkflowNode {
     private String departamentoId;
     private String rolRequerido;
     private String formularioId;
+    private String funcionarioId;    // usuario asignado a este nodo
     private boolean requiereEvidencia;
     private int tiempoLimiteHoras;
     private int orden;

@@ -46,6 +46,13 @@ public class WorkflowController {
         return ResponseEntity.ok(ApiResponse.ok(workflowService.obtenerTemplate(id)));
     }
 
+    @PutMapping("/templates/{id}")
+    public ResponseEntity<ApiResponse<WorkflowDTO>> actualizarTemplate(
+            @PathVariable String id,
+            @RequestBody CreateWorkflowRequest request) {
+        return ResponseEntity.ok(ApiResponse.ok("Template actualizado", workflowService.actualizarTemplate(id, request)));
+    }
+
     @PutMapping("/templates/{id}/activar")
     public ResponseEntity<ApiResponse<WorkflowDTO>> activarTemplate(@PathVariable String id) {
         return ResponseEntity.ok(ApiResponse.ok("Template activado", workflowService.activarTemplate(id)));

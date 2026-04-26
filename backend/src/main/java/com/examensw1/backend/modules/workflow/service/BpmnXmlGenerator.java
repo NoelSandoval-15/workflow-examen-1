@@ -42,7 +42,7 @@ public class BpmnXmlGenerator {
 
         sb.append("  <process id=\"").append(processKey)
           .append("\" name=\"").append(escape(workflow.getNombre()))
-          .append("\" isExecutable=\"true\">\n\n");
+          .append("\" isExecutable=\"true\" camunda:historyTimeToLive=\"P180D\">\n\n");
 
         // Elementos del proceso
         for (WorkflowNode node : workflow.getNodos()) {
