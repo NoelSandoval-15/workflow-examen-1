@@ -27,6 +27,11 @@
         }
 
         <mat-card-actions align="end">
+          <button mat-icon-button matTooltip="Editar diseño" (click)="editar(t, $event)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+
           @if (t.estado === 'BORRADOR') {
             <button mat-stroked-button color="primary"
                     [disabled]="procesando === t.id"
@@ -42,6 +47,8 @@
             </button>
           }
         </mat-card-actions>
+
+
       </mat-card>
     }
 

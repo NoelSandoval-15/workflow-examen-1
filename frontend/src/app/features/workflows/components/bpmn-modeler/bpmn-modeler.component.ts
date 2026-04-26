@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter, NgZone } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Output, Input, EventEmitter, NgZone } from '@angular/core';
 import { WorkflowNode, WorkflowEdge } from '../../models/workflow.model';
 
 export interface NodoSeleccionado {
@@ -7,6 +7,7 @@ export interface NodoSeleccionado {
   tipo: string;
   departamentoId?: string;
   rolRequerido?: string;
+  funcionarioId?: string;
   tiempoLimiteHoras?: number;
   requiereEvidencia?: boolean;
 }
@@ -51,41 +52,52 @@ const INITIAL_XML = `<?xml version="1.0" encoding="UTF-8"?>
 export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('canvas') canvasRef!: ElementRef;
   @Output() elementoDobleClick = new EventEmitter<NodoSeleccionado>();
+  /** Emite el BPMN XML cada vez que el usuario realiza un cambio en el canvas */
+  @Output() xmlChanged = new EventEmitter<string>();
+
+  @Input() xmlInicial?: string;
 
   private modeler: any;
   private nodeExtras = new Map<string, Partial<NodoSeleccionado>>();
+  /** Evita el loop: cambio local → importXML → commandStack.changed → loop */
+  private applyingRemoteChange = false;
 
   constructor(private ngZone: NgZone) {}
 
   async ngAfterViewInit(): Promise<void> {
     const { default: BpmnModeler } = await import('bpmn-js/lib/Modeler');
     this.modeler = new BpmnModeler({ container: this.canvasRef.nativeElement });
-    await this.modeler.importXML(INITIAL_XML);
+    const xml = this.xmlInicial?.trim() ? this.xmlInicial : INITIAL_XML;
+    await this.modeler.importXML(xml);
     this.modeler.get('canvas').zoom('fit-viewport');
     this.registrarEventos();
   }
 
   private registrarEventos(): void {
-    const eventBus = this.modeler.get('eventBus');
+    const eventBus   = this.modeler.get('eventBus');
     const directEditing = this.modeler.get('directEditing');
 
-    // Prioridad 1500 > default 1000 → corre primero y cancela el editor de etiquetas
+    // ── Doble clic: abrir panel de propiedades ──────────────────
     eventBus.on('element.dblclick', 1500, (event: any) => {
       const el = event.element;
       if (el.type === 'bpmn:Process' || el.type === 'label') return;
-
       event.stopPropagation();
       setTimeout(() => { if (directEditing?.isActive()) directEditing.cancel(); }, 0);
-
       const extras = this.nodeExtras.get(el.id) ?? {};
       this.ngZone.run(() => {
         this.elementoDobleClick.emit({
-          id: el.id,
-          nombre: el.businessObject?.name || el.id,
-          tipo: el.type,
-          ...extras
+          id: el.id, nombre: el.businessObject?.name || el.id,
+          tipo: el.type, ...extras
         });
       });
+    });
+
+    // ── commandStack.changed: emitir XML para sincronización colaborativa ──
+    eventBus.on('commandStack.changed', () => {
+      if (this.applyingRemoteChange) return; // evitar loop feedback
+      this.modeler.saveXML({ format: false }).then(({ xml }: { xml: string }) => {
+        this.ngZone.run(() => this.xmlChanged.emit(xml));
+      }).catch(() => {});
     });
   }
 
@@ -100,6 +112,30 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
 
     const { id: _i, nombre: _n, tipo: _t, ...extras } = datos as any;
     this.nodeExtras.set(id, { ...(this.nodeExtras.get(id) ?? {}), ...extras });
+  }
+
+  /** Carga XML remoto sin disparar xmlChanged (evita loop colaborativo) */
+  async aplicarXmlRemoto(xml: string): Promise<void> {
+    if (!this.modeler || !xml?.trim()) return;
+    try {
+      this.applyingRemoteChange = true;
+      await this.modeler.importXML(xml);
+      this.modeler.get('canvas').zoom('fit-viewport');
+    } catch {} finally {
+      this.applyingRemoteChange = false;
+    }
+  }
+
+  /** Carga un BPMN XML existente en el modeler (modo edición) */
+  async cargarXml(xml: string): Promise<void> {
+    if (!this.modeler) return;
+    try {
+      this.applyingRemoteChange = true;
+      await this.modeler.importXML(xml);
+      this.modeler.get('canvas').zoom('fit-viewport');
+    } catch {} finally {
+      this.applyingRemoteChange = false;
+    }
   }
 
   /** Exporta el BPMN 2.0 XML completo para enviarlo al backend y desplegarlo en Camunda */
@@ -134,7 +170,16 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
         const src = bo.sourceRef?.id;
         const tgt = bo.targetRef?.id;
         if (src && tgt) {
-          conexiones.push({ id, nodoOrigenId: src, nodoDestinoId: tgt, etiqueta: bo.name || undefined });
+          // El label de la flecha en bpmn.js se usa como etiqueta visible Y como condicion de ruteo.
+          // Ejemplo: si la flecha se llama "Aprobado", el backend enruta por condicion="Aprobado"
+          const label = bo.name || undefined;
+          conexiones.push({
+            id,
+            nodoOrigenId: src,
+            nodoDestinoId: tgt,
+            etiqueta: label,
+            condicion: label
+          });
         }
       }
     });

@@ -37,6 +37,9 @@ export class AdminService {
   crearUsuario(req: CreateUserRequest): Observable<User> {
     return this.http.post<ApiResponse<User>>(`${environment.apiUrl}/usuarios`, req).pipe(map(r => r.data));
   }
+  actualizarUsuario(id: string, req: Partial<CreateUserRequest>): Observable<User> {
+    return this.http.put<ApiResponse<User>>(`${environment.apiUrl}/usuarios/${id}`, req).pipe(map(r => r.data));
+  }
 
   // Departamentos
   listarDepartamentos(): Observable<Departamento[]> {

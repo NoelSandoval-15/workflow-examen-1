@@ -86,14 +86,19 @@
                 @if (conexionesDelNodoActual.length > 1) {
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Selecciona el camino a seguir</mat-label>
-                    <mat-select formControlName="condicion">
+                    <mat-icon matPrefix>call_split</mat-icon>
+                    <mat-select formControlName="conexionId" required>
                       @for (c of conexionesDelNodoActual; track c.id) {
-                        <mat-option [value]="c.condicion">
-                          {{ c.etiqueta ?? c.condicion ?? 'Opción ' + ($index + 1) }}
-                        </mat-option>
+                        <mat-option [value]="c.id">{{ c.labelVisible }}</mat-option>
                       }
                     </mat-select>
+                    <mat-hint>Elige la ruta según el resultado de este nodo</mat-hint>
                   </mat-form-field>
+                } @else if (conexionesDelNodoActual.length === 1) {
+                  <div class="unico-camino">
+                    <mat-icon>arrow_forward</mat-icon>
+                    <span>Siguiente: <strong>{{ getNombreNodo(conexionesDelNodoActual[0].nodoDestinoId) }}</strong></span>
+                  </div>
                 }
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Observación (opcional)</mat-label>

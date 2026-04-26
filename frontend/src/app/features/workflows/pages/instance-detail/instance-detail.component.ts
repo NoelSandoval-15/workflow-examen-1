@@ -49,7 +49,7 @@ export class InstanceDetailComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.avanzarForm = this.fb.group({
-      condicion: [''],
+      conexionId: [''],   // id de la conexión elegida (para obtener la condicion real)
       observacion: ['']
     });
   }
@@ -72,11 +72,27 @@ export class InstanceDetailComponent implements OnInit {
     });
   }
 
-  get conexionesDelNodoActual(): WorkflowEdge[] {
+  get conexionesDelNodoActual(): (WorkflowEdge & { labelVisible: string })[] {
     if (!this.template || !this.instancia?.nodoActual) return [];
-    return this.template.conexiones.filter(
-      c => c.nodoOrigenId === this.instancia!.nodoActual!.id
-    );
+    return this.template.conexiones
+      .filter(c => c.nodoOrigenId === this.instancia!.nodoActual!.id)
+      .map((c, i) => {
+        const nodoDestino = this.template!.nodos.find(n => n.id === c.nodoDestinoId);
+        const base = c.etiqueta ?? c.condicion;
+        const dest = nodoDestino?.nombre ?? '';
+        const labelVisible = base ? `${base} → ${dest}` : `Opción ${i + 1}: → ${dest}`;
+        return { ...c, labelVisible };
+      });
+  }
+
+  /** Valor de condicion que se enviará al backend según la conexión seleccionada */
+  getCondicionDeConexion(conexionId: string): string {
+    const c = this.conexionesDelNodoActual.find(x => x.id === conexionId);
+    return c?.condicion ?? '';
+  }
+
+  getNombreNodo(nodoId: string): string {
+    return this.template?.nodos.find(n => n.id === nodoId)?.nombre ?? nodoId;
   }
 
   get estaFinalizado(): boolean {
@@ -93,10 +109,14 @@ export class InstanceDetailComponent implements OnInit {
   avanzar(): void {
     if (!this.instancia) return;
     this.procesando = true;
-    this.instanceService.avanzar(this.instancia.id, this.avanzarForm.value).subscribe({
+    const conexionId = this.avanzarForm.get('conexionId')?.value;
+    const condicion = conexionId ? this.getCondicionDeConexion(conexionId) : '';
+    const observacion = this.avanzarForm.get('observacion')?.value ?? '';
+    this.instanceService.avanzar(this.instancia.id, { condicion, observacion }).subscribe({
       next: actualizada => {
         this.instancia = actualizada;
         this.mostrarFormAvanzar = false;
+        this.avanzarForm.reset({ conexionId: '', observacion: '' });
         this.procesando = false;
         this.cdr.detectChanges();
         this.templateService.obtener(actualizada.templateId).subscribe(t => { this.template = t; this.cdr.detectChanges(); });

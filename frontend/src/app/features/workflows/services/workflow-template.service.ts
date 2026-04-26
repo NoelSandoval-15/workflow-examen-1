@@ -28,6 +28,11 @@ export class WorkflowTemplateService {
       .pipe(map(r => r.data));
   }
 
+  actualizar(id: string, request: CreateWorkflowRequest): Observable<WorkflowTemplate> {
+    return this.http.put<ApiResponse<WorkflowTemplate>>(`${this.base}/templates/${id}`, request)
+      .pipe(map(r => r.data));
+  }
+
   activar(id: string): Observable<WorkflowTemplate> {
     return this.http.put<ApiResponse<WorkflowTemplate>>(`${this.base}/templates/${id}/activar`, {})
       .pipe(map(r => r.data));

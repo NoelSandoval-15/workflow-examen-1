@@ -1,57 +1,57 @@
 <div class="page-header">
   <h2>Gestión de Usuarios</h2>
-  <button mat-raised-button color="primary" (click)="mostrarForm = !mostrarForm">
+  <button mat-raised-button color="primary" (click)="abrirFormNuevo()">
     <mat-icon>person_add</mat-icon> Nuevo Usuario
   </button>
 </div>
 
+<!-- FORMULARIO CREAR / EDITAR -->
 @if (mostrarForm) {
   <mat-card class="form-card">
     <mat-card-header>
-      <mat-card-title>Crear Usuario</mat-card-title>
-      <mat-card-subtitle>Completa todos los campos requeridos</mat-card-subtitle>
+      <mat-card-title>
+        <mat-icon>{{ usuarioEditando ? 'edit' : 'person_add' }}</mat-icon>
+        {{ usuarioEditando ? 'Editar Usuario' : 'Nuevo Usuario' }}
+      </mat-card-title>
+      @if (usuarioEditando) {
+        <mat-card-subtitle>Editando: <strong>{{ usuarioEditando.nombre }} {{ usuarioEditando.apellido }}</strong></mat-card-subtitle>
+      }
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="guardar()" class="form-grid">
 
         <mat-form-field appearance="outline">
           <mat-label>Nombre *</mat-label>
-          <input matInput formControlName="nombre" placeholder="Ej: Juan">
+          <input matInput formControlName="nombre">
           @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
-            <mat-error>El nombre es obligatorio</mat-error>
+            <mat-error>Obligatorio</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Apellido *</mat-label>
-          <input matInput formControlName="apellido" placeholder="Ej: Pérez">
+          <input matInput formControlName="apellido">
           @if (form.get('apellido')?.hasError('required') && form.get('apellido')?.touched) {
-            <mat-error>El apellido es obligatorio</mat-error>
+            <mat-error>Obligatorio</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Correo electrónico *</mat-label>
-          <input matInput formControlName="correo" type="email" placeholder="usuario@cree.com">
-          @if (form.get('correo')?.hasError('required') && form.get('correo')?.touched) {
-            <mat-error>El correo es obligatorio</mat-error>
-          }
+          <input matInput formControlName="correo" type="email">
           @if (form.get('correo')?.hasError('email') && form.get('correo')?.touched) {
-            <mat-error>Formato de correo inválido</mat-error>
+            <mat-error>Correo inválido</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Username *</mat-label>
-          <input matInput formControlName="username" placeholder="Ej: jperez">
-          @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
-            <mat-error>El username es obligatorio</mat-error>
-          }
+          <input matInput formControlName="username">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Contraseña *</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="Mínimo 6 caracteres">
+          <mat-label>{{ usuarioEditando ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña *' }}</mat-label>
+          <input matInput formControlName="password" type="password">
           @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
             <mat-error>Mínimo 6 caracteres</mat-error>
           }
@@ -59,20 +59,20 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Rol *</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
           <mat-select formControlName="rolId">
-            @for (rol of roles; track rol.id) {
-              <mat-option [value]="rol.id">
-                <strong>{{ rol.label }}</strong> — {{ rol.descripcion }}
+            @for (r of rolesOrden; track r.id) {
+              <mat-option [value]="r.id">
+                <mat-icon [style.color]="r.color">{{ r.icono }}</mat-icon>
+                {{ r.label.slice(0, -1) }}
               </mat-option>
             }
           </mat-select>
-          @if (form.get('rolId')?.hasError('required') && form.get('rolId')?.touched) {
-            <mat-error>Selecciona un rol</mat-error>
-          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-col">
           <mat-label>Departamento</mat-label>
+          <mat-icon matPrefix>business</mat-icon>
           <mat-select formControlName="departamentoId">
             <mat-option value="">Sin departamento</mat-option>
             @for (dep of departamentos; track dep.id) {
@@ -82,17 +82,11 @@
         </mat-form-field>
 
         <div class="form-actions">
-          <button mat-raised-button color="primary" type="submit"
-                  [disabled]="guardando || form.invalid">
-            @if (guardando) {
-              <mat-spinner diameter="18"></mat-spinner>
-            } @else {
-              <ng-container><mat-icon>save</mat-icon> Guardar</ng-container>
-            }
+          <button mat-raised-button color="primary" type="submit" [disabled]="guardando || form.invalid">
+            @if (guardando) { <mat-spinner diameter="18"></mat-spinner> }
+            @else { <ng-container><mat-icon>save</mat-icon> {{ usuarioEditando ? 'Actualizar' : 'Guardar' }}</ng-container> }
           </button>
-          <button mat-stroked-button type="button" (click)="mostrarForm = false">
-            Cancelar
-          </button>
+          <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
         </div>
 
       </form>
@@ -100,69 +94,59 @@
   </mat-card>
 }
 
+<!-- LISTA AGRUPADA POR ROL -->
 @if (loading) {
   <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
 } @else {
-  <mat-card>
-    <mat-card-content>
-      <table mat-table [dataSource]="usuarios" class="full-width">
+  @for (grupo of grupos; track grupo.id) {
+    <div class="grupo-section">
 
-        <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let u">
-            <div class="user-cell">
-              <mat-icon class="avatar-icon">account_circle</mat-icon>
-              <div>
-                <div class="user-nombre">{{ u.nombre }} {{ u.apellido }}</div>
-                <div class="user-sub">{{ u.correo }}</div>
+      <!-- Cabecera del grupo -->
+      <div class="grupo-header" [style.border-left-color]="grupo.color">
+        <mat-icon [style.color]="grupo.color">{{ grupo.icono }}</mat-icon>
+        <span class="grupo-label">{{ grupo.label }}</span>
+        <span class="grupo-count">{{ grupo.usuarios.length }}</span>
+      </div>
+
+      <!-- Filas de usuarios -->
+      <mat-card class="grupo-card">
+        @for (u of grupo.usuarios; track u.id; let last = $last) {
+          <div class="user-row">
+            <div class="user-avatar" [style.background]="grupo.color + '22'">
+              <mat-icon [style.color]="grupo.color">account_circle</mat-icon>
+            </div>
+
+            <div class="user-main">
+              <div class="user-nombre">{{ u.nombre }} {{ u.apellido }}</div>
+              <div class="user-meta">
+                <span><mat-icon>alternate_email</mat-icon>{{ u.username }}</span>
+                <span><mat-icon>mail</mat-icon>{{ u.correo }}</span>
+                @if (getNombreDepartamento(u.departamentoId ?? '') !== '—') {
+                  <span><mat-icon>business</mat-icon>{{ getNombreDepartamento(u.departamentoId ?? '') }}</span>
+                }
               </div>
             </div>
-          </td>
-        </ng-container>
 
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef>Username</th>
-          <td mat-cell *matCellDef="let u"><code>{{ u.username }}</code></td>
-        </ng-container>
+            <div class="user-actions">
+              <span class="estado-dot" [class.activo]="u.activo" [matTooltip]="u.activo ? 'Activo' : 'Inactivo'">
+                <mat-icon>{{ u.activo ? 'check_circle' : 'cancel' }}</mat-icon>
+              </span>
+              <button mat-icon-button matTooltip="Editar usuario" (click)="abrirFormEditar(u)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </div>
+          @if (!last) { <mat-divider></mat-divider> }
+        }
+      </mat-card>
 
-        <ng-container matColumnDef="correo">
-          <th mat-header-cell *matHeaderCellDef>Correo</th>
-          <td mat-cell *matCellDef="let u">{{ u.correo }}</td>
-        </ng-container>
+    </div>
+  }
 
-        <ng-container matColumnDef="rolId">
-          <th mat-header-cell *matHeaderCellDef>Rol</th>
-          <td mat-cell *matCellDef="let u">
-            <span class="rol-badge" [class]="'rol-' + u.rolId?.toLowerCase()">
-              {{ getRolLabel(u.rolId) }}
-            </span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="departamento">
-          <th mat-header-cell *matHeaderCellDef>Departamento</th>
-          <td mat-cell *matCellDef="let u">{{ getNombreDepartamento(u.departamentoId) }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="activo">
-          <th mat-header-cell *matHeaderCellDef>Estado</th>
-          <td mat-cell *matCellDef="let u">
-            <mat-icon [style.color]="u.activo ? '#10b981' : '#ef4444'">
-              {{ u.activo ? 'check_circle' : 'cancel' }}
-            </mat-icon>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="cols"></tr>
-        <tr mat-row *matRowDef="let row; columns: cols;"></tr>
-      </table>
-
-      @if (usuarios.length === 0) {
-        <div class="empty-state">
-          <mat-icon>people</mat-icon>
-          <p>No hay usuarios registrados</p>
-        </div>
-      }
-    </mat-card-content>
-  </mat-card>
+  @if (usuarios.length === 0) {
+    <div class="empty-state">
+      <mat-icon>people</mat-icon>
+      <p>No hay usuarios registrados</p>
+    </div>
+  }
 }

@@ -5,6 +5,7 @@ export interface WorkflowNode {
   departamentoId?: string;
   rolRequerido?: string;
   formularioId?: string;
+  funcionarioId?: string;
   requiereEvidencia?: boolean;
   tiempoLimiteHoras?: number;
   orden?: number;
@@ -21,6 +22,7 @@ export interface WorkflowEdge {
 export interface WorkflowTemplate {
   id: string;
   nombre: string;
+  tipoSolicitud?: string;
   descripcion?: string;
   estado: 'BORRADOR' | 'ACTIVO' | 'INACTIVO';
   nodos: WorkflowNode[];

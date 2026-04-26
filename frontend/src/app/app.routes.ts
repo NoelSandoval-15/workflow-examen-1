@@ -33,6 +33,15 @@ export const routes: Routes = [
         loadComponent: () => import('./features/workflows/pages/workflow-designer/workflow-designer.component').then(m => m.WorkflowDesignerComponent)
       },
       {
+        path: 'flujos/editar/:id',
+        loadComponent: () => import('./features/workflows/pages/workflow-designer/workflow-designer.component').then(m => m.WorkflowDesignerComponent)
+      },
+      {
+        // Ruta colaborativa: accesible sin diseñar desde cero, se carga por token
+        path: 'flujos/colaborar/:token',
+        loadComponent: () => import('./features/workflows/pages/workflow-designer/workflow-designer.component').then(m => m.WorkflowDesignerComponent)
+      },
+      {
         path: 'tareas',
         loadComponent: () => import('./features/tasks/pages/task-list.component').then(m => m.TaskListComponent)
       },

@@ -6,10 +6,28 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <div>
-      <h2>Diseñar Flujo de Trabajo</h2>
-      <p class="page-sub">Arrastra elementos y configura cada nodo con doble clic</p>
+      <h2>
+        {{ isCollaborationMode ? '🤝 Colaborando en: ' + form.get('nombre')?.value : 'Diseñar Flujo de Trabajo' }}
+      </h2>
+      <p class="page-sub">
+        {{ isCollaborationMode
+           ? 'Modo colaborativo — tus cambios serán visibles para todos en esta sala'
+           : 'Arrastra elementos y configura cada nodo con doble clic' }}
+      </p>
     </div>
     <span class="spacer"></span>
+
+    <!-- Botón Compartir: visible cuando hay templateId (edición o colaboración) -->
+    @if (templateId) {
+      <button mat-stroked-button
+              matTooltip="Compartir para edición colaborativa"
+              [color]="mostrarPanelCompartir ? 'accent' : ''"
+              (click)="toggleCompartir()"
+              style="margin-right: 8px;">
+        <mat-icon>share</mat-icon> Compartir
+      </button>
+    }
+
     <button mat-raised-button color="primary" [disabled]="guardando" (click)="guardar()">
       @if (guardando) {
         <mat-spinner diameter="18"></mat-spinner>
@@ -18,6 +36,41 @@
       }
     </button>
   </div>
+
+  <!-- PANEL COMPARTIR -->
+  @if (mostrarPanelCompartir) {
+    <div class="collab-panel-header-section">
+      <div class="collab-panel-inner">
+        <div class="collab-panel-title">
+          <mat-icon>people</mat-icon>
+          <span>Colaboración en tiempo real</span>
+        </div>
+        @if (cargandoLink) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else if (linkColaboracion) {
+          <div class="collab-link-row">
+            <span class="collab-url">{{ linkColaboracion.collaborationUrl }}</span>
+            <button mat-icon-button matTooltip="Copiar link" (click)="copiarLink()">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-stroked-button (click)="regenerarLink()">
+              <mat-icon>refresh</mat-icon> Regenerar
+            </button>
+            <button mat-stroked-button color="warn" (click)="revocarLink()">
+              <mat-icon>link_off</mat-icon> Revocar
+            </button>
+            <button mat-icon-button (click)="mostrarPanelCompartir = false">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <p class="collab-hint-text">
+            <mat-icon>info</mat-icon>
+            Comparte este link. Quien lo abra podrá diseñar el flujo junto contigo en tiempo real.
+          </p>
+        }
+      </div>
+    </div>
+  }
 
   <!-- META -->
   <mat-card class="meta-card">
@@ -59,8 +112,17 @@
             <strong>Doble clic</strong> en un nodo para configurar sus propiedades
           </span>
         </div>
-        <app-bpmn-modeler #modeler (elementoDobleClick)="onElementoSeleccionado($event)">
-        </app-bpmn-modeler>
+        @if (modelerListo) {
+          <app-bpmn-modeler #modeler
+            [xmlInicial]="xmlParaCargar"
+            (elementoDobleClick)="onElementoSeleccionado($event)"
+            (xmlChanged)="onXmlChanged($event)">
+          </app-bpmn-modeler>
+        } @else {
+          <div style="height:540px;display:flex;align-items:center;justify-content:center;">
+            <mat-spinner diameter="48"></mat-spinner>
+          </div>
+        }
       </mat-card-content>
     </mat-card>
 
@@ -86,56 +148,99 @@
         <div class="props-body">
           <form [formGroup]="propForm">
 
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Nombre del nodo</mat-label>
-              <mat-icon matPrefix>edit</mat-icon>
-              <input matInput formControlName="nombre">
-              <mat-hint>Se actualiza en el diagrama al aplicar</mat-hint>
-            </mat-form-field>
+            <!-- SECCIÓN: Identificación -->
+            <div class="prop-section">
+              <div class="prop-section-title"><mat-icon>label</mat-icon> Identificación</div>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Nombre del nodo</mat-label>
+                <mat-icon matPrefix>edit</mat-icon>
+                <input matInput formControlName="nombre">
+                <mat-hint>Se actualiza en el diagrama al aplicar</mat-hint>
+              </mat-form-field>
+            </div>
 
             @if (!esSoloLectura(nodoSeleccionado.tipo)) {
 
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Departamento responsable</mat-label>
-                <mat-icon matPrefix>business</mat-icon>
-                <mat-select formControlName="departamentoId">
-                  <mat-option value="">Sin asignar</mat-option>
-                  @for (dep of departamentos; track dep.id) {
-                    <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
-                  }
-                </mat-select>
-                <mat-hint>Departamento que atiende este nodo</mat-hint>
-              </mat-form-field>
+              <!-- SECCIÓN: Asignación -->
+              <div class="prop-section">
+                <div class="prop-section-title"><mat-icon>group</mat-icon> Asignación</div>
 
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Rol requerido</mat-label>
-                <mat-icon matPrefix>badge</mat-icon>
-                <mat-select formControlName="rolRequerido">
-                  <mat-option value="">Sin restricción</mat-option>
-                  @for (rol of roles; track rol.id) {
-                    <mat-option [value]="rol.id">{{ rol.label }}</mat-option>
-                  }
-                </mat-select>
-                <mat-hint>Jerarquía mínima para ejecutar</mat-hint>
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Departamento responsable</mat-label>
+                  <mat-icon matPrefix>business</mat-icon>
+                  <mat-select formControlName="departamentoId">
+                    <mat-option value="">Sin asignar</mat-option>
+                    @for (dep of departamentos; track dep.id) {
+                      <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
+                    }
+                  </mat-select>
+                  <mat-hint>Área encargada de este paso</mat-hint>
+                </mat-form-field>
 
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Tiempo límite (horas)</mat-label>
-                <mat-icon matPrefix>schedule</mat-icon>
-                <input matInput type="number" formControlName="tiempoLimiteHoras" min="0">
-                <mat-hint>0 = sin límite de tiempo</mat-hint>
-              </mat-form-field>
+                <!-- Funcionario: se filtra por departamento seleccionado -->
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>
+                    {{ propForm.get('departamentoId')?.value
+                       ? 'Funcionario del departamento'
+                       : 'Funcionario asignado' }}
+                  </mat-label>
+                  <mat-icon matPrefix>person</mat-icon>
+                  <mat-select formControlName="funcionarioId">
+                    <mat-option value="">Sin asignar</mat-option>
+                    @for (f of funcionariosFiltrados; track f.id) {
+                      <mat-option [value]="f.id">
+                        <div class="func-option">
+                          <span class="func-nombre">{{ f.nombre }} {{ f.apellido }}</span>
+                          <span class="func-dept">{{ getNombreDepartamento(f.departamentoId ?? '') }}</span>
+                        </div>
+                      </mat-option>
+                    }
+                    @if (funcionariosFiltrados.length === 0) {
+                      <mat-option disabled value="">Sin funcionarios en este departamento</mat-option>
+                    }
+                  </mat-select>
+                  <mat-hint>
+                    {{ propForm.get('departamentoId')?.value
+                       ? (funcionariosFiltrados.length + ' funcionario(s) disponibles')
+                       : 'Selecciona un departamento para filtrar' }}
+                  </mat-hint>
+                </mat-form-field>
 
-              <div class="evidencia-toggle">
-                <mat-checkbox formControlName="requiereEvidencia" color="primary">
-                  Requiere evidencia o documento adjunto
-                </mat-checkbox>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Rol mínimo requerido</mat-label>
+                  <mat-icon matPrefix>badge</mat-icon>
+                  <mat-select formControlName="rolRequerido">
+                    <mat-option value="">Sin restricción de rol</mat-option>
+                    @for (rol of roles; track rol.id) {
+                      <mat-option [value]="rol.id">{{ rol.label }}</mat-option>
+                    }
+                  </mat-select>
+                  <mat-hint>Jerarquía mínima para ejecutar este paso</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <!-- SECCIÓN: Configuración -->
+              <div class="prop-section">
+                <div class="prop-section-title"><mat-icon>settings</mat-icon> Configuración</div>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Tiempo límite (horas)</mat-label>
+                  <mat-icon matPrefix>schedule</mat-icon>
+                  <input matInput type="number" formControlName="tiempoLimiteHoras" min="0">
+                  <mat-hint>0 = sin límite de tiempo</mat-hint>
+                </mat-form-field>
+
+                <div class="evidencia-toggle">
+                  <mat-checkbox formControlName="requiereEvidencia" color="primary">
+                    Requiere evidencia o documento adjunto
+                  </mat-checkbox>
+                </div>
               </div>
 
             } @else {
               <div class="readonly-notice">
                 <mat-icon>lock</mat-icon>
-                <span>Este nodo no tiene propiedades configurables</span>
+                <span>Este nodo es automático y no tiene propiedades configurables</span>
               </div>
             }
 

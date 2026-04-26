@@ -43,12 +43,25 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
 
   private renderizar(): void {
     if (!this.template) return;
-    this.xml = this.buildBpmnXml(this.template);
+
+    // Preferir el BPMN XML real guardado por bpmn.js → renderizado exacto al diseño original
+    this.xml = this.template.bpmnXml
+      ? this.template.bpmnXml
+      : this.buildBpmnXml(this.template);
+
     this.cdr.detectChanges();
     this.viewer.importXML(this.xml).then(() => {
       this.viewer.get('canvas').zoom('fit-viewport');
       if (this.nodoActualId) this.resaltarNodo(this.nodoActualId);
-    }).catch(() => {});
+    }).catch((err: any) => {
+      // Si el XML del diseñador falla, fallback al generado
+      if (this.template?.bpmnXml) {
+        this.xml = this.buildBpmnXml(this.template);
+        this.viewer.importXML(this.xml).then(() => {
+          this.viewer.get('canvas').zoom('fit-viewport');
+        }).catch(() => {});
+      }
+    });
   }
 
   private resaltarNodo(nodoId: string): void {
@@ -58,6 +71,7 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
     } catch {}
   }
 
+  /** Generación BFS — solo se usa si el template no tiene bpmnXml guardado */
   private computeLayout(template: WorkflowTemplate): Map<string, { x: number; y: number; w: number; h: number }> {
     const dim = (n: WorkflowNode) => {
       if (n.tipo === 'INICIO' || n.tipo === 'FIN') return { w: 36, h: 36 };
@@ -65,7 +79,6 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
       return { w: 120, h: 80 };
     };
 
-    // Build adjacency list (outgoing edges)
     const adj = new Map<string, string[]>();
     for (const n of template.nodos) adj.set(n.id, []);
     for (const e of template.conexiones) {
@@ -73,7 +86,6 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
       if (list) list.push(e.nodoDestinoId);
     }
 
-    // BFS from INICIO node to assign column levels
     const startNode = template.nodos.find(n => n.tipo === 'INICIO') ?? template.nodos[0];
     const level = new Map<string, number>();
     const queue: string[] = [startNode.id];
@@ -90,14 +102,12 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
       }
     }
 
-    // Assign remaining nodes (unreachable from start) to end columns
     let maxLevel = 0;
     for (const v of level.values()) if (v > maxLevel) maxLevel = v;
     for (const n of template.nodos) {
       if (!level.has(n.id)) level.set(n.id, ++maxLevel);
     }
 
-    // Group nodes by level to calculate Y positions
     const byLevel = new Map<number, string[]>();
     for (const [id, lv] of level.entries()) {
       if (!byLevel.has(lv)) byLevel.set(lv, []);
@@ -111,7 +121,6 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
     const STEP_Y = 120;
     const START_X = 60;
     const START_Y = 60;
-
     const posMap = new Map<string, { x: number; y: number; w: number; h: number }>();
 
     for (const [lv, ids] of byLevel.entries()) {
@@ -120,15 +129,9 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
         const node = nodeMap.get(id)!;
         const { w, h } = dim(node);
         const centerY = START_Y + totalHeight / 2 - STEP_Y / 2 + rowIdx * STEP_Y;
-        posMap.set(id, {
-          x: START_X + lv * STEP_X,
-          y: centerY - h / 2,
-          w,
-          h
-        });
+        posMap.set(id, { x: START_X + lv * STEP_X, y: centerY - h / 2, w, h });
       });
     }
-
     return posMap;
   }
 

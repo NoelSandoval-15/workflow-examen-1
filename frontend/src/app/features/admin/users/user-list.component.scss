@@ -1,36 +1,79 @@
 .page-header {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px;
-  h2 { margin: 0; font-size: 1.4rem; }
+  margin-bottom: 24px;
+  h2 { margin: 0; font-size: 1.4rem; font-weight: 700; }
 }
 
-.form-card { margin-bottom: 20px; }
-
+/* Formulario */
+.form-card { margin-bottom: 24px;
+  mat-card-title { display: flex; align-items: center; gap: 8px; }
+}
 .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;
   .full-col { grid-column: 1/-1; }
 }
-
 .form-actions { grid-column: 1/-1; display: flex; gap: 12px; margin-top: 8px; }
 
+/* Grupos por rol */
+.grupo-section { margin-bottom: 28px; }
+
+.grupo-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; margin-bottom: 8px;
+  border-left: 4px solid;
+  background: #f8fafc; border-radius: 0 8px 8px 0;
+
+  mat-icon { font-size: 22px; width: 22px; height: 22px; }
+  .grupo-label { font-weight: 700; font-size: 15px; color: #1e293b; flex: 1; }
+  .grupo-count {
+    background: #e2e8f0; color: #475569;
+    border-radius: 12px; padding: 2px 10px;
+    font-size: 12px; font-weight: 600;
+  }
+}
+
+.grupo-card { border-radius: 12px !important; overflow: hidden; }
+
+.user-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  transition: background 0.15s ease;
+  &:hover { background: #f8fafc; }
+}
+
+.user-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  mat-icon { font-size: 28px; width: 28px; height: 28px; }
+}
+
+.user-main { flex: 1; min-width: 0; }
+
+.user-nombre { font-weight: 600; font-size: 14px; color: #1e293b; }
+
+.user-meta {
+  display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;
+  span {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; color: #64748b;
+    mat-icon { font-size: 14px; width: 14px; height: 14px; }
+  }
+}
+
+.user-actions {
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+
+  .estado-dot {
+    mat-icon { font-size: 20px; width: 20px; height: 20px; }
+    &.activo mat-icon { color: #10b981; }
+    &:not(.activo) mat-icon { color: #ef4444; }
+  }
+
+  button mat-icon { color: #64748b; }
+  button:hover mat-icon { color: #3b82f6; }
+}
+
 .loading-center { display: flex; justify-content: center; padding: 60px; }
-.full-width { width: 100%; }
-
-.user-cell {
-  display: flex; align-items: center; gap: 10px; padding: 8px 0;
-  .avatar-icon { font-size: 32px; width: 32px; height: 32px; color: #94a3b8; }
-  .user-nombre { font-weight: 500; }
-  .user-sub { font-size: 12px; color: #94a3b8; }
-}
-
-.rol-badge {
-  padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600;
-  &.rol-admin       { background: #fde68a; color: #92400e; }
-  &.rol-supervisor  { background: #bfdbfe; color: #1e40af; }
-  &.rol-funcionario { background: #d1fae5; color: #065f46; }
-}
 
 .empty-state {
   text-align: center; padding: 40px; color: #94a3b8;
