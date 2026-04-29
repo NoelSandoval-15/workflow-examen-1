@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from '../../../../core/services/auth.service';
 import { WorkflowTemplateService } from '../../services/workflow-template.service';
 import { WorkflowInstanceService } from '../../services/workflow-instance.service';
 import { WorkflowCollaborationService, CollaborationLinkDTO } from '../../services/workflow-collaboration.service';
@@ -41,8 +42,17 @@ export class TemplateListComponent implements OnInit {
     private collaborationService: WorkflowCollaborationService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
+
+  get esFuncionario(): boolean {
+    return this.authService.getCurrentUser()?.rolId?.toUpperCase() === 'FUNCIONARIO';
+  }
+
+  get esAdmin(): boolean {
+    return this.authService.getCurrentUser()?.rolId?.toUpperCase() === 'ADMIN';
+  }
 
   ngOnInit(): void {
     this.templateService.listar().subscribe({
@@ -94,6 +104,28 @@ export class TemplateListComponent implements OnInit {
   editar(template: WorkflowTemplate, event: Event): void {
     event.stopPropagation();
     this.router.navigate(['/flujos/editar', template.id]);
+  }
+
+  eliminar(template: WorkflowTemplate, event: Event): void {
+    event.stopPropagation();
+    if (!confirm(`¿Estás seguro que deseas eliminar el flujo "${template.nombre}"? Esta acción no se puede deshacer.`)) {
+      return;
+    }
+    this.procesando = template.id;
+    this.templateService.eliminar(template.id).subscribe({
+      next: () => {
+        this.templates = this.templates.filter(t => t.id !== template.id);
+        if (this.selectedTemplate?.id === template.id) this.selectedTemplate = undefined;
+        this.procesando = null;
+        this.cdr.detectChanges();
+        this.snackBar.open('✓ Flujo eliminado correctamente', '', { duration: 2500 });
+      },
+      error: (err) => {
+        this.procesando = null;
+        this.cdr.detectChanges();
+        alert('Error: ' + (err?.error?.message || 'Error al eliminar el flujo'));
+      }
+    });
   }
 
   // ── Colaboración ──────────────────────────────────────────────

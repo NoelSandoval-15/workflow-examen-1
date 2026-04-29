@@ -37,4 +37,9 @@ export class WorkflowTemplateService {
     return this.http.put<ApiResponse<WorkflowTemplate>>(`${this.base}/templates/${id}/activar`, {})
       .pipe(map(r => r.data));
   }
+
+  eliminar(id: string): Observable<void> {
+    return this.http.delete<ApiResponse<void>>(`${this.base}/templates/${id}`)
+      .pipe(map(r => r.data));
+  }
 }

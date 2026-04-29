@@ -60,7 +60,7 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
 
   // ── Colaboración en tiempo real ──────────────────────────────
   /** ID único por sesión de navegador — identifica al cliente en la sala */
-  readonly clientId = crypto.randomUUID();
+  readonly clientId = this.generateClientId();
   private collaborationVersion = 0;
   /** Debounce: espera 400ms de inactividad antes de enviar el XML */
   private readonly xmlSubject = new Subject<string>();
@@ -71,6 +71,15 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
     { id: 'SUPERVISOR',  label: 'Supervisor'     },
     { id: 'FUNCIONARIO', label: 'Funcionario'    }
   ];
+
+  private generateClientId(): string {
+    // Generar un UUID v4 compatible sin crypto.randomUUID()
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
   get funcionariosFiltrados(): User[] {
     const deptId = this.propForm.get('departamentoId')?.value;
@@ -173,19 +182,61 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
       this.mostrarPanelCompartir = false;
       return;
     }
-    if (!this.templateId) {
-      this.snackBar.open('Guarda el flujo primero para poder compartirlo', 'OK', { duration: 3000 });
-      return;
+
+    if (this.templateId) {
+      // Ya existe el flujo → generar link directamente
+      this.abrirPanelConLink(this.templateId);
+    } else {
+      // Flujo nuevo → guardar en silencio primero, luego compartir
+      if (this.form.invalid) {
+        this.snackBar.open('Completa el nombre y tipo de solicitud antes de compartir', 'OK', { duration: 3000 });
+        return;
+      }
+      this.guardarSilenciosoYCompartir();
     }
+  }
+
+  private guardarSilenciosoYCompartir(): void {
     this.cargandoLink = true;
     this.mostrarPanelCompartir = true;
-    this.collaborationService.generarLink(this.templateId).subscribe({
+
+    const { nodos, conexiones } = this.modelerRef?.extractData() ?? { nodos: [], conexiones: [] };
+    this.modelerRef?.exportXml().then(bpmnXml => {
+      const request = { ...this.form.value, nodos, conexiones, bpmnXml };
+      this.templateService.crear(request).subscribe({
+        next: saved => {
+          this.templateId = saved.id;
+          this.conectarSalaRealtime(saved.id);
+          this.snackBar.open('Flujo guardado. Generando link…', '', { duration: 1500 });
+          this.abrirPanelConLink(saved.id);
+        },
+        error: () => {
+          this.cargandoLink = false;
+          this.mostrarPanelCompartir = false;
+          this.cdr.detectChanges();
+          this.snackBar.open('Error al guardar el flujo', 'OK', { duration: 3000 });
+        }
+      });
+    }).catch(() => {
+      this.cargandoLink = false;
+      this.mostrarPanelCompartir = false;
+    });
+  }
+
+  private abrirPanelConLink(templateId: string): void {
+    this.cargandoLink = true;
+    this.mostrarPanelCompartir = true;
+    this.collaborationService.generarLink(templateId).subscribe({
       next: link => {
         this.linkColaboracion = link;
         this.cargandoLink = false;
         this.cdr.detectChanges();
       },
-      error: () => { this.cargandoLink = false; this.mostrarPanelCompartir = false; this.cdr.detectChanges(); }
+      error: () => {
+        this.cargandoLink = false;
+        this.mostrarPanelCompartir = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 

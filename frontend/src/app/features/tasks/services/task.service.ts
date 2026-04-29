@@ -8,6 +8,7 @@ import { ApiResponse } from '../../../core/models/api-response.model';
 export interface Task {
   id: string;
   procesoInstanciaId: string;
+  procesoInstanciaCodigo?: string;   // TRM-XXXXXXXX para mostrar en UI
   nodoId?: string;
   nombre: string;
   tipo?: string;
@@ -27,6 +28,12 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
+  /** Tareas del usuario autenticado — endpoint seguro que no expone otros IDs */
+  misTareas(): Observable<Task[]> {
+    return this.http.get<ApiResponse<Task[]>>(`${this.base}/mis-tareas`)
+      .pipe(map(r => r.data));
+  }
+
   listarPorUsuario(usuarioId: string): Observable<Task[]> {
     return this.http.get<ApiResponse<Task[]>>(`${this.base}/usuario/${usuarioId}`)
       .pipe(map(r => r.data));
@@ -38,7 +45,10 @@ export class TaskService {
   }
 
   completar(id: string, observacion: string): Observable<Task> {
-    return this.http.put<ApiResponse<Task>>(`${this.base}/${id}/completar`, { observacion })
-      .pipe(map(r => r.data));
+    return this.http.put<ApiResponse<Task>>(
+      `${this.base}/${id}/completar`,
+      null,
+      { params: { observacion } }
+    ).pipe(map(r => r.data));
   }
 }

@@ -1,9 +1,11 @@
 <div class="page-header">
   <h2>Flujos de Trabajo</h2>
   <span class="spacer"></span>
-  <button mat-raised-button color="primary" (click)="crearFlujo()">
-    <mat-icon>add</mat-icon> Crear Flujo
-  </button>
+  @if (!esFuncionario) {
+    <button mat-raised-button color="primary" (click)="crearFlujo()">
+      <mat-icon>add</mat-icon> Crear Flujo
+    </button>
+  }
 </div>
 
 @if (loading) {
@@ -27,19 +29,28 @@
         }
 
         <mat-card-actions align="end">
-          <button mat-icon-button matTooltip="Editar diseño" (click)="editar(t, $event)">
-            <mat-icon>edit</mat-icon>
-          </button>
+          @if (!esFuncionario) {
+            <button mat-icon-button matTooltip="Editar diseño" (click)="editar(t, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
 
+          @if (esAdmin) {
+            <button mat-icon-button matTooltip="Eliminar" color="warn" 
+                    [disabled]="procesando === t.id"
+                    (click)="eliminar(t, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
 
-          @if (t.estado === 'BORRADOR') {
+          @if (!esFuncionario && t.estado === 'BORRADOR') {
             <button mat-stroked-button color="primary"
                     [disabled]="procesando === t.id"
                     (click)="activar(t, $event)">
               <mat-icon>publish</mat-icon> Publicar
             </button>
           }
-          @if (t.estado === 'ACTIVO') {
+          @if (!esFuncionario && t.estado === 'ACTIVO') {
             <button mat-raised-button color="primary"
                     [disabled]="procesando === t.id"
                     (click)="iniciarTramite(t, $event)">
@@ -47,7 +58,6 @@
             </button>
           }
         </mat-card-actions>
-
 
       </mat-card>
     }

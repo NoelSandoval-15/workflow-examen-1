@@ -9,4 +9,5 @@ export interface LoginResponse {
   rolId: string;
   departamentoId: string;
   nombre: string;
+  userId: string;  // MongoDB _id — para filtrar tareas propias
 }

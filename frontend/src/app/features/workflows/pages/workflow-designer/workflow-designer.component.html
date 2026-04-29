@@ -17,10 +17,10 @@
     </div>
     <span class="spacer"></span>
 
-    <!-- Botón Compartir: visible cuando hay templateId (edición o colaboración) -->
-    @if (templateId) {
+    <!-- Botón Compartir: siempre visible para admin. Sin templateId pide guardar primero. -->
+    @if (!isCollaborationMode) {
       <button mat-stroked-button
-              matTooltip="Compartir para edición colaborativa"
+              matTooltip="{{ templateId ? 'Compartir para edición colaborativa' : 'Guarda el flujo primero para compartir' }}"
               [color]="mostrarPanelCompartir ? 'accent' : ''"
               (click)="toggleCompartir()"
               style="margin-right: 8px;">
