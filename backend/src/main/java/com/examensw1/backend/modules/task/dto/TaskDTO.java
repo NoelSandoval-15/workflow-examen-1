@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class TaskDTO {
     private String id;
     private String procesoInstanciaId;
+    private String procesoInstanciaCodigo;  // TRM-XXXXXXXX para mostrar en UI
     private String nodoId;
     private String nombre;
     private String tipo;

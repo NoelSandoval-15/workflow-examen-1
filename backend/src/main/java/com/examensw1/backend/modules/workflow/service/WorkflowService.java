@@ -10,6 +10,6 @@ public interface WorkflowService {
     WorkflowDTO obtenerTemplate(String id);
     List<WorkflowDTO> listarTemplates();
     WorkflowDTO activarTemplate(String id);
-    void desactivarTemplate(String id);
+    void desactivarTemplate(String id, String usuarioId);
     SimulationResultDTO simularTemplate(String id);
 }

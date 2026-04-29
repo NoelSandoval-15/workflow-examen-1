@@ -79,6 +79,7 @@ public class TaskServiceImpl implements TaskService {
         TaskDTO dto = new TaskDTO();
         dto.setId(t.getId());
         dto.setProcesoInstanciaId(t.getProcesoInstanciaId());
+        dto.setProcesoInstanciaCodigo(t.getProcesoInstanciaCodigo());
         dto.setNodoId(t.getNodoId());
         dto.setNombre(t.getNombre());
         dto.setTipo(t.getTipo());

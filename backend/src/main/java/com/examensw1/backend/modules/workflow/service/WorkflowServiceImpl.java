@@ -5,6 +5,7 @@ import com.examensw1.backend.modules.workflow.domain.WorkflowEdge;
 import com.examensw1.backend.modules.workflow.domain.WorkflowNode;
 import com.examensw1.backend.modules.workflow.dto.*;
 import com.examensw1.backend.modules.workflow.repository.WorkflowRepository;
+import com.examensw1.backend.modules.user.repository.UserRepository;
 import com.examensw1.backend.shared.enums.NodeType;
 import com.examensw1.backend.shared.exception.BusinessException;
 import com.examensw1.backend.shared.exception.ResourceNotFoundException;
@@ -25,6 +26,7 @@ import java.util.List;
 public class WorkflowServiceImpl implements WorkflowService {
 
     private final WorkflowRepository workflowRepository;
+    private final UserRepository userRepository;
     private final RepositoryService repositoryService;
     private final BpmnXmlGenerator bpmnXmlGenerator;
 
@@ -167,11 +169,18 @@ public class WorkflowServiceImpl implements WorkflowService {
     }
 
     @Override
-    public void desactivarTemplate(String id) {
+    public void desactivarTemplate(String id, String usuarioUsername) {
+        // Validar que solo ADMIN puede eliminar flujos
+        var usuario = userRepository.findByUsername(usuarioUsername)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", usuarioUsername));
+        
+        if (!("ADMIN".equals(usuario.getRolId()))) {
+            throw new BusinessException("Solo administradores pueden eliminar flujos");
+        }
+        
         Workflow workflow = workflowRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Template", id));
-        workflow.setEstado("INACTIVO");
-        workflowRepository.save(workflow);
+        workflowRepository.delete(workflow);
     }
 
     @Override

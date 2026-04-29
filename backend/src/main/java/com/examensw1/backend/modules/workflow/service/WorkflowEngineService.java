@@ -1,6 +1,8 @@
 package com.examensw1.backend.modules.workflow.service;
 
 import com.examensw1.backend.modules.notification.service.NotificationService;
+import com.examensw1.backend.modules.task.repository.TaskRepository;
+import org.camunda.bpm.engine.task.Task;
 import com.examensw1.backend.modules.workflow.domain.HistorialEntry;
 import com.examensw1.backend.modules.workflow.domain.ProcesoInstancia;
 import com.examensw1.backend.modules.workflow.domain.Workflow;
@@ -18,7 +20,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -40,7 +41,8 @@ public class WorkflowEngineService {
     private final NotificationService notificationService;
     private final RepositoryService repositoryService;
     private final RuntimeService runtimeService;
-    private final TaskService taskService;
+    private final TaskService taskService;            // Camunda TaskService
+    private final TaskRepository taskRepository;     // app TaskRepository para tareas de funcionarios
     private final BpmnXmlGenerator bpmnXmlGenerator;
 
     // ───────────────────────────────────────────────────────────────
@@ -119,10 +121,15 @@ public class WorkflowEngineService {
 
         registrarHistorial(instancia, nodoInicio, usuarioId, "INICIO", "Proceso iniciado");
 
-        // Sincronizar tarea activa de Camunda
+        // Sincronizar tarea activa de Camunda (puede avanzar al primer UserTask automáticamente)
         sincronizarTareaActiva(instancia, camundaInstance.getId());
 
-        ProcesoInstanciaDTO dto = toDTO(procesoInstanciaRepository.save(instancia));
+        procesoInstanciaRepository.save(instancia);
+
+        // Si el primer nodo ya es una TAREA con funcionario asignado, notificar
+        crearTareaYNotificar(instancia, instancia.getNodoActual());
+
+        ProcesoInstanciaDTO dto = toDTO(instancia);
         log.info("Proceso iniciado: codigo={}, camundaId={}", instancia.getCodigo(), camundaInstance.getId());
         return dto;
     }
@@ -228,7 +235,12 @@ public class WorkflowEngineService {
         }
 
         instancia.setUpdatedAt(LocalDateTime.now());
-        ProcesoInstanciaDTO resultado = toDTO(procesoInstanciaRepository.save(instancia));
+        procesoInstanciaRepository.save(instancia);
+
+        // Si el nuevo nodo es una TAREA con funcionario asignado → crear tarea + notificar
+        if (instancia.getNodoActual() != null) {
+            crearTareaYNotificar(instancia, instancia.getNodoActual());
+        }
 
         notificationService.enviarNotificacion(
                 usuarioId,
@@ -238,7 +250,7 @@ public class WorkflowEngineService {
                 instanciaId
         );
 
-        return resultado;
+        return toDTO(instancia);
     }
 
     // ───────────────────────────────────────────────────────────────
@@ -388,6 +400,52 @@ public class WorkflowEngineService {
 
     private String generarCodigo() {
         return "TRM-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+    }
+
+    /**
+     * Si el nodo es TAREA y tiene funcionarioId, crea una Task en MongoDB
+     * y envía una notificación al funcionario asignado.
+     */
+    private void crearTareaYNotificar(ProcesoInstancia instancia, WorkflowNode nodo) {
+        if (!NodeType.TAREA.equals(nodo.getTipo())) return;
+        if (nodo.getFuncionarioId() == null || nodo.getFuncionarioId().isBlank()) return;
+
+        // Evitar tarea duplicada para el mismo nodo e instancia
+        boolean yaExiste = taskRepository
+                .findByProcesoInstanciaId(instancia.getId())
+                .stream()
+                .anyMatch(t -> nodo.getId().equals(t.getNodoId()) && !"CANCELADO".equals(t.getEstado()));
+        if (yaExiste) return;
+
+        // Crear tarea para el funcionario
+        com.examensw1.backend.modules.task.domain.Task tarea =
+                new com.examensw1.backend.modules.task.domain.Task();
+        tarea.setProcesoInstanciaId(instancia.getId());
+        tarea.setProcesoInstanciaCodigo(instancia.getCodigo());
+        tarea.setNodoId(nodo.getId());
+        tarea.setNombre(nodo.getNombre());
+        tarea.setTipo("TAREA");
+        tarea.setEstado("PENDIENTE");
+        tarea.setUsuarioAsignadoId(nodo.getFuncionarioId());
+        tarea.setDepartamentoAsignadoId(nodo.getDepartamentoId());
+        tarea.setRequiereEvidencia(nodo.isRequiereEvidencia());
+        tarea.setFechaInicio(LocalDateTime.now());
+        if (nodo.getTiempoLimiteHoras() > 0) {
+            tarea.setFechaLimite(LocalDateTime.now().plusHours(nodo.getTiempoLimiteHoras()));
+        }
+        taskRepository.save(tarea);
+
+        // Notificar al funcionario
+        notificationService.enviarNotificacion(
+                nodo.getFuncionarioId(),
+                "Nueva tarea asignada",
+                "Tienes una nueva tarea: \"" + nodo.getNombre() + "\" en el trámite " + instancia.getCodigo(),
+                "TAREA_ASIGNADA",
+                instancia.getId()
+        );
+
+        log.info("Tarea creada y notificada → funcionario={} nodo='{}' trámite={}",
+                nodo.getFuncionarioId(), nodo.getNombre(), instancia.getCodigo());
     }
 
     private ProcesoInstanciaDTO toDTO(ProcesoInstancia p) {

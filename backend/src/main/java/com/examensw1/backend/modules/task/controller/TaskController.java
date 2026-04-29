@@ -4,6 +4,7 @@ import com.examensw1.backend.modules.task.dto.CreateTaskRequest;
 import com.examensw1.backend.modules.task.dto.TaskDTO;
 import com.examensw1.backend.modules.task.dto.UpdateTaskRequest;
 import com.examensw1.backend.modules.task.service.TaskService;
+import com.examensw1.backend.modules.user.repository.UserRepository;
 import com.examensw1.backend.shared.response.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService taskService;
+    private final UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse<TaskDTO>> crear(@Valid @RequestBody CreateTaskRequest request) {
@@ -33,6 +37,16 @@ public class TaskController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<TaskDTO>> obtener(@PathVariable String id) {
         return ResponseEntity.ok(ApiResponse.ok(taskService.obtenerTarea(id)));
+    }
+
+    /** Tareas del usuario autenticado — el funcionario ve solo las suyas */
+    @GetMapping("/mis-tareas")
+    public ResponseEntity<ApiResponse<List<TaskDTO>>> misTareas(
+            @AuthenticationPrincipal UserDetails userDetails) {
+        return userRepository.findByUsername(userDetails.getUsername())
+                .map(user -> ResponseEntity.ok(
+                        ApiResponse.ok(taskService.listarPorUsuario(user.getId()))))
+                .orElse(ResponseEntity.ok(ApiResponse.ok(List.of())));
     }
 
     @GetMapping("/instancia/{procesoInstanciaId}")

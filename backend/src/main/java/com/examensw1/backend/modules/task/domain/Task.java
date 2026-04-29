@@ -17,6 +17,7 @@ public class Task {
     private String id;
 
     private String procesoInstanciaId;
+    private String procesoInstanciaCodigo;
     private String nodoId;
     private String nombre;
     private String tipo;

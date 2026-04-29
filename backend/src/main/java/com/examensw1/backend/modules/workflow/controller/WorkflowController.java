@@ -59,9 +59,11 @@ public class WorkflowController {
     }
 
     @DeleteMapping("/templates/{id}")
-    public ResponseEntity<ApiResponse<Void>> desactivarTemplate(@PathVariable String id) {
-        workflowService.desactivarTemplate(id);
-        return ResponseEntity.ok(ApiResponse.ok("Template desactivado", null));
+    public ResponseEntity<ApiResponse<Void>> desactivarTemplate(
+            @PathVariable String id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        workflowService.desactivarTemplate(id, userDetails.getUsername());
+        return ResponseEntity.ok(ApiResponse.ok("Template eliminado", null));
     }
 
     @GetMapping("/templates/{id}/simular")

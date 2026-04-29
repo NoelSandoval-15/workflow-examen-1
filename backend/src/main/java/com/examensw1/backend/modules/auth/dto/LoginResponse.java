@@ -11,4 +11,5 @@ public class LoginResponse {
     private String rolId;
     private String departamentoId;
     private String nombre;
+    private String userId;   // MongoDB _id del usuario — usado para filtrar tareas
 }

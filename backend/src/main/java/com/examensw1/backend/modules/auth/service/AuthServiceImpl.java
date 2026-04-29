@@ -34,6 +34,6 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
         return new LoginResponse(token, user.getUsername(), user.getRolId(),
-                user.getDepartamentoId(), user.getNombre());
+                user.getDepartamentoId(), user.getNombre(), user.getId());
     }
 }
