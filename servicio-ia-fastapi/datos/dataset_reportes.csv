@@ -1,0 +1,2501 @@
+texto,categoria,criterio,formato
+Descargar reporte de trámite demorado en docx.,tramites,atrasados,word
+Crear reporte de clientes en formato pdf,clientes,todos,pdf
+En pantalla quiero el reporte de usuarios finales activo,clientes,pendientes,pantalla
+Quisiera ver la lista de operadores atrasado y bajarla en en pdf,usuarios,atrasados,pdf
+Sácame un reporte de ciudadanos con demora en documento editable.,clientes,atrasados,word
+Lista archivo completado documento pdf,documentos,completados,pdf
+Muéstrame un reporte de personal en xlsx,usuarios,todos,excel
+lista usuarios con retraso en excel,usuarios,atrasados,excel
+Por favor genera un reporte de papeles lista completa en json,documentos,todos,pantalla
+DESCARGAR REPORTE DE POLÍTICA EN ARCHIVO WORD,politicas,todos,word
+Exportar a vista previa los solicitante,clientes,todos,pantalla
+En en word quiero el reporte de trámites terminados,tramites,completados,word
+Descargar en archivo pdf el reporte de reglas de negocio procesando,politicas,pendientes,pdf
+Sácame un reporte de diagramas atrasados en word,politicas,atrasados,word
+por favor genera un reporte de diagramas atrasado en archivo pdf,politicas,atrasados,pdf
+Sácame un reporte de política total en en excel,politicas,todos,excel
+Dame los funcionario atrasados en formato excel,usuarios,atrasados,excel
+Obtener reporte de archivo en ver,documentos,todos,pantalla
+descargar reporte de solicitante aprobado en pantalla,clientes,completados,pantalla
+Lista archivos en curso ver.,documentos,pendientes,pantalla
+En formato pdf quiero el reporte de políticas de negocio atrasado,politicas,atrasados,pdf
+Listado requisitos total documento pdf,documentos,todos,pdf
+reporte solicitantes excel.,clientes,todos,excel
+Muéstrame un reporte de usuarios finales pendiente en formato pdf,clientes,pendientes,pdf
+Exportar a formato portable los políticas,politicas,todos,pdf
+muéstrame un reporte de empleados sin filtros en hoja de cálculo,usuarios,todos,excel
+Necesito exportar a word el listado de política de negocio sin terminar,politicas,pendientes,word
+Crear reporte de políticas demorados en documento word,politicas,atrasados,word
+Reporte ficheros resueltos en excel.,documentos,completados,excel
+Reporte clientes terminado formato pdf,clientes,completados,pdf
+Sácame un reporte de solicitudes atrasados en hoja excel,tramites,atrasados,excel
+Descargar reporte de casos finalizado en formato excel,tramites,completados,excel
+En formato excel dame los archivos en curso,documentos,pendientes,excel
+Necesito el reporte de documento aprobados en hoja excel,documentos,completados,excel
+¿es posible obtener los usuarios activos en en excel?,usuarios,pendientes,excel
+En formato documento word dame los políticas de negocio todas.,politicas,todos,word
+crear reporte de reglas en archivo word!,politicas,todos,word
+¿es posible obtener los solicitantes vencidos en excel?,clientes,atrasados,excel
+lista reglas json,politicas,todos,pantalla
+Listado adjuntos completados json,documentos,completados,pantalla
+En hoja excel quiero el reporte de usuarios finales sin filtros,clientes,todos,excel
+quiero un reporte de trámite activos en docx,tramites,pendientes,word
+Generar un reporte de personas en en excel.,clientes,todos,excel
+Dame los trámite cualquiera en formato en excel,tramites,todos,excel
+Lista usuarios finales consola,clientes,todos,pantalla
+Muéstrame un reporte de archivo terminados en vista previa,documentos,completados,pantalla
+Podrías generarme un reporte de trámite en curso en formato excel,tramites,pendientes,excel
+Quiero un reporte de ciudadanos vencidos en en excel!,clientes,atrasados,excel
+Quiero exportar en formato json las operadores resueltos,usuarios,completados,pantalla
+Generar un reporte de cliente en pantalla.,clientes,todos,pantalla
+Hazme un reporte de cliente pendientes en json,clientes,pendientes,pantalla
+reporte usuario word,usuarios,todos,word
+Podrías generarme un reporte de trámite atrasados en archivo excel,tramites,atrasados,excel
+Crear reporte de cliente resuelto en archivo word,clientes,completados,word
+Descargar reporte de funcionario todas en mostrar,usuarios,todos,pantalla
+CREAR REPORTE DE DIAGRAMAS DE ACTIVIDAD EN WORD,politicas,todos,word
+En formato consola dame los personas finalizados,clientes,completados,pantalla
+Necesito exportar a en pantalla el listado de diagramas de actividad total,politicas,todos,pantalla
+¿cómo puedo ver el reporte de clientes sin filtros en documento editable?,clientes,todos,word
+Quiero un reporte de política en formato pdf,politicas,todos,pdf
+Generar un reporte de clientes en formato pdf,clientes,todos,pdf
+Lista reglas terminado vista previa,politicas,completados,pantalla
+Exportar a hoja de cálculo los política,politicas,todos,excel
+lista usuarios procesando docx,usuarios,pendientes,word
+Obtener reporte de usuarios finales en documento pdf.,clientes,todos,pdf
+Dame los solicitante vencido en formato pdf,clientes,atrasados,pdf
+Dame los archivo en formato consola,documentos,todos,pantalla
+Obtener reporte de política demorado en en pdf.,politicas,atrasados,pdf
+Necesito el reporte de casos sin filtros en json,tramites,todos,pantalla
+Quiero exportar en archivo excel las requisitos completado,documentos,completados,excel
+Datos papeles completado en word,documentos,completados,word
+quiero un reporte de casos con retraso en json,tramites,atrasados,pantalla
+Exportar a documento pdf los peticiones,tramites,todos,pdf
+¿cómo puedo ver el reporte de solicitantes vencidos en en pantalla?,clientes,atrasados,pantalla
+Reporte operador todas en pdf,usuarios,todos,pdf
+Sácame un reporte de trámites general en formato json,tramites,todos,pantalla
+Quiero un reporte de operador en proceso en word,usuarios,pendientes,word
+Muéstrame un reporte de políticas en visualizar,politicas,todos,pantalla
+Muéstrame un reporte de operador en mostrar,usuarios,todos,pantalla
+CREAR REPORTE DE REQUISITOS EN DOCUMENTO EDITABLE,documentos,todos,word
+Quisiera ver la lista de diagramas cualquiera y bajarla en en excel,politicas,todos,excel
+¿cómo puedo ver el reporte de archivo en curso en pantalla?,documentos,pendientes,pantalla
+¿es posible obtener los archivos cualquiera en archivo pdf?,documentos,todos,pdf
+Obtener reporte de solicitante en excel,clientes,todos,excel
+reporte procesos vista previa,tramites,todos,pantalla
+En vista previa quiero el reporte de documento atrasado.,documentos,atrasados,pantalla
+Necesito exportar a docx el listado de procesos aprobados,tramites,completados,word
+Muéstrame un reporte de flujos de trabajo en xlsx,tramites,todos,excel
+Datos clientes aprobado hoja de cálculo,clientes,completados,excel
+Quisiera ver la lista de documento general y bajarla en consola,documentos,todos,pantalla
+Dame los usuarios finales hechos en formato formato portable,clientes,completados,pdf
+Por favor genera un reporte de archivo resuelto en hoja de cálculo,documentos,completados,excel
+Listado personas demorados word,clientes,atrasados,word
+Listado empleados aprobado hoja excel,usuarios,completados,excel
+generar un reporte de adjuntos en visualizar,documentos,todos,pantalla
+Quiero un reporte de usuario general en en word,usuarios,todos,word
+POR FAVOR GENERA UN REPORTE DE CASOS GLOBAL EN WORD,tramites,todos,word
+Quiero un reporte de papeles en formato json,documentos,todos,pantalla
+Dame los clientes en formato docx,clientes,todos,word
+Crear reporte de operadores terminados en formato pdf.,usuarios,completados,pdf
+exportar a formato pdf los fichero demorado,documentos,atrasados,pdf
+Podrías generarme un reporte de documentos terminados en hoja excel,documentos,completados,excel
+¿cómo puedo ver el reporte de procesos activos en archivo pdf?,tramites,pendientes,pdf
+Descargar reporte de flujos de trabajo con retraso en formato json,tramites,atrasados,pantalla
+Generar un reporte de políticas de negocio en vista previa,politicas,todos,pantalla
+Lista trámites hoja de cálculo,tramites,todos,excel
+Exportar a formato portable los políticas cualquiera,politicas,todos,pdf
+Reporte solicitantes global en pdf,clientes,todos,pdf
+lista trámites ver,tramites,todos,pantalla
+Datos ciudadanos completados json,clientes,completados,pantalla
+Lista adjuntos con retraso word,documentos,atrasados,word
+Datos políticas de negocio demorados documento word,politicas,atrasados,word
+Exportar a excel los personas,clientes,todos,excel
+Dame los funcionarios demorados en formato archivo pdf,usuarios,atrasados,pdf
+Quisiera ver la lista de cliente cualquiera y bajarla en word,clientes,todos,word
+Generar un reporte de operadores con demora en excel,usuarios,atrasados,excel
+Necesito el reporte de usuarios en formato portable,usuarios,todos,pdf
+Muéstrame un reporte de usuarios en pantalla,usuarios,todos,pantalla
+En en pdf quiero el reporte de solicitante completados,clientes,completados,pdf
+Generar un reporte de trámite en archivo pdf,tramites,todos,pdf
+Crear reporte de personal en archivo pdf,usuarios,todos,pdf
+En formato formato pdf dame los archivos activo,documentos,pendientes,pdf
+Podrías generarme un reporte de personas completo en en pantalla,clientes,todos,pantalla
+dame los políticas en formato en word,politicas,todos,word
+Dame los solicitudes en formato pantalla,tramites,todos,pantalla
+Obtener reporte de diagramas pendiente en en pdf,politicas,pendientes,pdf
+Quiero un reporte de solicitantes en en word.,clientes,todos,word
+Hazme un reporte de usuario tardíos en formato word,usuarios,atrasados,word
+generar un reporte de archivos en en pdf.,documentos,todos,pdf
+NECESITO EL REPORTE DE POLÍTICA DE NEGOCIO EN WORD,politicas,todos,word
+Muéstrame un reporte de funcionario lista completa en xlsx,usuarios,todos,excel
+Podrías generarme un reporte de política de negocio con demora en en word,politicas,atrasados,word
+Necesito exportar a formato portable el listado de requisitos completo,documentos,todos,pdf
+Dame los papeles en formato documento word,documentos,todos,word
+Obtener reporte de ficheros en formato excel,documentos,todos,excel
+Dame los peticiones en formato en pdf,tramites,todos,pdf
+Generar un reporte de documentos en word,documentos,todos,word
+podrías generarme un reporte de peticiones hechos en en pdf,tramites,completados,pdf
+Reporte documentos todas pantalla,documentos,todos,pantalla
+Dame los cliente fuera de plazo en formato word,clientes,atrasados,word
+necesito el reporte de personas en hoja de cálculo,clientes,todos,excel
+Crear reporte de solicitudes en archivo pdf,tramites,todos,pdf
+Necesito exportar a en pdf el listado de empleado completado,usuarios,completados,pdf
+En formato en pdf dame los empleado procesando,usuarios,pendientes,pdf
+descargar en en pdf el reporte de papeles pendientes.,documentos,pendientes,pdf
+Listado empleados todos mostrar,usuarios,todos,pantalla
+¿es posible obtener los flujos de trabajo aprobado en consola?,tramites,completados,pantalla
+En formato documento pdf dame los diagramas de actividad completado.,politicas,completados,pdf
+Quisiera ver la lista de operadores finalizados y bajarla en vista previa,usuarios,completados,pantalla
+Generar un reporte de clientes en formato portable,clientes,todos,pdf
+Sácame un reporte de archivos todas en formato pdf.,documentos,todos,pdf
+Muéstrame un reporte de fichero sin filtros en documento editable,documentos,todos,word
+Hazme un reporte de archivos vencido en archivo pdf,documentos,atrasados,pdf
+Muéstrame un reporte de archivo completado en ver,documentos,completados,pantalla
+Datos personal resueltos en pdf,usuarios,completados,pdf
+descargar reporte de funcionario en formato pdf,usuarios,todos,pdf
+Obtener reporte de políticas en documento pdf,politicas,todos,pdf
+Por favor genera un reporte de operador tardíos en en pantalla,usuarios,atrasados,pantalla
+Datos documento cualquiera formato pdf,documentos,todos,pdf
+Lista reglas de negocio formato portable,politicas,todos,pdf
+quiero un reporte de fichero pendientes en hoja excel,documentos,pendientes,excel
+Datos papeles cualquiera en pdf,documentos,todos,pdf
+Muéstrame un reporte de flujos de trabajo en en excel,tramites,todos,excel
+Descargar reporte de empleado cualquiera en archivo excel,usuarios,todos,excel
+Necesito exportar a en word el listado de flujos de trabajo con demora,tramites,atrasados,word
+Descargar reporte de operador en en excel.,usuarios,todos,excel
+Dame los cliente completo en formato excel,clientes,todos,excel
+Sácame un reporte de operadores demorados en en pdf,usuarios,atrasados,pdf
+Dame los documento en formato archivo word,documentos,todos,word
+Lista flujos de trabajo en pdf,tramites,todos,pdf
+¿es posible obtener los políticas de negocio demorados en formato portable?,politicas,atrasados,pdf
+Datos archivos aprobados archivo word,documentos,completados,word
+Crear reporte de políticas de negocio terminado en en pantalla,politicas,completados,pantalla
+Dame los casos general en formato formato word,tramites,todos,word
+Quiero un reporte de clientes pendiente en xlsx,clientes,pendientes,excel
+Lista política de negocio formato pdf,politicas,todos,pdf
+Reporte adjuntos completo formato word,documentos,todos,word
+Obtener reporte de archivo en documento word,documentos,todos,word
+listado peticiones completo ver.,tramites,todos,pantalla
+Lista cliente finalizado formato json,clientes,completados,pantalla
+quiero exportar en xlsx las políticas de negocio procesando,politicas,pendientes,excel
+Descargar en en excel el reporte de requisitos vencido,documentos,atrasados,excel
+Necesito el reporte de trámite en curso en formato pdf,tramites,pendientes,pdf
+Descargar reporte de empleados con demora en archivo pdf,usuarios,atrasados,pdf
+Crear reporte de diagramas total en xlsx,politicas,todos,excel
+Descargar en documento editable el reporte de solicitudes hechos,tramites,completados,word
+En formato pdf dame los diagramas de actividad hechos!,politicas,completados,pdf
+Datos ciudadanos activo en pantalla,clientes,pendientes,pantalla
+Generar un reporte de papeles en formato pdf,documentos,todos,pdf
+Por favor genera un reporte de solicitudes finalizado en docx,tramites,completados,word
+Dame los política en formato archivo excel,politicas,todos,excel
+Exportar a hoja excel los política de negocio,politicas,todos,excel
+Quiero un reporte de diagramas en archivo pdf,politicas,todos,pdf
+EXPORTAR A FORMATO WORD LOS PETICIONES TODOS,tramites,todos,word
+En formato consola dame los trámites fuera de plazo,tramites,atrasados,pantalla
+Obtener reporte de solicitante aprobados en consola,clientes,completados,pantalla
+Por favor genera un reporte de personal vencidos en archivo excel.,usuarios,atrasados,excel
+Reporte casos consola,tramites,todos,pantalla
+Necesito exportar a pdf el listado de requisitos con demora.,documentos,atrasados,pdf
+Quiero exportar en en excel las políticas de negocio vencidos,politicas,atrasados,excel
+Podrías generarme un reporte de empleado activos en documento word,usuarios,pendientes,word
+Hazme un reporte de diagramas pendientes en en pantalla,politicas,pendientes,pantalla
+Podrías generarme un reporte de cliente activos en json,clientes,pendientes,pantalla
+¿es posible obtener los política activo en mostrar?,politicas,pendientes,pantalla
+Necesito el reporte de requisitos con demora en archivo word,documentos,atrasados,word
+Generar un reporte de política sin terminar en json,politicas,pendientes,pantalla
+¿cómo puedo ver el reporte de solicitante activos en archivo excel?,clientes,pendientes,excel
+¿cómo puedo ver el reporte de operador completado en vista previa?,usuarios,completados,pantalla
+Quiero un reporte de ficheros en archivo pdf,documentos,todos,pdf
+Descargar reporte de ficheros en formato word,documentos,todos,word
+Muéstrame un reporte de políticas de negocio cualquiera en excel,politicas,todos,excel
+Muéstrame un reporte de documentos en archivo excel,documentos,todos,excel
+quiero un reporte de clientes en archivo pdf,clientes,todos,pdf
+Podrías generarme un reporte de trámites todas en archivo excel,tramites,todos,excel
+Necesito exportar a archivo word el listado de solicitante vencido,clientes,atrasados,word
+OBTENER REPORTE DE FLUJOS DE TRABAJO EN FORMATO JSON,tramites,todos,pantalla
+Exportar a formato pdf los usuarios finales completados,clientes,completados,pdf
+Exportar a pdf los trámite terminado,tramites,completados,pdf
+Hazme un reporte de solicitudes finalizado en archivo excel,tramites,completados,excel
+Muéstrame un reporte de trámites aprobados en formato pdf,tramites,completados,pdf
+Quisiera ver la lista de operador vencido y bajarla en docx,usuarios,atrasados,word
+muéstrame un reporte de ciudadanos demorado en formato word,clientes,atrasados,word
+Datos clientes completado word,clientes,completados,word
+Quisiera ver la lista de clientes todos y bajarla en visualizar,clientes,todos,pantalla
+Necesito exportar a formato json el listado de flujos de trabajo completado,tramites,completados,pantalla
+Necesito el reporte de funcionarios en ver,usuarios,todos,pantalla
+datos papeles todas xlsx,documentos,todos,excel
+¿cómo puedo ver el reporte de operadores lista completa en documento word?,usuarios,todos,word
+Necesito exportar a en word el listado de personas hechos,clientes,completados,word
+Exportar a formato excel los políticas de negocio en proceso,politicas,pendientes,excel
+Reporte personas total xlsx,clientes,todos,excel
+Sácame un reporte de diagramas de actividad cualquiera en pantalla,politicas,todos,pantalla
+Generar un reporte de trámite en archivo word,tramites,todos,word
+Quiero exportar en archivo excel las solicitudes resueltos,tramites,completados,excel
+Listado políticas de negocio en proceso word,politicas,pendientes,word
+Exportar a documento editable los fichero aprobado.,documentos,completados,word
+crear reporte de solicitantes completados en formato portable,clientes,completados,pdf
+Muéstrame un reporte de fichero en en excel,documentos,todos,excel
+Necesito el reporte de personas en documento pdf,clientes,todos,pdf
+muéstrame un reporte de procesos en xlsx,tramites,todos,excel
+Muéstrame un reporte de usuario en en pantalla,usuarios,todos,pantalla
+datos reglas atrasado xlsx,politicas,atrasados,excel
+Reporte diagramas de actividad vista previa,politicas,todos,pantalla
+Dame los cliente en formato hoja excel,clientes,todos,excel
+Dame los requisitos en formato consola.,documentos,todos,pantalla
+Listado ficheros finalizado archivo pdf,documentos,completados,pdf
+REPORTE REGLAS DE NEGOCIO EN PDF,politicas,todos,pdf
+Reporte solicitantes atrasados en excel,clientes,atrasados,excel
+Por favor genera un reporte de requisitos en progreso en archivo word,documentos,pendientes,word
+Lista reglas terminados hoja de cálculo,politicas,completados,excel
+Por favor genera un reporte de ficheros lista completa en formato portable,documentos,todos,pdf
+Quiero un reporte de usuarios finales en formato excel,clientes,todos,excel
+Generar un reporte de solicitante aprobado en documento word.,clientes,completados,word
+Exportar a documento pdf los ciudadanos resueltos,clientes,completados,pdf
+dame los operador terminado en formato formato excel!,usuarios,completados,excel
+Por favor genera un reporte de documentos global en mostrar,documentos,todos,pantalla
+en formato word quiero el reporte de trámites terminado,tramites,completados,word
+muéstrame un reporte de clientes demorado en documento pdf!,clientes,atrasados,pdf
+Quiero exportar en visualizar las funcionarios vencido,usuarios,atrasados,pantalla
+Exportar a visualizar los funcionarios,usuarios,todos,pantalla
+descargar reporte de papeles activos en visualizar,documentos,pendientes,pantalla
+Obtener reporte de cliente terminados en formato excel,clientes,completados,excel
+Descargar en archivo excel el reporte de solicitudes resuelto.,tramites,completados,excel
+Muéstrame un reporte de documento general en vista previa,documentos,todos,pantalla
+Obtener reporte de fichero en ver.,documentos,todos,pantalla
+Generar un reporte de trámite en word,tramites,todos,word
+Obtener reporte de solicitantes atrasado en hoja de cálculo,clientes,atrasados,excel
+necesito exportar a formato word el listado de personas vencidos,clientes,atrasados,word
+Por favor genera un reporte de política de negocio atrasado en word,politicas,atrasados,word
+CREAR REPORTE DE FUNCIONARIOS ACTIVO EN FORMATO WORD,usuarios,pendientes,word
+sácame un reporte de flujos de trabajo aprobado en archivo pdf,tramites,completados,pdf
+NECESITO EL REPORTE DE CASOS TARDÍOS EN EXCEL.,tramites,atrasados,excel
+Quiero un reporte de funcionarios en archivo excel,usuarios,todos,excel
+En formato pdf dame los solicitudes hechos.,tramites,completados,pdf
+¿cómo puedo ver el reporte de ciudadanos fuera de plazo en json?,clientes,atrasados,pantalla
+Reporte empleado mostrar.,usuarios,todos,pantalla
+GENERAR UN REPORTE DE USUARIOS FINALES CON RETRASO EN FORMATO EXCEL,clientes,atrasados,excel
+Descargar reporte de personal en en excel,usuarios,todos,excel
+Obtener reporte de casos sin terminar en vista previa,tramites,pendientes,pantalla
+Reporte política de negocio demorado json,politicas,atrasados,pantalla
+descargar en visualizar el reporte de empleados finalizado,usuarios,completados,pantalla
+Quisiera ver la lista de solicitante todas y bajarla en archivo word,clientes,todos,word
+Necesito el reporte de peticiones fuera de plazo en hoja excel,tramites,atrasados,excel
+Quiero un reporte de empleados total en formato pdf,usuarios,todos,pdf
+generar un reporte de peticiones lista completa en pdf,tramites,todos,pdf
+muéstrame un reporte de usuarios finales resuelto en en pdf,clientes,completados,pdf
+Dame los documento atrasados en formato en word,documentos,atrasados,word
+En formato mostrar dame los trámite completo,tramites,todos,pantalla
+obtener reporte de diagramas en archivo word,politicas,todos,word
+Reporte diagramas de actividad documento pdf,politicas,todos,pdf
+lista empleado activos pdf,usuarios,pendientes,pdf
+Reporte archivo en pdf.,documentos,todos,pdf
+¿cómo puedo ver el reporte de archivos lista completa en docx?!,documentos,todos,word
+En formato hoja de cálculo dame los operador procesando,usuarios,pendientes,excel
+¿es posible obtener los reglas general en formato pdf?,politicas,todos,pdf
+Exportar a hoja excel los peticiones,tramites,todos,excel
+En docx quiero el reporte de solicitantes con retraso,clientes,atrasados,word
+Datos funcionario en progreso en word!,usuarios,pendientes,word
+Quiero exportar en archivo pdf las política de negocio completo,politicas,todos,pdf
+Obtener reporte de procesos en progreso en formato word,tramites,pendientes,word
+Reporte trámite completado hoja de cálculo.,tramites,completados,excel
+Quisiera ver la lista de solicitante sin filtros y bajarla en en excel,clientes,todos,excel
+Quiero un reporte de documento pendientes en json.,documentos,pendientes,pantalla
+¿es posible obtener los documento cualquiera en excel?!,documentos,todos,excel
+Exportar a hoja de cálculo los documentos todas,documentos,todos,excel
+Dame los reglas de negocio finalizado en formato word,politicas,completados,word
+descargar reporte de procesos sin filtros en formato pdf,tramites,todos,pdf
+Obtener reporte de flujos de trabajo aprobado en json,tramites,completados,pantalla
+Reporte ficheros sin filtros documento pdf.,documentos,todos,pdf
+Quiero exportar en en word las peticiones tardíos,tramites,atrasados,word
+Generar un reporte de diagramas en excel,politicas,todos,excel
+Exportar a formato pdf los diagramas en progreso,politicas,pendientes,pdf
+muéstrame un reporte de ciudadanos activo en hoja de cálculo,clientes,pendientes,excel
+podrías generarme un reporte de diagramas de actividad todas en documento pdf,politicas,todos,pdf
+Quiero un reporte de peticiones en documento word,tramites,todos,word
+Necesito el reporte de archivos resuelto en consola!,documentos,completados,pantalla
+Datos clientes terminado documento editable,clientes,completados,word
+Quiero un reporte de papeles en documento word,documentos,todos,word
+en archivo word quiero el reporte de ciudadanos todos,clientes,todos,word
+Dame los política demorado en formato hoja excel,politicas,atrasados,excel
+Quiero un reporte de personal aprobados en visualizar,usuarios,completados,pantalla
+Obtener reporte de cliente terminados en formato word,clientes,completados,word
+Quiero un reporte de archivo en formato excel,documentos,todos,excel
+Reporte usuarios finales pendientes xlsx,clientes,pendientes,excel
+Exportar a json los empleado sin filtros,usuarios,todos,pantalla
+Listado solicitudes con demora archivo word.,tramites,atrasados,word
+Datos empleados hechos formato word,usuarios,completados,word
+Descargar reporte de política de negocio en formato word,politicas,todos,word
+Reporte casos formato word,tramites,todos,word
+Por favor genera un reporte de empleados pendiente en en excel,usuarios,pendientes,excel
+Datos empleado demorado formato excel,usuarios,atrasados,excel
+Obtener reporte de clientes en visualizar,clientes,todos,pantalla
+¿es posible obtener los funcionarios lista completa en formato pdf?,usuarios,todos,pdf
+En formato formato portable dame los operador sin terminar,usuarios,pendientes,pdf
+Necesito el reporte de documento en consola!,documentos,todos,pantalla
+Quiero un reporte de fichero resueltos en formato pdf,documentos,completados,pdf
+Datos usuario aprobados archivo excel,usuarios,completados,excel
+Quisiera ver la lista de política de negocio terminado y bajarla en vista previa,politicas,completados,pantalla
+Quiero un reporte de casos en progreso en xlsx,tramites,pendientes,excel
+DAME LOS PETICIONES CUALQUIERA EN FORMATO ARCHIVO WORD,tramites,todos,word
+Lista flujos de trabajo visualizar,tramites,todos,pantalla
+Lista casos completado formato json,tramites,completados,pantalla
+Descargar en en word el reporte de políticas atrasado,politicas,atrasados,word
+Descargar reporte de funcionarios en archivo word,usuarios,todos,word
+descargar reporte de peticiones en formato portable,tramites,todos,pdf
+muéstrame un reporte de flujos de trabajo en hoja de cálculo,tramites,todos,excel
+Generar un reporte de usuario completado en pantalla,usuarios,completados,pantalla
+Crear reporte de solicitantes terminado en formato pdf,clientes,completados,pdf
+Dame los clientes lista completa en formato formato excel,clientes,todos,excel
+Quisiera ver la lista de usuarios finales global y bajarla en hoja excel,clientes,todos,excel
+necesito el reporte de documento global en vista previa.,documentos,todos,pantalla
+Necesito exportar a formato word el listado de políticas en curso,politicas,pendientes,word
+Descargar reporte de política de negocio en documento pdf,politicas,todos,pdf
+necesito exportar a en excel el listado de personal vencidos,usuarios,atrasados,excel
+quiero un reporte de clientes sin filtros en formato word!,clientes,todos,word
+¿es posible obtener los casos hechos en en excel?,tramites,completados,excel
+quiero exportar en word las diagramas todas,politicas,todos,word
+Por favor genera un reporte de políticas de negocio finalizados en documento pdf,politicas,completados,pdf
+Descargar en documento pdf el reporte de requisitos activos,documentos,pendientes,pdf
+POR FAVOR GENERA UN REPORTE DE DIAGRAMAS CON DEMORA EN FORMATO JSON,politicas,atrasados,pantalla
+por favor genera un reporte de personas lista completa en formato excel,clientes,todos,excel
+Listado solicitantes global hoja de cálculo,clientes,todos,excel
+Listado política finalizado docx,politicas,completados,word
+Quiero un reporte de fichero en documento pdf,documentos,todos,pdf
+Dame los clientes vencidos en formato formato pdf,clientes,atrasados,pdf
+reporte usuarios xlsx,usuarios,todos,excel
+Dame los política procesando en formato json,politicas,pendientes,pantalla
+Dame los empleados en formato archivo pdf,usuarios,todos,pdf
+Muéstrame un reporte de reglas de negocio en proceso en xlsx,politicas,pendientes,excel
+reporte cliente finalizados archivo word!,clientes,completados,word
+quisiera ver la lista de operador con demora y bajarla en archivo word,usuarios,atrasados,word
+generar un reporte de diagramas de actividad en archivo excel,politicas,todos,excel
+generar un reporte de personal aprobado en archivo excel,usuarios,completados,excel
+Hazme un reporte de reglas en curso en pdf.,politicas,pendientes,pdf
+Descargar en json el reporte de diagramas completados.,politicas,completados,pantalla
+Necesito el reporte de política en formato portable,politicas,todos,pdf
+¿es posible obtener los clientes vencido en formato excel?,clientes,atrasados,excel
+GENERAR UN REPORTE DE FLUJOS DE TRABAJO EN EN WORD,tramites,todos,word
+Descargar reporte de políticas con retraso en archivo pdf,politicas,atrasados,pdf
+En vista previa quiero el reporte de ciudadanos todos,clientes,todos,pantalla
+SÁCAME UN REPORTE DE REGLAS DE NEGOCIO HECHOS EN HOJA EXCEL,politicas,completados,excel
+Datos solicitudes tardíos visualizar,tramites,atrasados,pantalla
+Reporte política de negocio activos archivo excel,politicas,pendientes,excel
+Descargar reporte de reglas de negocio todas en en pdf,politicas,todos,pdf
+Descargar reporte de documento en documento word,documentos,todos,word
+¿cómo puedo ver el reporte de diagramas de actividad finalizados en word?,politicas,completados,word
+Quisiera ver la lista de operador en proceso y bajarla en en word,usuarios,pendientes,word
+Muéstrame un reporte de solicitudes finalizado en hoja de cálculo,tramites,completados,excel
+Reporte políticas de negocio hoja de cálculo,politicas,todos,excel
+crear reporte de cliente en archivo word.,clientes,todos,word
+Podrías generarme un reporte de papeles en progreso en xlsx,documentos,pendientes,excel
+Necesito el reporte de solicitantes sin terminar en formato pdf,clientes,pendientes,pdf
+Exportar a pdf los personas,clientes,todos,pdf
+Exportar a visualizar los diagramas de actividad,politicas,todos,pantalla
+Dame los usuarios en formato ver,usuarios,todos,pantalla
+¿es posible obtener los documento activos en en word?,documentos,pendientes,word
+en formato pdf quiero el reporte de archivo todos,documentos,todos,pdf
+Quiero un reporte de adjuntos aprobados en archivo excel,documentos,completados,excel
+Quiero un reporte de papeles en mostrar,documentos,todos,pantalla
+Muéstrame un reporte de reglas aprobado en archivo excel,politicas,completados,excel
+Necesito el reporte de políticas lista completa en en excel,politicas,todos,excel
+Necesito el reporte de adjuntos vencidos en en pantalla,documentos,atrasados,pantalla
+Obtener reporte de solicitante en en pdf.,clientes,todos,pdf
+Generar un reporte de política todos en formato word.,politicas,todos,word
+Necesito el reporte de fichero en ver,documentos,todos,pantalla
+Lista funcionario formato json,usuarios,todos,pantalla
+Quiero exportar en visualizar las funcionarios hechos,usuarios,completados,pantalla
+Generar un reporte de cliente aprobados en formato portable,clientes,completados,pdf
+Necesito el reporte de trámite con retraso en word,tramites,atrasados,word
+Descargar en excel el reporte de operador vencido,usuarios,atrasados,excel
+Generar un reporte de políticas de negocio sin terminar en xlsx,politicas,pendientes,excel
+Muéstrame un reporte de usuarios finales todos en formato excel,clientes,todos,excel
+Descargar en archivo word el reporte de reglas de negocio finalizado.,politicas,completados,word
+Listado adjuntos todas archivo pdf,documentos,todos,pdf
+Necesito exportar a vista previa el listado de diagramas de actividad resuelto,politicas,completados,pantalla
+Hazme un reporte de políticas fuera de plazo en visualizar,politicas,atrasados,pantalla
+Reporte personal cualquiera word,usuarios,todos,word
+Lista procesos sin terminar mostrar,tramites,pendientes,pantalla
+Descargar en xlsx el reporte de ficheros activos,documentos,pendientes,excel
+Necesito el reporte de solicitudes atrasados en formato json,tramites,atrasados,pantalla
+Generar un reporte de política de negocio en json.,politicas,todos,pantalla
+En formato documento pdf dame los usuarios finales completo,clientes,todos,pdf
+¿cómo puedo ver el reporte de flujos de trabajo con demora en excel?,tramites,atrasados,excel
+Necesito el reporte de empleado en en word,usuarios,todos,word
+Descargar reporte de funcionarios general en hoja excel,usuarios,todos,excel
+Quiero un reporte de papeles en xlsx,documentos,todos,excel
+Dame los empleados cualquiera en formato documento editable.,usuarios,todos,word
+Sácame un reporte de operador completo en en pdf,usuarios,todos,pdf
+Reporte ciudadanos docx,clientes,todos,word
+Podrías generarme un reporte de solicitante total en documento pdf,clientes,todos,pdf
+Quiero exportar en en pdf las políticas lista completa,politicas,todos,pdf
+Dame los ciudadanos en formato formato json.,clientes,todos,pantalla
+descargar reporte de archivo finalizados en documento pdf,documentos,completados,pdf
+Obtener reporte de solicitantes con demora en formato pdf,clientes,atrasados,pdf
+en hoja excel quiero el reporte de funcionarios cualquiera,usuarios,todos,excel
+Reporte usuarios finales docx,clientes,todos,word
+Quiero exportar en archivo word las reglas sin filtros,politicas,todos,word
+LISTADO PERSONAL DEMORADOS EN PDF,usuarios,atrasados,pdf
+Quiero exportar en en pdf las ciudadanos aprobados,clientes,completados,pdf
+Hazme un reporte de cliente global en hoja excel,clientes,todos,excel
+Muéstrame un reporte de reglas de negocio aprobados en docx,politicas,completados,word
+DAME LOS EMPLEADO TODOS EN FORMATO XLSX,usuarios,todos,excel
+Generar un reporte de archivo todas en formato pdf,documentos,todos,pdf
+Dame los empleado todas en formato formato pdf,usuarios,todos,pdf
+Dame los usuario en formato documento pdf,usuarios,todos,pdf
+EN EN PANTALLA QUIERO EL REPORTE DE FLUJOS DE TRABAJO ACTIVO,tramites,pendientes,pantalla
+Exportar a word los funcionario completo!,usuarios,todos,word
+Obtener reporte de funcionario en pantalla,usuarios,todos,pantalla
+Quisiera ver la lista de ciudadanos atrasados y bajarla en word,clientes,atrasados,word
+Hazme un reporte de papeles finalizado en word,documentos,completados,word
+Reporte cliente ver,clientes,todos,pantalla
+Reporte política de negocio en proceso en pdf,politicas,pendientes,pdf
+Muéstrame un reporte de archivo con retraso en formato word,documentos,atrasados,word
+¿cómo puedo ver el reporte de solicitantes en curso en formato word?.,clientes,pendientes,word
+descargar en documento pdf el reporte de archivo pendiente,documentos,pendientes,pdf
+muéstrame un reporte de reglas finalizado en archivo pdf,politicas,completados,pdf
+Quiero un reporte de procesos en formato portable.,tramites,todos,pdf
+Exportar a pdf los políticas terminados,politicas,completados,pdf
+Lista archivos formato excel,documentos,todos,excel
+Generar un reporte de cliente en archivo pdf,clientes,todos,pdf
+Necesito el reporte de empleado en documento editable,usuarios,todos,word
+Generar un reporte de solicitante aprobado en en word,clientes,completados,word
+¿cómo puedo ver el reporte de funcionario demorado en documento editable?,usuarios,atrasados,word
+podrías generarme un reporte de políticas de negocio en proceso en en pdf,politicas,pendientes,pdf
+Obtener reporte de funcionario en en pantalla,usuarios,todos,pantalla
+Obtener reporte de casos resuelto en documento pdf,tramites,completados,pdf
+Generar un reporte de ciudadanos general en formato portable.,clientes,todos,pdf
+Quiero exportar en archivo word las política de negocio con retraso,politicas,atrasados,word
+generar un reporte de diagramas de actividad en hoja excel,politicas,todos,excel
+Necesito el reporte de políticas en archivo word,politicas,todos,word
+necesito exportar a xlsx el listado de usuarios finales cualquiera,clientes,todos,excel
+Descargar en en pantalla el reporte de flujos de trabajo con retraso.,tramites,atrasados,pantalla
+Necesito el reporte de operador en progreso en en word,usuarios,pendientes,word
+listado trámite con demora formato pdf,tramites,atrasados,pdf
+Exportar a xlsx los casos resueltos,tramites,completados,excel
+en json quiero el reporte de adjuntos atrasados,documentos,atrasados,pantalla
+SÁCAME UN REPORTE DE SOLICITANTE FUERA DE PLAZO EN FORMATO PORTABLE,clientes,atrasados,pdf
+reporte fichero archivo pdf,documentos,todos,pdf
+Descargar reporte de solicitudes en hoja de cálculo,tramites,todos,excel
+Quiero un reporte de usuarios activo en en word,usuarios,pendientes,word
+Quiero exportar en archivo pdf las personas en curso,clientes,pendientes,pdf
+Reporte política de negocio ver,politicas,todos,pantalla
+Muéstrame un reporte de política de negocio en progreso en en pantalla,politicas,pendientes,pantalla
+Dame los requisitos en formato documento word,documentos,todos,word
+Lista archivos en progreso pdf,documentos,pendientes,pdf
+Crear reporte de casos en formato pdf,tramites,todos,pdf
+quiero exportar en mostrar las cliente lista completa.,clientes,todos,pantalla
+En formato excel dame los funcionario general,usuarios,todos,excel
+Necesito el reporte de operadores global en hoja excel,usuarios,todos,excel
+Necesito exportar a pdf el listado de diagramas vencido,politicas,atrasados,pdf
+Datos reglas de negocio vencido en excel,politicas,atrasados,excel
+crear reporte de peticiones en visualizar,tramites,todos,pantalla
+En formato pantalla dame los fichero sin filtros,documentos,todos,pantalla
+En formato word quiero el reporte de casos hechos,tramites,completados,word
+HAZME UN REPORTE DE PERSONAL CON DEMORA EN VER,usuarios,atrasados,pantalla
+Datos archivos pendientes en excel,documentos,pendientes,excel
+Muéstrame un reporte de trámites en excel,tramites,todos,excel
+Quiero un reporte de usuarios finales en en excel.,clientes,todos,excel
+DAME LOS POLÍTICAS DE NEGOCIO FINALIZADOS EN FORMATO XLSX,politicas,completados,excel
+Quiero un reporte de políticas en word,politicas,todos,word
+Datos reglas pendientes visualizar,politicas,pendientes,pantalla
+Lista diagramas demorados word,politicas,atrasados,word
+Listado flujos de trabajo con demora formato portable,tramites,atrasados,pdf
+Descargar reporte de diagramas en formato excel,politicas,todos,excel
+Crear reporte de documentos vencido en formato portable,documentos,atrasados,pdf
+Generar un reporte de solicitudes hechos en docx,tramites,completados,word
+¿es posible obtener los usuario hechos en en pdf?,usuarios,completados,pdf
+Necesito el reporte de papeles aprobado en documento editable,documentos,completados,word
+Datos diagramas de actividad completados formato json!,politicas,completados,pantalla
+Quiero un reporte de políticas finalizados en documento word,politicas,completados,word
+¿cómo puedo ver el reporte de políticas total en formato excel?.,politicas,todos,excel
+Datos ficheros finalizado formato json.,documentos,completados,pantalla
+Crear reporte de adjuntos en vista previa,documentos,todos,pantalla
+POR FAVOR GENERA UN REPORTE DE USUARIO RESUELTOS EN FORMATO EXCEL,usuarios,completados,excel
+Obtener reporte de trámites con demora en documento editable,tramites,atrasados,word
+Descargar en docx el reporte de funcionario con retraso,usuarios,atrasados,word
+Lista empleados excel,usuarios,todos,excel
+¿es posible obtener los archivos completado en hoja de cálculo?.,documentos,completados,excel
+Generar un reporte de trámites en consola,tramites,todos,pantalla
+reporte solicitantes formato word,clientes,todos,word
+Muéstrame un reporte de flujos de trabajo en formato portable,tramites,todos,pdf
+¿CÓMO PUEDO VER EL REPORTE DE FUNCIONARIOS HECHOS EN EN PANTALLA?,usuarios,completados,pantalla
+Por favor genera un reporte de ciudadanos sin terminar en archivo word,clientes,pendientes,word
+Quiero un reporte de diagramas en archivo word,politicas,todos,word
+Necesito el reporte de peticiones en en excel,tramites,todos,excel
+lista solicitudes en pdf,tramites,todos,pdf
+Obtener reporte de reglas vencido en pantalla,politicas,atrasados,pantalla
+Hazme un reporte de flujos de trabajo procesando en hoja de cálculo,tramites,pendientes,excel
+Crear reporte de empleado en pantalla,usuarios,todos,pantalla
+Quiero un reporte de reglas atrasado en en pdf,politicas,atrasados,pdf
+En formato mostrar dame los solicitante cualquiera,clientes,todos,pantalla
+GENERAR UN REPORTE DE CIUDADANOS EN PROGRESO EN DOCX,clientes,pendientes,word
+Necesito el reporte de cliente en documento pdf,clientes,todos,pdf
+Generar un reporte de cliente aprobados en archivo excel,clientes,completados,excel
+sácame un reporte de clientes resuelto en documento pdf,clientes,completados,pdf
+Necesito exportar a visualizar el listado de políticas resueltos,politicas,completados,pantalla
+Obtener reporte de reglas en pdf,politicas,todos,pdf
+Datos funcionarios completados formato word.,usuarios,completados,word
+Quiero un reporte de personas activo en formato portable,clientes,pendientes,pdf
+reporte empleados terminados hoja excel,usuarios,completados,excel
+Necesito exportar a documento editable el listado de archivos total,documentos,todos,word
+Quiero un reporte de peticiones en hoja excel,tramites,todos,excel
+En pdf quiero el reporte de ficheros completado,documentos,completados,pdf
+Podrías generarme un reporte de diagramas de actividad en proceso en json,politicas,pendientes,pantalla
+Quisiera ver la lista de clientes resueltos y bajarla en formato portable,clientes,completados,pdf
+Generar un reporte de usuario en formato word,usuarios,todos,word
+GENERAR UN REPORTE DE FICHERO RESUELTOS EN EXCEL.,documentos,completados,excel
+descargar en documento word el reporte de trámite total.,tramites,todos,word
+Por favor genera un reporte de políticas pendiente en archivo pdf,politicas,pendientes,pdf
+Muéstrame un reporte de ficheros fuera de plazo en en excel,documentos,atrasados,excel
+Dame los usuario terminados en formato hoja excel.,usuarios,completados,excel
+Generar un reporte de usuario en mostrar,usuarios,todos,pantalla
+muéstrame un reporte de ficheros atrasado en pantalla!,documentos,atrasados,pantalla
+Podrías generarme un reporte de clientes en curso en en pdf,clientes,pendientes,pdf
+quiero exportar en formato json las solicitante todas,clientes,todos,pantalla
+Obtener reporte de reglas de negocio aprobados en word,politicas,completados,word
+Descargar en en excel el reporte de personal pendientes,usuarios,pendientes,excel
+Necesito el reporte de personas demorado en ver,clientes,atrasados,pantalla
+Necesito el reporte de solicitudes aprobado en pantalla,tramites,completados,pantalla
+PODRÍAS GENERARME UN REPORTE DE ARCHIVO TODAS EN EXCEL,documentos,todos,excel
+Descargar reporte de archivos pendientes en en pdf,documentos,pendientes,pdf
+Muéstrame un reporte de solicitudes con demora en mostrar,tramites,atrasados,pantalla
+Por favor genera un reporte de personas resuelto en archivo pdf!,clientes,completados,pdf
+Quiero un reporte de documento en formato pdf,documentos,todos,pdf
+en en excel quiero el reporte de políticas con demora.,politicas,atrasados,excel
+Por favor genera un reporte de requisitos vencido en formato word,documentos,atrasados,word
+DATOS PAPELES CON DEMORA EXCEL,documentos,atrasados,excel
+Exportar a documento editable los política vencido,politicas,atrasados,word
+Sácame un reporte de cliente todos en excel,clientes,todos,excel
+EN FORMATO ARCHIVO PDF DAME LOS PERSONAS ATRASADOS,clientes,atrasados,pdf
+¿cómo puedo ver el reporte de requisitos general en formato word?,documentos,todos,word
+descargar reporte de cliente en vista previa,clientes,todos,pantalla
+Descargar en formato word el reporte de archivos sin filtros,documentos,todos,word
+Muéstrame un reporte de política de negocio en documento editable,politicas,todos,word
+Exportar a en excel los política,politicas,todos,excel
+Necesito el reporte de funcionario en en pantalla,usuarios,todos,pantalla
+crear reporte de políticas de negocio en vista previa,politicas,todos,pantalla
+Generar un reporte de trámite todas en formato json,tramites,todos,pantalla
+Muéstrame un reporte de papeles en formato pdf.,documentos,todos,pdf
+Sácame un reporte de ciudadanos global en xlsx.,clientes,todos,excel
+Necesito el reporte de solicitudes en documento word,tramites,todos,word
+Sácame un reporte de documentos tardíos en formato word,documentos,atrasados,word
+exportar a archivo excel los personal completado,usuarios,completados,excel
+Crear reporte de reglas en hoja de cálculo.,politicas,todos,excel
+Obtener reporte de personal en visualizar,usuarios,todos,pantalla
+Obtener reporte de política aprobado en pdf,politicas,completados,pdf
+Exportar a formato pdf los archivos aprobado,documentos,completados,pdf
+Quiero un reporte de reglas en curso en vista previa,politicas,pendientes,pantalla
+Descargar reporte de reglas en en pantalla,politicas,todos,pantalla
+Obtener reporte de funcionarios en docx,usuarios,todos,word
+En formato hoja de cálculo dame los funcionarios cualquiera,usuarios,todos,excel
+Por favor genera un reporte de documento pendientes en hoja de cálculo,documentos,pendientes,excel
+En archivo excel quiero el reporte de empleado aprobado.,usuarios,completados,excel
+Reporte solicitantes pantalla,clientes,todos,pantalla
+necesito el reporte de empleado pendiente en vista previa,usuarios,pendientes,pantalla
+Descargar en word el reporte de documento completo,documentos,todos,word
+Generar un reporte de casos en formato json,tramites,todos,pantalla
+sácame un reporte de operadores completo en en excel,usuarios,todos,excel
+Dame los diagramas en formato hoja excel,politicas,todos,excel
+Obtener reporte de cliente en en pdf,clientes,todos,pdf
+Lista políticas de negocio global formato portable,politicas,todos,pdf
+descargar reporte de requisitos en archivo excel,documentos,todos,excel
+Reporte políticas de negocio todos xlsx,politicas,todos,excel
+Crear reporte de operador general en excel,usuarios,todos,excel
+Sácame un reporte de empleados sin filtros en visualizar,usuarios,todos,pantalla
+en documento word quiero el reporte de flujos de trabajo en progreso,tramites,pendientes,word
+Crear reporte de solicitudes en word,tramites,todos,word
+sácame un reporte de ficheros terminados en formato word!,documentos,completados,word
+en documento word quiero el reporte de diagramas aprobados,politicas,completados,word
+Por favor genera un reporte de diagramas atrasado en visualizar,politicas,atrasados,pantalla
+Crear reporte de personas terminados en excel,clientes,completados,excel
+crear reporte de documento en curso en formato excel!,documentos,pendientes,excel
+necesito el reporte de flujos de trabajo atrasado en en pdf,tramites,atrasados,pdf
+obtener reporte de política de negocio sin terminar en excel,politicas,pendientes,excel
+Generar un reporte de personal pendiente en excel,usuarios,pendientes,excel
+Obtener reporte de política en formato portable,politicas,todos,pdf
+Quiero exportar en formato json las requisitos finalizado,documentos,completados,pantalla
+necesito el reporte de reglas activo en formato json,politicas,pendientes,pantalla
+Necesito el reporte de personal en hoja de cálculo,usuarios,todos,excel
+Dame los operador en formato documento pdf,usuarios,todos,pdf
+¿es posible obtener los políticas con retraso en xlsx?,politicas,atrasados,excel
+Generar un reporte de ciudadanos en documento editable,clientes,todos,word
+Reporte diagramas completado excel!,politicas,completados,excel
+Hazme un reporte de casos atrasados en ver,tramites,atrasados,pantalla
+Descargar reporte de trámite en vista previa,tramites,todos,pantalla
+¿cómo puedo ver el reporte de trámites vencidos en vista previa?.,tramites,atrasados,pantalla
+Datos papeles aprobados xlsx,documentos,completados,excel
+Generar un reporte de política de negocio en pantalla,politicas,todos,pantalla
+Por favor genera un reporte de usuarios resuelto en pdf!,usuarios,completados,pdf
+Quiero un reporte de operadores en en pdf,usuarios,todos,pdf
+en en pdf quiero el reporte de reglas de negocio atrasado,politicas,atrasados,pdf
+Quiero un reporte de políticas de negocio sin filtros en archivo word,politicas,todos,word
+¿es posible obtener los solicitantes vencido en archivo excel?,clientes,atrasados,excel
+Generar un reporte de procesos en documento word,tramites,todos,word
+Exportar a archivo word los reglas de negocio,politicas,todos,word
+Quiero un reporte de personal en mostrar,usuarios,todos,pantalla
+Muéstrame un reporte de papeles en formato excel,documentos,todos,excel
+Necesito exportar a xlsx el listado de solicitantes vencido,clientes,atrasados,excel
+Listado operadores fuera de plazo hoja excel,usuarios,atrasados,excel
+Datos trámites activos hoja excel,tramites,pendientes,excel
+Reporte procesos en progreso excel,tramites,pendientes,excel
+Datos trámites todas en pdf,tramites,todos,pdf
+Crear reporte de trámite en archivo excel,tramites,todos,excel
+¿cómo puedo ver el reporte de políticas finalizado en visualizar?,politicas,completados,pantalla
+Exportar a xlsx los archivos todas,documentos,todos,excel
+Obtener reporte de solicitantes en documento pdf,clientes,todos,pdf
+Necesito el reporte de empleados todos en formato word,usuarios,todos,word
+Crear reporte de ficheros hechos en en pantalla!,documentos,completados,pantalla
+Exportar a documento word los clientes finalizado,clientes,completados,word
+Descargar reporte de ciudadanos en documento editable,clientes,todos,word
+Quiero un reporte de solicitudes en documento word,tramites,todos,word
+por favor genera un reporte de casos vencido en hoja excel,tramites,atrasados,excel
+Quiero un reporte de solicitudes en hoja excel,tramites,todos,excel
+Quiero un reporte de empleados en word,usuarios,todos,word
+Quiero exportar en formato portable las políticas de negocio procesando,politicas,pendientes,pdf
+podrías generarme un reporte de requisitos con demora en json,documentos,atrasados,pantalla
+Exportar a mostrar los diagramas todas,politicas,todos,pantalla
+Exportar a archivo excel los solicitante general,clientes,todos,excel
+Dame los solicitantes en formato formato pdf,clientes,todos,pdf
+Generar un reporte de peticiones en formato excel,tramites,todos,excel
+¿es posible obtener los personal atrasados en pdf?,usuarios,atrasados,pdf
+Hazme un reporte de reglas de negocio tardíos en archivo pdf,politicas,atrasados,pdf
+Descargar reporte de reglas de negocio en archivo excel,politicas,todos,excel
+Necesito el reporte de reglas de negocio todas en hoja de cálculo,politicas,todos,excel
+¿cómo puedo ver el reporte de empleados total en archivo word?,usuarios,todos,word
+Quiero exportar en pdf las archivo lista completa,documentos,todos,pdf
+Lista flujos de trabajo formato portable,tramites,todos,pdf
+En formato pdf quiero el reporte de trámite terminados,tramites,completados,pdf
+Descargar reporte de requisitos en xlsx.,documentos,todos,excel
+¿cómo puedo ver el reporte de solicitudes todas en documento editable?,tramites,todos,word
+Dame los solicitantes en formato formato portable,clientes,todos,pdf
+Dame los políticas de negocio activo en formato hoja de cálculo,politicas,pendientes,excel
+Exportar a excel los operadores pendiente,usuarios,pendientes,excel
+Datos papeles vencidos formato word,documentos,atrasados,word
+Lista operador en curso vista previa,usuarios,pendientes,pantalla
+Crear reporte de diagramas de actividad en pantalla,politicas,todos,pantalla
+Obtener reporte de ficheros sin filtros en documento pdf,documentos,todos,pdf
+Muéstrame un reporte de empleados pendientes en formato json,usuarios,pendientes,pantalla
+crear reporte de solicitantes en word,clientes,todos,word
+Muéstrame un reporte de solicitante en en pdf,clientes,todos,pdf
+DESCARGAR REPORTE DE DOCUMENTO ACTIVO EN HOJA EXCEL!,documentos,pendientes,excel
+Sácame un reporte de ciudadanos sin filtros en json,clientes,todos,pantalla
+Quiero un reporte de trámites activos en excel.,tramites,pendientes,excel
+Obtener reporte de solicitante procesando en xlsx!,clientes,pendientes,excel
+Dame los papeles en formato pantalla,documentos,todos,pantalla
+Necesito el reporte de trámites en formato portable,tramites,todos,pdf
+Crear reporte de diagramas en documento pdf,politicas,todos,pdf
+¿cómo puedo ver el reporte de usuarios finales pendientes en documento pdf?,clientes,pendientes,pdf
+En word quiero el reporte de flujos de trabajo global,tramites,todos,word
+Quiero un reporte de archivos en consola,documentos,todos,pantalla
+En formato docx dame los documento en proceso,documentos,pendientes,word
+Quiero un reporte de cliente resueltos en excel,clientes,completados,excel
+quiero exportar en pdf las reglas vencidos,politicas,atrasados,pdf
+Descargar reporte de funcionarios tardíos en archivo word,usuarios,atrasados,word
+crear reporte de peticiones en pdf,tramites,todos,pdf
+Podrías generarme un reporte de adjuntos aprobado en visualizar,documentos,completados,pantalla
+Listado cliente sin filtros en pdf,clientes,todos,pdf
+quiero exportar en hoja excel las personal en curso,usuarios,pendientes,excel
+Exportar a pdf los diagramas,politicas,todos,pdf
+Podrías generarme un reporte de requisitos todos en formato portable,documentos,todos,pdf
+Datos diagramas de actividad hechos formato json,politicas,completados,pantalla
+Dame los diagramas en formato formato json,politicas,todos,pantalla
+Hazme un reporte de documentos resueltos en en pdf,documentos,completados,pdf
+Exportar a en pdf los personal.,usuarios,todos,pdf
+Crear reporte de reglas de negocio aprobados en archivo excel,politicas,completados,excel
+Generar un reporte de flujos de trabajo fuera de plazo en archivo pdf,tramites,atrasados,pdf
+Por favor genera un reporte de reglas de negocio activo en formato word,politicas,pendientes,word
+Necesito el reporte de diagramas en docx.,politicas,todos,word
+Exportar a hoja de cálculo los papeles,documentos,todos,excel
+en consola quiero el reporte de diagramas sin filtros,politicas,todos,pantalla
+En excel quiero el reporte de diagramas vencido,politicas,atrasados,excel
+Necesito el reporte de solicitantes con demora en en pdf,clientes,atrasados,pdf
+quiero un reporte de funcionarios en archivo pdf,usuarios,todos,pdf
+Necesito el reporte de usuarios finales con retraso en pdf,clientes,atrasados,pdf
+Muéstrame un reporte de ciudadanos en archivo excel,clientes,todos,excel
+reporte trámite en pantalla,tramites,todos,pantalla
+Crear reporte de solicitudes activo en archivo pdf,tramites,pendientes,pdf
+REPORTE SOLICITUDES VISUALIZAR,tramites,todos,pantalla
+Necesito el reporte de reglas global en archivo pdf,politicas,todos,pdf
+Descargar reporte de procesos completado en visualizar,tramites,completados,pantalla
+en formato en pantalla dame los archivos completados,documentos,completados,pantalla
+Descargar en word el reporte de solicitante completado,clientes,completados,word
+Muéstrame un reporte de reglas de negocio en en pdf.,politicas,todos,pdf
+Descargar reporte de adjuntos con demora en formato word,documentos,atrasados,word
+Podrías generarme un reporte de ciudadanos cualquiera en formato pdf,clientes,todos,pdf
+Listado clientes sin filtros archivo pdf.,clientes,todos,pdf
+Quisiera ver la lista de ciudadanos hechos y bajarla en en word,clientes,completados,word
+Crear reporte de documento vencidos en formato word,documentos,atrasados,word
+Necesito exportar a documento word el listado de ficheros aprobado,documentos,completados,word
+Generar un reporte de usuarios con demora en en excel,usuarios,atrasados,excel
+Quiero un reporte de ciudadanos todas en archivo pdf,clientes,todos,pdf
+Muéstrame un reporte de cliente en visualizar.,clientes,todos,pantalla
+Datos trámite completado documento editable,tramites,completados,word
+Generar un reporte de casos resuelto en mostrar,tramites,completados,pantalla
+Por favor genera un reporte de política lista completa en excel,politicas,todos,excel
+Reporte políticas de negocio hechos archivo excel.,politicas,completados,excel
+Crear reporte de solicitante vencidos en documento word,clientes,atrasados,word
+¿cómo puedo ver el reporte de requisitos tardíos en en word?.,documentos,atrasados,word
+Descargar en xlsx el reporte de diagramas de actividad atrasado,politicas,atrasados,excel
+necesito exportar a en pdf el listado de usuarios finales completo,clientes,todos,pdf
+Dame los operador en formato formato portable.,usuarios,todos,pdf
+por favor genera un reporte de peticiones todas en documento editable.,tramites,todos,word
+Dame los políticas todos en formato archivo pdf.,politicas,todos,pdf
+Necesito el reporte de solicitante en documento pdf,clientes,todos,pdf
+descargar reporte de solicitudes general en word,tramites,todos,word
+Dame los reglas en formato en word.,politicas,todos,word
+Datos adjuntos hechos en pantalla,documentos,completados,pantalla
+podrías generarme un reporte de reglas completados en archivo word,politicas,completados,word
+Muéstrame un reporte de cliente hechos en xlsx,clientes,completados,excel
+en documento word quiero el reporte de reglas de negocio aprobados,politicas,completados,word
+Obtener reporte de flujos de trabajo en xlsx,tramites,todos,excel
+Muéstrame un reporte de documentos completo en excel,documentos,todos,excel
+Listado políticas de negocio finalizado formato pdf,politicas,completados,pdf
+REPORTE POLÍTICA PENDIENTES XLSX,politicas,pendientes,excel
+Sácame un reporte de procesos aprobado en xlsx,tramites,completados,excel
+Descargar en formato pdf el reporte de políticas lista completa,politicas,todos,pdf
+Podrías generarme un reporte de adjuntos fuera de plazo en hoja excel,documentos,atrasados,excel
+Muéstrame un reporte de políticas sin filtros en hoja excel,politicas,todos,excel
+Exportar a en pantalla los funcionarios,usuarios,todos,pantalla
+Necesito exportar a en excel el listado de cliente demorado,clientes,atrasados,excel
+Dame los funcionarios en formato en pdf.,usuarios,todos,pdf
+Quiero un reporte de diagramas en consola!,politicas,todos,pantalla
+Obtener reporte de personas pendiente en documento word,clientes,pendientes,word
+Necesito el reporte de usuario pendiente en en pdf,usuarios,pendientes,pdf
+Datos personal activo excel,usuarios,pendientes,excel
+Quiero exportar en mostrar las política de negocio vencidos,politicas,atrasados,pantalla
+Descargar en en pantalla el reporte de reglas todas,politicas,todos,pantalla
+Por favor genera un reporte de política de negocio con demora en documento editable,politicas,atrasados,word
+Generar un reporte de operadores en formato excel,usuarios,todos,excel
+Generar un reporte de política de negocio en archivo excel,politicas,todos,excel
+datos fichero sin filtros formato portable!,documentos,todos,pdf
+Hazme un reporte de política de negocio general en pdf,politicas,todos,pdf
+Generar un reporte de trámite en documento pdf,tramites,todos,pdf
+Necesito el reporte de trámite en hoja de cálculo,tramites,todos,excel
+Podrías generarme un reporte de empleados activos en pantalla,usuarios,pendientes,pantalla
+Listado operador todos visualizar,usuarios,todos,pantalla
+Necesito el reporte de operadores en xlsx,usuarios,todos,excel
+Reporte ciudadanos hoja de cálculo,clientes,todos,excel
+Muéstrame un reporte de adjuntos todas en en pantalla,documentos,todos,pantalla
+quiero un reporte de adjuntos completados en en excel,documentos,completados,excel
+Crear reporte de clientes pendientes en json,clientes,pendientes,pantalla
+dame los usuarios finales en formato formato portable,clientes,todos,pdf
+Generar un reporte de procesos en archivo excel.,tramites,todos,excel
+Necesito el reporte de empleado en progreso en mostrar!,usuarios,pendientes,pantalla
+generar un reporte de reglas de negocio vencido en pantalla,politicas,atrasados,pantalla
+Generar un reporte de documentos en curso en pdf,documentos,pendientes,pdf
+Descargar reporte de trámites en curso en archivo excel,tramites,pendientes,excel
+Descargar reporte de políticas general en mostrar,politicas,todos,pantalla
+sácame un reporte de cliente pendiente en json,clientes,pendientes,pantalla
+¿cómo puedo ver el reporte de solicitantes atrasado en archivo excel?,clientes,atrasados,excel
+Muéstrame un reporte de fichero hechos en en excel,documentos,completados,excel
+Crear reporte de documentos con demora en hoja excel,documentos,atrasados,excel
+Podrías generarme un reporte de flujos de trabajo activo en docx,tramites,pendientes,word
+Necesito el reporte de solicitantes terminado en formato excel,clientes,completados,excel
+reporte procesos docx,tramites,todos,word
+generar un reporte de archivos sin filtros en formato word,documentos,todos,word
+Lista documento archivo excel,documentos,todos,excel
+Necesito el reporte de personas en xlsx,clientes,todos,excel
+Hazme un reporte de documento terminado en consola,documentos,completados,pantalla
+Datos requisitos global pdf,documentos,todos,pdf
+obtener reporte de solicitantes en formato json,clientes,todos,pantalla
+Generar un reporte de adjuntos en documento pdf,documentos,todos,pdf
+Hazme un reporte de solicitante completados en pdf,clientes,completados,pdf
+NECESITO EXPORTAR A EN WORD EL LISTADO DE USUARIOS GLOBAL,usuarios,todos,word
+Podrías generarme un reporte de solicitudes en proceso en formato word,tramites,pendientes,word
+Obtener reporte de casos vencidos en documento pdf,tramites,atrasados,pdf
+Descargar reporte de empleados aprobados en visualizar,usuarios,completados,pantalla
+descargar reporte de documentos en documento editable,documentos,todos,word
+Por favor genera un reporte de funcionarios completo en xlsx,usuarios,todos,excel
+Descargar en hoja excel el reporte de documentos en progreso,documentos,pendientes,excel
+hazme un reporte de políticas fuera de plazo en excel.,politicas,atrasados,excel
+LISTA DOCUMENTO TODOS PANTALLA,documentos,todos,pantalla
+Descargar reporte de flujos de trabajo en en pdf,tramites,todos,pdf
+Hazme un reporte de empleado hechos en en excel,usuarios,completados,excel
+Crear reporte de casos lista completa en pantalla,tramites,todos,pantalla
+Generar un reporte de personal global en mostrar!,usuarios,todos,pantalla
+Descargar reporte de operador en archivo word.,usuarios,todos,word
+Descargar en en pdf el reporte de personas global,clientes,todos,pdf
+Lista diagramas hoja de cálculo,politicas,todos,excel
+obtener reporte de cliente en progreso en hoja excel.,clientes,pendientes,excel
+Obtener reporte de funcionario en formato word,usuarios,todos,word
+Muéstrame un reporte de ciudadanos demorado en archivo word,clientes,atrasados,word
+listado cliente total excel,clientes,todos,excel
+Generar un reporte de peticiones terminado en en excel,tramites,completados,excel
+Por favor genera un reporte de ciudadanos hechos en documento editable,clientes,completados,word
+Quiero exportar en documento editable las política de negocio total,politicas,todos,word
+Obtener reporte de solicitudes en documento word,tramites,todos,word
+Quiero exportar en hoja excel las peticiones finalizado,tramites,completados,excel
+Lista ciudadanos word,clientes,todos,word
+Descargar en en pdf el reporte de usuarios finales total.,clientes,todos,pdf
+Por favor genera un reporte de operador demorados en archivo word,usuarios,atrasados,word
+Necesito el reporte de documento en en word.,documentos,todos,word
+¿es posible obtener los usuarios todas en archivo excel?,usuarios,todos,excel
+En formato hoja de cálculo dame los flujos de trabajo vencido,tramites,atrasados,excel
+generar un reporte de procesos sin filtros en en pantalla,tramites,todos,pantalla
+Descargar reporte de diagramas activo en formato portable,politicas,pendientes,pdf
+Reporte clientes excel.,clientes,todos,excel
+Crear reporte de políticas general en formato portable,politicas,todos,pdf
+en formato pdf quiero el reporte de funcionarios con demora,usuarios,atrasados,pdf
+GENERAR UN REPORTE DE SOLICITUDES FINALIZADOS EN EN WORD,tramites,completados,word
+Quisiera ver la lista de operador completo y bajarla en archivo excel,usuarios,todos,excel
+Exportar a en pdf los trámite en progreso,tramites,pendientes,pdf
+Hazme un reporte de adjuntos total en en pdf,documentos,todos,pdf
+Descargar en formato excel el reporte de clientes activo,clientes,pendientes,excel
+Quiero un reporte de fichero global en en excel,documentos,todos,excel
+¿es posible obtener los reglas todas en en pdf?,politicas,todos,pdf
+Crear reporte de flujos de trabajo todas en hoja excel,tramites,todos,excel
+Listado personas con demora documento editable,clientes,atrasados,word
+Generar un reporte de ciudadanos en archivo word.,clientes,todos,word
+lista política de negocio en curso archivo excel,politicas,pendientes,excel
+Muéstrame un reporte de archivos en en pantalla,documentos,todos,pantalla
+Obtener reporte de ficheros aprobados en en pdf,documentos,completados,pdf
+Generar un reporte de reglas de negocio tardíos en documento pdf,politicas,atrasados,pdf
+Descargar en archivo pdf el reporte de solicitante todos,clientes,todos,pdf
+Exportar a formato portable los operador,usuarios,todos,pdf
+Sácame un reporte de operador vencidos en ver,usuarios,atrasados,pantalla
+exportar a documento word los flujos de trabajo terminados,tramites,completados,word
+Generar un reporte de diagramas atrasados en en pantalla!,politicas,atrasados,pantalla
+Descargar reporte de documentos en en word,documentos,todos,word
+Obtener reporte de ciudadanos en xlsx,clientes,todos,excel
+QUISIERA VER LA LISTA DE OPERADOR DEMORADOS Y BAJARLA EN VER,usuarios,atrasados,pantalla
+Quiero un reporte de trámites en en word,tramites,todos,word
+Descargar reporte de solicitante en archivo pdf,clientes,todos,pdf
+quiero un reporte de clientes todas en hoja excel.,clientes,todos,excel
+Generar un reporte de requisitos con demora en formato word,documentos,atrasados,word
+Crear reporte de archivo activo en hoja excel,documentos,pendientes,excel
+Podrías generarme un reporte de adjuntos lista completa en formato pdf.,documentos,todos,pdf
+Dame los documentos activos en formato visualizar,documentos,pendientes,pantalla
+Necesito el reporte de papeles en formato json,documentos,todos,pantalla
+necesito el reporte de empleado todos en xlsx,usuarios,todos,excel
+Sácame un reporte de funcionarios fuera de plazo en vista previa,usuarios,atrasados,pantalla
+Sácame un reporte de fichero resuelto en archivo word,documentos,completados,word
+Dame los trámites en formato formato pdf,tramites,todos,pdf
+Quiero un reporte de clientes en xlsx,clientes,todos,excel
+Crear reporte de diagramas hechos en formato word,politicas,completados,word
+Necesito el reporte de reglas de negocio demorados en hoja de cálculo,politicas,atrasados,excel
+Hazme un reporte de cliente sin filtros en archivo pdf,clientes,todos,pdf
+Crear reporte de solicitudes en hoja excel,tramites,todos,excel
+quiero exportar en docx las adjuntos completado.,documentos,completados,word
+Necesito exportar a formato excel el listado de ficheros completados,documentos,completados,excel
+Por favor genera un reporte de políticas resueltos en documento word,politicas,completados,word
+Reporte casos terminados xlsx,tramites,completados,excel
+Exportar a formato json los reglas de negocio con demora,politicas,atrasados,pantalla
+Podrías generarme un reporte de cliente en curso en en pantalla,clientes,pendientes,pantalla
+Datos archivos activo pantalla,documentos,pendientes,pantalla
+generar un reporte de flujos de trabajo en documento pdf,tramites,todos,pdf
+Generar un reporte de diagramas de actividad atrasados en visualizar.,politicas,atrasados,pantalla
+Generar un reporte de archivos con demora en word,documentos,atrasados,word
+En hoja excel quiero el reporte de flujos de trabajo en proceso,tramites,pendientes,excel
+listado usuarios atrasado archivo pdf!,usuarios,atrasados,pdf
+Quisiera ver la lista de requisitos vencidos y bajarla en xlsx,documentos,atrasados,excel
+Listado trámites general excel,tramites,todos,excel
+¿es posible obtener los trámite vencidos en archivo excel?,tramites,atrasados,excel
+Sácame un reporte de usuario terminados en en word,usuarios,completados,word
+Dame los procesos en formato en excel,tramites,todos,excel
+Por favor genera un reporte de política de negocio todas en documento word,politicas,todos,word
+Hazme un reporte de ciudadanos hechos en xlsx,clientes,completados,excel
+Quiero exportar en archivo pdf las requisitos cualquiera.,documentos,todos,pdf
+Quisiera ver la lista de trámite completado y bajarla en pantalla,tramites,completados,pantalla
+Dame los cliente activos en formato mostrar,clientes,pendientes,pantalla
+Muéstrame un reporte de trámites todas en formato word,tramites,todos,word
+quiero un reporte de documento en archivo excel,documentos,todos,excel
+listado empleado sin filtros pantalla,usuarios,todos,pantalla
+Muéstrame un reporte de requisitos en formato portable,documentos,todos,pdf
+Hazme un reporte de ficheros todas en archivo excel,documentos,todos,excel
+Muéstrame un reporte de adjuntos en hoja excel,documentos,todos,excel
+descargar reporte de trámite terminados en visualizar!,tramites,completados,pantalla
+Generar un reporte de usuario activos en archivo pdf,usuarios,pendientes,pdf
+obtener reporte de trámites en archivo word!,tramites,todos,word
+Generar un reporte de personal en en pantalla,usuarios,todos,pantalla
+Hazme un reporte de clientes con demora en hoja excel.,clientes,atrasados,excel
+Exportar a mostrar los documento pendiente,documentos,pendientes,pantalla
+Sácame un reporte de política de negocio terminado en json.,politicas,completados,pantalla
+DESCARGAR REPORTE DE USUARIOS FINALES EN XLSX,clientes,todos,excel
+Listado flujos de trabajo completo formato pdf,tramites,todos,pdf
+Dame los papeles en formato documento editable,documentos,todos,word
+Por favor genera un reporte de flujos de trabajo aprobados en documento editable,tramites,completados,word
+Necesito exportar a pantalla el listado de procesos todos,tramites,todos,pantalla
+Hazme un reporte de ciudadanos pendiente en mostrar,clientes,pendientes,pantalla
+Descargar reporte de políticas lista completa en formato portable,politicas,todos,pdf
+Exportar a en word los empleado con demora!,usuarios,atrasados,word
+Necesito el reporte de archivo completo en archivo excel.,documentos,todos,excel
+Quiero un reporte de funcionario todos en mostrar,usuarios,todos,pantalla
+Datos procesos en curso pdf,tramites,pendientes,pdf
+Datos usuario en curso en pdf,usuarios,pendientes,pdf
+descargar en archivo word el reporte de requisitos todos,documentos,todos,word
+¿cómo puedo ver el reporte de operador demorados en en excel?,usuarios,atrasados,excel
+descargar reporte de casos sin filtros en formato excel,tramites,todos,excel
+Generar un reporte de fichero general en xlsx,documentos,todos,excel
+Quisiera ver la lista de flujos de trabajo global y bajarla en en pantalla,tramites,todos,pantalla
+En formato json quiero el reporte de fichero lista completa,documentos,todos,pantalla
+Quiero un reporte de clientes completado en pdf,clientes,completados,pdf
+Exportar a consola los políticas de negocio fuera de plazo,politicas,atrasados,pantalla
+generar un reporte de ciudadanos en en word,clientes,todos,word
+necesito el reporte de funcionario completados en consola,usuarios,completados,pantalla
+Necesito exportar a en word el listado de política de negocio resuelto,politicas,completados,word
+En formato formato excel dame los casos global,tramites,todos,excel
+¿cómo puedo ver el reporte de ficheros tardíos en ver?,documentos,atrasados,pantalla
+Por favor genera un reporte de políticas en curso en pdf,politicas,pendientes,pdf
+Hazme un reporte de adjuntos finalizado en formato excel,documentos,completados,excel
+descargar reporte de flujos de trabajo con demora en pdf,tramites,atrasados,pdf
+quiero un reporte de usuario en pantalla.,usuarios,todos,pantalla
+EN DOCUMENTO EDITABLE QUIERO EL REPORTE DE PERSONAS SIN FILTROS,clientes,todos,word
+reporte reglas documento pdf,politicas,todos,pdf
+CREAR REPORTE DE POLÍTICA DE NEGOCIO DEMORADO EN EN PDF,politicas,atrasados,pdf
+Quisiera ver la lista de papeles finalizado y bajarla en word,documentos,completados,word
+Lista solicitantes lista completa xlsx,clientes,todos,excel
+Lista requisitos en proceso consola,documentos,pendientes,pantalla
+Necesito el reporte de políticas aprobado en docx,politicas,completados,word
+¿cómo puedo ver el reporte de políticas de negocio completado en ver?,politicas,completados,pantalla
+¿cómo puedo ver el reporte de empleado completado en excel?,usuarios,completados,excel
+Exportar a archivo pdf los operadores activo,usuarios,pendientes,pdf
+descargar en mostrar el reporte de procesos completo.,tramites,todos,pantalla
+¿cómo puedo ver el reporte de usuario sin filtros en formato pdf?.,usuarios,todos,pdf
+Necesito el reporte de procesos demorados en consola.,tramites,atrasados,pantalla
+Lista trámites vencidos json.,tramites,atrasados,pantalla
+Muéstrame un reporte de operadores en formato portable,usuarios,todos,pdf
+por favor genera un reporte de política atrasados en pdf,politicas,atrasados,pdf
+Dame los fichero tardíos en formato excel,documentos,atrasados,excel
+Hazme un reporte de casos resuelto en documento editable,tramites,completados,word
+Crear reporte de requisitos hechos en en excel,documentos,completados,excel
+Listado funcionario completado json,usuarios,completados,pantalla
+Generar un reporte de papeles atrasados en formato pdf,documentos,atrasados,pdf
+Podrías generarme un reporte de empleados en proceso en formato word,usuarios,pendientes,word
+Muéstrame un reporte de ciudadanos global en xlsx,clientes,todos,excel
+Quiero un reporte de trámites pendiente en mostrar.,tramites,pendientes,pantalla
+Obtener reporte de reglas de negocio todas en archivo word,politicas,todos,word
+Dame los empleados con retraso en formato visualizar,usuarios,atrasados,pantalla
+NECESITO EL REPORTE DE USUARIOS FINALES EN ARCHIVO WORD,clientes,todos,word
+Muéstrame un reporte de solicitudes fuera de plazo en formato pdf,tramites,atrasados,pdf
+Descargar reporte de clientes en json,clientes,todos,pantalla
+Obtener reporte de políticas en archivo pdf,politicas,todos,pdf
+Generar un reporte de procesos en proceso en xlsx.,tramites,pendientes,excel
+Obtener reporte de usuarios en hoja de cálculo,usuarios,todos,excel
+Podrías generarme un reporte de solicitudes resueltos en xlsx,tramites,completados,excel
+Sácame un reporte de personas aprobado en documento word,clientes,completados,word
+quiero un reporte de reglas de negocio cualquiera en formato portable,politicas,todos,pdf
+Exportar a en pdf los funcionario global,usuarios,todos,pdf
+Generar un reporte de empleados en hoja de cálculo,usuarios,todos,excel
+Quisiera ver la lista de diagramas de actividad aprobado y bajarla en archivo pdf,politicas,completados,pdf
+En formato word quiero el reporte de usuarios finales procesando!,clientes,pendientes,word
+Descargar reporte de peticiones en word!,tramites,todos,word
+Lista empleados formato word,usuarios,todos,word
+Obtener reporte de ficheros en pdf,documentos,todos,pdf
+En formato documento word dame los solicitantes con demora,clientes,atrasados,word
+Datos requisitos resueltos xlsx,documentos,completados,excel
+Dame los documento en formato formato json,documentos,todos,pantalla
+QUIERO UN REPORTE DE OPERADORES GLOBAL EN VISTA PREVIA,usuarios,todos,pantalla
+Reporte adjuntos xlsx.,documentos,todos,excel
+Exportar a vista previa los personas.,clientes,todos,pantalla
+Obtener reporte de peticiones en archivo pdf,tramites,todos,pdf
+descargar reporte de política de negocio en formato excel,politicas,todos,excel
+Generar un reporte de funcionario atrasado en visualizar,usuarios,atrasados,pantalla
+generar un reporte de peticiones en documento pdf,tramites,todos,pdf
+Quiero un reporte de documento aprobados en ver,documentos,completados,pantalla
+Descargar reporte de diagramas activo en json,politicas,pendientes,pantalla
+Quiero un reporte de peticiones global en ver,tramites,todos,pantalla
+Muéstrame un reporte de procesos en documento pdf,tramites,todos,pdf
+En formato word dame los diagramas de actividad procesando,politicas,pendientes,word
+Obtener reporte de requisitos en documento editable,documentos,todos,word
+Quisiera ver la lista de reglas resuelto y bajarla en archivo excel.,politicas,completados,excel
+Obtener reporte de trámites en en excel,tramites,todos,excel
+Dame los requisitos vencidos en formato excel,documentos,atrasados,excel
+Dame los empleado en formato formato excel,usuarios,todos,excel
+En mostrar quiero el reporte de empleados general,usuarios,todos,pantalla
+Sácame un reporte de trámites demorados en excel,tramites,atrasados,excel
+Quisiera ver la lista de política sin filtros y bajarla en archivo excel,politicas,todos,excel
+Por favor genera un reporte de ciudadanos todas en visualizar,clientes,todos,pantalla
+Hazme un reporte de política terminados en en pdf,politicas,completados,pdf
+Crear reporte de flujos de trabajo pendientes en archivo word,tramites,pendientes,word
+dame los procesos finalizado en formato en pantalla,tramites,completados,pantalla
+Muéstrame un reporte de trámites pendientes en en pantalla,tramites,pendientes,pantalla
+Necesito el reporte de reglas de negocio todos en excel,politicas,todos,excel
+Hazme un reporte de documentos demorado en archivo pdf,documentos,atrasados,pdf
+por favor genera un reporte de personas en curso en formato json,clientes,pendientes,pantalla
+QUIERO EXPORTAR EN DOCX LAS OPERADORES PENDIENTES,usuarios,pendientes,word
+dame los política atrasados en formato pdf.,politicas,atrasados,pdf
+Crear reporte de funcionarios en curso en en word,usuarios,pendientes,word
+Listado empleados sin terminar formato json,usuarios,pendientes,pantalla
+Descargar reporte de reglas en formato portable,politicas,todos,pdf
+podrías generarme un reporte de documento terminado en formato excel,documentos,completados,excel
+Lista peticiones atrasados json,tramites,atrasados,pantalla
+dame los políticas de negocio en formato consola,politicas,todos,pantalla
+¿es posible obtener los solicitudes terminado en pdf?,tramites,completados,pdf
+Descargar reporte de peticiones aprobados en pantalla,tramites,completados,pantalla
+Muéstrame un reporte de reglas de negocio en consola!,politicas,todos,pantalla
+generar un reporte de personal en hoja de cálculo,usuarios,todos,excel
+¿cómo puedo ver el reporte de reglas de negocio con demora en formato portable?!,politicas,atrasados,pdf
+Lista procesos formato portable,tramites,todos,pdf
+Lista diagramas finalizados en pdf,politicas,completados,pdf
+Crear reporte de políticas en xlsx.,politicas,todos,excel
+QUISIERA VER LA LISTA DE FICHEROS ATRASADOS Y BAJARLA EN FORMATO WORD,documentos,atrasados,word
+¿cómo puedo ver el reporte de políticas general en formato pdf?,politicas,todos,pdf
+Sácame un reporte de clientes terminado en archivo excel,clientes,completados,excel
+PODRÍAS GENERARME UN REPORTE DE EMPLEADO ATRASADOS EN HOJA DE CÁLCULO,usuarios,atrasados,excel
+Podrías generarme un reporte de diagramas de actividad resuelto en excel.,politicas,completados,excel
+Dame los solicitudes pendiente en formato formato json,tramites,pendientes,pantalla
+Sácame un reporte de fichero finalizado en hoja excel,documentos,completados,excel
+crear reporte de clientes en archivo word,clientes,todos,word
+Quiero un reporte de usuarios finales en hoja excel,clientes,todos,excel
+Crear reporte de usuario en documento pdf,usuarios,todos,pdf
+Reporte archivos todas documento pdf,documentos,todos,pdf
+Por favor genera un reporte de casos lista completa en pdf,tramites,todos,pdf
+¿es posible obtener los ficheros todas en hoja de cálculo?!,documentos,todos,excel
+Obtener reporte de operador en json,usuarios,todos,pantalla
+Sácame un reporte de políticas de negocio con demora en archivo excel,politicas,atrasados,excel
+¿es posible obtener los política terminados en documento pdf?,politicas,completados,pdf
+EN FORMATO DOCUMENTO EDITABLE DAME LOS SOLICITANTE TERMINADO,clientes,completados,word
+Listado fichero todas documento word,documentos,todos,word
+lista documento finalizado formato word,documentos,completados,word
+Quiero un reporte de trámites vencido en hoja excel,tramites,atrasados,excel
+Dame los solicitantes en formato visualizar.,clientes,todos,pantalla
+Quiero exportar en formato portable las fichero completado,documentos,completados,pdf
+Exportar a word los políticas de negocio,politicas,todos,word
+Quiero exportar en en excel las trámite con demora,tramites,atrasados,excel
+Exportar a excel los cliente.,clientes,todos,excel
+Quiero un reporte de casos en excel,tramites,todos,excel
+Descargar reporte de empleados en hoja de cálculo,usuarios,todos,excel
+Dame los usuario en formato en excel,usuarios,todos,excel
+Obtener reporte de operadores en documento editable,usuarios,todos,word
+quiero un reporte de solicitudes en documento editable,tramites,todos,word
+Lista solicitante total pantalla!,clientes,todos,pantalla
+Exportar a archivo excel los usuarios finales lista completa,clientes,todos,excel
+¿es posible obtener los requisitos atrasado en formato portable?,documentos,atrasados,pdf
+Reporte política documento editable,politicas,todos,word
+GENERAR UN REPORTE DE FUNCIONARIO RESUELTOS EN MOSTRAR,usuarios,completados,pantalla
+Quiero un reporte de cliente total en en pdf,clientes,todos,pdf
+muéstrame un reporte de trámite total en visualizar,tramites,todos,pantalla
+Datos casos en curso formato pdf,tramites,pendientes,pdf
+Listado solicitantes en proceso documento pdf,clientes,pendientes,pdf
+Sácame un reporte de usuarios en proceso en consola,usuarios,pendientes,pantalla
+Descargar reporte de flujos de trabajo completo en en excel,tramites,todos,excel
+necesito exportar a archivo excel el listado de peticiones en proceso,tramites,pendientes,excel
+Datos diagramas activo documento pdf.,politicas,pendientes,pdf
+Descargar reporte de reglas de negocio en archivo pdf,politicas,todos,pdf
+Por favor genera un reporte de solicitante atrasado en documento pdf,clientes,atrasados,pdf
+Exportar a formato pdf los solicitante,clientes,todos,pdf
+¿cómo puedo ver el reporte de empleados fuera de plazo en formato json?,usuarios,atrasados,pantalla
+Exportar a en word los reglas de negocio en proceso,politicas,pendientes,word
+En formato consola dame los documentos sin terminar,documentos,pendientes,pantalla
+descargar reporte de adjuntos en proceso en en pdf,documentos,pendientes,pdf
+Listado políticas de negocio activos documento word,politicas,pendientes,word
+podrías generarme un reporte de política todas en archivo word,politicas,todos,word
+en docx quiero el reporte de ficheros sin filtros,documentos,todos,word
+Generar un reporte de política de negocio en proceso en hoja excel.,politicas,pendientes,excel
+Crear reporte de diagramas en json,politicas,todos,pantalla
+exportar a documento word los ciudadanos,clientes,todos,word
+Reporte personal en proceso vista previa,usuarios,pendientes,pantalla
+Necesito el reporte de peticiones en en pantalla,tramites,todos,pantalla
+Dame los personas en formato xlsx,clientes,todos,excel
+Lista empleados completados formato portable,usuarios,completados,pdf
+Muéstrame un reporte de operador en formato portable,usuarios,todos,pdf
+Podrías generarme un reporte de trámites con demora en formato word,tramites,atrasados,word
+Descargar reporte de casos atrasados en en pantalla,tramites,atrasados,pantalla
+Sácame un reporte de casos finalizados en archivo word,tramites,completados,word
+lista peticiones tardíos xlsx,tramites,atrasados,excel
+Lista políticas de negocio hoja de cálculo,politicas,todos,excel
+Obtener reporte de políticas todas en formato pdf,politicas,todos,pdf
+Necesito exportar a formato word el listado de flujos de trabajo pendiente,tramites,pendientes,word
+lista requisitos terminados formato pdf,documentos,completados,pdf
+Obtener reporte de ficheros en proceso en documento word,documentos,pendientes,word
+Reporte ciudadanos formato pdf,clientes,todos,pdf
+lista personal procesando documento editable,usuarios,pendientes,word
+¿cómo puedo ver el reporte de flujos de trabajo demorados en en excel?!,tramites,atrasados,excel
+¿es posible obtener los trámite aprobados en documento pdf?,tramites,completados,pdf
+Muéstrame un reporte de documentos en hoja excel,documentos,todos,excel
+Generar un reporte de fichero en formato word,documentos,todos,word
+Quiero un reporte de diagramas de actividad fuera de plazo en consola,politicas,atrasados,pantalla
+Dame los política de negocio sin terminar en formato hoja excel,politicas,pendientes,excel
+Podrías generarme un reporte de solicitante todos en formato excel,clientes,todos,excel
+Lista archivo formato portable,documentos,todos,pdf
+Muéstrame un reporte de solicitante en hoja excel.,clientes,todos,excel
+Necesito el reporte de requisitos en hoja de cálculo,documentos,todos,excel
+Sácame un reporte de política de negocio demorado en hoja de cálculo,politicas,atrasados,excel
+Exportar a excel los flujos de trabajo activos,tramites,pendientes,excel
+obtener reporte de requisitos en documento editable,documentos,todos,word
+GENERAR UN REPORTE DE POLÍTICAS EN VISUALIZAR,politicas,todos,pantalla
+Dame los solicitante global en formato documento pdf,clientes,todos,pdf
+sácame un reporte de personas terminado en formato json,clientes,completados,pantalla
+Crear reporte de procesos en formato pdf!,tramites,todos,pdf
+Dame los operador vencido en formato en pdf,usuarios,atrasados,pdf
+quiero un reporte de funcionarios en documento word,usuarios,todos,word
+reporte funcionario visualizar,usuarios,todos,pantalla
+necesito el reporte de funcionario resueltos en vista previa,usuarios,completados,pantalla
+generar un reporte de procesos en documento pdf,tramites,todos,pdf
+Reporte peticiones general archivo pdf,tramites,todos,pdf
+En formato json dame los trámite aprobados,tramites,completados,pantalla
+Quiero un reporte de operadores en pdf,usuarios,todos,pdf
+¿cómo puedo ver el reporte de funcionario atrasados en formato excel?,usuarios,atrasados,excel
+lista usuarios finales en word,clientes,todos,word
+HAZME UN REPORTE DE USUARIOS FINALES LISTA COMPLETA EN FORMATO EXCEL,clientes,todos,excel
+Datos cliente resueltos en pdf!,clientes,completados,pdf
+Quiero un reporte de diagramas de actividad en curso en documento editable,politicas,pendientes,word
+Generar un reporte de usuarios finales en visualizar,clientes,todos,pantalla
+Lista fichero general consola,documentos,todos,pantalla
+Muéstrame un reporte de operadores en hoja excel,usuarios,todos,excel
+En formato documento pdf dame los usuarios finales terminado,clientes,completados,pdf
+quiero exportar en archivo excel las personas todos,clientes,todos,excel
+Obtener reporte de usuarios finales en docx.,clientes,todos,word
+Necesito exportar a hoja de cálculo el listado de política de negocio sin filtros,politicas,todos,excel
+Muéstrame un reporte de funcionario en documento pdf,usuarios,todos,pdf
+Muéstrame un reporte de ciudadanos en docx,clientes,todos,word
+reporte clientes json,clientes,todos,pantalla
+Generar un reporte de peticiones en json.,tramites,todos,pantalla
+Podrías generarme un reporte de ciudadanos todas en visualizar,clientes,todos,pantalla
+Obtener reporte de fichero en mostrar,documentos,todos,pantalla
+Dame los solicitantes en formato formato word,clientes,todos,word
+Quiero exportar en excel las solicitudes activo,tramites,pendientes,excel
+Podrías generarme un reporte de papeles hechos en json,documentos,completados,pantalla
+DATOS CLIENTES FINALIZADO ARCHIVO EXCEL,clientes,completados,excel
+Crear reporte de política de negocio en ver,politicas,todos,pantalla
+Muéstrame un reporte de papeles global en excel,documentos,todos,excel
+Generar un reporte de flujos de trabajo en proceso en archivo word,tramites,pendientes,word
+Descargar reporte de documentos en curso en formato word,documentos,pendientes,word
+Necesito exportar a archivo pdf el listado de diagramas con demora,politicas,atrasados,pdf
+Lista archivos json,documentos,todos,pantalla
+Obtener reporte de archivo en formato pdf,documentos,todos,pdf
+Obtener reporte de trámites en visualizar,tramites,todos,pantalla
+Muéstrame un reporte de políticas en mostrar,politicas,todos,pantalla
+Reporte adjuntos terminados json,documentos,completados,pantalla
+¿cómo puedo ver el reporte de funcionarios sin filtros en pdf?,usuarios,todos,pdf
+Reporte ciudadanos en pdf,clientes,todos,pdf
+Datos personal aprobado word,usuarios,completados,word
+Exportar a hoja de cálculo los archivos,documentos,todos,excel
+Podrías generarme un reporte de operador activo en documento word,usuarios,pendientes,word
+Dame los operadores todos en formato consola,usuarios,todos,pantalla
+sácame un reporte de funcionario fuera de plazo en hoja de cálculo,usuarios,atrasados,excel
+Necesito exportar a visualizar el listado de ficheros pendiente,documentos,pendientes,pantalla
+dame los trámite total en formato consola,tramites,todos,pantalla
+Quiero un reporte de funcionarios en en pantalla,usuarios,todos,pantalla
+Reporte política con retraso formato json,politicas,atrasados,pantalla
+Exportar a formato word los peticiones aprobado,tramites,completados,word
+Quiero un reporte de funcionarios en formato portable,usuarios,todos,pdf
+Crear reporte de solicitudes en pdf,tramites,todos,pdf
+Reporte usuario pdf,usuarios,todos,pdf
+Muéstrame un reporte de ciudadanos en en pdf,clientes,todos,pdf
+Necesito el reporte de flujos de trabajo en documento editable,tramites,todos,word
+Podrías generarme un reporte de cliente con retraso en documento pdf,clientes,atrasados,pdf
+Podrías generarme un reporte de personas en progreso en docx.,clientes,pendientes,word
+¿cómo puedo ver el reporte de reglas atrasado en hoja de cálculo?,politicas,atrasados,excel
+dame los empleado en formato xlsx.,usuarios,todos,excel
+Descargar en documento pdf el reporte de papeles sin filtros,documentos,todos,pdf
+Quisiera ver la lista de archivo atrasado y bajarla en en excel,documentos,atrasados,excel
+muéstrame un reporte de reglas de negocio en visualizar,politicas,todos,pantalla
+Datos procesos completado en word,tramites,completados,word
+Podrías generarme un reporte de personas con retraso en word.,clientes,atrasados,word
+Exportar a excel los diagramas pendientes,politicas,pendientes,excel
+En formato xlsx dame los archivos cualquiera!,documentos,todos,excel
+Quiero un reporte de fichero terminados en en pantalla!,documentos,completados,pantalla
+Exportar a archivo pdf los adjuntos,documentos,todos,pdf
+Reporte solicitante documento pdf!,clientes,todos,pdf
+Reporte cliente formato word,clientes,todos,word
+Podrías generarme un reporte de política procesando en xlsx.,politicas,pendientes,excel
+En formato en pdf dame los cliente finalizado,clientes,completados,pdf
+Podrías generarme un reporte de reglas aprobados en hoja de cálculo.,politicas,completados,excel
+Necesito el reporte de cliente atrasados en xlsx!,clientes,atrasados,excel
+Exportar a en word los cliente global,clientes,todos,word
+Descargar reporte de política de negocio en documento word.,politicas,todos,word
+Quiero un reporte de empleado aprobados en formato portable,usuarios,completados,pdf
+Dame los trámite en formato documento word.,tramites,todos,word
+Quiero un reporte de política en progreso en mostrar,politicas,pendientes,pantalla
+Sácame un reporte de política tardíos en docx,politicas,atrasados,word
+Generar un reporte de archivo en pantalla,documentos,todos,pantalla
+Muéstrame un reporte de personas terminados en excel,clientes,completados,excel
+Obtener reporte de diagramas de actividad en formato pdf,politicas,todos,pdf
+Descargar en archivo excel el reporte de requisitos global,documentos,todos,excel
+Podrías generarme un reporte de archivos general en documento pdf.,documentos,todos,pdf
+Necesito el reporte de políticas completo en hoja de cálculo,politicas,todos,excel
+descargar reporte de reglas de negocio activos en formato json,politicas,pendientes,pantalla
+Lista requisitos todos visualizar,documentos,todos,pantalla
+Descargar reporte de empleado todas en word,usuarios,todos,word
+Hazme un reporte de ciudadanos aprobado en archivo pdf!,clientes,completados,pdf
+Quiero un reporte de trámites en en pdf.,tramites,todos,pdf
+Quiero un reporte de solicitante global en formato portable,clientes,todos,pdf
+Quisiera ver la lista de operador total y bajarla en en pdf,usuarios,todos,pdf
+Lista funcionarios archivo word,usuarios,todos,word
+Reporte fichero archivo pdf,documentos,todos,pdf
+En formato vista previa dame los procesos con demora,tramites,atrasados,pantalla
+quiero un reporte de funcionarios lista completa en documento word,usuarios,todos,word
+Muéstrame un reporte de diagramas de actividad resuelto en formato excel,politicas,completados,excel
+Quisiera ver la lista de personas terminado y bajarla en archivo excel,clientes,completados,excel
+Necesito el reporte de funcionario vencido en documento editable!,usuarios,atrasados,word
+exportar a formato excel los archivo en proceso,documentos,pendientes,excel
+Quiero un reporte de usuarios finales en mostrar,clientes,todos,pantalla
+Sácame un reporte de ciudadanos terminados en en word,clientes,completados,word
+Reporte peticiones documento editable,tramites,todos,word
+Quisiera ver la lista de ciudadanos resuelto y bajarla en formato pdf,clientes,completados,pdf
+Descargar reporte de solicitante en documento pdf!,clientes,todos,pdf
+quisiera ver la lista de solicitante demorados y bajarla en word,clientes,atrasados,word
+Exportar a consola los casos lista completa,tramites,todos,pantalla
+Generar un reporte de adjuntos completo en hoja excel,documentos,todos,excel
+Necesito exportar a mostrar el listado de casos demorados,tramites,atrasados,pantalla
+Generar un reporte de procesos en pdf,tramites,todos,pdf
+Quisiera ver la lista de cliente pendiente y bajarla en documento word,clientes,pendientes,word
+Obtener reporte de funcionario completo en formato excel!,usuarios,todos,excel
+Generar un reporte de reglas atrasado en formato pdf.,politicas,atrasados,pdf
+Sácame un reporte de ciudadanos resuelto en archivo pdf,clientes,completados,pdf
+Sácame un reporte de documento en progreso en archivo word,documentos,pendientes,word
+Crear reporte de documentos pendientes en formato json,documentos,pendientes,pantalla
+Podrías generarme un reporte de papeles activos en archivo pdf,documentos,pendientes,pdf
+¿es posible obtener los políticas cualquiera en visualizar?,politicas,todos,pantalla
+Descargar reporte de clientes vencido en documento editable,clientes,atrasados,word
+Dame los reglas de negocio en formato xlsx,politicas,todos,excel
+¿cómo puedo ver el reporte de clientes vencido en visualizar?,clientes,atrasados,pantalla
+Reporte funcionario en pdf.,usuarios,todos,pdf
+reporte flujos de trabajo documento word,tramites,todos,word
+Muéstrame un reporte de políticas de negocio en word,politicas,todos,word
+Exportar a en excel los documentos todos,documentos,todos,excel
+Necesito el reporte de funcionario sin terminar en consola,usuarios,pendientes,pantalla
+Generar un reporte de personas terminados en en excel,clientes,completados,excel
+dame los personas en formato pdf.,clientes,todos,pdf
+En formato excel dame los peticiones vencido,tramites,atrasados,excel
+Descargar reporte de solicitantes resuelto en documento word,clientes,completados,word
+Obtener reporte de trámite en excel.,tramites,todos,excel
+Necesito el reporte de ciudadanos en formato pdf,clientes,todos,pdf
+Generar un reporte de casos sin terminar en excel,tramites,pendientes,excel
+Podrías generarme un reporte de usuarios global en en excel,usuarios,todos,excel
+Exportar a formato pdf los operador,usuarios,todos,pdf
+En pantalla quiero el reporte de solicitudes tardíos.,tramites,atrasados,pantalla
+Dame los flujos de trabajo pendientes en formato archivo pdf,tramites,pendientes,pdf
+Hazme un reporte de casos vencido en archivo pdf,tramites,atrasados,pdf
+Podrías generarme un reporte de personas aprobado en en word,clientes,completados,word
+Quiero un reporte de archivos completo en formato word.,documentos,todos,word
+Generar un reporte de cliente en mostrar,clientes,todos,pantalla
+generar un reporte de solicitantes en formato word,clientes,todos,word
+Quiero un reporte de diagramas en documento editable,politicas,todos,word
+Exportar a docx los diagramas de actividad todos,politicas,todos,word
+En formato consola dame los clientes activos,clientes,pendientes,pantalla
+Necesito exportar a en excel el listado de solicitante sin terminar,clientes,pendientes,excel
+Generar un reporte de políticas atrasado en pdf,politicas,atrasados,pdf
+Muéstrame un reporte de funcionario activo en hoja excel,usuarios,pendientes,excel
+Lista solicitantes excel,clientes,todos,excel
+Necesito exportar a formato excel el listado de diagramas total,politicas,todos,excel
+En vista previa quiero el reporte de flujos de trabajo en curso,tramites,pendientes,pantalla
+¿es posible obtener los clientes en proceso en en pantalla?.,clientes,pendientes,pantalla
+¿cómo puedo ver el reporte de archivos completado en mostrar?,documentos,completados,pantalla
+Descargar en json el reporte de cliente con retraso!,clientes,atrasados,pantalla
+Dame los funcionario en formato en pdf,usuarios,todos,pdf
+GENERAR UN REPORTE DE USUARIOS FINALES ATRASADOS EN DOCX,clientes,atrasados,word
+Hazme un reporte de personas total en formato portable,clientes,todos,pdf
+Descargar en archivo excel el reporte de solicitantes terminados,clientes,completados,excel
+necesito exportar a pdf el listado de trámites finalizados,tramites,completados,pdf
+¿es posible obtener los casos atrasados en formato portable?,tramites,atrasados,pdf
+Por favor genera un reporte de usuarios finales completado en pdf.,clientes,completados,pdf
+Dame los flujos de trabajo demorado en formato formato pdf,tramites,atrasados,pdf
+Dame los papeles total en formato formato excel.,documentos,todos,excel
+Crear reporte de adjuntos resuelto en xlsx,documentos,completados,excel
+Listado ficheros en curso formato json,documentos,pendientes,pantalla
+dame los peticiones finalizados en formato word,tramites,completados,word
+Sácame un reporte de clientes atrasado en en pantalla,clientes,atrasados,pantalla
+Datos operador completo en word,usuarios,todos,word
+Muéstrame un reporte de reglas en documento pdf,politicas,todos,pdf
+Quiero un reporte de cliente global en en excel,clientes,todos,excel
+En formato documento editable dame los documentos global!,documentos,todos,word
+Descargar reporte de solicitantes en word,clientes,todos,word
+En consola quiero el reporte de papeles en curso,documentos,pendientes,pantalla
+Descargar reporte de funcionarios en archivo word.,usuarios,todos,word
+Crear reporte de empleados en curso en archivo word,usuarios,pendientes,word
+Sácame un reporte de documento completados en vista previa,documentos,completados,pantalla
+¿es posible obtener los personal completo en archivo word?,usuarios,todos,word
+Obtener reporte de política en archivo excel,politicas,todos,excel
+lista adjuntos aprobado documento pdf,documentos,completados,pdf
+Generar un reporte de papeles finalizado en formato pdf,documentos,completados,pdf
+Descargar en formato json el reporte de empleado resuelto,usuarios,completados,pantalla
+Crear reporte de casos en archivo pdf,tramites,todos,pdf
+quiero un reporte de trámite finalizados en documento word,tramites,completados,word
+¿cómo puedo ver el reporte de adjuntos lista completa en vista previa?,documentos,todos,pantalla
+quiero un reporte de usuarios finales finalizados en hoja de cálculo,clientes,completados,excel
+En formato documento pdf dame los operadores completo.,usuarios,todos,pdf
+Por favor genera un reporte de personal completados en formato portable,usuarios,completados,pdf
+Obtener reporte de fichero sin terminar en en pdf,documentos,pendientes,pdf
+Exportar a visualizar los política de negocio cualquiera,politicas,todos,pantalla
+necesito el reporte de documentos demorado en documento pdf,documentos,atrasados,pdf
+generar un reporte de requisitos en formato word,documentos,todos,word
+Exportar a pdf los cliente con demora,clientes,atrasados,pdf
+Generar un reporte de funcionario en progreso en formato json,usuarios,pendientes,pantalla
+Descargar en hoja de cálculo el reporte de política total,politicas,todos,excel
+Necesito el reporte de trámite lista completa en visualizar,tramites,todos,pantalla
+Dame los reglas de negocio terminado en formato en excel,politicas,completados,excel
+En formato documento editable dame los documentos demorado,documentos,atrasados,word
+Lista funcionarios vista previa,usuarios,todos,pantalla
+Dame los peticiones atrasados en formato archivo pdf,tramites,atrasados,pdf
+Descargar en formato pdf el reporte de clientes sin terminar,clientes,pendientes,pdf
+Reporte trámites terminados formato pdf,tramites,completados,pdf
+Obtener reporte de trámite atrasados en visualizar,tramites,atrasados,pantalla
+Podrías generarme un reporte de operador completado en formato portable!,usuarios,completados,pdf
+Muéstrame un reporte de cliente todos en pantalla,clientes,todos,pantalla
+Dame los ficheros en formato formato pdf.,documentos,todos,pdf
+sácame un reporte de política todos en json,politicas,todos,pantalla
+Quiero un reporte de empleado en hoja de cálculo,usuarios,todos,excel
+necesito el reporte de personal en en pantalla,usuarios,todos,pantalla
+Podrías generarme un reporte de clientes completo en archivo excel,clientes,todos,excel
+Quiero un reporte de diagramas de actividad en hoja excel,politicas,todos,excel
+¿es posible obtener los política de negocio demorado en formato word?,politicas,atrasados,word
+Podrías generarme un reporte de adjuntos pendiente en documento pdf,documentos,pendientes,pdf
+Quiero un reporte de funcionario pendientes en pdf,usuarios,pendientes,pdf
+generar un reporte de trámites en en pantalla,tramites,todos,pantalla
+DESCARGAR REPORTE DE USUARIOS EN PANTALLA,usuarios,todos,pantalla
+Descargar reporte de personas en en pantalla,clientes,todos,pantalla
+Necesito exportar a word el listado de solicitudes todas,tramites,todos,word
+Lista usuarios json,usuarios,todos,pantalla
+En formato en word dame los políticas tardíos,politicas,atrasados,word
+OBTENER REPORTE DE FUNCIONARIOS EN FORMATO PDF,usuarios,todos,pdf
+¿es posible obtener los ficheros lista completa en formato pdf?,documentos,todos,pdf
+Quiero un reporte de trámite demorados en formato excel!,tramites,atrasados,excel
+Lista diagramas de actividad aprobado pdf.,politicas,completados,pdf
+Necesito exportar a archivo word el listado de flujos de trabajo aprobados,tramites,completados,word
+datos cliente demorado formato pdf.,clientes,atrasados,pdf
+exportar a archivo pdf los solicitudes,tramites,todos,pdf
+Obtener reporte de personas en en excel,clientes,todos,excel
+Muéstrame un reporte de peticiones procesando en xlsx.,tramites,pendientes,excel
+quiero un reporte de fichero en json,documentos,todos,pantalla
+Quiero exportar en archivo word las flujos de trabajo en proceso,tramites,pendientes,word
+Descargar reporte de usuarios finales en hoja de cálculo.,clientes,todos,excel
+Lista peticiones atrasados hoja de cálculo,tramites,atrasados,excel
+Hazme un reporte de operador resueltos en en word,usuarios,completados,word
+¿es posible obtener los reglas pendiente en vista previa?.,politicas,pendientes,pantalla
+¿cómo puedo ver el reporte de personal finalizado en documento word?,usuarios,completados,word
+Descargar en formato word el reporte de empleados global,usuarios,todos,word
+Exportar a documento word los personal procesando,usuarios,pendientes,word
+Descargar reporte de empleado en formato excel,usuarios,todos,excel
+reporte solicitantes resuelto excel,clientes,completados,excel
+Lista flujos de trabajo en proceso archivo word,tramites,pendientes,word
+crear reporte de solicitante vencidos en en pantalla,clientes,atrasados,pantalla
+lista trámites tardíos archivo word,tramites,atrasados,word
+Lista trámites con retraso archivo pdf,tramites,atrasados,pdf
+¿cómo puedo ver el reporte de funcionarios completados en archivo excel?,usuarios,completados,excel
+Lista políticas con demora formato excel,politicas,atrasados,excel
+descargar reporte de archivos general en hoja de cálculo,documentos,todos,excel
+Obtener reporte de cliente todas en hoja excel,clientes,todos,excel
+Descargar reporte de reglas de negocio en formato portable!,politicas,todos,pdf
+Muéstrame un reporte de política completo en ver,politicas,todos,pantalla
+Necesito exportar a documento word el listado de fichero en curso,documentos,pendientes,word
+QUISIERA VER LA LISTA DE FLUJOS DE TRABAJO PENDIENTES Y BAJARLA EN DOCUMENTO PDF,tramites,pendientes,pdf
+Lista solicitantes con retraso mostrar,clientes,atrasados,pantalla
+quiero exportar en pdf las diagramas de actividad sin terminar.,politicas,pendientes,pdf
+dame los políticas en formato documento word,politicas,todos,word
+Muéstrame un reporte de ficheros en progreso en formato json.,documentos,pendientes,pantalla
+Quiero un reporte de requisitos finalizados en mostrar,documentos,completados,pantalla
+Muéstrame un reporte de solicitudes en hoja excel,tramites,todos,excel
+Crear reporte de fichero en en pdf,documentos,todos,pdf
+Sácame un reporte de archivos demorados en mostrar,documentos,atrasados,pantalla
+hazme un reporte de casos pendientes en excel,tramites,pendientes,excel
+Generar un reporte de personas en en pantalla,clientes,todos,pantalla
+Sácame un reporte de cliente pendiente en archivo pdf,clientes,pendientes,pdf
+Quiero un reporte de empleado aprobado en formato pdf,usuarios,completados,pdf
+Quiero un reporte de diagramas de actividad activos en docx,politicas,pendientes,word
+Dame los solicitante finalizados en formato en excel,clientes,completados,excel
+necesito el reporte de operador en formato word,usuarios,todos,word
+Datos procesos completo formato pdf,tramites,todos,pdf
+Exportar a formato pdf los políticas de negocio,politicas,todos,pdf
+Exportar a documento editable los empleado,usuarios,todos,word
+Dame los política de negocio en formato en pdf,politicas,todos,pdf
+NECESITO EL REPORTE DE FICHEROS VENCIDOS EN MOSTRAR,documentos,atrasados,pantalla
+Reporte requisitos cualquiera archivo excel,documentos,todos,excel
+Muéstrame un reporte de peticiones en mostrar,tramites,todos,pantalla
+Lista ciudadanos documento word,clientes,todos,word
+Quiero un reporte de funcionario activos en documento editable,usuarios,pendientes,word
+Podrías generarme un reporte de ciudadanos fuera de plazo en word,clientes,atrasados,word
+Sácame un reporte de personas procesando en archivo pdf,clientes,pendientes,pdf
+Necesito el reporte de documento en pantalla,documentos,todos,pantalla
+Descargar reporte de empleados en documento pdf,usuarios,todos,pdf
+¿cómo puedo ver el reporte de archivos terminado en xlsx?,documentos,completados,excel
+dame los flujos de trabajo pendiente en formato ver,tramites,pendientes,pantalla
+¿es posible obtener los usuarios finalizados en en pdf?.,usuarios,completados,pdf
+descargar reporte de peticiones en en excel,tramites,todos,excel
+Reporte políticas aprobado archivo excel,politicas,completados,excel
+En formato portable quiero el reporte de requisitos terminado,documentos,completados,pdf
+Exportar a en pantalla los funcionario total,usuarios,todos,pantalla
+Podrías generarme un reporte de políticas vencido en xlsx,politicas,atrasados,excel
+Datos requisitos todas formato json!,documentos,todos,pantalla
+Necesito el reporte de fichero todas en excel,documentos,todos,excel
+¿cómo puedo ver el reporte de solicitante lista completa en documento editable?,clientes,todos,word
+Obtener reporte de política de negocio activo en documento pdf,politicas,pendientes,pdf
+Necesito el reporte de archivo lista completa en en word,documentos,todos,word
+Descargar en archivo pdf el reporte de usuario aprobado,usuarios,completados,pdf
+Muéstrame un reporte de política en pantalla,politicas,todos,pantalla
+Muéstrame un reporte de solicitantes atrasados en en word,clientes,atrasados,word
+Datos política en proceso documento word,politicas,pendientes,word
+quiero exportar en formato json las reglas de negocio completados,politicas,completados,pantalla
+REPORTE CIUDADANOS ARCHIVO PDF,clientes,todos,pdf
+Listado funcionario tardíos formato json,usuarios,atrasados,pantalla
+¿es posible obtener los usuarios en curso en excel?.,usuarios,pendientes,excel
+Quiero un reporte de ficheros en hoja de cálculo,documentos,todos,excel
+Generar un reporte de usuario finalizados en pdf,usuarios,completados,pdf
+Crear reporte de operador en pdf,usuarios,todos,pdf
+En formato en pdf dame los reglas completado,politicas,completados,pdf
+En en pdf quiero el reporte de política de negocio demorados,politicas,atrasados,pdf
+Crear reporte de operadores en word,usuarios,todos,word
+Muéstrame un reporte de ciudadanos en archivo excel!,clientes,todos,excel
+Sácame un reporte de usuarios finales sin terminar en pdf,clientes,pendientes,pdf
+Exportar a archivo excel los ciudadanos,clientes,todos,excel
+Necesito exportar a en pdf el listado de políticas de negocio hechos,politicas,completados,pdf
+Hazme un reporte de casos terminados en hoja excel,tramites,completados,excel
+DATOS DIAGRAMAS TERMINADOS FORMATO PORTABLE,politicas,completados,pdf
+Reporte procesos pendiente pdf,tramites,pendientes,pdf
+Lista políticas de negocio hoja de cálculo.,politicas,todos,excel
+Necesito el reporte de políticas aprobados en documento editable.,politicas,completados,word
+generar un reporte de funcionarios completado en pdf,usuarios,completados,pdf
+necesito exportar a archivo word el listado de política de negocio con demora,politicas,atrasados,word
+Crear reporte de trámite en ver,tramites,todos,pantalla
+Exportar a consola los política pendientes,politicas,pendientes,pantalla
+Crear reporte de ficheros total en mostrar!,documentos,todos,pantalla
+Por favor genera un reporte de casos total en formato excel,tramites,todos,excel
+Necesito el reporte de archivo activos en formato portable,documentos,pendientes,pdf
+Generar un reporte de casos atrasado en hoja excel,tramites,atrasados,excel
+Exportar a formato word los flujos de trabajo,tramites,todos,word
+Descargar reporte de archivo en en word,documentos,todos,word
+Exportar a en pdf los papeles tardíos,documentos,atrasados,pdf
+Muéstrame un reporte de ciudadanos en visualizar,clientes,todos,pantalla
+Quiero exportar en vista previa las empleados lista completa,usuarios,todos,pantalla
+Sácame un reporte de clientes activo en formato excel,clientes,pendientes,excel
+Listado usuario todas formato pdf,usuarios,todos,pdf
+¿cómo puedo ver el reporte de políticas de negocio en progreso en pantalla?,politicas,pendientes,pantalla
+Necesito el reporte de clientes en formato excel,clientes,todos,excel
+Descargar en archivo pdf el reporte de diagramas de actividad aprobado,politicas,completados,pdf
+Quiero un reporte de archivo aprobados en formato json,documentos,completados,pantalla
+Descargar reporte de flujos de trabajo procesando en visualizar,tramites,pendientes,pantalla
+Generar un reporte de documento pendientes en documento word,documentos,pendientes,word
+crear reporte de solicitantes activos en archivo pdf,clientes,pendientes,pdf
+Generar un reporte de ficheros tardíos en ver,documentos,atrasados,pantalla
+lista personal con demora formato pdf,usuarios,atrasados,pdf
+Lista políticas pendientes formato portable!,politicas,pendientes,pdf
+muéstrame un reporte de archivo en hoja de cálculo!,documentos,todos,excel
+Muéstrame un reporte de requisitos finalizados en formato word,documentos,completados,word
+exportar a ver los trámites pendiente,tramites,pendientes,pantalla
+Reporte papeles documento editable,documentos,todos,word
+Quiero un reporte de solicitantes resuelto en docx,clientes,completados,word
+Reporte trámites formato excel,tramites,todos,excel
+Por favor genera un reporte de política de negocio procesando en formato pdf,politicas,pendientes,pdf
+Obtener reporte de procesos procesando en archivo pdf,tramites,pendientes,pdf
+Obtener reporte de cliente general en formato excel.,clientes,todos,excel
+Lista diagramas demorados formato word.,politicas,atrasados,word
+¿cómo puedo ver el reporte de peticiones atrasados en pdf?,tramites,atrasados,pdf
+sácame un reporte de papeles cualquiera en formato portable!,documentos,todos,pdf
+Crear reporte de requisitos en word,documentos,todos,word
+Muéstrame un reporte de papeles cualquiera en documento editable,documentos,todos,word
+NECESITO EL REPORTE DE FLUJOS DE TRABAJO EN FORMATO JSON.,tramites,todos,pantalla
+Sácame un reporte de empleado sin terminar en visualizar,usuarios,pendientes,pantalla
+Quiero exportar en formato json las trámite activo.,tramites,pendientes,pantalla
+obtener reporte de usuarios en pantalla,usuarios,todos,pantalla
+por favor genera un reporte de políticas de negocio cualquiera en docx.,politicas,todos,word
+Lista peticiones word,tramites,todos,word
+Hazme un reporte de archivo cualquiera en mostrar,documentos,todos,pantalla
+Listado archivos en curso archivo pdf,documentos,pendientes,pdf
+Quiero un reporte de funcionarios en docx,usuarios,todos,word
+Muéstrame un reporte de solicitantes en pdf,clientes,todos,pdf
+LISTADO CIUDADANOS SIN TERMINAR DOCUMENTO EDITABLE,clientes,pendientes,word
+Quiero un reporte de empleados finalizado en hoja excel,usuarios,completados,excel
+Lista usuario xlsx,usuarios,todos,excel
+Dame los fichero todos en formato en pdf,documentos,todos,pdf
+Quiero exportar en en word las empleado pendiente.,usuarios,pendientes,word
+Descargar en pantalla el reporte de políticas cualquiera,politicas,todos,pantalla
+Necesito el reporte de archivo todos en en word,documentos,todos,word
+Crear reporte de diagramas de actividad en en word,politicas,todos,word
+Quiero un reporte de trámite atrasados en hoja excel,tramites,atrasados,excel
+Descargar reporte de diagramas de actividad en en excel,politicas,todos,excel
+quisiera ver la lista de solicitante con retraso y bajarla en archivo excel,clientes,atrasados,excel
+Quiero exportar en formato pdf las solicitudes terminados,tramites,completados,pdf
+crear reporte de ciudadanos en xlsx,clientes,todos,excel
+Exportar a docx los trámites.,tramites,todos,word
+Necesito el reporte de funcionario en en word.,usuarios,todos,word
+Descargar en excel el reporte de flujos de trabajo atrasados,tramites,atrasados,excel
+muéstrame un reporte de solicitante en formato portable,clientes,todos,pdf
+Necesito el reporte de fichero en documento editable,documentos,todos,word
+Reporte usuarios finales general archivo excel,clientes,todos,excel
+Necesito exportar a json el listado de política con retraso,politicas,atrasados,pantalla
+Sácame un reporte de archivo general en formato portable,documentos,todos,pdf
+Muéstrame un reporte de solicitudes con demora en formato word!,tramites,atrasados,word
+Quiero un reporte de solicitante en formato excel,clientes,todos,excel
+Reporte personal formato pdf,usuarios,todos,pdf
+Datos ficheros completados archivo pdf,documentos,completados,pdf
+Podrías generarme un reporte de archivo fuera de plazo en hoja excel,documentos,atrasados,excel
+Generar un reporte de solicitudes en formato pdf,tramites,todos,pdf
+Quiero exportar en formato excel las solicitantes procesando,clientes,pendientes,excel
+Listado personal pendientes hoja excel,usuarios,pendientes,excel
+Podrías generarme un reporte de procesos pendientes en formato json,tramites,pendientes,pantalla
+Muéstrame un reporte de operadores con retraso en consola,usuarios,atrasados,pantalla
+¿es posible obtener los peticiones procesando en hoja de cálculo?,tramites,pendientes,excel
+Crear reporte de funcionario en hoja excel,usuarios,todos,excel
+Crear reporte de documentos en formato excel,documentos,todos,excel
+Obtener reporte de solicitudes demorado en visualizar,tramites,atrasados,pantalla
+lista flujos de trabajo tardíos pdf.,tramites,atrasados,pdf
+Descargar en formato json el reporte de operadores demorados,usuarios,atrasados,pantalla
+Quiero un reporte de casos terminados en hoja de cálculo,tramites,completados,excel
+Quiero un reporte de casos en hoja excel,tramites,todos,excel
+Muéstrame un reporte de flujos de trabajo todos en ver,tramites,todos,pantalla
+Muéstrame un reporte de política en formato pdf,politicas,todos,pdf
+Reporte requisitos en word,documentos,todos,word
+Crear reporte de archivos atrasados en documento pdf,documentos,atrasados,pdf
+hazme un reporte de operador procesando en en pantalla.,usuarios,pendientes,pantalla
+En word quiero el reporte de reglas de negocio resuelto,politicas,completados,word
+Dame los diagramas de actividad fuera de plazo en formato en pdf,politicas,atrasados,pdf
+Crear reporte de solicitante en formato excel.,clientes,todos,excel
+Descargar en visualizar el reporte de adjuntos demorados,documentos,atrasados,pantalla
+Reporte funcionario mostrar,usuarios,todos,pantalla
+DAME LOS EMPLEADO EN FORMATO ARCHIVO PDF,usuarios,todos,pdf
+Dame los solicitante sin filtros en formato formato portable,clientes,todos,pdf
+podrías generarme un reporte de documentos vencidos en archivo word,documentos,atrasados,word
+¿es posible obtener los operadores sin terminar en pdf?,usuarios,pendientes,pdf
+Por favor genera un reporte de política de negocio pendiente en archivo pdf,politicas,pendientes,pdf
+Reporte flujos de trabajo archivo excel.,tramites,todos,excel
+Quiero exportar en archivo pdf las fichero pendientes,documentos,pendientes,pdf
+Crear reporte de empleados en hoja de cálculo.,usuarios,todos,excel
+Quisiera ver la lista de usuarios sin filtros y bajarla en visualizar,usuarios,todos,pantalla
+Hazme un reporte de clientes en proceso en hoja de cálculo.,clientes,pendientes,excel
+Necesito el reporte de solicitante en ver,clientes,todos,pantalla
+exportar a en pantalla los usuarios,usuarios,todos,pantalla
+Hazme un reporte de usuarios con retraso en documento editable,usuarios,atrasados,word
+¿es posible obtener los procesos tardíos en xlsx?,tramites,atrasados,excel
+Listado cliente completo hoja excel,clientes,todos,excel
+Descargar reporte de política finalizado en formato json.,politicas,completados,pantalla
+Hazme un reporte de operador en progreso en documento word,usuarios,pendientes,word
+crear reporte de documento en documento editable!,documentos,todos,word
+Quiero un reporte de ciudadanos resueltos en en pantalla,clientes,completados,pantalla
+Crear reporte de funcionario activo en formato portable,usuarios,pendientes,pdf
+Exportar a mostrar los trámite,tramites,todos,pantalla
+¿cómo puedo ver el reporte de flujos de trabajo terminados en excel?,tramites,completados,excel
+exportar a en word los archivo,documentos,todos,word
+Descargar reporte de casos hechos en hoja excel.,tramites,completados,excel
+Exportar a visualizar los operadores,usuarios,todos,pantalla
+Crear reporte de solicitantes en docx,clientes,todos,word
+Crear reporte de requisitos en en pantalla,documentos,todos,pantalla
+Lista fichero procesando en pantalla,documentos,pendientes,pantalla
+Crear reporte de personal finalizados en hoja de cálculo,usuarios,completados,excel
+Sácame un reporte de documentos demorados en en pdf,documentos,atrasados,pdf
+exportar a pdf los fichero sin terminar.,documentos,pendientes,pdf
+Listado documento total hoja de cálculo,documentos,todos,excel
+Dame los ciudadanos en formato consola,clientes,todos,pantalla
+En archivo pdf quiero el reporte de cliente sin terminar,clientes,pendientes,pdf
+Por favor genera un reporte de archivos activos en pdf!,documentos,pendientes,pdf
+Exportar a pdf los operadores,usuarios,todos,pdf
+Generar un reporte de usuarios finales en documento pdf,clientes,todos,pdf
+Lista empleado en pantalla,usuarios,todos,pantalla
+Muéstrame un reporte de solicitudes en archivo excel,tramites,todos,excel
+Muéstrame un reporte de trámites en proceso en ver,tramites,pendientes,pantalla
+Podrías generarme un reporte de fichero en progreso en formato pdf,documentos,pendientes,pdf
+Datos fichero con demora visualizar,documentos,atrasados,pantalla
+Lista empleado procesando hoja de cálculo,usuarios,pendientes,excel
+Necesito exportar a hoja de cálculo el listado de ciudadanos en curso,clientes,pendientes,excel
+dame los solicitante en formato hoja excel,clientes,todos,excel
+Exportar a visualizar los personal en proceso,usuarios,pendientes,pantalla
+descargar reporte de política de negocio pendientes en hoja excel,politicas,pendientes,excel
+Crear reporte de política en formato word,politicas,todos,word
+Hazme un reporte de procesos activo en formato pdf,tramites,pendientes,pdf
+obtener reporte de procesos lista completa en formato pdf,tramites,todos,pdf
+Obtener reporte de políticas en formato pdf,politicas,todos,pdf
+descargar reporte de papeles en mostrar!,documentos,todos,pantalla
+Muéstrame un reporte de archivo en pdf,documentos,todos,pdf
+POR FAVOR GENERA UN REPORTE DE FLUJOS DE TRABAJO VENCIDOS EN PDF!,tramites,atrasados,pdf
+Necesito el reporte de archivo finalizado en mostrar,documentos,completados,pantalla
+descargar reporte de casos activo en formato json,tramites,pendientes,pantalla
+¿cómo puedo ver el reporte de procesos todos en archivo excel?,tramites,todos,excel
+Muéstrame un reporte de reglas en curso en documento editable.,politicas,pendientes,word
+Descargar reporte de papeles completados en hoja excel,documentos,completados,excel
+POR FAVOR GENERA UN REPORTE DE OPERADORES TERMINADOS EN DOCUMENTO EDITABLE,usuarios,completados,word
+Crear reporte de papeles atrasados en en excel,documentos,atrasados,excel
+NECESITO EL REPORTE DE FLUJOS DE TRABAJO EN DOCUMENTO PDF,tramites,todos,pdf
+En documento editable quiero el reporte de empleado fuera de plazo,usuarios,atrasados,word
+Sácame un reporte de usuarios atrasado en excel,usuarios,atrasados,excel
+Sácame un reporte de ciudadanos terminados en visualizar,clientes,completados,pantalla
+descargar reporte de solicitantes en proceso en hoja excel!,clientes,pendientes,excel
+Necesito el reporte de peticiones tardíos en pdf,tramites,atrasados,pdf
+Descargar reporte de requisitos en visualizar,documentos,todos,pantalla
+Descargar reporte de funcionarios todos en formato portable,usuarios,todos,pdf
+Muéstrame un reporte de trámites en pantalla,tramites,todos,pantalla
+Generar un reporte de operador en docx.,usuarios,todos,word
+Exportar a hoja excel los reglas,politicas,todos,excel
+¿es posible obtener los clientes tardíos en excel?,clientes,atrasados,excel
+Necesito el reporte de solicitantes en consola,clientes,todos,pantalla
+Generar un reporte de documentos en en pdf,documentos,todos,pdf
+Descargar reporte de trámites en archivo pdf!,tramites,todos,pdf
+Necesito exportar a en pdf el listado de empleados pendientes,usuarios,pendientes,pdf
+Exportar a documento editable los operador,usuarios,todos,word
+Lista diagramas de actividad archivo pdf,politicas,todos,pdf
+Obtener reporte de ficheros en vista previa,documentos,todos,pantalla
+Listado personas procesando formato excel,clientes,pendientes,excel
+por favor genera un reporte de trámite vencidos en documento editable,tramites,atrasados,word
+En pdf quiero el reporte de políticas en curso,politicas,pendientes,pdf
+Crear reporte de funcionario en formato portable,usuarios,todos,pdf
+Reporte papeles formato portable,documentos,todos,pdf
+Por favor genera un reporte de procesos fuera de plazo en formato json,tramites,atrasados,pantalla
+Reporte reglas pantalla!,politicas,todos,pantalla
+Descargar en ver el reporte de personas completado,clientes,completados,pantalla
+Necesito el reporte de casos en ver,tramites,todos,pantalla
+Quisiera ver la lista de reglas de negocio todos y bajarla en archivo pdf,politicas,todos,pdf
+Descargar reporte de reglas en pdf,politicas,todos,pdf
+Muéstrame un reporte de diagramas de actividad en word,politicas,todos,word
+Hazme un reporte de requisitos hechos en en pdf,documentos,completados,pdf
+Muéstrame un reporte de solicitudes terminados en ver,tramites,completados,pantalla
+reporte requisitos archivo excel,documentos,todos,excel
+Necesito el reporte de adjuntos resueltos en mostrar,documentos,completados,pantalla
+muéstrame un reporte de diagramas de actividad todos en archivo pdf,politicas,todos,pdf
+Quiero exportar en excel las archivo aprobados,documentos,completados,excel
+Descargar reporte de fichero tardíos en archivo word,documentos,atrasados,word
+Crear reporte de operador finalizados en documento word,usuarios,completados,word
+Obtener reporte de operadores en pdf,usuarios,todos,pdf
+Generar un reporte de políticas de negocio procesando en archivo word,politicas,pendientes,word
+Descargar reporte de flujos de trabajo cualquiera en documento editable,tramites,todos,word
+Necesito exportar a formato json el listado de usuarios finales hechos,clientes,completados,pantalla
+Reporte usuario completo documento word.,usuarios,todos,word
+Necesito exportar a hoja de cálculo el listado de trámites en proceso,tramites,pendientes,excel
+Reporte flujos de trabajo formato pdf,tramites,todos,pdf
+Reporte documento cualquiera archivo excel!,documentos,todos,excel
+Reporte procesos resueltos archivo excel,tramites,completados,excel
+¿cómo puedo ver el reporte de operador global en pantalla?.,usuarios,todos,pantalla
+¿ES POSIBLE OBTENER LOS EMPLEADO APROBADO EN VISTA PREVIA?,usuarios,completados,pantalla
+Por favor genera un reporte de personal pendientes en en excel,usuarios,pendientes,excel
+listado ciudadanos en curso hoja de cálculo,clientes,pendientes,excel
+Crear reporte de requisitos demorados en formato pdf,documentos,atrasados,pdf
+¿cómo puedo ver el reporte de solicitantes global en ver?,clientes,todos,pantalla
+Reporte peticiones tardíos documento editable,tramites,atrasados,word
+Generar un reporte de diagramas en archivo pdf,politicas,todos,pdf
+Lista flujos de trabajo pendientes documento editable,tramites,pendientes,word
+Dame los archivos todas en formato formato pdf,documentos,todos,pdf
+Dame los empleado en curso en formato formato json,usuarios,pendientes,pantalla
+Lista funcionarios formato word,usuarios,todos,word
+Sácame un reporte de operadores fuera de plazo en en pdf,usuarios,atrasados,pdf
+Dame los trámite en formato formato excel,tramites,todos,excel
+Necesito exportar a mostrar el listado de solicitante vencidos,clientes,atrasados,pantalla
+En en excel quiero el reporte de adjuntos tardíos!,documentos,atrasados,excel
+Reporte diagramas de actividad demorado pdf.,politicas,atrasados,pdf
+Quiero exportar en archivo word las política de negocio activo!,politicas,pendientes,word
+Listado flujos de trabajo vencido formato json,tramites,atrasados,pantalla
+necesito el reporte de empleado en documento word,usuarios,todos,word
+Generar un reporte de flujos de trabajo cualquiera en excel,tramites,todos,excel
+Crear reporte de funcionarios en documento pdf,usuarios,todos,pdf
+Obtener reporte de políticas de negocio en hoja de cálculo,politicas,todos,excel
+Obtener reporte de solicitante activos en word,clientes,pendientes,word
+Lista funcionarios documento editable,usuarios,todos,word
+Quiero un reporte de políticas tardíos en en excel,politicas,atrasados,excel
+NECESITO EL REPORTE DE ARCHIVOS DEMORADOS EN EXCEL,documentos,atrasados,excel
+CREAR REPORTE DE FLUJOS DE TRABAJO VENCIDOS EN CONSOLA,tramites,atrasados,pantalla
+Obtener reporte de políticas todos en formato json,politicas,todos,pantalla
+Obtener reporte de procesos activos en formato word,tramites,pendientes,word
+¿cómo puedo ver el reporte de reglas activo en en excel?.,politicas,pendientes,excel
+Sácame un reporte de requisitos demorados en pantalla,documentos,atrasados,pantalla
+Necesito el reporte de solicitantes todos en formato portable,clientes,todos,pdf
+Datos casos vencidos en pdf,tramites,atrasados,pdf
+Descargar reporte de papeles resueltos en en pdf,documentos,completados,pdf
+Descargar en archivo pdf el reporte de políticas de negocio completo,politicas,todos,pdf
+Generar un reporte de diagramas de actividad sin filtros en hoja excel,politicas,todos,excel
+sácame un reporte de diagramas con demora en visualizar,politicas,atrasados,pantalla
+Quiero un reporte de trámites general en ver,tramites,todos,pantalla
+OBTENER REPORTE DE OPERADORES TODOS EN HOJA DE CÁLCULO,usuarios,todos,excel
+Crear reporte de operador en en pdf,usuarios,todos,pdf
+muéstrame un reporte de procesos en curso en ver,tramites,pendientes,pantalla
+En formato json dame los funcionarios vencidos,usuarios,atrasados,pantalla
+Sácame un reporte de peticiones total en formato portable,tramites,todos,pdf
+crear reporte de usuarios en consola,usuarios,todos,pantalla
+Generar un reporte de usuarios en pdf,usuarios,todos,pdf
+Obtener reporte de trámite en hoja de cálculo,tramites,todos,excel
+Exportar a archivo pdf los usuario,usuarios,todos,pdf
+Generar un reporte de requisitos cualquiera en en pdf,documentos,todos,pdf
+En formato pdf dame los solicitudes con retraso,tramites,atrasados,pdf
+Necesito el reporte de flujos de trabajo completado en formato excel,tramites,completados,excel
+Muéstrame un reporte de trámites pendientes en en excel!,tramites,pendientes,excel
+Lista usuarios finales en pdf,clientes,todos,pdf
+Por favor genera un reporte de política global en en pantalla,politicas,todos,pantalla
+Obtener reporte de trámite activo en formato json!,tramites,pendientes,pantalla
+Generar un reporte de empleado en formato excel,usuarios,todos,excel
+Podrías generarme un reporte de personal general en documento word,usuarios,todos,word
+Quiero exportar en formato json las solicitante demorado,clientes,atrasados,pantalla
+Quiero exportar en documento editable las política de negocio sin terminar,politicas,pendientes,word
+¿es posible obtener los personal todos en hoja de cálculo?,usuarios,todos,excel
+Obtener reporte de usuarios finales terminado en en pantalla,clientes,completados,pantalla
+Necesito el reporte de peticiones con retraso en word,tramites,atrasados,word
+Muéstrame un reporte de políticas en excel.,politicas,todos,excel
+Dame los peticiones en formato formato word,tramites,todos,word
+Lista trámite completo documento editable!,tramites,todos,word
+Quisiera ver la lista de flujos de trabajo sin terminar y bajarla en hoja excel,tramites,pendientes,excel
+En formato docx dame los trámites con retraso,tramites,atrasados,word
+listado reglas completados vista previa.,politicas,completados,pantalla
+Quisiera ver la lista de solicitante procesando y bajarla en excel!,clientes,pendientes,excel
+Exportar a en pdf los documentos vencidos.,documentos,atrasados,pdf
+Necesito el reporte de reglas de negocio con retraso en formato pdf,politicas,atrasados,pdf
+Descargar reporte de personal fuera de plazo en formato portable,usuarios,atrasados,pdf
+¿es posible obtener los archivo terminado en formato word?.,documentos,completados,word
+Generar un reporte de solicitudes en pantalla,tramites,todos,pantalla
+Necesito exportar a pantalla el listado de flujos de trabajo total,tramites,todos,pantalla
+quiero exportar en documento editable las ficheros sin terminar,documentos,pendientes,word
+Quisiera ver la lista de documentos finalizado y bajarla en docx,documentos,completados,word
+Muéstrame un reporte de funcionarios en visualizar.,usuarios,todos,pantalla
+descargar reporte de archivo activo en hoja de cálculo.,documentos,pendientes,excel
+Reporte procesos pdf!,tramites,todos,pdf
+POR FAVOR GENERA UN REPORTE DE FLUJOS DE TRABAJO VENCIDO EN MOSTRAR,tramites,atrasados,pantalla
+Obtener reporte de solicitantes resuelto en ver,clientes,completados,pantalla
+En formato en excel dame los ciudadanos demorado,clientes,atrasados,excel
+Quiero un reporte de reglas de negocio en proceso en documento pdf,politicas,pendientes,pdf
+Descargar en xlsx el reporte de personal pendientes.,usuarios,pendientes,excel
+Exportar a pdf los reglas.,politicas,todos,pdf
+Necesito el reporte de usuario en formato json,usuarios,todos,pantalla
+HAZME UN REPORTE DE DIAGRAMAS FINALIZADOS EN VISUALIZAR.,politicas,completados,pantalla
+Lista personal visualizar,usuarios,todos,pantalla
+Dame los solicitantes activo en formato documento editable,clientes,pendientes,word
+Exportar a archivo pdf los clientes en progreso,clientes,pendientes,pdf
+Lista documentos activo excel,documentos,pendientes,excel
+Descargar en archivo pdf el reporte de diagramas de actividad con retraso,politicas,atrasados,pdf
+Podrías generarme un reporte de documentos fuera de plazo en formato excel,documentos,atrasados,excel
+Por favor genera un reporte de fichero demorado en excel,documentos,atrasados,excel
+Quiero exportar en en pdf las personas pendientes,clientes,pendientes,pdf
+Quiero un reporte de política de negocio atrasado en formato excel.,politicas,atrasados,excel
+En documento editable quiero el reporte de flujos de trabajo todos,tramites,todos,word
+lista peticiones resueltos hoja excel,tramites,completados,excel
+Dame los papeles atrasados en formato formato json,documentos,atrasados,pantalla
+Generar un reporte de solicitante en formato portable,clientes,todos,pdf
+Necesito el reporte de empleados fuera de plazo en documento word,usuarios,atrasados,word
+Datos diagramas de actividad sin terminar excel,politicas,pendientes,excel
+Listado requisitos todas excel,documentos,todos,excel
+Crear reporte de funcionarios en formato word,usuarios,todos,word
+Obtener reporte de cliente demorado en json,clientes,atrasados,pantalla
+En formato en excel dame los política de negocio terminados,politicas,completados,excel
+Obtener reporte de documentos finalizado en excel,documentos,completados,excel
+Hazme un reporte de procesos aprobado en documento editable,tramites,completados,word
+Sácame un reporte de personas completo en docx,clientes,todos,word
+Necesito el reporte de personal en visualizar.,usuarios,todos,pantalla
+Generar un reporte de usuarios resueltos en formato word,usuarios,completados,word
+Podrías generarme un reporte de funcionarios vencidos en archivo word,usuarios,atrasados,word
+Muéstrame un reporte de ciudadanos en pdf,clientes,todos,pdf
+listado política de negocio vencidos word,politicas,atrasados,word
+¿cómo puedo ver el reporte de requisitos pendiente en hoja de cálculo?,documentos,pendientes,excel
+Quiero un reporte de cliente pendiente en pantalla,clientes,pendientes,pantalla
+Lista usuario hoja de cálculo,usuarios,todos,excel
+Muéstrame un reporte de archivos en archivo word,documentos,todos,word
+Exportar a pantalla los trámite,tramites,todos,pantalla
+¿cómo puedo ver el reporte de cliente global en consola?.,clientes,todos,pantalla
+reporte empleado documento pdf,usuarios,todos,pdf
+En formato formato portable dame los trámite vencido,tramites,atrasados,pdf
+Quiero exportar en json las documentos con demora,documentos,atrasados,pantalla
+Crear reporte de cliente atrasados en mostrar,clientes,atrasados,pantalla
+Descargar reporte de usuarios finales en archivo pdf,clientes,todos,pdf
+Dame los funcionarios en formato xlsx,usuarios,todos,excel
+Quiero exportar en formato word las fichero vencido,documentos,atrasados,word
+Dame los diagramas aprobados en formato pdf,politicas,completados,pdf
+necesito el reporte de ciudadanos demorado en en excel,clientes,atrasados,excel
+Necesito el reporte de políticas en formato excel,politicas,todos,excel
+reporte solicitantes sin filtros hoja excel,clientes,todos,excel
+Descargar reporte de adjuntos pendientes en formato excel,documentos,pendientes,excel
+Dame los política de negocio sin terminar en formato en excel,politicas,pendientes,excel
+Obtener reporte de requisitos en formato portable,documentos,todos,pdf
+DESCARGAR REPORTE DE CASOS APROBADO EN JSON,tramites,completados,pantalla
+Muéstrame un reporte de reglas finalizados en pdf,politicas,completados,pdf
+Muéstrame un reporte de operador completo en en excel,usuarios,todos,excel
+Necesito el reporte de usuario en excel.,usuarios,todos,excel
+Hazme un reporte de empleados completados en visualizar,usuarios,completados,pantalla
+Quiero un reporte de operador pendientes en formato pdf!,usuarios,pendientes,pdf
+datos política de negocio todas formato pdf,politicas,todos,pdf
+Exportar a pantalla los diagramas,politicas,todos,pantalla
+HAZME UN REPORTE DE ARCHIVOS VENCIDO EN FORMATO EXCEL,documentos,atrasados,excel
+Datos reglas general mostrar,politicas,todos,pantalla
+QUIERO EXPORTAR EN FORMATO PDF LAS PERSONAL SIN TERMINAR,usuarios,pendientes,pdf
+Listado peticiones aprobados json,tramites,completados,pantalla
+Generar un reporte de flujos de trabajo en en excel,tramites,todos,excel
+Descargar en consola el reporte de empleados todas!,usuarios,todos,pantalla
+¿cómo puedo ver el reporte de operadores demorado en en pdf?.,usuarios,atrasados,pdf
+dame los usuarios finales en formato vista previa,clientes,todos,pantalla
+Sácame un reporte de reglas general en excel,politicas,todos,excel
+Datos requisitos activos consola,documentos,pendientes,pantalla
+Necesito el reporte de reglas en consola,politicas,todos,pantalla
+Datos empleados pendiente documento editable,usuarios,pendientes,word
+Quiero exportar en documento word las reglas de negocio en proceso!,politicas,pendientes,word
+¿es posible obtener los política pendientes en archivo excel?,politicas,pendientes,excel
+Generar un reporte de archivo finalizados en pdf,documentos,completados,pdf
+Datos documentos vencido en pantalla,documentos,atrasados,pantalla
+POR FAVOR GENERA UN REPORTE DE SOLICITANTE RESUELTO EN DOCX,clientes,completados,word
+Dame los funcionarios general en formato archivo pdf,usuarios,todos,pdf
+Generar un reporte de papeles en hoja excel,documentos,todos,excel
+Obtener reporte de políticas de negocio resueltos en consola,politicas,completados,pantalla
+Hazme un reporte de empleados terminado en en excel,usuarios,completados,excel
+Quiero un reporte de trámite en documento editable,tramites,todos,word
+Quiero un reporte de ficheros en json,documentos,todos,pantalla
+¿cómo puedo ver el reporte de políticas de negocio todos en formato json?,politicas,todos,pantalla
+listado políticas vencido en excel,politicas,atrasados,excel
+Sácame un reporte de funcionario tardíos en hoja excel,usuarios,atrasados,excel
+¿es posible obtener los empleado lista completa en vista previa?,usuarios,todos,pantalla
+Por favor genera un reporte de documentos en progreso en excel,documentos,pendientes,excel
+Quiero un reporte de trámite en en pdf,tramites,todos,pdf
+necesito el reporte de ciudadanos en en word,clientes,todos,word
+Sácame un reporte de funcionarios activo en formato portable,usuarios,pendientes,pdf
+Exportar a pantalla los política de negocio finalizado!,politicas,completados,pantalla
+Obtener reporte de políticas resuelto en pantalla,politicas,completados,pantalla
+Quiero un reporte de usuarios en documento editable,usuarios,todos,word
+Descargar reporte de procesos total en consola,tramites,todos,pantalla
+Reporte empleado mostrar,usuarios,todos,pantalla
+Necesito el reporte de archivos finalizados en en pdf,documentos,completados,pdf
+Necesito exportar a en word el listado de política de negocio finalizado,politicas,completados,word
+Crear reporte de documento atrasado en excel.,documentos,atrasados,excel
+DESCARGAR REPORTE DE USUARIO EN PDF,usuarios,todos,pdf
+¿cómo puedo ver el reporte de ficheros terminado en formato pdf?,documentos,completados,pdf
+Quiero exportar en mostrar las requisitos activo.,documentos,pendientes,pantalla
+Hazme un reporte de usuario en curso en xlsx,usuarios,pendientes,excel
+Reporte personas formato excel,clientes,todos,excel
+GENERAR UN REPORTE DE SOLICITUDES RESUELTO EN EN PANTALLA,tramites,completados,pantalla
+Dame los políticas en formato docx,politicas,todos,word
+En formato documento word dame los requisitos activos,documentos,pendientes,word
+Quisiera ver la lista de operadores pendiente y bajarla en documento pdf!,usuarios,pendientes,pdf
+¿cómo puedo ver el reporte de empleados pendiente en excel?,usuarios,pendientes,excel
+Necesito exportar a en word el listado de requisitos finalizado,documentos,completados,word
+Muéstrame un reporte de políticas de negocio aprobados en en excel,politicas,completados,excel
+Descargar reporte de política finalizado en formato portable!,politicas,completados,pdf
+podrías generarme un reporte de políticas pendiente en xlsx,politicas,pendientes,excel
+Necesito el reporte de personal en documento editable,usuarios,todos,word
+Lista solicitudes en pdf,tramites,todos,pdf
+Descargar reporte de trámite en formato json,tramites,todos,pantalla
+Crear reporte de empleados global en json,usuarios,todos,pantalla
+MUÉSTRAME UN REPORTE DE PETICIONES EN PROGRESO EN VER!,tramites,pendientes,pantalla
+Descargar reporte de documento en formato excel,documentos,todos,excel
+Podrías generarme un reporte de peticiones con demora en vista previa,tramites,atrasados,pantalla
+lista personal excel,usuarios,todos,excel
+En formato pdf quiero el reporte de documentos con retraso,documentos,atrasados,pdf
+Necesito exportar a en pdf el listado de procesos finalizados!,tramites,completados,pdf
+Dame los funcionarios en formato pantalla,usuarios,todos,pantalla
+Crear reporte de cliente en xlsx,clientes,todos,excel
+Crear reporte de documento cualquiera en en pantalla,documentos,todos,pantalla
+Necesito el reporte de solicitante en mostrar,clientes,todos,pantalla
+podrías generarme un reporte de archivo activos en formato excel,documentos,pendientes,excel
+¿cómo puedo ver el reporte de usuario procesando en vista previa?!,usuarios,pendientes,pantalla
+Sácame un reporte de clientes todos en consola,clientes,todos,pantalla
+Por favor genera un reporte de política atrasado en archivo word,politicas,atrasados,word
+Reporte diagramas de actividad documento editable,politicas,todos,word
+Generar un reporte de requisitos en hoja de cálculo,documentos,todos,excel
+Crear reporte de flujos de trabajo en documento word,tramites,todos,word
+Por favor genera un reporte de políticas de negocio aprobado en json,politicas,completados,pantalla
+Generar un reporte de ficheros en vista previa,documentos,todos,pantalla
+Listado personal completo formato word,usuarios,todos,word
+Listado diagramas de actividad aprobado formato pdf,politicas,completados,pdf
+Quiero un reporte de reglas de negocio con demora en formato json,politicas,atrasados,pantalla
+Necesito el reporte de reglas lista completa en pdf,politicas,todos,pdf
+Reporte personal en pdf,usuarios,todos,pdf
+Reporte reglas en pdf,politicas,todos,pdf
+Podrías generarme un reporte de peticiones finalizado en pantalla!,tramites,completados,pantalla
+Hazme un reporte de casos sin terminar en formato portable,tramites,pendientes,pdf
+listado políticas de negocio terminado en excel,politicas,completados,excel
+Crear reporte de diagramas en pantalla,politicas,todos,pantalla
+Crear reporte de diagramas de actividad todos en excel,politicas,todos,excel
+Por favor genera un reporte de procesos activo en documento word,tramites,pendientes,word
+Necesito el reporte de empleado lista completa en json,usuarios,todos,pantalla
+En formato consola dame los funcionarios completo!,usuarios,todos,pantalla
+Descargar reporte de papeles en documento word,documentos,todos,word
+Descargar reporte de operadores terminado en xlsx,usuarios,completados,excel
+Quisiera ver la lista de solicitantes con retraso y bajarla en formato excel,clientes,atrasados,excel
+En formato formato excel dame los flujos de trabajo demorados.,tramites,atrasados,excel
+En en excel quiero el reporte de personas en proceso,clientes,pendientes,excel
+En documento word quiero el reporte de reglas resueltos,politicas,completados,word
+¿cómo puedo ver el reporte de requisitos completado en archivo pdf?,documentos,completados,pdf
+Reporte procesos con demora word,tramites,atrasados,word
+Exportar a hoja excel los ficheros,documentos,todos,excel
+Muéstrame un reporte de usuarios finales en formato word,clientes,todos,word
+Quiero exportar en pantalla las personal procesando,usuarios,pendientes,pantalla
+EN FORMATO ARCHIVO EXCEL DAME LOS PETICIONES PROCESANDO,tramites,pendientes,excel
+Obtener reporte de archivos en archivo word,documentos,todos,word
+Datos trámites aprobado formato excel,tramites,completados,excel
+Descargar reporte de documento cualquiera en archivo pdf,documentos,todos,pdf
+Hazme un reporte de personas sin filtros en documento pdf,clientes,todos,pdf
+Reporte operadores en progreso archivo excel,usuarios,pendientes,excel
+Reporte usuarios pdf!,usuarios,todos,pdf
+Quiero un reporte de documento en archivo excel,documentos,todos,excel
+Muéstrame un reporte de usuarios finales en archivo word,clientes,todos,word
+Exportar a docx los ciudadanos.,clientes,todos,word
+Por favor genera un reporte de papeles tardíos en visualizar,documentos,atrasados,pantalla
+Datos clientes con retraso formato json,clientes,atrasados,pantalla
+Generar un reporte de operador en formato json,usuarios,todos,pantalla
+reporte peticiones documento editable,tramites,todos,word
+Quiero un reporte de solicitantes con demora en word,clientes,atrasados,word
+Dame los diagramas en proceso en formato archivo pdf,politicas,pendientes,pdf
+¿cómo puedo ver el reporte de reglas pendiente en formato excel?.,politicas,pendientes,excel
+generar un reporte de cliente en formato word,clientes,todos,word
+Obtener reporte de política en formato pdf,politicas,todos,pdf
+Reporte personas en pdf!,clientes,todos,pdf
+Muéstrame un reporte de empleados en formato excel,usuarios,todos,excel
+dame los diagramas de actividad en formato xlsx,politicas,todos,excel
+Dame los reglas activos en formato hoja excel,politicas,pendientes,excel
+necesito exportar a en word el listado de personas fuera de plazo,clientes,atrasados,word
+crear reporte de reglas completo en hoja excel,politicas,todos,excel
+muéstrame un reporte de flujos de trabajo en xlsx,tramites,todos,excel
+En formato en pdf dame los solicitantes general,clientes,todos,pdf
+Muéstrame un reporte de clientes en formato portable,clientes,todos,pdf
+Necesito el reporte de usuarios completo en word.,usuarios,todos,word
+Quiero un reporte de solicitantes en documento pdf,clientes,todos,pdf
+Quiero exportar en archivo word las operador completado,usuarios,completados,word
+Generar un reporte de diagramas vencidos en json,politicas,atrasados,pantalla
+Necesito exportar a word el listado de reglas completo,politicas,todos,word
+Quiero un reporte de papeles total en formato pdf,documentos,todos,pdf
+Descargar en pantalla el reporte de peticiones fuera de plazo,tramites,atrasados,pantalla
+Quisiera ver la lista de solicitudes sin filtros y bajarla en en excel,tramites,todos,excel
+Quiero exportar en pdf las ciudadanos total,clientes,todos,pdf
+Por favor genera un reporte de usuarios en progreso en formato json,usuarios,pendientes,pantalla
+Necesito el reporte de funcionario atrasado en archivo excel!,usuarios,atrasados,excel
+lista usuarios vencido formato portable,usuarios,atrasados,pdf
+Descargar reporte de papeles con demora en en pdf,documentos,atrasados,pdf
+Quiero un reporte de cliente en json.,clientes,todos,pantalla
+Reporte cliente terminados excel,clientes,completados,excel
+Hazme un reporte de trámites demorado en en pdf,tramites,atrasados,pdf
+PODRÍAS GENERARME UN REPORTE DE FLUJOS DE TRABAJO EN PROGRESO EN PANTALLA,tramites,pendientes,pantalla
+Quiero un reporte de clientes en xlsx.,clientes,todos,excel
+Descargar reporte de clientes en word,clientes,todos,word
+DESCARGAR EN EXCEL EL REPORTE DE SOLICITUDES SIN FILTROS,tramites,todos,excel
+Obtener reporte de solicitudes en formato json,tramites,todos,pantalla
+Quiero un reporte de peticiones en formato word,tramites,todos,word
+Necesito exportar a en pdf el listado de flujos de trabajo total,tramites,todos,pdf
+OBTENER REPORTE DE FUNCIONARIOS TERMINADO EN XLSX,usuarios,completados,excel
+Quiero un reporte de política de negocio hechos en formato portable,politicas,completados,pdf
+En formato mostrar dame los usuarios finales pendientes,clientes,pendientes,pantalla
+lista documento json,documentos,todos,pantalla
+descargar reporte de operadores completados en formato pdf,usuarios,completados,pdf
+Listado diagramas de actividad tardíos en excel,politicas,atrasados,excel
+Hazme un reporte de política de negocio general en vista previa,politicas,todos,pantalla
+Lista usuarios finales documento pdf!,clientes,todos,pdf
+Dame los operadores activo en formato pdf,usuarios,pendientes,pdf
+Lista archivo completo xlsx,documentos,todos,excel
+¿cómo puedo ver el reporte de trámite procesando en documento pdf?!,tramites,pendientes,pdf
+Podrías generarme un reporte de casos en proceso en formato excel,tramites,pendientes,excel
+Exportar a archivo pdf los documentos,documentos,todos,pdf
+Exportar a pdf los usuarios finales,clientes,todos,pdf
+Hazme un reporte de usuarios atrasados en visualizar,usuarios,atrasados,pantalla
+Necesito el reporte de personas procesando en vista previa,clientes,pendientes,pantalla
+necesito el reporte de procesos global en mostrar,tramites,todos,pantalla
+Descargar reporte de política aprobados en excel,politicas,completados,excel
+Sácame un reporte de políticas con demora en archivo word,politicas,atrasados,word
+generar un reporte de funcionario activo en formato portable,usuarios,pendientes,pdf
+Listado solicitantes vencidos json,clientes,atrasados,pantalla
+Lista documentos tardíos formato pdf,documentos,atrasados,pdf
+Dame los política de negocio en formato archivo excel,politicas,todos,excel
+Muéstrame un reporte de usuarios finales sin terminar en archivo pdf,clientes,pendientes,pdf
+QUISIERA VER LA LISTA DE EMPLEADOS EN PROGRESO Y BAJARLA EN MOSTRAR,usuarios,pendientes,pantalla
+Quiero un reporte de trámites en word,tramites,todos,word
+Dame los operadores atrasado en formato word.,usuarios,atrasados,word
+Lista clientes formato pdf.,clientes,todos,pdf
+QUISIERA VER LA LISTA DE TRÁMITE EN CURSO Y BAJARLA EN EXCEL,tramites,pendientes,excel
+Quiero exportar en en pantalla las operadores vencidos,usuarios,atrasados,pantalla
+Podrías generarme un reporte de usuarios terminados en ver,usuarios,completados,pantalla
+necesito exportar a en pdf el listado de usuarios finales atrasado,clientes,atrasados,pdf
+Quisiera ver la lista de archivos terminados y bajarla en mostrar,documentos,completados,pantalla
+Muéstrame un reporte de documento en documento editable!,documentos,todos,word
+Por favor genera un reporte de solicitantes global en ver,clientes,todos,pantalla
+Muéstrame un reporte de ciudadanos en en word,clientes,todos,word
+Datos operadores atrasado archivo pdf,usuarios,atrasados,pdf
+Datos archivo terminados word,documentos,completados,word
+Quisiera ver la lista de procesos en curso y bajarla en en pdf!,tramites,pendientes,pdf
+crear reporte de personas completado en documento editable,clientes,completados,word
+Necesito el reporte de diagramas en excel,politicas,todos,excel
+Quiero un reporte de reglas de negocio en curso en archivo pdf!,politicas,pendientes,pdf
+Sácame un reporte de trámite atrasado en formato pdf,tramites,atrasados,pdf
+Datos documento en curso pdf,documentos,pendientes,pdf
+Dame los documento cualquiera en formato en excel.,documentos,todos,excel
+obtener reporte de adjuntos con demora en pantalla,documentos,atrasados,pantalla
+Descargar reporte de clientes vencido en formato excel,clientes,atrasados,excel
+Dame los peticiones completo en formato formato excel,tramites,todos,excel
+Muéstrame un reporte de clientes hechos en word,clientes,completados,word
+DAME LOS TRÁMITE EN FORMATO FORMATO JSON,tramites,todos,pantalla
+necesito el reporte de trámites en visualizar,tramites,todos,pantalla
+Descargar reporte de requisitos en en excel,documentos,todos,excel
+En formato pantalla dame los solicitudes todas,tramites,todos,pantalla
+En pantalla quiero el reporte de personal completados,usuarios,completados,pantalla
+Generar un reporte de archivos en visualizar,documentos,todos,pantalla
+Quiero un reporte de solicitantes aprobados en vista previa,clientes,completados,pantalla
+¿cómo puedo ver el reporte de reglas demorados en excel?,politicas,atrasados,excel
+EXPORTAR A PDF LOS DOCUMENTOS SIN FILTROS,documentos,todos,pdf
+Crear reporte de reglas de negocio finalizado en formato excel,politicas,completados,excel
+Descargar reporte de usuarios atrasados en hoja de cálculo,usuarios,atrasados,excel
+Muéstrame un reporte de funcionarios pendiente en en pdf,usuarios,pendientes,pdf
+¿es posible obtener los personas finalizado en mostrar?.,clientes,completados,pantalla
+Reporte empleados vencido documento pdf,usuarios,atrasados,pdf
+¿es posible obtener los solicitante demorado en archivo word?,clientes,atrasados,word
+Quiero exportar en ver las procesos todas,tramites,todos,pantalla
+Muéstrame un reporte de operadores en excel.,usuarios,todos,excel
+MUÉSTRAME UN REPORTE DE EMPLEADO EN CONSOLA.,usuarios,todos,pantalla
+muéstrame un reporte de trámite en formato json,tramites,todos,pantalla
+Descargar reporte de políticas de negocio en visualizar,politicas,todos,pantalla
+¿cómo puedo ver el reporte de ciudadanos terminados en archivo pdf?,clientes,completados,pdf
+Generar un reporte de requisitos en archivo word,documentos,todos,word
+por favor genera un reporte de operadores vencidos en json,usuarios,atrasados,pantalla
+Lista solicitantes formato excel,clientes,todos,excel
+Obtener reporte de diagramas de actividad en hoja excel!,politicas,todos,excel
+¿es posible obtener los funcionarios todos en formato excel?,usuarios,todos,excel
+¿cómo puedo ver el reporte de trámite en curso en visualizar?,tramites,pendientes,pantalla
+Obtener reporte de operadores en word,usuarios,todos,word
+Exportar a mostrar los usuario,usuarios,todos,pantalla
+En formato formato excel dame los archivos todos,documentos,todos,excel
+Crear reporte de casos sin filtros en en word,tramites,todos,word
+Generar un reporte de ficheros en archivo pdf,documentos,todos,pdf
+Quiero un reporte de usuarios finales demorados en xlsx,clientes,atrasados,excel
+Generar un reporte de reglas de negocio en formato portable.,politicas,todos,pdf
+Exportar a pdf los diagramas vencido,politicas,atrasados,pdf
+Descargar en archivo pdf el reporte de trámites terminados,tramites,completados,pdf
+Lista usuario sin filtros xlsx,usuarios,todos,excel
+Dame los diagramas de actividad sin terminar en formato en pdf,politicas,pendientes,pdf
+Por favor genera un reporte de política resuelto en formato pdf,politicas,completados,pdf
+Quisiera ver la lista de peticiones en curso y bajarla en formato pdf,tramites,pendientes,pdf
+Generar un reporte de casos en vista previa,tramites,todos,pantalla
+sácame un reporte de operador terminados en archivo excel,usuarios,completados,excel
+Quiero un reporte de operador con retraso en consola,usuarios,atrasados,pantalla
+Sácame un reporte de política de negocio en progreso en pdf,politicas,pendientes,pdf
+Quiero exportar en word las solicitudes resuelto,tramites,completados,word
+Necesito el reporte de archivo con retraso en excel,documentos,atrasados,excel
+Necesito el reporte de procesos fuera de plazo en hoja de cálculo,tramites,atrasados,excel
+En xlsx quiero el reporte de política finalizado,politicas,completados,excel
+Reporte fichero formato portable,documentos,todos,pdf
+Dame los funcionarios en formato pdf,usuarios,todos,pdf
+Descargar reporte de políticas en formato pdf,politicas,todos,pdf
+Lista usuarios en curso formato pdf,usuarios,pendientes,pdf
+quiero exportar en excel las flujos de trabajo en proceso,tramites,pendientes,excel
+Generar un reporte de solicitantes en formato json,clientes,todos,pantalla
+Generar un reporte de diagramas general en pdf,politicas,todos,pdf
+En xlsx quiero el reporte de empleados completados,usuarios,completados,excel
+por favor genera un reporte de usuario fuera de plazo en docx,usuarios,atrasados,word
+Reporte solicitudes sin filtros ver,tramites,todos,pantalla
+Reporte adjuntos procesando formato pdf,documentos,pendientes,pdf
+descargar reporte de procesos en documento pdf,tramites,todos,pdf
+Descargar reporte de adjuntos en curso en hoja de cálculo.,documentos,pendientes,excel
+Exportar a word los operadores,usuarios,todos,word
+obtener reporte de reglas en formato excel.,politicas,todos,excel
+Sácame un reporte de diagramas finalizados en ver,politicas,completados,pantalla
+En formato ver dame los funcionarios tardíos,usuarios,atrasados,pantalla
+Lista empleados xlsx,usuarios,todos,excel
+lista peticiones demorados xlsx!,tramites,atrasados,excel
+POR FAVOR GENERA UN REPORTE DE TRÁMITE SIN FILTROS EN PANTALLA,tramites,todos,pantalla
+Obtener reporte de trámite en visualizar.,tramites,todos,pantalla
+Necesito exportar a formato pdf el listado de documento con demora,documentos,atrasados,pdf
+Generar un reporte de usuario general en documento pdf.,usuarios,todos,pdf
+Generar un reporte de diagramas en en pantalla,politicas,todos,pantalla
+Listado peticiones lista completa consola!,tramites,todos,pantalla
+Lista diagramas finalizados xlsx,politicas,completados,excel
+Generar un reporte de archivo vencidos en excel,documentos,atrasados,excel
+Quisiera ver la lista de cliente completado y bajarla en en excel,clientes,completados,excel
+Sácame un reporte de solicitante en curso en formato json!,clientes,pendientes,pantalla
+Lista archivos resuelto word,documentos,completados,word
+Descargar en archivo pdf el reporte de trámites sin filtros.,tramites,todos,pdf
+lista papeles terminados hoja de cálculo,documentos,completados,excel
+En pantalla quiero el reporte de empleados en proceso,usuarios,pendientes,pantalla
+Muéstrame un reporte de usuarios finales en json,clientes,todos,pantalla
+¿es posible obtener los trámite tardíos en documento editable?,tramites,atrasados,word
+QUIERO UN REPORTE DE TRÁMITE COMPLETO EN DOCUMENTO EDITABLE,tramites,todos,word
+Quiero un reporte de trámites en vista previa,tramites,todos,pantalla
+Generar un reporte de política en word,politicas,todos,word
+Hazme un reporte de operadores sin filtros en docx,usuarios,todos,word
+Sácame un reporte de casos completado en archivo word,tramites,completados,word
+EXPORTAR A PANTALLA LOS ARCHIVOS,documentos,todos,pantalla
+Quiero un reporte de reglas de negocio en en pdf!,politicas,todos,pdf
+exportar a docx los requisitos cualquiera,documentos,todos,word
+En formato formato pdf dame los usuarios finales lista completa,clientes,todos,pdf
+Exportar a consola los peticiones general,tramites,todos,pantalla
+Quiero un reporte de políticas de negocio completo en en pantalla,politicas,todos,pantalla
+Muéstrame un reporte de procesos cualquiera en documento pdf!,tramites,todos,pdf
+Muéstrame un reporte de ciudadanos pendientes en hoja excel,clientes,pendientes,excel
+Crear reporte de peticiones en hoja excel,tramites,todos,excel
+¿cómo puedo ver el reporte de adjuntos lista completa en documento pdf?,documentos,todos,pdf
+Reporte solicitudes global en pdf,tramites,todos,pdf
+quiero un reporte de política sin terminar en en pdf,politicas,pendientes,pdf
+¿es posible obtener los usuarios finales demorados en visualizar?.,clientes,atrasados,pantalla
+Lista funcionario procesando archivo word.,usuarios,pendientes,word
+Obtener reporte de adjuntos en consola,documentos,todos,pantalla
+dame los empleado procesando en formato archivo pdf,usuarios,pendientes,pdf
+necesito el reporte de documentos demorado en en word,documentos,atrasados,word
+CREAR REPORTE DE USUARIOS EN PANTALLA,usuarios,todos,pantalla
+En archivo excel quiero el reporte de flujos de trabajo lista completa,tramites,todos,excel
+Quiero un reporte de usuarios hechos en documento editable,usuarios,completados,word
+Quiero un reporte de reglas de negocio en visualizar,politicas,todos,pantalla
+generar un reporte de política de negocio en documento pdf,politicas,todos,pdf
+Descargar en consola el reporte de documentos demorados,documentos,atrasados,pantalla
+Descargar reporte de reglas de negocio en archivo excel.,politicas,todos,excel
+Lista archivo docx,documentos,todos,word
+Por favor genera un reporte de casos en proceso en pantalla,tramites,pendientes,pantalla
+Necesito el reporte de empleado en formato word,usuarios,todos,word
+Lista funcionario aprobados formato portable,usuarios,completados,pdf
+Lista política cualquiera en pantalla,politicas,todos,pantalla
+Muéstrame un reporte de documentos en consola,documentos,todos,pantalla
+Descargar reporte de solicitudes en archivo word,tramites,todos,word
+En formato en excel dame los solicitudes resueltos!,tramites,completados,excel
+Descargar en formato pdf el reporte de solicitante global,clientes,todos,pdf
+Lista política hoja excel,politicas,todos,excel
+datos solicitantes global excel,clientes,todos,excel
+Exportar a archivo pdf los empleado,usuarios,todos,pdf
+Listado documentos todos pdf,documentos,todos,pdf
+Quiero exportar en formato portable las ciudadanos activo,clientes,pendientes,pdf
+Descargar reporte de documentos en archivo pdf,documentos,todos,pdf
+En documento word quiero el reporte de peticiones global,tramites,todos,word
+Quiero exportar en xlsx las trámites resueltos,tramites,completados,excel
+generar un reporte de usuarios finales en archivo pdf,clientes,todos,pdf
+generar un reporte de diagramas de actividad tardíos en docx,politicas,atrasados,word
+¿es posible obtener los clientes cualquiera en consola?,clientes,todos,pantalla
+reporte funcionario fuera de plazo en word,usuarios,atrasados,word
+Dame los requisitos todas en formato word,documentos,todos,word
+En formato hoja excel dame los operadores atrasado,usuarios,atrasados,excel
+muéstrame un reporte de diagramas en xlsx,politicas,todos,excel
+LISTA EMPLEADOS RESUELTOS PANTALLA,usuarios,completados,pantalla
+Obtener reporte de documento en formato word,documentos,todos,word
+Necesito exportar a formato word el listado de clientes vencido,clientes,atrasados,word
+Muéstrame un reporte de funcionario terminados en pantalla.,usuarios,completados,pantalla
+Lista empleado vencido en pdf,usuarios,atrasados,pdf
+GENERAR UN REPORTE DE CASOS SIN FILTROS EN DOCUMENTO PDF,tramites,todos,pdf
+Lista procesos completado archivo word,tramites,completados,word
+Exportar a excel los políticas procesando,politicas,pendientes,excel
+Generar un reporte de peticiones en archivo word,tramites,todos,word
+¿es posible obtener los solicitante con retraso en xlsx?,clientes,atrasados,excel
+quiero un reporte de política en formato excel,politicas,todos,excel
+Necesito el reporte de personal en pdf,usuarios,todos,pdf
+Obtener reporte de casos pendiente en archivo pdf,tramites,pendientes,pdf
+Podrías generarme un reporte de usuario activos en formato portable.,usuarios,pendientes,pdf
+Generar un reporte de políticas de negocio en docx,politicas,todos,word
+podrías generarme un reporte de peticiones hechos en ver,tramites,completados,pantalla
+Obtener reporte de solicitantes en documento word.,clientes,todos,word
+Muéstrame un reporte de políticas en proceso en hoja excel,politicas,pendientes,excel
+Por favor genera un reporte de papeles aprobados en consola,documentos,completados,pantalla
+hazme un reporte de cliente atrasados en docx.,clientes,atrasados,word
+Exportar a consola los usuarios,usuarios,todos,pantalla
+sácame un reporte de trámite global en pantalla,tramites,todos,pantalla
+crear reporte de usuarios finales resueltos en archivo pdf.,clientes,completados,pdf
+quiero un reporte de peticiones activos en formato portable,tramites,pendientes,pdf
+Crear reporte de papeles completo en docx!,documentos,todos,word
+Descargar reporte de política de negocio en en pdf,politicas,todos,pdf
+Lista reglas formato portable,politicas,todos,pdf
+Lista políticas de negocio pdf,politicas,todos,pdf
+sácame un reporte de operadores finalizados en ver,usuarios,completados,pantalla
+Quiero un reporte de cliente en pdf,clientes,todos,pdf
+Por favor genera un reporte de operadores global en excel.,usuarios,todos,excel
+generar un reporte de políticas terminado en formato pdf,politicas,completados,pdf
+Quisiera ver la lista de solicitantes global y bajarla en pdf,clientes,todos,pdf
+Datos funcionario con demora hoja de cálculo,usuarios,atrasados,excel
+Dame los empleado en proceso en formato archivo pdf,usuarios,pendientes,pdf
+Necesito el reporte de reglas de negocio en mostrar,politicas,todos,pantalla
+Lista personal en word,usuarios,todos,word
+Necesito exportar a json el listado de documento cualquiera,documentos,todos,pantalla
+Descargar en mostrar el reporte de flujos de trabajo finalizado,tramites,completados,pantalla
+Necesito el reporte de requisitos activo en hoja de cálculo,documentos,pendientes,excel
+En json quiero el reporte de requisitos lista completa,documentos,todos,pantalla
+en formato xlsx dame los documentos finalizados!,documentos,completados,excel
+Lista ciudadanos en progreso archivo excel,clientes,pendientes,excel
+Obtener reporte de diagramas sin terminar en en pdf,politicas,pendientes,pdf
+Lista flujos de trabajo docx.,tramites,todos,word
+En formato xlsx dame los cliente hechos,clientes,completados,excel
+Exportar a mostrar los papeles sin filtros,documentos,todos,pantalla
+dame los procesos en formato pantalla.,tramites,todos,pantalla
+Crear reporte de usuarios finales en docx,clientes,todos,word
+Descargar reporte de casos en docx,tramites,todos,word
+SÁCAME UN REPORTE DE OPERADOR EN CURSO EN VER,usuarios,pendientes,pantalla
+Crear reporte de casos en xlsx,tramites,todos,excel
+Dame los personas en formato json,clientes,todos,pantalla
+Crear reporte de reglas de negocio en json,politicas,todos,pantalla
+Quiero un reporte de funcionario en documento editable,usuarios,todos,word
+En visualizar quiero el reporte de documento finalizados,documentos,completados,pantalla
+¿ES POSIBLE OBTENER LOS SOLICITUDES FUERA DE PLAZO EN ARCHIVO WORD?,tramites,atrasados,word
+Exportar a hoja excel los cliente,clientes,todos,excel
+Muéstrame un reporte de papeles resueltos en vista previa,documentos,completados,pantalla
+Dame los adjuntos procesando en formato vista previa,documentos,pendientes,pantalla
+Sácame un reporte de políticas demorado en json,politicas,atrasados,pantalla
+Dame los empleado en formato documento pdf,usuarios,todos,pdf
+Generar un reporte de diagramas en formato pdf,politicas,todos,pdf
+generar un reporte de requisitos global en formato pdf,documentos,todos,pdf
+Exportar a formato word los reglas,politicas,todos,word
+NECESITO EL REPORTE DE CLIENTE EN DOCUMENTO PDF,clientes,todos,pdf
+Muéstrame un reporte de reglas de negocio todos en hoja de cálculo,politicas,todos,excel
+OBTENER REPORTE DE USUARIO EN ARCHIVO WORD,usuarios,todos,word
+¿cómo puedo ver el reporte de documentos cualquiera en mostrar?,documentos,todos,pantalla
+Lista documentos total hoja excel,documentos,todos,excel
+Reporte solicitudes formato portable,tramites,todos,pdf
+Necesito el reporte de casos en archivo word,tramites,todos,word
+Lista reglas de negocio xlsx,politicas,todos,excel
+Quisiera ver la lista de trámites aprobado y bajarla en docx,tramites,completados,word
+Reporte diagramas demorado archivo word,politicas,atrasados,word
+Reporte diagramas de actividad atrasados xlsx!,politicas,atrasados,excel
+Por favor genera un reporte de adjuntos con demora en documento editable!,documentos,atrasados,word
+Dame los documentos en formato excel,documentos,todos,excel
+Necesito el reporte de reglas de negocio en archivo pdf,politicas,todos,pdf
+Generar un reporte de fichero en hoja excel,documentos,todos,excel
+Sácame un reporte de archivos en curso en excel,documentos,pendientes,excel
+Descargar reporte de solicitantes cualquiera en mostrar,clientes,todos,pantalla
+Obtener reporte de fichero pendiente en archivo pdf,documentos,pendientes,pdf
+LISTA USUARIOS FINALES EN WORD,clientes,todos,word
+Dame los archivo en formato excel.,documentos,todos,excel
+Necesito el reporte de papeles en excel,documentos,todos,excel
+¿cómo puedo ver el reporte de ciudadanos vencido en en word?,clientes,atrasados,word
+Reporte personal hoja excel,usuarios,todos,excel
+Descargar reporte de usuarios finales en documento word,clientes,todos,word
+Crear reporte de diagramas de actividad en xlsx,politicas,todos,excel
+Necesito exportar a ver el listado de requisitos atrasado,documentos,atrasados,pantalla
+reporte políticas documento editable,politicas,todos,word
+descargar reporte de ciudadanos en formato excel,clientes,todos,excel
+Por favor genera un reporte de políticas de negocio vencido en archivo pdf,politicas,atrasados,pdf
+Necesito el reporte de reglas de negocio en formato excel!,politicas,todos,excel
+Crear reporte de operador en vista previa,usuarios,todos,pantalla
+Descargar reporte de papeles en documento editable,documentos,todos,word
+Necesito el reporte de fichero con retraso en formato word,documentos,atrasados,word
+Quiero exportar en archivo pdf las personal en proceso!,usuarios,pendientes,pdf
+Datos usuario activo pdf,usuarios,pendientes,pdf
+Reporte documentos en word,documentos,todos,word
+Dame los diagramas en formato archivo pdf,politicas,todos,pdf
+Reporte operadores resueltos documento word!,usuarios,completados,word
+Necesito el reporte de ficheros en visualizar,documentos,todos,pantalla
+Dame los solicitantes en formato en pdf,clientes,todos,pdf
+Exportar a archivo pdf los usuarios finales en curso,clientes,pendientes,pdf
+datos funcionario finalizado xlsx,usuarios,completados,excel
+Muéstrame un reporte de operadores en excel,usuarios,todos,excel
+Quisiera ver la lista de usuario completo y bajarla en formato excel,usuarios,todos,excel
+¿es posible obtener los políticas vencido en pantalla?,politicas,atrasados,pantalla
+Quiero exportar en pdf las casos total,tramites,todos,pdf
+Dame los casos en formato hoja excel,tramites,todos,excel
+Quiero un reporte de archivo general en documento editable,documentos,todos,word
+Quiero un reporte de trámites en xlsx,tramites,todos,excel
+¿cómo puedo ver el reporte de clientes todos en ver?,clientes,todos,pantalla
+reporte trámite hoja de cálculo,tramites,todos,excel
+Descargar reporte de solicitante sin terminar en pantalla.,clientes,pendientes,pantalla
+listado requisitos completado documento word,documentos,completados,word
+Necesito el reporte de peticiones en documento word,tramites,todos,word
+exportar a en excel los flujos de trabajo lista completa,tramites,todos,excel
+En formato formato word dame los usuarios finales finalizados,clientes,completados,word
+¿cómo puedo ver el reporte de trámites finalizado en archivo pdf?,tramites,completados,pdf
+obtener reporte de ficheros en en word,documentos,todos,word
+Sácame un reporte de funcionario todas en hoja de cálculo,usuarios,todos,excel
+Crear reporte de cliente terminado en excel,clientes,completados,excel
+Generar un reporte de políticas finalizados en hoja excel,politicas,completados,excel
+Exportar a pdf los usuarios finales.,clientes,todos,pdf
+Obtener reporte de políticas total en xlsx,politicas,todos,excel
+lista políticas en excel.,politicas,todos,excel
+Muéstrame un reporte de solicitantes en en pantalla,clientes,todos,pantalla
+Reporte archivo todas hoja de cálculo.,documentos,todos,excel
+Crear reporte de trámite en xlsx,tramites,todos,excel
+descargar reporte de trámite terminados en formato excel.,tramites,completados,excel
+Reporte clientes completo pdf,clientes,todos,pdf
+por favor genera un reporte de cliente cualquiera en xlsx.,clientes,todos,excel
+Sácame un reporte de funcionarios en progreso en excel.,usuarios,pendientes,excel
+Reporte políticas en pdf,politicas,todos,pdf
+Exportar a excel los adjuntos aprobados,documentos,completados,excel
+En formato documento word dame los cliente finalizado,clientes,completados,word
+Necesito el reporte de solicitantes en archivo excel,clientes,todos,excel
+Obtener reporte de diagramas de actividad en formato excel,politicas,todos,excel
+Generar un reporte de diagramas en hoja de cálculo,politicas,todos,excel
+Lista diagramas de actividad fuera de plazo visualizar,politicas,atrasados,pantalla
+Lista reglas de negocio aprobado hoja excel,politicas,completados,excel
+Necesito exportar a en pantalla el listado de funcionarios procesando,usuarios,pendientes,pantalla
+obtener reporte de solicitantes en hoja de cálculo,clientes,todos,excel
+Listado solicitantes activo xlsx,clientes,pendientes,excel
+Podrías generarme un reporte de políticas vencidos en formato json,politicas,atrasados,pantalla
+crear reporte de políticas en mostrar,politicas,todos,pantalla
+Exportar a documento pdf los cliente atrasados,clientes,atrasados,pdf
+Obtener reporte de solicitudes en en word.,tramites,todos,word
+Crear reporte de archivo todas en docx,documentos,todos,word
+Podrías generarme un reporte de solicitantes total en hoja excel,clientes,todos,excel
+muéstrame un reporte de funcionario en visualizar,usuarios,todos,pantalla
+Crear reporte de operadores en hoja de cálculo,usuarios,todos,excel
+Quiero un reporte de usuarios finales en word,clientes,todos,word
+Descargar reporte de archivo pendiente en word,documentos,pendientes,word
+Necesito el reporte de peticiones demorado en json,tramites,atrasados,pantalla
+Lista operadores en proceso mostrar.,usuarios,pendientes,pantalla
+DESCARGAR REPORTE DE POLÍTICAS DE NEGOCIO EN DOCUMENTO PDF,politicas,todos,pdf
+quiero un reporte de trámites fuera de plazo en visualizar,tramites,atrasados,pantalla
+Generar un reporte de peticiones en visualizar,tramites,todos,pantalla
+Descargar en excel el reporte de reglas de negocio demorados,politicas,atrasados,excel
+Muéstrame un reporte de funcionario sin terminar en formato pdf,usuarios,pendientes,pdf
+Obtener reporte de usuarios finales vencidos en excel,clientes,atrasados,excel
+Datos cliente atrasado archivo excel,clientes,atrasados,excel
+Obtener reporte de usuarios finales tardíos en hoja excel,clientes,atrasados,excel
+Exportar a hoja excel los operador completado,usuarios,completados,excel
+obtener reporte de usuario general en archivo excel,usuarios,todos,excel
+podrías generarme un reporte de cliente demorado en formato word.,clientes,atrasados,word
+Quiero un reporte de archivo en word,documentos,todos,word
+En formato documento word dame los solicitantes finalizados,clientes,completados,word
+Muéstrame un reporte de papeles en formato word,documentos,todos,word
+dame los empleados cualquiera en formato mostrar,usuarios,todos,pantalla
+Sácame un reporte de empleado global en mostrar,usuarios,todos,pantalla
+generar un reporte de papeles en documento pdf!,documentos,todos,pdf
+Listado clientes atrasados visualizar,clientes,atrasados,pantalla
+Necesito el reporte de peticiones lista completa en json,tramites,todos,pantalla
+Lista flujos de trabajo tardíos pantalla,tramites,atrasados,pantalla
+Crear reporte de requisitos en mostrar,documentos,todos,pantalla
+En formato xlsx dame los adjuntos en progreso,documentos,pendientes,excel
+lista ficheros pendientes word,documentos,pendientes,word
+Crear reporte de peticiones pendiente en formato word.,tramites,pendientes,word
+Exportar a docx los operador.,usuarios,todos,word
+DESCARGAR REPORTE DE PERSONAS EN EN PDF,clientes,todos,pdf
+datos peticiones pendiente pdf,tramites,pendientes,pdf
+Descargar reporte de fichero finalizados en archivo pdf,documentos,completados,pdf
+Obtener reporte de usuarios finales completados en xlsx,clientes,completados,excel
+Quiero un reporte de solicitante procesando en formato word,clientes,pendientes,word
+GENERAR UN REPORTE DE PAPELES EN XLSX,documentos,todos,excel
+Lista empleados todos archivo word.,usuarios,todos,word
+Podrías generarme un reporte de personas total en en pdf,clientes,todos,pdf
+Quiero exportar en docx las flujos de trabajo sin filtros!,tramites,todos,word
+Quiero exportar en excel las solicitante aprobados,clientes,completados,excel
+Lista trámite pendientes archivo word,tramites,pendientes,word
+Descargar reporte de reglas de negocio en en word,politicas,todos,word
+En formato hoja de cálculo dame los política finalizados,politicas,completados,excel
+Necesito exportar a documento word el listado de clientes sin terminar,clientes,pendientes,word
+Descargar reporte de usuarios en docx,usuarios,todos,word
+Podrías generarme un reporte de ciudadanos demorado en xlsx,clientes,atrasados,excel
+Hazme un reporte de adjuntos demorados en archivo word,documentos,atrasados,word
+en en excel quiero el reporte de personas todas,clientes,todos,excel
+Reporte documento en word,documentos,todos,word
+Generar un reporte de diagramas de actividad activos en vista previa,politicas,pendientes,pantalla
+Datos archivos tardíos excel,documentos,atrasados,excel
+Necesito exportar a pdf el listado de casos todos,tramites,todos,pdf
+Quiero un reporte de clientes atrasados en formato portable,clientes,atrasados,pdf
+descargar reporte de requisitos en formato word,documentos,todos,word
+Quisiera ver la lista de trámite todos y bajarla en hoja de cálculo,tramites,todos,excel
+Listado ciudadanos cualquiera visualizar,clientes,todos,pantalla
+Descargar en en pdf el reporte de usuarios finales fuera de plazo,clientes,atrasados,pdf
+Dame los solicitante global en formato en pantalla,clientes,todos,pantalla
+Obtener reporte de peticiones en progreso en archivo pdf,tramites,pendientes,pdf
+Crear reporte de trámite demorado en excel,tramites,atrasados,excel
+Por favor genera un reporte de cliente completo en mostrar,clientes,todos,pantalla
+Listado requisitos tardíos formato excel,documentos,atrasados,excel
+quiero un reporte de solicitudes terminados en xlsx,tramites,completados,excel
+Reporte documento activos xlsx,documentos,pendientes,excel
+reporte solicitante procesando formato excel,clientes,pendientes,excel
+por favor genera un reporte de solicitantes finalizado en archivo pdf,clientes,completados,pdf
+Listado personas aprobados en excel,clientes,completados,excel
+¿cómo puedo ver el reporte de operador demorados en hoja de cálculo?,usuarios,atrasados,excel
+Reporte operadores sin filtros en word,usuarios,todos,word
+Quiero un reporte de usuario en documento word,usuarios,todos,word
+crear reporte de diagramas de actividad cualquiera en documento word,politicas,todos,word
+Quiero un reporte de cliente general en en pantalla,clientes,todos,pantalla
+Necesito el reporte de funcionarios en en pdf,usuarios,todos,pdf
+Listado papeles resueltos pantalla,documentos,completados,pantalla
+Dame los adjuntos terminados en formato formato portable,documentos,completados,pdf
+Necesito exportar a ver el listado de solicitudes hechos,tramites,completados,pantalla
+Generar un reporte de políticas en en word,politicas,todos,word
+Muéstrame un reporte de archivo pendientes en visualizar!,documentos,pendientes,pantalla
+Reporte trámite aprobados documento editable,tramites,completados,word
+En formato json quiero el reporte de requisitos todos,documentos,todos,pantalla
+Listado trámites sin terminar json!,tramites,pendientes,pantalla
+descargar en documento editable el reporte de usuarios todas,usuarios,todos,word
+Descargar reporte de políticas de negocio pendientes en word,politicas,pendientes,word
+Crear reporte de política en formato portable,politicas,todos,pdf
+Muéstrame un reporte de trámites fuera de plazo en docx,tramites,atrasados,word
+Descargar reporte de adjuntos hechos en formato excel,documentos,completados,excel
+generar un reporte de usuarios con demora en formato excel,usuarios,atrasados,excel
+reporte ciudadanos vencido formato json,clientes,atrasados,pantalla
+Exportar a formato json los usuarios finales tardíos.,clientes,atrasados,pantalla
+Obtener reporte de personal global en visualizar,usuarios,todos,pantalla
+Obtener reporte de política de negocio en excel,politicas,todos,excel
+reporte política documento word,politicas,todos,word
+Crear reporte de reglas en xlsx,politicas,todos,excel
+¿es posible obtener los usuarios finales todos en word?,clientes,todos,word
+Crear reporte de política en formato pdf,politicas,todos,pdf
+Sácame un reporte de solicitantes completo en excel,clientes,todos,excel
+Generar un reporte de diagramas de actividad completado en docx,politicas,completados,word
+Quiero exportar en hoja excel las políticas de negocio sin filtros,politicas,todos,excel
+Crear reporte de personas en visualizar,clientes,todos,pantalla
+Dame los políticas de negocio en formato excel.,politicas,todos,excel
+Listado archivo terminados formato excel,documentos,completados,excel
+obtener reporte de clientes en visualizar,clientes,todos,pantalla
+Hazme un reporte de solicitante total en pantalla,clientes,todos,pantalla
+Hazme un reporte de trámite terminados en xlsx,tramites,completados,excel
+Generar un reporte de documento activo en formato pdf,documentos,pendientes,pdf
+crear reporte de solicitantes vencido en formato portable.,clientes,atrasados,pdf
+GENERAR UN REPORTE DE FLUJOS DE TRABAJO DEMORADOS EN DOCUMENTO PDF,tramites,atrasados,pdf
+Lista fichero vista previa,documentos,todos,pantalla
+Descargar reporte de documento resuelto en ver,documentos,completados,pantalla
+NECESITO EXPORTAR A JSON EL LISTADO DE PERSONAS EN CURSO,clientes,pendientes,pantalla
+exportar a ver los solicitante,clientes,todos,pantalla
+Necesito el reporte de política de negocio activo en pantalla,politicas,pendientes,pantalla
+Hazme un reporte de trámites total en formato portable,tramites,todos,pdf
+Generar un reporte de funcionarios en excel.,usuarios,todos,excel
+Descargar en en word el reporte de requisitos activos.,documentos,pendientes,word
+EXPORTAR A EN EXCEL LOS TRÁMITES,tramites,todos,excel
+lista política con retraso formato excel,politicas,atrasados,excel
+Quiero exportar en formato excel las políticas de negocio fuera de plazo.,politicas,atrasados,excel
+obtener reporte de usuarios finales todos en archivo excel,clientes,todos,excel
+Quisiera ver la lista de empleados aprobado y bajarla en pantalla,usuarios,completados,pantalla
+necesito exportar a docx el listado de casos tardíos,tramites,atrasados,word
+Crear reporte de clientes resueltos en archivo excel,clientes,completados,excel
+Descargar reporte de ciudadanos en documento pdf.,clientes,todos,pdf
+Reporte ciudadanos formato json,clientes,todos,pantalla
+En documento pdf quiero el reporte de políticas hechos,politicas,completados,pdf
+Descargar en pantalla el reporte de usuarios finales cualquiera,clientes,todos,pantalla
+Generar un reporte de personal procesando en archivo excel,usuarios,pendientes,excel
+Obtener reporte de reglas en archivo excel,politicas,todos,excel
+Descargar en documento editable el reporte de clientes cualquiera!,clientes,todos,word
+Hazme un reporte de trámites vencido en word,tramites,atrasados,word
+Reporte fichero formato json,documentos,todos,pantalla
+Generar un reporte de ciudadanos con retraso en pdf,clientes,atrasados,pdf
+Quiero exportar en pantalla las fichero sin filtros!,documentos,todos,pantalla
+Crear reporte de casos en word,tramites,todos,word
+Quiero exportar en docx las trámite lista completa,tramites,todos,word
+DESCARGAR REPORTE DE POLÍTICA DE NEGOCIO EN PANTALLA,politicas,todos,pantalla
+Sácame un reporte de archivos total en vista previa,documentos,todos,pantalla
+Datos peticiones completado json,tramites,completados,pantalla
+Descargar reporte de personas en archivo pdf,clientes,todos,pdf
+Necesito el reporte de documento en en word,documentos,todos,word
+Quiero exportar en archivo word las política activo,politicas,pendientes,word
+Datos archivo global consola.,documentos,todos,pantalla
+Crear reporte de usuarios finales en word,clientes,todos,word
+Necesito el reporte de solicitantes en documento editable!,clientes,todos,word
+Necesito el reporte de peticiones completados en documento word,tramites,completados,word
+Descargar en ver el reporte de trámite fuera de plazo,tramites,atrasados,pantalla
+Generar un reporte de solicitantes sin terminar en formato word.,clientes,pendientes,word
+Por favor genera un reporte de documento terminado en word,documentos,completados,word
+muéstrame un reporte de archivo con retraso en docx,documentos,atrasados,word
+descargar reporte de fichero activos en visualizar!,documentos,pendientes,pantalla
+reporte archivos sin filtros documento editable,documentos,todos,word
+Quiero exportar en documento pdf las personal con retraso,usuarios,atrasados,pdf
+Obtener reporte de operadores atrasados en documento editable.,usuarios,atrasados,word
+Muéstrame un reporte de empleado en docx,usuarios,todos,word
+Dame los diagramas en formato mostrar,politicas,todos,pantalla
+Necesito el reporte de operadores en documento editable!,usuarios,todos,word
+Dame los operadores demorados en formato pantalla,usuarios,atrasados,pantalla
+Descargar reporte de trámites en formato word.,tramites,todos,word
+Descargar reporte de operadores en proceso en xlsx,usuarios,pendientes,excel
+Listado reglas atrasado formato word,politicas,atrasados,word
+Lista clientes docx,clientes,todos,word
+En formato en word dame los solicitante aprobados,clientes,completados,word
+Descargar en archivo word el reporte de trámite completado,tramites,completados,word
+obtener reporte de casos en en excel,tramites,todos,excel
+Muéstrame un reporte de política de negocio vencidos en en pantalla,politicas,atrasados,pantalla
+Crear reporte de personas en formato portable,clientes,todos,pdf
+Exportar a vista previa los políticas sin terminar,politicas,pendientes,pantalla
+Listado operador pendientes vista previa,usuarios,pendientes,pantalla
+dame los empleados activo en formato en pdf.,usuarios,pendientes,pdf
+Datos usuarios finales pendientes mostrar,clientes,pendientes,pantalla
+lista clientes general pantalla,clientes,todos,pantalla
+Podrías generarme un reporte de personas completado en archivo word!,clientes,completados,word
+¿cómo puedo ver el reporte de archivos pendiente en pantalla?,documentos,pendientes,pantalla
+Reporte usuarios xlsx,usuarios,todos,excel
+Quiero un reporte de diagramas de actividad en pdf,politicas,todos,pdf
+Generar un reporte de casos global en archivo excel,tramites,todos,excel
+quisiera ver la lista de clientes todos y bajarla en excel,clientes,todos,excel
+Lista clientes vencidos mostrar.,clientes,atrasados,pantalla
+Generar un reporte de política de negocio finalizado en documento pdf,politicas,completados,pdf
+Quiero un reporte de procesos en documento word,tramites,todos,word
+Necesito exportar a visualizar el listado de flujos de trabajo en proceso,tramites,pendientes,pantalla
+Quisiera ver la lista de diagramas de actividad general y bajarla en archivo excel,politicas,todos,excel
+Exportar a documento pdf los solicitantes sin terminar,clientes,pendientes,pdf
+Listado funcionarios demorado formato excel,usuarios,atrasados,excel
+Generar un reporte de solicitante activos en mostrar.,clientes,pendientes,pantalla
+Descargar reporte de personas total en formato pdf,clientes,todos,pdf
+Quiero un reporte de diagramas de actividad total en en excel,politicas,todos,excel
+Lista cliente archivo pdf.,clientes,todos,pdf
+Obtener reporte de política en curso en mostrar,politicas,pendientes,pantalla
+¿es posible obtener los diagramas atrasados en en excel?.,politicas,atrasados,excel
+Obtener reporte de funcionarios con demora en visualizar,usuarios,atrasados,pantalla
+Dame los trámites en formato pdf,tramites,todos,pdf
+Reporte usuarios finales resuelto formato json,clientes,completados,pantalla
+descargar reporte de política de negocio en word,politicas,todos,word
+Descargar reporte de usuarios finales resuelto en archivo pdf.,clientes,completados,pdf
+necesito exportar a en excel el listado de casos completo,tramites,todos,excel
+quiero un reporte de solicitante en formato word,clientes,todos,word
+Dame los política tardíos en formato formato portable!,politicas,atrasados,pdf
+Quisiera ver la lista de documento vencidos y bajarla en vista previa,documentos,atrasados,pantalla
+Exportar a documento pdf los archivo!,documentos,todos,pdf
+Quisiera ver la lista de diagramas demorados y bajarla en archivo excel,politicas,atrasados,excel
+Obtener reporte de personal en xlsx,usuarios,todos,excel
+lista documento aprobado documento editable,documentos,completados,word
+Descargar reporte de peticiones aprobados en ver,tramites,completados,pantalla
+Quisiera ver la lista de trámite con demora y bajarla en json,tramites,atrasados,pantalla
+DAME LOS EMPLEADO EN CURSO EN FORMATO FORMATO PDF,usuarios,pendientes,pdf
+Datos personas resuelto documento pdf,clientes,completados,pdf
+Descargar en en excel el reporte de usuario vencido,usuarios,atrasados,excel
+Obtener reporte de política en archivo pdf.,politicas,todos,pdf
+En formato pantalla dame los archivo fuera de plazo,documentos,atrasados,pantalla
+Necesito exportar a formato excel el listado de usuarios vencidos,usuarios,atrasados,excel
+Listado procesos fuera de plazo docx,tramites,atrasados,word
+Datos trámite sin terminar word,tramites,pendientes,word
+Generar un reporte de reglas global en en pdf,politicas,todos,pdf
+Datos papeles atrasados hoja de cálculo,documentos,atrasados,excel
+muéstrame un reporte de diagramas de actividad atrasado en formato excel,politicas,atrasados,excel
+Hazme un reporte de archivos activos en documento pdf,documentos,pendientes,pdf
+Reporte reglas xlsx.,politicas,todos,excel
+Por favor genera un reporte de peticiones activos en en pdf!,tramites,pendientes,pdf
+Descargar en xlsx el reporte de solicitantes en curso,clientes,pendientes,excel
+Exportar a excel los papeles!,documentos,todos,excel

@@ -1,0 +1,47 @@
+Verificar version de Python
+python --version
+# o también
+python3 --version
+
+# Entra a la carpeta
+cd servicio-ia-fastapi
+
+# Crear entorno virtual (se creará una carpeta llamada .venv)
+python -m venv .venv
+.venv\Scripts\activate
+
+1.4 Instalar las librerías necesarias
+pip install fastapi uvicorn tensorflow numpy pandas python-multipart
+
+# guardar las librerias instaladas
+pip freeze > requirements.txt
+
+# instalar las librerias necesarias
+pip install -r requirements.txt
+
+
+
+2. ESTRUCTURA DEL PROYECTO
+/servicio-ia-fastapi
+├── model/                      # Modelos de Machine Learning
+│   ├── riesgo_model.h5
+│   ├── riesgo_model_metadata.json
+│   └── palabras_peligrosas_loader.py
+├── main.py                     # API principal con FastAPI
+├── requirements.txt            # Dependencias del proyecto
+├── data/                       # Datos (pueden estar en el .gitignore si son grandes)
+│   ├── palabras_peligrosas.csv
+│   └── dataset_riesgos.csv
+└── .gitignore                  # Para ignorar carpetas como .venv, __pycache__, etc.
+
+
+
+
+cd servicio-ia-fastapi
+
+# ⚠️ RECUERDA ACTIVAR EL ENTORNO VIRTUAL PRIMERO
+.venv\Scripts\activate  # Windows
+# source .venv/bin/activate  # Linux/Mac
+
+# Levantar el servidor
+uvicorn main:app --reload --port 8000

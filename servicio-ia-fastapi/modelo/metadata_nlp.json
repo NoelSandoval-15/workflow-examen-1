@@ -1,0 +1,22 @@
+{
+    "categorias": [
+        "clientes",
+        "documentos",
+        "politicas",
+        "tramites",
+        "usuarios"
+    ],
+    "criterios": [
+        "atrasados",
+        "completados",
+        "pendientes",
+        "todos"
+    ],
+    "formatos": [
+        "excel",
+        "pantalla",
+        "pdf",
+        "word"
+    ],
+    "max_len": 20
+}

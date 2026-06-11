@@ -1,0 +1,15 @@
+{
+    "clases": [
+        "BAJA",
+        "MEDIA",
+        "ALTA"
+    ],
+    "caracteristicas": [
+        "tiempo_promedio",
+        "tiempo_limite",
+        "ratio_tiempos",
+        "pendientes",
+        "atrasadas",
+        "ratio_atrasadas"
+    ]
+}
