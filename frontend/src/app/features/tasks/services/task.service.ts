@@ -5,10 +5,20 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api-response.model';
 
+export interface CampoFormulario {
+  id: string;
+  etiqueta: string;
+  tipo: 'TEXTO' | 'TEXTO_LARGO' | 'NUMERO' | 'FECHA' | 'CHECKBOX' | 'TELEFONO' | 'EMAIL' | 'ARCHIVO';
+  requerido: boolean;
+  valor?: string | boolean;
+  archivoUrl?: string;
+  archivoNombre?: string;
+}
+
 export interface Task {
   id: string;
   procesoInstanciaId: string;
-  procesoInstanciaCodigo?: string;   // TRM-XXXXXXXX para mostrar en UI
+  procesoInstanciaCodigo?: string;
   nodoId?: string;
   nombre: string;
   tipo?: string;
@@ -16,10 +26,16 @@ export interface Task {
   departamentoAsignadoId?: string;
   usuarioAsignadoId?: string;
   observacion?: string;
+  formularioDinamicoHabilitado?: boolean;
+  datosFormulario?: CampoFormulario[];
   fechaInicio?: string;
   fechaLimite?: string;
   fechaCompletado?: string;
   createdAt?: string;
+  // Campos del nodo para Gestión Documental
+  formatosPermitidos?: string[];       // ['pdf','docx','xlsx',...]
+  permisoDefectoCreador?: string;      // 'VER' | 'EDITAR' | 'NINGUNO'
+  nivelVisibilidadGlobal?: string;     // 'PRIVADO' | 'DEPARTAMENTO' | 'PUBLICO'
 }
 
 @Injectable({ providedIn: 'root' })
@@ -28,14 +44,14 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  /** Tareas del usuario autenticado — endpoint seguro que no expone otros IDs */
+  /** Tareas del usuario autenticado */
   misTareas(): Observable<Task[]> {
     return this.http.get<ApiResponse<Task[]>>(`${this.base}/mis-tareas`)
       .pipe(map(r => r.data));
   }
 
-  listarPorUsuario(usuarioId: string): Observable<Task[]> {
-    return this.http.get<ApiResponse<Task[]>>(`${this.base}/usuario/${usuarioId}`)
+  listarPorUsuarioYDepartamento(usuarioId: string, departamentoId: string): Observable<Task[]> {
+    return this.http.get<ApiResponse<Task[]>>(`${this.base}/usuario/${usuarioId}/departamento/${departamentoId}`)
       .pipe(map(r => r.data));
   }
 
@@ -51,4 +67,19 @@ export class TaskService {
       { params: { observacion } }
     ).pipe(map(r => r.data));
   }
+
+  /** Guarda el formulario dinámico llenado por el funcionario */
+  guardarFormulario(id: string, campos: CampoFormulario[]): Observable<Task> {
+    return this.http.put<ApiResponse<Task>>(
+      `${this.base}/${id}/formulario`,
+      { campos }
+    ).pipe(map(r => r.data));
+  }
+
+  /** Reclama una tarea del pool del departamento */
+  reclamar(id: string): Observable<Task> {
+    return this.http.put<ApiResponse<Task>>(`${this.base}/${id}/reclamar`, null)
+      .pipe(map(r => r.data));
+  }
 }
+

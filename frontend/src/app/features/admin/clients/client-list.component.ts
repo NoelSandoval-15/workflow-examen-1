@@ -24,6 +24,26 @@ export class ClientListComponent implements OnInit {
   form: FormGroup;
   cols = ['nombre', 'correo', 'telefono'];
 
+  // Paginación
+  pageSize = 10;
+  currentPage = 1;
+
+  get paginatedClientes(): Cliente[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.clientes.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.clientes.length / this.pageSize);
+  }
+
+  cambiarPagina(delta: number): void {
+    const newPage = this.currentPage + delta;
+    if (newPage >= 1 && newPage <= this.totalPages) {
+      this.currentPage = newPage;
+    }
+  }
+
   constructor(private adminService: AdminService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],

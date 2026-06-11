@@ -24,7 +24,7 @@
   <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
 } @else {
   <mat-card>
-    <table mat-table [dataSource]="departamentos" class="full-width">
+    <table mat-table [dataSource]="paginatedDepartamentos" class="full-width">
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
         <td mat-cell *matCellDef="let d">{{ d.nombre }}</td>
@@ -42,5 +42,18 @@
       <tr mat-header-row *matHeaderRowDef="cols"></tr>
       <tr mat-row *matRowDef="let row; columns: cols;"></tr>
     </table>
+
+    <!-- Controles de paginación -->
+    @if (departamentos.length > pageSize) {
+      <div class="pagination-controls">
+        <button mat-icon-button (click)="cambiarPagina(-1)" [disabled]="currentPage === 0">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+        <button mat-icon-button (click)="cambiarPagina(1)" [disabled]="currentPage >= totalPages - 1">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    }
   </mat-card>
 }

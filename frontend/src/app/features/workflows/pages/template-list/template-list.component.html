@@ -29,6 +29,10 @@
         }
 
         <mat-card-actions align="end">
+          <button mat-icon-button matTooltip="Analizar Cuellos de Botella" color="accent" (click)="analizarCuellosBotella(t, $event)">
+            <mat-icon>analytics</mat-icon>
+          </button>
+
           @if (!esFuncionario) {
             <button mat-icon-button matTooltip="Editar diseño" (click)="editar(t, $event)">
               <mat-icon>edit</mat-icon>

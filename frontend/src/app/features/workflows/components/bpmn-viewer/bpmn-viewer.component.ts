@@ -156,7 +156,7 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     const diShapes = template.nodos.map(n => {
       const p = posMap.get(n.id) ?? { x: 80, y: 180, w: 120, h: 80 };
-      return `<bpmndi:BPMNShape bpmnElement="${n.id}">
+      return `<bpmndi:BPMNShape id="${n.id}_di" bpmnElement="${n.id}">
           <dc:Bounds x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}"/>
         </bpmndi:BPMNShape>`;
     }).join('\n      ');
@@ -168,7 +168,7 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
       const sy = src ? src.y + src.h / 2 : 100;
       const tx = tgt ? tgt.x             : 200;
       const ty = tgt ? tgt.y + tgt.h / 2 : 100;
-      return `<bpmndi:BPMNEdge bpmnElement="${e.id}">
+      return `<bpmndi:BPMNEdge id="${e.id}_di" bpmnElement="${e.id}">
           <di:waypoint x="${sx}" y="${sy}"/>
           <di:waypoint x="${tx}" y="${ty}"/>
         </bpmndi:BPMNEdge>`;
@@ -184,8 +184,8 @@ export class BpmnViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
     ${shapes}
     ${flows}
   </process>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="process_${template.id}">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_${template.id}">
+    <bpmndi:BPMNPlane id="BPMNPlane_${template.id}" bpmnElement="process_${template.id}">
       ${diShapes}
       ${diEdges}
     </bpmndi:BPMNPlane>

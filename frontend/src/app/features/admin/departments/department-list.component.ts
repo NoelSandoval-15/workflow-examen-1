@@ -49,4 +49,24 @@ export class DepartmentListComponent implements OnInit {
       error: () => { this.guardando = false; }
     });
   }
+
+  // Paginación
+  pageSize = 10;
+  currentPage = 0;
+
+  get paginatedDepartamentos(): Departamento[] {
+    const startIndex = this.currentPage * this.pageSize;
+    return this.departamentos.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.departamentos.length / this.pageSize);
+  }
+
+  cambiarPagina(incremento: number): void {
+    const nuevaPagina = this.currentPage + incremento;
+    if (nuevaPagina >= 0 && nuevaPagina < this.totalPages) {
+      this.currentPage = nuevaPagina;
+    }
+  }
 }

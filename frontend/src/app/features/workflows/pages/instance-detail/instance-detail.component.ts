@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { WorkflowInstanceService } from '../../services/workflow-instance.service';
 import { WorkflowTemplateService } from '../../services/workflow-template.service';
+import { TaskService, Task } from '../../../tasks/services/task.service';
+import { DynamicFormComponent } from '../../../tasks/pages/dynamic-form.component';
 import { BpmnViewerComponent } from '../../components/bpmn-viewer/bpmn-viewer.component';
 import { HistoryTimelineComponent } from '../../components/history-timeline/history-timeline.component';
 import { ProcesoInstancia, WorkflowTemplate, WorkflowEdge } from '../../models/workflow.model';
@@ -26,7 +28,7 @@ import { ProcesoInstancia, WorkflowTemplate, WorkflowEdge } from '../../models/w
     MatCardModule, MatButtonModule, MatIconModule, MatChipsModule,
     MatDividerModule, MatProgressSpinnerModule, MatDialogModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
-    BpmnViewerComponent, HistoryTimelineComponent
+    BpmnViewerComponent, HistoryTimelineComponent, DynamicFormComponent
   ],
   templateUrl: './instance-detail.component.html',
   styleUrl: './instance-detail.component.scss'
@@ -34,6 +36,7 @@ import { ProcesoInstancia, WorkflowTemplate, WorkflowEdge } from '../../models/w
 export class InstanceDetailComponent implements OnInit {
   instancia?: ProcesoInstancia;
   template?: WorkflowTemplate;
+  tareaActual?: Task;
   loading = true;
   procesando = false;
 
@@ -45,6 +48,7 @@ export class InstanceDetailComponent implements OnInit {
     private router: Router,
     private instanceService: WorkflowInstanceService,
     private templateService: WorkflowTemplateService,
+    private taskService: TaskService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef
   ) {
@@ -67,6 +71,12 @@ export class InstanceDetailComponent implements OnInit {
             error: () => {}
           });
         }
+        this.taskService.listarPorInstancia(inst.id).subscribe({
+          next: tareas => {
+            this.tareaActual = tareas.find(t => t.nodoId === inst.nodoActual?.id && t.estado === 'PENDIENTE');
+            this.cdr.detectChanges();
+          }
+        });
       },
       error: () => { this.loading = false; this.cdr.detectChanges(); }
     });

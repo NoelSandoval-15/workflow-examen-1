@@ -12,15 +12,59 @@
 } @else if (tareas.length === 0) {
   <div class="empty-state">
     <mat-icon>task_alt</mat-icon>
-    <p>No tienes tareas pendientes</p>
+    <p>No tienes tareas pendientes ni completadas</p>
   </div>
 } @else {
-  <div class="tasks-list">
-    @for (tarea of tareas; track tarea.id) {
-      <mat-card class="task-card" [class.pendiente]="tarea.estado === 'PENDIENTE'"
+  <div class="tasks-split-layout">
+    
+    <!-- Columna Pendientes / En Progreso -->
+    <div class="tasks-column">
+      <div class="column-header pendientes-header">
+        <mat-icon>pending_actions</mat-icon>
+        <h3>Por Hacer ({{ pendientes.length + bandejaComun.length }})</h3>
+      </div>
+      <div class="column-content">
+        @for (tarea of bandejaComun; track tarea.id) {
+          <ng-container *ngTemplateOutlet="taskCard; context: { $implicit: tarea }"></ng-container>
+        }
+        @for (tarea of pendientes; track tarea.id) {
+          <ng-container *ngTemplateOutlet="taskCard; context: { $implicit: tarea }"></ng-container>
+        }
+        @if (pendientes.length === 0 && bandejaComun.length === 0) {
+          <div class="empty-col">
+            <mat-icon>done_all</mat-icon>
+            <p>No tienes tareas pendientes</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Columna Realizadas -->
+    <div class="tasks-column">
+      <div class="column-header realizadas-header">
+        <mat-icon>task_alt</mat-icon>
+        <h3>Realizadas ({{ completadas.length }})</h3>
+      </div>
+      <div class="column-content">
+        @for (tarea of completadas; track tarea.id) {
+          <ng-container *ngTemplateOutlet="taskCard; context: { $implicit: tarea }"></ng-container>
+        }
+        @if (completadas.length === 0) {
+          <div class="empty-col">
+            <mat-icon>history</mat-icon>
+            <p>Aún no has completado tareas</p>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #taskCard let-tarea>
+    <mat-card class="task-card" [class.pendiente]="tarea.estado === 'PENDIENTE' || tarea.estado === 'EN_PROGRESO'"
                                   [class.completada]="tarea.estado === 'COMPLETADO'">
 
-        <!-- Cabecera de la tarea -->
+        <!-- ══ Cabecera de la tarea ══ -->
         <div class="task-header" (click)="toggleExpand(tarea.id)">
           <mat-icon class="task-estado-icon" [class]="'estado-' + tarea.estado.toLowerCase()">
             {{ getEstadoIcono(tarea.estado) }}
@@ -36,6 +80,14 @@
                   Límite: {{ tarea.fechaLimite | date:'dd/MM/yyyy HH:mm' }}
                 </span>
               }
+              @if (tarea.formularioDinamicoHabilitado) {
+                <span class="badge-formulario"
+                      [class.formulario-ok]="!formularioPendiente(tarea)"
+                      [class.formulario-pendiente]="formularioPendiente(tarea)">
+                  <mat-icon>{{ formularioPendiente(tarea) ? 'edit_note' : 'check_circle' }}</mat-icon>
+                  {{ formularioPendiente(tarea) ? 'Formulario requerido' : 'Formulario completado' }}
+                </span>
+              }
             </div>
           </div>
           <mat-chip [color]="getEstadoColor(tarea.estado)" highlighted class="chip-estado">
@@ -46,49 +98,246 @@
           </mat-icon>
         </div>
 
-        <!-- Detalle expandible -->
+        <!-- ══ Detalle expandible ══ -->
         @if (expandedId === tarea.id) {
           <mat-divider></mat-divider>
           <div class="task-body">
 
-            @if (tarea.estado === 'PENDIENTE') {
-              <p class="task-instruccion">
-                <mat-icon>info</mat-icon>
-                Revisa el trámite, completa las acciones necesarias y avanza al siguiente paso.
-              </p>
+            @if (tarea.estado === 'PENDIENTE' || tarea.estado === 'EN_PROGRESO') {
+              @if (esTareaBandejaComun(tarea)) {
+                <!-- Bandeja Común: Botón para tomar la tarea -->
+                <div class="claim-banner">
+                  <mat-icon class="banner-icon" color="primary">group</mat-icon>
+                  <div class="banner-text">
+                    <h4>Tarea disponible del departamento</h4>
+                    <p>Esta tarea no tiene funcionario asignado. Tómala para poder trabajar en ella.</p>
+                  </div>
+                  <button mat-flat-button color="primary" class="btn-claim" [disabled]="procesandoId === tarea.id" (click)="reclamar(tarea)">
+                    <mat-icon>assignment_ind</mat-icon> Tomar Tarea
+                  </button>
+                </div>
+              } @else {
 
+              <!-- Botón Ver Trámite -->
               <div class="task-acciones-row">
                 <button mat-stroked-button (click)="verTramite(tarea)" matTooltip="Ver detalle del trámite">
                   <mat-icon>visibility</mat-icon> Ver Trámite
                 </button>
               </div>
 
-              <mat-divider style="margin: 12px 0;"></mat-divider>
+              <mat-divider style="margin: 14px 0;"></mat-divider>
 
-              <form [formGroup]="observacionForm">
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Observación (opcional)</mat-label>
-                  <textarea matInput formControlName="observacion" rows="2"
-                            placeholder="Ej: Documentos verificados correctamente"></textarea>
-                </mat-form-field>
-              </form>
+              <!-- ══════ PESTAÑAS: Datos y Reporte / Gestión Documental ══════ -->
+              <mat-tab-group class="task-tabs" animationDuration="250ms">
 
-              <div class="task-btn-group">
-                <button mat-raised-button color="primary"
-                        [disabled]="procesandoId === tarea.id"
-                        (click)="avanzar(tarea)">
-                  @if (procesandoId === tarea.id) {
-                    <mat-spinner diameter="18"></mat-spinner>
-                  } @else {
-                    <ng-container>
-                      <mat-icon>arrow_forward</mat-icon> Avanzar al siguiente paso
-                    </ng-container>
-                  }
-                </button>
-                <button mat-stroked-button (click)="toggleExpand(tarea.id)">
-                  Cancelar
-                </button>
-              </div>
+                <!-- ── PESTAÑA 1: Datos y Reporte ── -->
+                <mat-tab>
+                  <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">edit_note</mat-icon>
+                    Datos y Reporte
+                  </ng-template>
+
+                  <div class="tab-content">
+                    <!-- Formulario dinámico -->
+                    @if (tarea.formularioDinamicoHabilitado) {
+                      <div class="formulario-section">
+                        <div class="formulario-header"
+                             [class.formulario-header-ok]="!formularioPendiente(tarea)">
+                          <mat-icon>{{ formularioPendiente(tarea) ? 'assignment' : 'assignment_turned_in' }}</mat-icon>
+                          <div>
+                            <div class="formulario-titulo">
+                              {{ formularioPendiente(tarea) ? 'Formulario de trabajo requerido' : 'Formulario completado ✓' }}
+                            </div>
+                            <div class="formulario-subtitulo">
+                              {{ formularioPendiente(tarea)
+                                  ? 'Completa el formulario antes de avanzar al siguiente paso'
+                                  : 'Puedes editar el formulario o avanzar al siguiente paso' }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <app-dynamic-form
+                          [tareaId]="tarea.id"
+                          [camposIniciales]="tarea.datosFormulario ?? []"
+                          [soloLectura]="false"
+                          (formularioGuardado)="onFormularioGuardado(tarea, $event)">
+                        </app-dynamic-form>
+                      </div>
+                    } @else {
+                      <div class="no-formulario">
+                        <mat-icon>info</mat-icon>
+                        <span>Esta tarea no requiere formulario dinámico</span>
+                      </div>
+                    }
+
+                    <!-- Observación -->
+                    <form [formGroup]="observacionForm" style="margin-top: 16px;">
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Observación (opcional)</mat-label>
+                        <textarea matInput formControlName="observacion" rows="2"
+                                  placeholder="Ej: Documentos verificados correctamente"></textarea>
+                      </mat-form-field>
+                    </form>
+
+                    <!-- Botones de acción -->
+                    <div class="task-btn-group">
+                      <button mat-raised-button
+                              [color]="formularioPendiente(tarea) ? '' : 'primary'"
+                              [disabled]="procesandoId === tarea.id"
+                              [matTooltip]="formularioPendiente(tarea) ? 'Debes completar el formulario antes de avanzar' : 'Avanzar al siguiente paso'"
+                              (click)="avanzar(tarea)">
+                        @if (procesandoId === tarea.id) {
+                          <mat-spinner diameter="18"></mat-spinner>
+                        } @else {
+                          <ng-container>
+                            <mat-icon>{{ formularioPendiente(tarea) ? 'lock' : 'arrow_forward' }}</mat-icon>
+                            {{ formularioPendiente(tarea) ? 'Completa el formulario' : 'Avanzar al siguiente paso' }}
+                          </ng-container>
+                        }
+                      </button>
+                      <button mat-stroked-button (click)="toggleExpand(tarea.id)">Cancelar</button>
+                    </div>
+                  </div>
+                </mat-tab>
+
+                <!-- ── PESTAÑA 2: Gestión Documental ── -->
+                <mat-tab>
+                  <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">folder_open</mat-icon>
+                    Gestión Documental
+                  </ng-template>
+
+                  <div class="tab-content">
+
+                    <!-- Sección: Documentos del nodo -->
+                    <div class="doc-section">
+                      <div class="doc-section-header">
+                        <mat-icon>folder_special</mat-icon>
+                        <h4>Documentos Obligatorios y Adicionales</h4>
+                      </div>
+
+                      @if (cargandoDocumentos[tarea.id]) {
+                        <div class="doc-loading">
+                          <mat-spinner diameter="32"></mat-spinner>
+                          <span>Cargando documentos...</span>
+                        </div>
+                      } @else if (!documentosPorTarea[tarea.id] || documentosPorTarea[tarea.id].length === 0) {
+                        <div class="doc-empty">
+                          <mat-icon>folder_off</mat-icon>
+                          <span>No hay documentos en este nodo aún</span>
+                        </div>
+                      } @else {
+                        <!-- Tabla de documentos -->
+                        <div class="doc-table-wrapper">
+                          <table class="doc-table">
+                            <thead>
+                              <tr>
+                                <th>Nombre</th>
+                                <th>Versión</th>
+                                <th>Subido por</th>
+                                <th>Fecha</th>
+                                <th>Tamaño</th>
+                                <th>Acción</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @for (doc of documentosPorTarea[tarea.id]; track doc.id) {
+                                <tr class="doc-row">
+                                  <td class="doc-nombre-cell">
+                                    <mat-icon [style.color]="getColorIcono(doc)">{{ getIconoArchivo(doc) }}</mat-icon>
+                                    <span class="doc-nombre">{{ doc.nombreArchivo }}</span>
+                                  </td>
+                                  <td class="doc-version">(v1.0)</td>
+                                  <td class="doc-uploader">{{ doc.subidoPorId || 'Sistema' }}</td>
+                                  <td class="doc-fecha">{{ doc.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                                  <td class="doc-tamano">{{ formatBytes(doc.tamanoBytes) }}</td>
+                                  <td class="doc-acciones">
+                                    <!-- Editar con OnlyOffice solo si tiene permiso y es editable -->
+                                    @if (puedeEditar(tarea) && ['doc','docx','xls','xlsx','ppt','pptx'].includes((doc.extension || '').toLowerCase())) {
+                                      <button class="btn-onlyoffice"
+                                              (click)="abrirEnOnlyOffice(doc)"
+                                              matTooltip="Editar con OnlyOffice">
+                                        <mat-icon>edit</mat-icon>
+                                        Editar con OnlyOffice
+                                      </button>
+                                    }
+                                    <!-- Ver -->
+                                    <button mat-icon-button
+                                            matTooltip="Visualizar"
+                                            (click)="verArchivo(doc)">
+                                      <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <!-- Descargar -->
+                                    <button mat-icon-button
+                                            matTooltip="Descargar"
+                                            (click)="descargarArchivo(doc)">
+                                      <mat-icon>download</mat-icon>
+                                    </button>
+                                  </td>
+                                </tr>
+                              }
+                            </tbody>
+                          </table>
+                        </div>
+                      }
+                    </div>
+
+                    <mat-divider style="margin: 16px 0;"></mat-divider>
+
+                    <!-- Sección: Cargar Documentos Adicionales -->
+                    <div class="doc-section">
+                      <div class="doc-section-header">
+                        <mat-icon>upload_file</mat-icon>
+                        <h4>Cargar Documentos Adicionales</h4>
+                      </div>
+
+                      <div class="upload-area">
+                        <input type="file"
+                               id="file-input-{{ tarea.id }}"
+                               class="hidden-input"
+                               [accept]="getAcceptFormatos(tarea)"
+                               (change)="onSeleccionarArchivo($event, tarea)">
+
+                        <button mat-stroked-button
+                                class="btn-subir"
+                                [disabled]="subiendoArchivo[tarea.id]"
+                                (click)="triggerFileInput(tarea.id)">
+                          @if (subiendoArchivo[tarea.id]) {
+                            <mat-spinner diameter="18"></mat-spinner>
+                            Subiendo...
+                          } @else {
+                            <ng-container>
+                              <mat-icon>add</mat-icon>
+                              Subir Archivo
+                            </ng-container>
+                          }
+                        </button>
+
+                        <span class="formatos-hint">{{ getTextoFormatos(tarea) }}</span>
+                      </div>
+
+                      <!-- Indicador de visibilidad del nodo -->
+                      @if (tarea.nivelVisibilidadGlobal) {
+                        <div class="visibilidad-badge"
+                             [class.visibilidad-privado]="tarea.nivelVisibilidadGlobal === 'PRIVADO'"
+                             [class.visibilidad-depto]="tarea.nivelVisibilidadGlobal === 'DEPARTAMENTO'"
+                             [class.visibilidad-publico]="tarea.nivelVisibilidadGlobal === 'PUBLICO'">
+                          <mat-icon>
+                            {{ tarea.nivelVisibilidadGlobal === 'PRIVADO' ? 'lock' :
+                               tarea.nivelVisibilidadGlobal === 'DEPARTAMENTO' ? 'people' : 'public' }}
+                          </mat-icon>
+                          Visibilidad: {{ tarea.nivelVisibilidadGlobal }}
+                        </div>
+                      }
+                    </div>
+
+                  </div>
+                </mat-tab>
+
+              </mat-tab-group>
+              <!-- ════════════════════════════════════════════════════════════ -->
+
+              }
             }
 
             @if (tarea.estado === 'COMPLETADO') {
@@ -99,11 +348,17 @@
               @if (tarea.observacion) {
                 <p class="task-obs">{{ tarea.observacion }}</p>
               }
+              @if (tarea.formularioDinamicoHabilitado && tarea.datosFormulario && tarea.datosFormulario.length > 0) {
+                <app-dynamic-form
+                  [tareaId]="tarea.id"
+                  [camposIniciales]="tarea.datosFormulario"
+                  [soloLectura]="true">
+                </app-dynamic-form>
+              }
             }
 
           </div>
         }
       </mat-card>
-    }
-  </div>
+  </ng-template>
 }

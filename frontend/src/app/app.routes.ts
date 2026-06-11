@@ -46,6 +46,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/tasks/pages/task-list.component').then(m => m.TaskListComponent)
       },
       {
+        path: 'asistente-ia',
+        loadComponent: () => import('./features/ia/asistente-ia.component').then(m => m.AsistenteIaComponent)
+      },
+      {
         path: 'notificaciones',
         loadComponent: () => import('./features/notifications/components/notification-list/notification-list.component').then(m => m.NotificationListComponent)
       },
@@ -60,6 +64,19 @@ export const routes: Routes = [
       {
         path: 'admin/clientes',
         loadComponent: () => import('./features/admin/clients/client-list.component').then(m => m.ClientListComponent)
+      },
+      {
+        path: 'admin/documentos',
+        loadComponent: () => import('./features/admin/document-list/document-list.component').then(m => m.DocumentListComponent)
+      },
+      {
+        path: 'admin/editor/:id',
+        loadComponent: () => import('./features/admin/document-editor/document-editor.component').then(m => m.DocumentEditorComponent)
+      },
+      {
+        // Ruta del editor accesible para funcionarios (desde vista de tareas)
+        path: 'editor/:id',
+        loadComponent: () => import('./features/admin/document-editor/document-editor.component').then(m => m.DocumentEditorComponent)
       }
     ]
   },

@@ -5,13 +5,189 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* ── Definición del Sistema de Colores (Día/Noche) ── */
+:root {
+  --bg-primary: #f1f5f9;
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body.dark-mode {
+  --bg-primary: #0f172a;
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --bg-header: #1e293b;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+
+  /* Overrides globales para componentes del sistema en Modo Noche */
+  .mat-mdc-card,
+  .template-card,
+  .instance-card,
+  .task-card,
+  .doc-card,
+  .card,
+  .dialog-container,
+  mat-dialog-container,
+  .mat-mdc-dialog-container {
+    background-color: var(--bg-card) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+  }
+
+  /* Títulos y textos principales */
+  h1, h2, h3, h4, h5, h6,
+  .title, .card-title,
+  .mat-mdc-card-title,
+  span, p, td, th, label,
+  .mdc-list-item__primary-text,
+  .mdc-list-item__secondary-text,
+  .mat-mdc-list-item,
+  .mdc-list-item,
+  .mat-mdc-select-value,
+  .mat-mdc-form-field-label,
+  .mat-mdc-tab-label,
+  .mdc-tab__text-label {
+    color: var(--text-color) !important;
+  }
+
+  /* Subtítulos y textos secundarios */
+  .text-muted,
+  .subtitle,
+  small,
+  span.description {
+    color: var(--text-muted) !important;
+  }
+
+  /* Inputs, Selects y Textareas */
+  input, select, textarea, .mat-mdc-input-element, .mat-mdc-select {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: var(--border-color) !important;
+  }
+
+  /* Tablas y Cabeceras */
+  table, tr, td {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+  }
+
+  th {
+    background-color: #0f172a !important;
+    color: var(--text-color) !important;
+  }
+
+  /* Iconos */
+  mat-icon:not(.logo-icon) {
+    color: var(--text-color) !important;
+  }
+
+  /* Bordes de división y líneas divisorias */
+  .divider,
+  hr,
+  .mat-mdc-list-item-divider,
+  .mdc-list-item-divider {
+    border-color: var(--border-color) !important;
+  }
+  
+  /* Ajustes en los globos del chat de la IA */
+  .mensaje-ia, .message.bot {
+    background-color: var(--bg-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .mensaje-usuario, .message.user {
+    background-color: #3b82f6 !important;
+    color: #ffffff !important;
+  }
+
+  /* Contenedores Genéricos y Paginación (Fuerzan fondo oscuro) */
+  .pagination-controls,
+  .group-header,
+  .grupo-header,
+  .ia-text-panel,
+  .rec-card,
+  .chart-box-donut,
+  .bar-chart-box,
+  .doc-stat-card,
+  .suggestions-container button,
+  .chat-input-container {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+  }
+
+  /* Botones primarios (Crear, Enviar, etc.) para que no se pierdan con el fondo blanco predeterminado */
+  .mat-mdc-raised-button,
+  .mat-mdc-flat-button,
+  .mat-mdc-unelevated-button,
+  .btn-submit,
+  .header-actions button {
+    background-color: #3b82f6 !important;
+    color: #ffffff !important;
+    
+    span, mat-icon {
+      color: #ffffff !important;
+    }
+  }
+
+  /* Botones en paginación y secundarios */
+  .pagination-controls button:not(:disabled) {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    
+    mat-icon {
+      color: var(--text-color) !important;
+    }
+  }
+
+  /* Arreglar texto de los chips de sugerencias en IA */
+  .suggestion-chip {
+    background-color: #1e293b !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+  }
+
+  /* Headers de grupo en Usuarios */
+  .group-title,
+  .grupo-label {
+    color: #3b82f6 !important; /* Azul claro para contraste en negro */
+  }
+
+  /* Hovers de filas para que no se vuelvan blancas en modo oscuro */
+  .user-row:hover,
+  .recent-item:hover,
+  .notif-item:hover {
+    background-color: #334155 !important;
+  }
+
+  /* Arreglo para Mat Chips (Estado, etc) */
+  .mat-mdc-chip {
+    background-color: #334155 !important;
+    color: #f8fafc !important;
+    span {
+      color: #f8fafc !important;
+    }
+  }
+}
+
 html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, sans-serif;
-  background: #f1f5f9;
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mat-mdc-card {
   border-radius: 12px !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }

@@ -1,6 +1,11 @@
 <mat-toolbar class="app-header">
   <span class="spacer"></span>
 
+  <!-- Botón de cambio de tema Día/Noche -->
+  <button mat-icon-button (click)="themeService.toggleTheme()" class="theme-toggle" title="Cambiar tema">
+    <mat-icon>{{ themeService.isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
   <button mat-icon-button [routerLink]="'/notificaciones'">
     @if (unreadCount > 0) {
       <mat-icon [matBadge]="unreadCount" matBadgeColor="warn">notifications</mat-icon>

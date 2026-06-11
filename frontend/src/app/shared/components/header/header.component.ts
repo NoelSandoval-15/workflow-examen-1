@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { WebsocketService } from '../../../core/services/websocket.service';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,8 @@ export class HeaderComponent {
 
   constructor(
     public authService: AuthService,
-    private wsService: WebsocketService
+    private wsService: WebsocketService,
+    public themeService: ThemeService
   ) {
     this.wsService.notification$.subscribe(() => {
       this.unreadCount++;

@@ -34,6 +34,10 @@ export class UserListComponent implements OnInit {
   usuarioEditando: User | null = null;
   form: FormGroup;
 
+  // Paginación
+  pageSize = 10;
+  paginacionGrupos: { [key: string]: number } = {};
+
   readonly rolesOrden = [
     { id: 'ADMIN',       label: 'Administradores', icono: 'admin_panel_settings', color: '#f59e0b' },
     { id: 'SUPERVISOR',  label: 'Supervisores',    icono: 'manage_accounts',      color: '#3b82f6' },
@@ -76,6 +80,29 @@ export class UserListComponent implements OnInit {
 
   getNombreDepartamento(id: string): string {
     return this.departamentos.find(d => d.id === id)?.nombre ?? id ?? '—';
+  }
+
+  // --- Lógica de Paginación ---
+  getPaginatedUsuarios(grupo: GrupoRol): User[] {
+    const page = this.paginacionGrupos[grupo.id] || 1;
+    const start = (page - 1) * this.pageSize;
+    return grupo.usuarios.slice(start, start + this.pageSize);
+  }
+
+  getTotalPages(grupo: GrupoRol): number {
+    return Math.ceil(grupo.usuarios.length / this.pageSize);
+  }
+
+  getCurrentPage(grupoId: string): number {
+    return this.paginacionGrupos[grupoId] || 1;
+  }
+
+  cambiarPagina(grupoId: string, delta: number, maxPages: number): void {
+    const current = this.paginacionGrupos[grupoId] || 1;
+    const newPage = current + delta;
+    if (newPage >= 1 && newPage <= maxPages) {
+      this.paginacionGrupos[grupoId] = newPage;
+    }
   }
 
   abrirFormNuevo(): void {

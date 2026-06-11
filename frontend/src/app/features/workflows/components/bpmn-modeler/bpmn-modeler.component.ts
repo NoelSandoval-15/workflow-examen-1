@@ -8,8 +8,17 @@ export interface NodoSeleccionado {
   departamentoId?: string;
   rolRequerido?: string;
   funcionarioId?: string;
-  tiempoLimiteHoras?: number;
+  fechaLimite?: string;
   requiereEvidencia?: boolean;
+  formularioDinamicoHabilitado?: boolean;
+
+  // Nuevos campos de Configuración y Permisos
+  permisoDefectoCreador?: string;
+  nivelVisibilidadGlobal?: string;
+  bloquearAlCompletar?: boolean;
+  habilitarFirmaDigital?: boolean;
+  formatosPermitidos?: string[];
+  matrizPermisosDocumentos?: any[];
 }
 
 const INITIAL_XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -57,12 +66,20 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
 
   @Input() xmlInicial?: string;
 
+  @Input() set nodosIniciales(nodos: WorkflowNode[] | undefined) {
+    if (!nodos) return;
+    for (const n of nodos) {
+      const { id, nombre, tipo, orden, ...extras } = n as any;
+      this.nodeExtras.set(n.id, { ...extras });
+    }
+  }
+
   private modeler: any;
   private nodeExtras = new Map<string, Partial<NodoSeleccionado>>();
   /** Evita el loop: cambio local → importXML → commandStack.changed → loop */
   private applyingRemoteChange = false;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone) { }
 
   async ngAfterViewInit(): Promise<void> {
     const { default: BpmnModeler } = await import('bpmn-js/lib/Modeler');
@@ -74,7 +91,7 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
   }
 
   private registrarEventos(): void {
-    const eventBus   = this.modeler.get('eventBus');
+    const eventBus = this.modeler.get('eventBus');
     const directEditing = this.modeler.get('directEditing');
 
     // ── Doble clic: abrir panel de propiedades ──────────────────
@@ -97,7 +114,7 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
       if (this.applyingRemoteChange) return; // evitar loop feedback
       this.modeler.saveXML({ format: false }).then(({ xml }: { xml: string }) => {
         this.ngZone.run(() => this.xmlChanged.emit(xml));
-      }).catch(() => {});
+      }).catch(() => { });
     });
   }
 
@@ -121,7 +138,7 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
       this.applyingRemoteChange = true;
       await this.modeler.importXML(xml);
       this.modeler.get('canvas').zoom('fit-viewport');
-    } catch {} finally {
+    } catch { } finally {
       this.applyingRemoteChange = false;
     }
   }
@@ -133,7 +150,7 @@ export class BpmnModelerComponent implements AfterViewInit, OnDestroy {
       this.applyingRemoteChange = true;
       await this.modeler.importXML(xml);
       this.modeler.get('canvas').zoom('fit-viewport');
-    } catch {} finally {
+    } catch { } finally {
       this.applyingRemoteChange = false;
     }
   }

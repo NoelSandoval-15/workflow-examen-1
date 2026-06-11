@@ -1,32 +1,59 @@
-<div class="page-header">
-  <h2>Notificaciones</h2>
-  <button mat-stroked-button (click)="marcarTodas()">
-    <mat-icon>done_all</mat-icon> Marcar todas como leídas
-  </button>
-</div>
-
-@if (loading) {
-  <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
-} @else {
-  <div class="notif-list">
-    @for (n of notificaciones; track n.id) {
-      <mat-card class="notif-card" [class.unread]="!n.leida" (click)="marcarLeida(n)">
-        <mat-card-header>
-          <mat-icon mat-card-avatar [class.icon-unread]="!n.leida">{{ getIcono(n.tipo) }}</mat-icon>
-          <mat-card-title>{{ n.titulo }}</mat-card-title>
-          <mat-card-subtitle>{{ n.createdAt | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ n.mensaje }}</p>
-        </mat-card-content>
-      </mat-card>
-    }
-
-    @if (notificaciones.length === 0) {
-      <div class="empty-state">
-        <mat-icon>notifications_none</mat-icon>
-        <p>Sin notificaciones</p>
-      </div>
-    }
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-title">
+      <mat-icon color="primary">notifications</mat-icon>
+      <h2>Notificaciones</h2>
+    </div>
+    <button mat-stroked-button color="primary" class="mark-all-btn" (click)="marcarTodas()">
+      <mat-icon>done_all</mat-icon> Marcar todas como leídas
+    </button>
   </div>
-}
+
+  @if (loading) {
+    <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
+  } @else {
+    <div class="notif-cards-container">
+      @for (n of paginatedNotificaciones; track n.id) {
+        <mat-card class="notif-card" [class.unread]="!n.leida" (click)="marcarLeida(n)">
+          <div class="card-layout">
+            <div class="notif-icon-wrapper" [class.unread-icon]="!n.leida">
+              <mat-icon>{{ getIcono(n.tipo) }}</mat-icon>
+            </div>
+            
+            <div class="notif-content">
+              <div class="notif-top-row">
+                <span class="notif-title">{{ n.titulo }}</span>
+                <span class="notif-date">{{ n.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              <p class="notif-message">{{ n.mensaje }}</p>
+            </div>
+
+            @if (!n.leida) {
+              <div class="unread-indicator"></div>
+            }
+          </div>
+        </mat-card>
+      }
+
+      <!-- Controles de paginación -->
+      @if (notificaciones.length > pageSize) {
+        <div class="pagination-controls">
+          <button mat-icon-button (click)="cambiarPagina(-1)" [disabled]="currentPage === 0">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="page-info">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+          <button mat-icon-button (click)="cambiarPagina(1)" [disabled]="currentPage >= totalPages - 1">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      }
+
+      @if (notificaciones.length === 0) {
+        <div class="empty-state">
+          <mat-icon>notifications_none</mat-icon>
+          <p>No tienes notificaciones pendientes</p>
+        </div>
+      }
+    </div>
+  }
+</div>

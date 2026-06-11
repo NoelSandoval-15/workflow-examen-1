@@ -1,3 +1,12 @@
+export interface ReglaPermisoDocumento {
+  rolODepartamento?: string;
+  permisoPdf?: string;
+  permisoWord?: string;
+  permisoExcel?: string;
+  permisoImagenes?: string;
+  permisoAudioVideo?: string;
+}
+
 export interface WorkflowNode {
   id: string;
   nombre: string;
@@ -7,8 +16,17 @@ export interface WorkflowNode {
   formularioId?: string;
   funcionarioId?: string;
   requiereEvidencia?: boolean;
-  tiempoLimiteHoras?: number;
+  fechaLimite?: string;
+  formularioDinamicoHabilitado?: boolean;
   orden?: number;
+
+  // Nuevos campos para Configuración y Permisos de Documentos
+  formatosPermitidos?: string[];
+  permisoDefectoCreador?: string;
+  nivelVisibilidadGlobal?: string;
+  bloquearAlCompletar?: boolean;
+  habilitarFirmaDigital?: boolean;
+  matrizPermisosDocumentos?: ReglaPermisoDocumento[];
 }
 
 export interface WorkflowEdge {

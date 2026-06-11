@@ -74,32 +74,59 @@
 
   <!-- META -->
   <mat-card class="meta-card">
-    <mat-card-content>
+    <mat-card-content style="padding: 16px 20px;">
       <form [formGroup]="form" class="meta-form">
-        <mat-form-field appearance="outline">
+        <!-- Cuadro 1 (Izquierdo): Nombre del flujo -->
+        <mat-form-field appearance="outline" class="meta-input-field">
           <mat-label>Nombre del flujo *</mat-label>
           <mat-icon matPrefix>account_tree</mat-icon>
-          <input matInput formControlName="nombre" placeholder="Ej: Instalación de Medidor Residencial">
+          <input matInput formControlName="nombre" placeholder="Ej: Farmacia">
           @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
             <mat-error>Campo obligatorio</mat-error>
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- Cuadro 2 (Medio): Tipo de solicitud -->
+        <mat-form-field appearance="outline" class="meta-input-field">
           <mat-label>Tipo de solicitud *</mat-label>
           <mat-icon matPrefix>label</mat-icon>
-          <input matInput formControlName="tipoSolicitud" placeholder="Ej: INSTALACION_MEDIDOR">
+          <input matInput formControlName="tipoSolicitud" placeholder="Ej: FARMACIA">
           @if (form.get('tipoSolicitud')?.hasError('required') && form.get('tipoSolicitud')?.touched) {
             <mat-error>Campo obligatorio</mat-error>
           }
         </mat-form-field>
+
+        <!-- Cuadro 3 (Derecho): Comando de voz/texto para generar con IA -->
+        <div class="ai-generator-group">
+          <mat-form-field appearance="outline" class="ai-input-field">
+            <mat-label>Instrucción por Voz o Texto</mat-label>
+            <mat-icon matPrefix color="primary">psychology</mat-icon>
+            <input matInput [(ngModel)]="aiPrompt" [ngModelOptions]="{standalone: true}" 
+                   placeholder="Ej: Crear flujo de compra de medicamentos con aprobación..."
+                   (keyup.enter)="generarFlujoIA()" [disabled]="cargandoIA">
+            <button mat-icon-button matSuffix (click)="toggleMicrofonoIA()" 
+                    [color]="escuchandoIA ? 'warn' : ''" 
+                    matTooltip="{{ escuchandoIA ? 'Escuchando... Haz clic para detener' : 'Activar micrófono' }}"
+                    type="button">
+              <mat-icon>{{ escuchandoIA ? 'mic' : 'mic_none' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <button mat-raised-button color="accent" class="ai-btn-submit"
+                  [disabled]="cargandoIA || !aiPrompt.trim()" (click)="generarFlujoIA()"
+                  type="button">
+            @if (cargandoIA) {
+              <mat-spinner diameter="18"></mat-spinner>
+            } @else {
+              <ng-container><mat-icon>auto_awesome</mat-icon> Diseñar con IA</ng-container>
+            }
+          </button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>
 
   <!-- LAYOUT PRINCIPAL -->
   <div class="designer-layout">
-
     <!-- CANVAS -->
     <mat-card class="modeler-card">
       <mat-card-header>
@@ -115,6 +142,7 @@
         @if (modelerListo) {
           <app-bpmn-modeler #modeler
             [xmlInicial]="xmlParaCargar"
+            [nodosIniciales]="nodosParaCargar"
             (elementoDobleClick)="onElementoSeleccionado($event)"
             (xmlChanged)="onXmlChanged($event)">
           </app-bpmn-modeler>
@@ -125,143 +153,237 @@
         }
       </mat-card-content>
     </mat-card>
+  </div>
 
-    <!-- PANEL DE PROPIEDADES -->
-    @if (nodoSeleccionado) {
-      <div class="props-panel">
-
-        <!-- Header con color según tipo -->
-        <div class="props-header" [style.background]="getTipoColor(nodoSeleccionado.tipo)">
-          <div class="props-header-icon">
-            <mat-icon>{{ getTipoIcono(nodoSeleccionado.tipo) }}</mat-icon>
-          </div>
-          <div class="props-header-info">
-            <div class="props-tipo">{{ getTipoLabel(nodoSeleccionado.tipo) }}</div>
-            <div class="props-id">{{ nodoSeleccionado.id }}</div>
-          </div>
-          <button mat-icon-button class="close-btn" (click)="cerrarPanel()" matTooltip="Cerrar">
+  <!-- PANEL INFERIOR (AVANZADO) -->
+  @if (nodoSeleccionado) {
+    <mat-card class="advanced-props-panel mt-4">
+      
+      <!-- Encabezado del Panel -->
+      <div class="props-header" [style.background]="getTipoColor(nodoSeleccionado.tipo)">
+        <div class="d-flex align-items-center gap-2">
+          <mat-icon>{{ getTipoIcono(nodoSeleccionado.tipo) }}</mat-icon>
+          <span class="fs-5 fw-bold">Formulario de Configuración de Tarea y Gestión Documental</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <div class="props-id text-white-50">{{ nodoSeleccionado.id }}</div>
+          <button mat-raised-button color="accent"
+                  [disabled]="propForm.invalid || esSoloLectura(nodoSeleccionado.tipo)"
+                  (click)="guardarPropiedades()">
+            <mat-icon>save</mat-icon> Guardar Configuración
+          </button>
+          <button mat-icon-button class="text-white" (click)="cerrarPanel()" matTooltip="Cerrar Panel">
             <mat-icon>close</mat-icon>
           </button>
         </div>
+      </div>
 
-        <!-- Cuerpo del formulario -->
-        <div class="props-body">
+      <mat-card-content class="pt-3">
+        @if (!esSoloLectura(nodoSeleccionado.tipo)) {
           <form [formGroup]="propForm">
+            <div class="grid-layout">
+              
+              <!-- COLUMNA 1: DATOS DE LA TAREA -->
+              <div>
+                <div class="section-title">
+                  <mat-icon>info</mat-icon> DATOS DE LA TAREA
+                </div>
+                
+                <div class="sub-section">
+                  <div class="sub-title">IDENTIFICACIÓN</div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre de la tarea</mat-label>
+                    <input matInput formControlName="nombre">
+                  </mat-form-field>
+                </div>
 
-            <!-- SECCIÓN: Identificación -->
-            <div class="prop-section">
-              <div class="prop-section-title"><mat-icon>label</mat-icon> Identificación</div>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Nombre del nodo</mat-label>
-                <mat-icon matPrefix>edit</mat-icon>
-                <input matInput formControlName="nombre">
-                <mat-hint>Se actualiza en el diagrama al aplicar</mat-hint>
-              </mat-form-field>
-            </div>
+                <div class="sub-section mt-3">
+                  <div class="sub-title">ASIGNACIÓN</div>
+                  <div class="grid-2-cols">
+                    <div>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Departamento responsable</mat-label>
+                        <mat-select formControlName="departamentoId">
+                          <mat-option value="">Sin asignar</mat-option>
+                          @for (dep of departamentos; track dep.id) {
+                            <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Funcionario asignado</mat-label>
+                        <mat-select formControlName="funcionarioId">
+                          <mat-option value="">Cualquiera del área</mat-option>
+                          @for (f of funcionariosFiltrados; track f.id) {
+                            <mat-option [value]="f.id">{{ f.nombre }} {{ f.apellido }}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Jerarquía mínima</mat-label>
+                      <mat-select formControlName="rolRequerido">
+                        <mat-option value="">Sin restricción de rol</mat-option>
+                        @for (rol of roles; track rol.id) {
+                          <mat-option [value]="rol.id">{{ rol.label }}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
 
-            @if (!esSoloLectura(nodoSeleccionado.tipo)) {
-
-              <!-- SECCIÓN: Asignación -->
-              <div class="prop-section">
-                <div class="prop-section-title"><mat-icon>group</mat-icon> Asignación</div>
-
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Departamento responsable</mat-label>
-                  <mat-icon matPrefix>business</mat-icon>
-                  <mat-select formControlName="departamentoId">
-                    <mat-option value="">Sin asignar</mat-option>
-                    @for (dep of departamentos; track dep.id) {
-                      <mat-option [value]="dep.id">{{ dep.nombre }}</mat-option>
-                    }
-                  </mat-select>
-                  <mat-hint>Área encargada de este paso</mat-hint>
-                </mat-form-field>
-
-                <!-- Funcionario: se filtra por departamento seleccionado -->
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>
-                    {{ propForm.get('departamentoId')?.value
-                       ? 'Funcionario del departamento'
-                       : 'Funcionario asignado' }}
-                  </mat-label>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <mat-select formControlName="funcionarioId">
-                    <mat-option value="">Sin asignar</mat-option>
-                    @for (f of funcionariosFiltrados; track f.id) {
-                      <mat-option [value]="f.id">
-                        <div class="func-option">
-                          <span class="func-nombre">{{ f.nombre }} {{ f.apellido }}</span>
-                          <span class="func-dept">{{ getNombreDepartamento(f.departamentoId ?? '') }}</span>
-                        </div>
-                      </mat-option>
-                    }
-                    @if (funcionariosFiltrados.length === 0) {
-                      <mat-option disabled value="">Sin funcionarios en este departamento</mat-option>
-                    }
-                  </mat-select>
-                  <mat-hint>
-                    {{ propForm.get('departamentoId')?.value
-                       ? (funcionariosFiltrados.length + ' funcionario(s) disponibles')
-                       : 'Selecciona un departamento para filtrar' }}
-                  </mat-hint>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Rol mínimo requerido</mat-label>
-                  <mat-icon matPrefix>badge</mat-icon>
-                  <mat-select formControlName="rolRequerido">
-                    <mat-option value="">Sin restricción de rol</mat-option>
-                    @for (rol of roles; track rol.id) {
-                      <mat-option [value]="rol.id">{{ rol.label }}</mat-option>
-                    }
-                  </mat-select>
-                  <mat-hint>Jerarquía mínima para ejecutar este paso</mat-hint>
-                </mat-form-field>
-              </div>
-
-              <!-- SECCIÓN: Configuración -->
-              <div class="prop-section">
-                <div class="prop-section-title"><mat-icon>settings</mat-icon> Configuración</div>
-
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Tiempo límite (horas)</mat-label>
-                  <mat-icon matPrefix>schedule</mat-icon>
-                  <input matInput type="number" formControlName="tiempoLimiteHoras" min="0">
-                  <mat-hint>0 = sin límite de tiempo</mat-hint>
-                </mat-form-field>
-
-                <div class="evidencia-toggle">
-                  <mat-checkbox formControlName="requiereEvidencia" color="primary">
-                    Requiere evidencia o documento adjunto
-                  </mat-checkbox>
+                <div class="sub-section mt-3">
+                  <div class="sub-title">TIEMPO LÍMITE</div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Tiempo límite (Fecha y Hora)</mat-label>
+                    <mat-icon matPrefix>event</mat-icon>
+                    <input matInput type="datetime-local" formControlName="fechaLimite">
+                  </mat-form-field>
                 </div>
               </div>
 
-            } @else {
-              <div class="readonly-notice">
-                <mat-icon>lock</mat-icon>
-                <span>Este nodo es automático y no tiene propiedades configurables</span>
+              <!-- COLUMNA 2: CONFIGURACIÓN DE LA TAREA (ROLES Y PERMISOS) -->
+              <div>
+                <div class="section-title">
+                  <mat-icon>settings</mat-icon> CONFIGURACIÓN DE LA TAREA
+                </div>
+
+                <div class="sub-section">
+                  <div class="sub-title d-flex justify-content-between align-items-center">
+                    <span><mat-icon class="fs-6 me-1" style="width:16px;height:16px;">security</mat-icon> ROLES Y PERMISOS DE DOCUMENTOS</span>
+                  </div>
+                  
+                  <!-- Placeholder Matrix -->
+                  <div class="permissions-matrix mt-2 mb-3">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="text-start">Rol/Departamento</th>
+                          <th>PDF</th>
+                          <th>Word</th>
+                          <th>Excel</th>
+                          <th>Imagenes</th>
+                          <th>Audio/Video</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-start fw-bold">Actual (Nodo)</td>
+                          <td><mat-icon class="text-success fs-6">visibility</mat-icon> Ver</td>
+                          <td><mat-icon class="text-primary fs-6">edit</mat-icon> Editar</td>
+                          <td><mat-icon class="text-success fs-6">visibility</mat-icon> Ver</td>
+                          <td><mat-icon class="text-success fs-6">visibility</mat-icon> Ver</td>
+                          <td><mat-icon class="text-danger fs-6">block</mat-icon> Sin</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="text-muted mt-2" style="font-size: 11px;">(La matriz completa de todos los roles se implementará en la fase de backend)</div>
+                  </div>
+                  <div class="row mt-3 mb-2">
+                    <div class="col-12">
+                      <mat-form-field appearance="outline" class="w-100 mb-2">
+                        <mat-label>Permiso por defecto para el Creador</mat-label>
+                        <mat-select formControlName="permisoDefectoCreador">
+                          <mat-option value="EDITAR">Editar</mat-option>
+                          <mat-option value="VER">Ver</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nivel de visibilidad global</mat-label>
+                        <mat-select formControlName="nivelVisibilidadGlobal">
+                          <mat-option value="PRIVADO">Privado por departamento</mat-option>
+                          <mat-option value="PUBLICO">Público para todos</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="mt-2">
+                      <mat-checkbox formControlName="bloquearAlCompletar" color="primary">Bloquear nodo al completar</mat-checkbox>
+                    </div>
+                    <div>
+                      <mat-checkbox formControlName="habilitarFirmaDigital" color="primary">Habilitar firma digital</mat-checkbox>
+                    </div>
+                    <div>
+                      <mat-checkbox formControlName="formularioDinamicoHabilitado" color="accent">
+                        Habilitar Formulario Dinámico
+                      </mat-checkbox>
+                    </div>
+                  </div>
+
+                </div>
               </div>
-            }
 
+              <!-- COLUMNA 3: GESTIÓN DOCUMENTAL ADICIONAL -->
+              <div class="col-3">
+                <div class="section-title">
+                  <mat-icon>folder</mat-icon> GESTIÓN DOCUMENTAL ADICIONAL
+                </div>
+                
+                <div class="sub-section">
+                  <div class="grid-2-cols">
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-primary me-1">picture_as_pdf</mat-icon> PDF</div>
+                        <mat-slide-toggle formControlName="permitePdf" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-primary me-1">description</mat-icon> Word</div>
+                        <mat-slide-toggle formControlName="permiteWord" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-primary me-1">table_chart</mat-icon> Excel</div>
+                        <mat-slide-toggle formControlName="permiteExcel" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-primary me-1">image</mat-icon> Imágenes</div>
+                        <mat-slide-toggle formControlName="permiteImagenes" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-secondary me-1">audiotrack</mat-icon> Audio</div>
+                        <mat-slide-toggle formControlName="permiteAudio" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="file-type-card">
+                        <div class="d-flex align-items-center mb-1"><mat-icon class="text-secondary me-1">videocam</mat-icon> Video</div>
+                        <mat-slide-toggle formControlName="permiteVideo" color="primary"><small class="text-muted">Habilitar</small></mat-slide-toggle>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <mat-checkbox formControlName="requiereEvidencia" color="primary">
+                      <strong>Requiere evidencia o adjunto</strong>
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </form>
-
-          <mat-divider></mat-divider>
-
-          <div class="props-actions">
-            <button mat-raised-button color="primary"
-                    [disabled]="propForm.invalid || esSoloLectura(nodoSeleccionado.tipo)"
-                    (click)="guardarPropiedades()">
-              <mat-icon>check</mat-icon> Aplicar
-            </button>
-            <button mat-stroked-button (click)="cerrarPanel()">
-              Cancelar
-            </button>
+        } @else {
+          <div class="alert alert-secondary d-flex align-items-center m-3">
+            <mat-icon class="me-2">lock</mat-icon>
+            Este nodo es de control automático (Inicio/Fin) y no tiene propiedades configurables avanzadas.
           </div>
-        </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
 
-      </div>
-    }
-
-  </div>
 </div>

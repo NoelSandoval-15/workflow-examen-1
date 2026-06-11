@@ -1,71 +1,99 @@
-import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ApiResponse } from '../models/api-response.model';
-import { LoginRequest, LoginResponse } from '../models/auth.model';
+
+export interface AuthUser {
+  id: string;       // identificador único (UUID, GUID, etc.)
+  name: string;     // nombre a mostrar en OnlyOffice
+  nombre?: string;  // alias display
+  username?: string;
+  rolId?: string;   // rol del usuario
+  token?: string;   // JWT (si el backend lo incluye en el objeto)
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private _user$ = new BehaviorSubject<AuthUser | null>(null);
 
-  private readonly TOKEN_KEY = 'wf_token';
-  private readonly USER_KEY  = 'wf_user';
-  private isBrowser: boolean;
+  /** Observable público */
+  readonly user$: Observable<AuthUser | null> = this._user$.asObservable();
 
-  private currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
-  currentUser$ = this.currentUserSubject.asObservable();
-
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    @Inject(PLATFORM_ID) platformId: object
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-    if (this.isBrowser) {
-      this.currentUserSubject.next(this.loadUser());
-    }
+  constructor(private http: HttpClient, private router: Router) {
+    // Restaurar sesión desde localStorage
+    try {
+      const stored = localStorage.getItem('authUser');
+      if (stored) this._user$.next(JSON.parse(stored));
+    } catch { /* ignorar */ }
   }
 
-  login(request: LoginRequest): Observable<ApiResponse<LoginResponse>> {
-    return this.http.post<ApiResponse<LoginResponse>>(
-      `${environment.apiUrl}/auth/login`, request
-    ).pipe(
-      tap(response => {
-        if (response.success && this.isBrowser) {
-          localStorage.setItem(this.TOKEN_KEY, response.data.token);
-          localStorage.setItem(this.USER_KEY, JSON.stringify(response.data));
-          this.currentUserSubject.next(response.data);
-        }
+  /** Login: envía credenciales y actualiza estado */
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/auth/login`, credentials).pipe(
+      map(res => {
+        const data = res.data;
+        return {
+          id: data.userId,
+          name: data.nombre,
+          nombre: data.nombre,
+          username: data.username,
+          rolId: data.rolId,
+          token: data.token
+        } as AuthUser;
+      }),
+      tap((user: AuthUser) => {
+        this._user$.next(user);
+        localStorage.setItem('authUser', JSON.stringify(user));
+        if (user.token) localStorage.setItem('token', user.token);
       })
     );
   }
 
+  /** Logout: limpia estado y llama al backend */
   logout(): void {
-    if (this.isBrowser) {
-      localStorage.removeItem(this.TOKEN_KEY);
-      localStorage.removeItem(this.USER_KEY);
-    }
-    this.currentUserSubject.next(null);
+    this._user$.next(null);
+    localStorage.removeItem('authUser');
+    localStorage.removeItem('token');
+    this.http.post(`${environment.apiUrl}/auth/logout`, {}).subscribe({ error: () => {} });
     this.router.navigate(['/login']);
   }
 
-  getToken(): string | null {
-    return this.isBrowser ? localStorage.getItem(this.TOKEN_KEY) : null;
-  }
-
-  getCurrentUser(): LoginResponse | null {
-    return this.currentUserSubject.value;
-  }
-
+  /** ¿Hay usuario autenticado? */
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    return this._user$.value !== null;
   }
 
-  private loadUser(): LoginResponse | null {
-    if (!this.isBrowser) return null;
-    const raw = localStorage.getItem(this.USER_KEY);
-    return raw ? JSON.parse(raw) : null;
+  /** Devuelve el JWT si existe */
+  getToken(): string | null {
+    return this._user$.value?.token ?? localStorage.getItem('token');
+  }
+
+  /** Alias síncrono para obtener el usuario actual */
+  getCurrentUser(): AuthUser | null {
+    return this._user$.value;
+  }
+
+  /** Getter de conveniencia */
+  get currentUser(): AuthUser | null {
+    return this._user$.value;
+  }
+
+  /**
+   * Carga el usuario autenticado desde localStorage.
+   * Utilizado al iniciar la aplicación.
+   */
+  loadCurrentUser(): void {
+    try {
+      const stored = localStorage.getItem('authUser');
+      if (stored) {
+        this._user$.next(JSON.parse(stored));
+      } else {
+        this._user$.next(null);
+      }
+    } catch {
+      this._user$.next(null);
+    }
   }
 }

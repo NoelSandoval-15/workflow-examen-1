@@ -1,4 +1,4 @@
-.page-header {
+﻿.page-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -46,7 +46,7 @@
 
   .collab-link-box {
     display: flex; align-items: center; gap: 4px;
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
+    background: var(--bg-card); border: 1px solid #e2e8f0; border-radius: 8px;
     padding: 6px 8px 6px 12px; margin-bottom: 8px;
 
     .collab-link-text {

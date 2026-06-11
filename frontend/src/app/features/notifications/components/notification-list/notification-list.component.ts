@@ -53,6 +53,26 @@ export class NotificationListComponent implements OnInit {
     });
   }
 
+  // Paginación
+  pageSize = 10;
+  currentPage = 0;
+
+  get paginatedNotificaciones(): Notification[] {
+    const startIndex = this.currentPage * this.pageSize;
+    return this.notificaciones.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.notificaciones.length / this.pageSize);
+  }
+
+  cambiarPagina(incremento: number): void {
+    const nuevaPagina = this.currentPage + incremento;
+    if (nuevaPagina >= 0 && nuevaPagina < this.totalPages) {
+      this.currentPage = nuevaPagina;
+    }
+  }
+
   getIcono(tipo: string): string {
     const map: Record<string, string> = {
       'WORKFLOW_AVANCE': 'arrow_forward',

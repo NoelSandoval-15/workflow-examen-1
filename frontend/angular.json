@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "nombre-de-tu-app": {
+    "flujos-de-trabajo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "nombre-de-tu-app:build:production"
+              "buildTarget": "flujos-de-trabajo:build:production"
             },
             "development": {
-              "buildTarget": "nombre-de-tu-app:build:development"
+              "buildTarget": "flujos-de-trabajo:build:development"
             }
           },
           "defaultConfiguration": "development"

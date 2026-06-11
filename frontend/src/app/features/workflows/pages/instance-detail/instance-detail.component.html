@@ -72,6 +72,16 @@
             <mat-card-title><mat-icon>touch_app</mat-icon> Acciones</mat-card-title>
           </mat-card-header>
           <mat-card-content>
+            @if (tareaActual?.formularioDinamicoHabilitado) {
+              <app-dynamic-form
+                [tareaId]="tareaActual!.id"
+                [camposIniciales]="tareaActual!.datosFormulario ?? []"
+                [soloLectura]="false"
+                (formularioGuardado)="tareaActual!.datosFormulario = $event">
+              </app-dynamic-form>
+              <mat-divider style="margin: 16px 0;"></mat-divider>
+            }
+
             @if (!mostrarFormAvanzar) {
               <div class="action-buttons">
                 <button mat-raised-button color="primary" (click)="mostrarFormAvanzar = true">

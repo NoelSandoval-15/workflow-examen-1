@@ -1,0 +1,159 @@
+<div class="ia-container">
+  <div class="ia-header">
+    <div class="header-title-box">
+      <mat-icon class="brain-icon">psychology</mat-icon>
+      <div class="header-text">
+        <h2>Asistente de Inteligencia Artificial</h2>
+        <p class="subtitle">Generador de reportes inteligentes basado en Deep Learning (NLP)</p>
+      </div>
+    </div>
+    <div class="status-box">
+      <span class="status-indicator" [class.connected]="fastApiStatus"></span>
+      <span class="status-text">{{ fastApiStatus ? 'Conectado a FastAPI' : 'Desconectado' }}</span>
+    </div>
+  </div>
+
+  <div class="chat-area" #chatScrollContainer>
+    <div class="message-list">
+      @for (msg of mensajes; track msg) {
+        <div class="msg-wrapper" [class.usuario]="msg.emisor === 'usuario'" [class.ia]="msg.emisor === 'ia'">
+          <div class="avatar">
+            @if (msg.emisor === 'ia') {
+              <mat-icon>smart_toy</mat-icon>
+            } @else {
+              <mat-icon>person</mat-icon>
+            }
+          </div>
+          
+          <div class="message-bubble">
+            <div class="bubble-header">
+              <span class="sender-name">{{ msg.emisor === 'ia' ? 'Asistente IA' : 'Usuario' }}</span>
+            </div>
+            
+            <p class="message-text">{{ msg.texto }}</p>
+            
+            <!-- Reporte Físico para descargar (PDF, Excel, Word) -->
+            @if (msg.reporte) {
+              <div class="report-box">
+                <mat-icon class="file-icon">
+                  {{ msg.reporte.tipo === 'excel' ? 'table_view' : (msg.reporte.tipo === 'word' ? 'article' : 'picture_as_pdf') }}
+                </mat-icon>
+                <div class="report-info">
+                  <span class="report-name">{{ msg.reporte.nombre }}</span>
+                  <span class="report-type">{{ msg.reporte.tipo | uppercase }} Report</span>
+                </div>
+                <button mat-flat-button color="primary" class="btn-download" (click)="descargarReporte(msg.reporte)">
+                  <mat-icon>download</mat-icon> Descargar
+                </button>
+              </div>
+            }
+
+            <!-- Previsualización de datos en pantalla -->
+            @if (msg.datos && msg.datos.length > 0) {
+              <div class="preview-box">
+                <button mat-stroked-button color="accent" class="btn-preview" (click)="toggleVerTabla(msg)">
+                  <mat-icon>{{ msg.mostrarTabla ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  {{ msg.mostrarTabla ? 'Ocultar datos' : 'Ver ' + msg.datos.length + ' registros en pantalla' }}
+                </button>
+                
+                @if (msg.mostrarTabla) {
+                  <div class="table-container mat-elevation-z2">
+                    <table class="custom-table">
+                      <thead>
+                        <tr>
+                          @for (key of obtenerLlaves(msg.datos[0]); track key) {
+                            <th>{{ key }}</th>
+                          }
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (row of msg.datos; track row) {
+                          <tr>
+                            @for (key of obtenerLlaves(row); track key) {
+                              <td>
+                                @if (esBoolean(row[key])) {
+                                  {{ row[key] ? 'Sí' : 'No' }}
+                                } @else {
+                                  {{ row[key] }}
+                                }
+                              </td>
+                            }
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                }
+              </div>
+            }
+
+            <!-- Metadata de confianza del modelo de NLP (Academic Debugger) -->
+            @if (msg.metadata_ia) {
+              <div class="nlp-metadata">
+                <div class="meta-title">
+                  <mat-icon class="meta-icon">analytics</mat-icon>
+                  <span>Análisis semántico de Deep Learning</span>
+                </div>
+                <div class="meta-metrics">
+                  <span class="meta-chip">
+                    <strong>Colección:</strong> {{ msg.metadata_ia.categoria_str }} ({{ msg.metadata_ia.categoria * 100 | number:'1.0-0' }}%)
+                  </span>
+                  <span class="meta-chip">
+                    <strong>Filtro:</strong> {{ msg.metadata_ia.criterio_str }} ({{ msg.metadata_ia.criterio * 100 | number:'1.0-0' }}%)
+                  </span>
+                  <span class="meta-chip">
+                    <strong>Salida:</strong> {{ msg.metadata_ia.formato_str }} ({{ msg.metadata_ia.formato * 100 | number:'1.0-0' }}%)
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (cargando) {
+        <div class="msg-wrapper ia">
+          <div class="avatar">
+            <mat-icon>smart_toy</mat-icon>
+          </div>
+          <div class="message-bubble thinking-bubble">
+            <div class="typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Sugerencias rápidas (Chips) -->
+  <div class="sugerencias-chips">
+    <span class="sug-label">Sugerencias rápidas:</span>
+    <div class="chips-container">
+      @for (chip of sugerencias; track chip) {
+        <button class="chip-btn" (click)="usarSugerencia(chip)">
+          {{ chip }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Input de Chat -->
+  <div class="input-area">
+    <button class="btn-action btn-mic" [class.listening]="escuchando" (click)="activarMicrofono()" [title]="escuchando ? 'Escuchando... Haz clic para detener' : 'Activar micrófono'">
+      <mat-icon>{{ escuchando ? 'mic' : 'mic_none' }}</mat-icon>
+    </button>
+    
+    <input 
+      type="text" 
+      [(ngModel)]="nuevoMensaje" 
+      (keyup.enter)="enviarConsulta()"
+      placeholder="Escribe tu solicitud (ej. 'Dame los trámites atrasados en PDF')..."
+      [disabled]="cargando"
+    />
+    
+    <button mat-flat-button color="primary" class="btn-send-action" (click)="enviarConsulta()" [disabled]="!nuevoMensaje.trim() || cargando">
+      <mat-icon>send</mat-icon> Enviar
+    </button>
+  </div>
+</div>

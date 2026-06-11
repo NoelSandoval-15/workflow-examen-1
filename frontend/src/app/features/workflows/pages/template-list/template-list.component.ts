@@ -186,6 +186,11 @@ export class TemplateListComponent implements OnInit {
 
   // ─────────────────────────────────────────────────────────────
 
+  analizarCuellosBotella(template: WorkflowTemplate, event: Event): void {
+    event.stopPropagation();
+    this.router.navigate(['/dashboard'], { queryParams: { templateId: template.id } });
+  }
+
   crearFlujo(): void { this.router.navigate(['/flujos/nuevo']); }
 
   getEstadoColor(estado: string): string {

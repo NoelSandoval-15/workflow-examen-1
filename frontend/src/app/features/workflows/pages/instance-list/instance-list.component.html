@@ -8,7 +8,7 @@
   </div>
 } @else {
   <mat-card>
-    <table mat-table [dataSource]="instancias" class="full-width">
+    <table mat-table [dataSource]="paginatedInstancias" class="full-width">
 
       <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef>Código</th>
@@ -56,6 +56,27 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"
           class="clickable-row" (click)="verDetalle(row.id)"></tr>
     </table>
+
+    <!-- Controles de Paginación -->
+    @if (totalPages > 1) {
+      <div class="pagination-controls">
+        <button mat-icon-button 
+                [disabled]="currentPage === 1" 
+                (click)="cambiarPagina(-1)">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        
+        <span class="page-info">
+          Página {{ currentPage }} de {{ totalPages }}
+        </span>
+
+        <button mat-icon-button 
+                [disabled]="currentPage === totalPages" 
+                (click)="cambiarPagina(1)">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    }
 
     @if (instancias.length === 0) {
       <div class="empty-state">

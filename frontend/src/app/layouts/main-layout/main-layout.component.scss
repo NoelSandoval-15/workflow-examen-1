@@ -17,6 +17,7 @@
 .page-content {
   padding: 24px;
   flex: 1;
-  background: #163c8c;
+  background: var(--bg-page);
   min-height: calc(100vh - 64px);
+  transition: background-color 0.3s ease;
 }

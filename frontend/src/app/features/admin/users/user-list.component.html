@@ -110,7 +110,7 @@
 
       <!-- Filas de usuarios -->
       <mat-card class="grupo-card">
-        @for (u of grupo.usuarios; track u.id; let last = $last) {
+        @for (u of getPaginatedUsuarios(grupo); track u.id; let last = $last) {
           <div class="user-row">
             <div class="user-avatar" [style.background]="grupo.color + '22'">
               <mat-icon [style.color]="grupo.color">account_circle</mat-icon>
@@ -139,6 +139,27 @@
           @if (!last) { <mat-divider></mat-divider> }
         }
       </mat-card>
+
+      <!-- Controles de Paginación -->
+      @if (getTotalPages(grupo) > 1) {
+        <div class="pagination-controls">
+          <button mat-icon-button 
+                  [disabled]="getCurrentPage(grupo.id) === 1" 
+                  (click)="cambiarPagina(grupo.id, -1, getTotalPages(grupo))">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          
+          <span class="page-info">
+            Página {{ getCurrentPage(grupo.id) }} de {{ getTotalPages(grupo) }}
+          </span>
+
+          <button mat-icon-button 
+                  [disabled]="getCurrentPage(grupo.id) === getTotalPages(grupo)" 
+                  (click)="cambiarPagina(grupo.id, 1, getTotalPages(grupo))">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      }
 
     </div>
   }

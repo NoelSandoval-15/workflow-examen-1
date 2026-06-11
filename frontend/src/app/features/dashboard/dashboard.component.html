@@ -6,8 +6,9 @@
   @if (loading) {
     <div class="loading-center"><mat-spinner diameter="48"></mat-spinner></div>
   } @else {
-    <div class="stats-grid">
-      @for (stat of stats; track stat.label) {
+    <div class="top-row-layout">
+      <div class="stats-grid">
+        @for (stat of stats; track stat.label) {
         <mat-card class="stat-card" [routerLink]="stat.route">
           <mat-card-content>
             <div class="stat-icon" [style.background]="stat.color + '20'">
@@ -47,6 +48,123 @@
         }
         @if (recentInstancias.length === 0) {
           <p class="empty">No hay trámites registrados aún</p>
+        }
+      </mat-card-content>
+    </mat-card>
+    </div>
+
+    <!-- SECCIÓN CUELLOS DE BOTELLA CON IA (CU15) -->
+    <mat-card class="bottleneck-card">
+      <mat-card-header class="bottleneck-header">
+        <mat-card-title>
+          <mat-icon color="primary" class="header-icon">psychology</mat-icon>
+          Análisis de Cuellos de Botella por IA
+        </mat-card-title>
+        <span class="spacer"></span>
+        <mat-form-field appearance="outline" class="select-workflow">
+          <mat-label>Filtrar por Flujo de Trabajo</mat-label>
+          <mat-select [(value)]="selectedTemplateId" (selectionChange)="onTemplateChange()">
+            <mat-option value="">Todos los Flujos</mat-option>
+            @for (t of templates; track t.id) {
+              <mat-option [value]="t.id">{{ t.nombre }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="select-ia-engine" style="margin-left: 16px; width: 280px;">
+          <mat-label>Motor de Análisis</mat-label>
+          <mat-select [(value)]="selectedEngine">
+            <mat-option value="cloud">Diagnóstico Inteligente en la Nube</mat-option>
+            <mat-option value="local">Análisis Predictivo Local</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button color="accent" style="margin-left: 16px; height: 50px;" [disabled]="loadingIA" (click)="consultarAnalisisIA()">
+          <mat-icon>search</mat-icon>
+          Detectar ahora
+        </button>
+      </mat-card-header>
+
+      <mat-card-content>
+        @if (loadingIA) {
+          <div class="ia-loading">
+            <mat-spinner diameter="36"></mat-spinner>
+            <p>{{ selectedEngine === 'cloud' ? 'Generando diagnóstico inteligente en la nube...' : 'Ejecutando análisis predictivo local en tiempo real...' }}</p>
+          </div>
+        } @else if (errorIA) {
+          <div class="ia-error">
+            <mat-icon>warning_amber</mat-icon>
+            <p>{{ errorIA }}</p>
+          </div>
+        } @else if (iaReport) {
+          <div class="bottleneck-grid">
+            <!-- Columna Izquierda: Alertas y Diagnóstico IA -->
+            <div class="ia-text-panel" [style.border-left-color]="getAlertaColor(iaReport.analisis_ia?.nivel_alerta_global)">
+              <div class="alert-status">
+                <span>Severidad General del Flujo:</span>
+                <span class="status-badge" [style.background-color]="getAlertaColor(iaReport.analisis_ia?.nivel_alerta_global)">
+                  {{ iaReport.analisis_ia?.nivel_alerta_global || 'SALUDABLE' }}
+                </span>
+              </div>
+
+              <div class="recommendations-box">
+                <h4>Recomendaciones de la IA:</h4>
+                @if (iaReport.analisis_ia?.cuellos_botella?.length > 0) {
+                  @for (c of iaReport.analisis_ia.cuellos_botella; track c.nodo) {
+                    <div class="rec-card">
+                      <div class="rec-header">
+                        <span class="rec-node">{{ c.nodo }}</span>
+                        <span class="rec-dept">{{ c.departamento }}</span>
+                        <span class="badge" [ngClass]="getSeveridadBadgeClass(c.severidad)">{{ c.severidad }}</span>
+                      </div>
+                      <p class="rec-desc"><strong>Problema:</strong> {{ c.descripcion }}</p>
+                      <p class="rec-sug"><strong>Sugerencia:</strong> {{ c.sugerencia }}</p>
+                    </div>
+                  }
+                } @else {
+                  <p class="no-alerts">✅ La IA no detectó cuellos de botella críticos en este flujo de trabajo.</p>
+                }
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Gráficos -->
+            <div class="charts-panel">
+              <!-- Fila Superior: Los 3 círculos -->
+              <div class="donuts-row">
+                <div class="chart-box-donut">
+                  <h5>Eficiencia de Tareas</h5>
+                  <div class="canvas-wrapper">
+                    <canvas id="chartDonaEficiencia"></canvas>
+                  </div>
+                </div>
+                <div class="chart-box-donut">
+                  <h5>Atrasos por Depto.</h5>
+                  <div class="canvas-wrapper">
+                    <canvas id="chartDonaDeptos"></canvas>
+                  </div>
+                </div>
+                <div class="chart-box-donut">
+                  <h5>Nivel de Riesgo</h5>
+                  <div class="canvas-wrapper">
+                    <canvas id="chartSeveridad"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fila Inferior: Tiempos -->
+              <div class="bar-chart-box">
+                <h5>Comparación de Tiempos por Nodo (Límite vs Real)</h5>
+                <div class="canvas-wrapper-bar">
+                  <canvas id="chartBarras"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="empty-ia" style="text-align: center; padding: 48px; color: #64748b; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <mat-icon style="font-size: 64px; width: 64px; height: 64px; margin-bottom: 16px; color: #94a3b8;">auto_awesome</mat-icon>
+            <p style="font-size: 16px;">Haz clic en el botón <strong>"Detectar ahora"</strong> para que el motor de IA seleccionado analice el rendimiento y busque cuellos de botella.</p>
+          </div>
         }
       </mat-card-content>
     </mat-card>

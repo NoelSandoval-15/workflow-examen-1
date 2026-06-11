@@ -26,6 +26,26 @@ export class InstanceListComponent implements OnInit {
   loading = true;
   displayedColumns = ['codigo', 'nodoActual', 'estadoActual', 'prioridad', 'createdAt', 'acciones'];
 
+  // Paginación
+  pageSize = 10;
+  currentPage = 1;
+
+  get paginatedInstancias(): ProcesoInstancia[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.instancias.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.instancias.length / this.pageSize);
+  }
+
+  cambiarPagina(delta: number): void {
+    const newPage = this.currentPage + delta;
+    if (newPage >= 1 && newPage <= this.totalPages) {
+      this.currentPage = newPage;
+    }
+  }
+
   constructor(
     private instanceService: WorkflowInstanceService,
     private router: Router,

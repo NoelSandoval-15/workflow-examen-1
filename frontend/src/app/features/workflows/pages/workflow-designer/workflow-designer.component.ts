@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
@@ -26,10 +28,10 @@ import { WorkflowTemplate, WorkflowNode, WorkflowEdge } from '../../models/workf
   selector: 'app-workflow-designer',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule,
+    CommonModule, ReactiveFormsModule, FormsModule, HttpClientModule,
     MatCardModule, MatButtonModule, MatIconModule,
     MatFormFieldModule, MatInputModule, MatSelectModule,
-    MatCheckboxModule, MatSnackBarModule, MatProgressSpinnerModule,
+    MatCheckboxModule, MatSlideToggleModule, MatSnackBarModule, MatProgressSpinnerModule,
     MatDividerModule, MatTooltipModule, BpmnModelerComponent
   ],
   templateUrl: './workflow-designer.component.html',
@@ -52,11 +54,18 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
 
   modelerListo = false;
   xmlParaCargar?: string;
+  nodosParaCargar?: WorkflowNode[];
 
   // Panel de compartir
   mostrarPanelCompartir = false;
   linkColaboracion: CollaborationLinkDTO | null = null;
   cargandoLink = false;
+
+  // IA y Voz
+  aiPrompt = '';
+  cargandoIA = false;
+  escuchandoIA = false;
+  private recognition: any;
 
   // ── Colaboración en tiempo real ──────────────────────────────
   /** ID único por sesión de navegador — identifica al cliente en la sala */
@@ -100,7 +109,9 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient,
+    private ngZone: NgZone
   ) {
     this.form = this.fb.group({
       nombre:        ['', Validators.required],
@@ -111,9 +122,58 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
       departamentoId:    [''],
       rolRequerido:      [''],
       funcionarioId:     [''],
-      tiempoLimiteHoras: [24],
-      requiereEvidencia: [false]
+      fechaLimite:       [''],
+      requiereEvidencia: [false],
+      formularioDinamicoHabilitado: [false],
+      permisoDefectoCreador: ['EDITAR'],
+      nivelVisibilidadGlobal: ['PRIVADO'],
+      bloquearAlCompletar: [false],
+      habilitarFirmaDigital: [false],
+      permitePdf: [true],
+      permiteWord: [true],
+      permiteExcel: [true],
+      permiteImagenes: [true],
+      permiteAudio: [false],
+      permiteVideo: [false],
+      matrizPermisosDocumentos: [[]]
     });
+
+    // Inicializar reconocimiento de voz si está disponible en el navegador
+    const { webkitSpeechRecognition, SpeechRecognition } = window as any;
+    const SpeechRec = SpeechRecognition || webkitSpeechRecognition;
+    if (SpeechRec) {
+      this.recognition = new SpeechRec();
+      this.recognition.continuous = false;
+      this.recognition.lang = 'es-BO';
+      this.recognition.interimResults = false;
+      this.recognition.onresult = (event: any) => {
+        this.ngZone.run(() => {
+          setTimeout(() => {
+            this.aiPrompt = event.results[0][0].transcript;
+            this.escuchandoIA = false;
+            this.cdr.detectChanges();
+            this.generarFlujoIA();
+          }, 0);
+        });
+      };
+      this.recognition.onerror = (err: any) => {
+        console.error('Error de reconocimiento de voz', err);
+        this.ngZone.run(() => {
+          setTimeout(() => {
+            this.escuchandoIA = false;
+            this.cdr.detectChanges();
+          }, 0);
+        });
+      };
+      this.recognition.onend = () => {
+        this.ngZone.run(() => {
+          setTimeout(() => {
+            this.escuchandoIA = false;
+            this.cdr.detectChanges();
+          }, 0);
+        });
+      };
+    }
   }
 
   ngOnInit(): void {
@@ -144,6 +204,7 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
             tipoSolicitud: session.tipoSolicitud ?? ''
           });
           this.xmlParaCargar = session.bpmnXml ?? this.generarXmlDesdeNodos(session);
+          this.nodosParaCargar = session.nodos;
           this.conectarSalaRealtime(session.templateId);
           setTimeout(() => { this.modelerListo = true; this.cdr.detectChanges(); }, 0);
         },
@@ -166,6 +227,7 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
       next: (t: WorkflowTemplate) => {
         this.form.patchValue({ nombre: t.nombre, tipoSolicitud: t.tipoSolicitud ?? '' });
         this.xmlParaCargar = t.bpmnXml?.trim() ? t.bpmnXml : this.generarXmlDesdeTemplate(t);
+        this.nodosParaCargar = t.nodos;
         this.conectarSalaRealtime(t.id);
         setTimeout(() => { this.modelerListo = true; this.cdr.detectChanges(); }, 0);
       },
@@ -283,15 +345,47 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
       departamentoId:    nodo.departamentoId    ?? '',
       rolRequerido:      nodo.rolRequerido      ?? '',
       funcionarioId:     nodo.funcionarioId     ?? '',
-      tiempoLimiteHoras: nodo.tiempoLimiteHoras ?? 24,
-      requiereEvidencia: nodo.requiereEvidencia ?? false
+      fechaLimite:       nodo.fechaLimite       ?? '',
+      requiereEvidencia: nodo.requiereEvidencia ?? false,
+      formularioDinamicoHabilitado: nodo.formularioDinamicoHabilitado ?? false,
+      permisoDefectoCreador: nodo.permisoDefectoCreador ?? 'EDITAR',
+      nivelVisibilidadGlobal: nodo.nivelVisibilidadGlobal ?? 'PRIVADO',
+      bloquearAlCompletar: nodo.bloquearAlCompletar ?? false,
+      habilitarFirmaDigital: nodo.habilitarFirmaDigital ?? false,
+      permitePdf: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('PDF') : true,
+      permiteWord: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('WORD') : true,
+      permiteExcel: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('EXCEL') : true,
+      permiteImagenes: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('IMG') : true,
+      permiteAudio: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('AUDIO') : false,
+      permiteVideo: nodo.formatosPermitidos ? nodo.formatosPermitidos.includes('VIDEO') : false,
+      matrizPermisosDocumentos: nodo.matrizPermisosDocumentos ?? []
     });
     this.cdr.detectChanges();
   }
 
   guardarPropiedades(): void {
     if (!this.nodoSeleccionado || this.propForm.invalid) return;
-    const datos: NodoSeleccionado = { ...this.nodoSeleccionado, ...this.propForm.value };
+    
+    // Convert boolean toggles back to string list
+    const fVals = this.propForm.value;
+    const formatos: string[] = [];
+    if (fVals.permitePdf) formatos.push('PDF');
+    if (fVals.permiteWord) formatos.push('WORD');
+    if (fVals.permiteExcel) formatos.push('EXCEL');
+    if (fVals.permiteImagenes) formatos.push('IMG');
+    if (fVals.permiteAudio) formatos.push('AUDIO');
+    if (fVals.permiteVideo) formatos.push('VIDEO');
+
+    const datosFormato = { ...fVals, formatosPermitidos: formatos };
+    // Remove temporary boolean fields so they don't pollute the model
+    delete datosFormato.permitePdf;
+    delete datosFormato.permiteWord;
+    delete datosFormato.permiteExcel;
+    delete datosFormato.permiteImagenes;
+    delete datosFormato.permiteAudio;
+    delete datosFormato.permiteVideo;
+
+    const datos: NodoSeleccionado = { ...this.nodoSeleccionado, ...datosFormato };
     this.modelerRef.actualizarNodo(datos.id, datos);
     this.nodoSeleccionado = datos;
     this.snackBar.open('Propiedades aplicadas', '', { duration: 1500 });
@@ -340,6 +434,138 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
   }
 
   volver(): void { this.router.navigate(['/flujos']); }
+
+  toggleMicrofonoIA(): void {
+    if (!this.recognition) {
+      this.snackBar.open('El reconocimiento de voz no está soportado en este navegador.', 'OK', { duration: 3000 });
+      return;
+    }
+
+    if (this.escuchandoIA) {
+      this.recognition.stop();
+      this.escuchandoIA = false;
+      this.cdr.detectChanges();
+    } else {
+      this.aiPrompt = '';
+      this.escuchandoIA = true;
+      try {
+        this.recognition.start();
+        this.snackBar.open('🎙️ Escuchando... habla ahora', '', { duration: 2000 });
+        this.cdr.detectChanges();
+      } catch (e) {
+        console.error(e);
+        this.escuchandoIA = false;
+        this.cdr.detectChanges();
+      }
+    }
+  }
+
+  generarFlujoIA(): void {
+    if (!this.aiPrompt || !this.aiPrompt.trim()) {
+      this.snackBar.open('Por favor ingresa o dicta una instrucción primero.', 'OK', { duration: 3000 });
+      return;
+    }
+
+    // Extraer datos actuales del modeler
+    const { nodos, conexiones } = this.modelerRef ? this.modelerRef.extractData() : { nodos: [], conexiones: [] };
+
+    // Mapear nodos del frontend (fechaLimite) a tiempoLimiteHoras para el backend
+    const mappedNodosParaBackend = nodos.map((n: any) => {
+      let horas: number | null = null;
+      if (n.fechaLimite) {
+        const diffMs = new Date(n.fechaLimite).getTime() - new Date().getTime();
+        if (diffMs > 0) {
+          horas = Math.round(diffMs / (1000 * 60 * 60));
+        }
+      }
+      return {
+        id: n.id,
+        nombre: n.nombre,
+        tipo: n.tipo,
+        departamentoId: n.departamentoId || null,
+        tiempoLimiteHoras: horas,
+        orden: n.orden
+      };
+    });
+
+    const payload = {
+      prompt: this.aiPrompt,
+      nodos: mappedNodosParaBackend,
+      conexiones: conexiones,
+      nombre_actual: this.form.get('nombre')?.value || '',
+      tipo_solicitud_actual: this.form.get('tipoSolicitud')?.value || ''
+    };
+
+    this.cargandoIA = true;
+    this.cdr.detectChanges();
+    this.snackBar.open('🤖 Procesando cambios con Gemini...', '', { duration: 2500 });
+
+    this.http.post<any>('http://localhost:8000/api/ia/workflow/generate', payload)
+      .subscribe({
+        next: (res) => {
+          this.cargandoIA = false;
+          this.cdr.detectChanges();
+          
+          if (!res || !res.nodos || res.nodos.length === 0) {
+            this.snackBar.open('La IA no pudo estructurar un flujo válido. Intenta con otra frase.', 'OK', { duration: 4000 });
+            return;
+          }
+
+          // Rellenar formulario principal
+          this.form.patchValue({
+            nombre: res.nombre_flujo || 'Flujo con IA',
+            tipoSolicitud: res.tipo_solicitud || 'SOLICITUD_IA'
+          });
+
+          // Mapear tiempoLimiteHoras a fechaLimite
+          const mappedNodos = res.nodos.map((n: any) => {
+            let fechaLim: string | undefined = undefined;
+            if (n.tiempoLimiteHoras) {
+              const d = new Date();
+              d.setHours(d.getHours() + n.tiempoLimiteHoras);
+              fechaLim = d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0') + 'T' +
+                String(d.getHours()).padStart(2, '0') + ':' +
+                String(d.getMinutes()).padStart(2, '0');
+            }
+            return {
+              id: n.id,
+              nombre: n.nombre,
+              tipo: n.tipo,
+              departamentoId: n.departamentoId,
+              fechaLimite: fechaLim,
+              orden: n.orden
+            };
+          });
+
+          // Generar XML desde los nodos y conexiones
+          const xml = this.generarXmlDesdeNodos({
+            nodos: mappedNodos,
+            conexiones: res.conexiones,
+            templateId: this.templateId || 'new'
+          });
+
+          // Reiniciar el modeler para renderizar
+          this.xmlParaCargar = xml;
+          this.nodosParaCargar = mappedNodos;
+          this.modelerListo = false;
+          this.cdr.detectChanges();
+
+          setTimeout(() => {
+            this.modelerListo = true;
+            this.cdr.detectChanges();
+            this.snackBar.open('✨ ¡Diagrama actualizado con éxito!', 'OK', { duration: 3000 });
+          }, 50);
+        },
+        error: (err) => {
+          this.cargandoIA = false;
+          this.cdr.detectChanges();
+          console.error(err);
+          this.snackBar.open('Error al conectar con el servicio de IA. Verifica que esté activo en el puerto 8000.', 'OK', { duration: 4000 });
+        }
+      });
+  }
 
   // ── Colaboración en tiempo real ───────────────────────────────
 
@@ -442,23 +668,47 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
 
     const STEP = 180, SX = 100, CY = 220;
     const sorted = [...t.nodos].sort((a,b) => (a.orden??0)-(b.orden??0));
-    const shapes = sorted.map((n,i) => {
+    
+    const posMap = new Map<string, { x: number; y: number; w: number; h: number }>();
+    sorted.forEach((n, i) => {
       const w = (n.tipo==='INICIO'||n.tipo==='FIN')?36:(n.tipo==='DECISION'||n.tipo==='PARALELO')?50:120;
       const h = (n.tipo==='INICIO'||n.tipo==='FIN')?36:(n.tipo==='DECISION'||n.tipo==='PARALELO')?50:80;
-      return `<bpmndi:BPMNShape bpmnElement="${n.id}"><dc:Bounds x="${SX+i*STEP}" y="${CY-h/2}" width="${w}" height="${h}"/></bpmndi:BPMNShape>`;
-    }).join('');
+      posMap.set(n.id, { x: SX + i * STEP, y: CY - h / 2, w, h });
+    });
+
+    const shapes = sorted.map(n => {
+      const p = posMap.get(n.id)!;
+      return `<bpmndi:BPMNShape id="${n.id}_di" bpmnElement="${n.id}"><dc:Bounds x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}"/></bpmndi:BPMNShape>`;
+    }).join('\n      ');
+
+    const edges = t.conexiones.map(e => {
+      const src = posMap.get(e.nodoOrigenId);
+      const tgt = posMap.get(e.nodoDestinoId);
+      const sx = src ? src.x + src.w     : 100;
+      const sy = src ? src.y + src.h / 2 : 100;
+      const tx = tgt ? tgt.x             : 200;
+      const ty = tgt ? tgt.y + tgt.h / 2 : 100;
+      return `<bpmndi:BPMNEdge id="${e.id}_di" bpmnElement="${e.id}">
+          <di:waypoint x="${sx}" y="${sy}"/>
+          <di:waypoint x="${tx}" y="${ty}"/>
+        </bpmndi:BPMNEdge>`;
+    }).join('\n      ');
 
     return `<?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
   targetNamespace="http://workflow">
   <process id="proc_${t.id}" isExecutable="false">
     ${t.nodos.map(nodoBpmn).join('\n    ')}
     ${t.conexiones.map(edgeBpmn).join('\n    ')}
   </process>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="proc_${t.id}">${shapes}</bpmndi:BPMNPlane>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_${t.id}">
+    <bpmndi:BPMNPlane id="BPMNPlane_${t.id}" bpmnElement="proc_${t.id}">
+      ${shapes}
+      ${edges}
+    </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </definitions>`;
   }

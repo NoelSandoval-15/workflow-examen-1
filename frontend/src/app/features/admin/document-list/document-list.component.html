@@ -1,0 +1,203 @@
+<div class="document-management-page">
+  <!-- Cabecera Azul Premium (idéntica al prototipo) -->
+  <div class="blue-banner">
+    <div class="banner-content">
+      <h1 class="page-title">GESTIÓN DOCUMENTAL</h1>
+      <div class="breadcrumbs">
+        <span>Home</span> <mat-icon class="chevron">chevron_right</mat-icon> <span class="active">Gestión Documental</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <!-- Tarjetas de Estadísticas (idénticas al prototipo) -->
+    <div class="stats-cards-container">
+      <div class="stat-card" (click)="onFilterChange('All')">
+        <div class="stat-icon-wrapper blue-bg">
+          <mat-icon class="stat-icon">description</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ totalDocsCount }}</span>
+          <span class="stat-label">Total Documentos</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon-wrapper green-bg">
+          <mat-icon class="stat-icon">insert_drive_file</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ recentDocsCount }}</span>
+          <span class="stat-label">Documentos Recientes</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon-wrapper red-bg">
+          <mat-icon class="stat-icon">folder</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ uniqueTypesCount }}</span>
+          <span class="stat-label">Tipos de Documento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Filtros y Búsqueda (idéntica al prototipo) -->
+    <div class="filter-search-row">
+      <div class="filter-group">
+        <span class="filter-label">Filtra</span>
+        <div class="custom-select-wrapper">
+          <select class="filter-select" [ngModel]="selectedFilter" (ngModelChange)="onFilterChange($event)">
+            <option value="All">All</option>
+            <option value="PDF">PDF</option>
+            <option value="Word">Word</option>
+            <option value="Excel">Excel</option>
+            <option value="Imagen">Imagen</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="upload-btn-container">
+        <label for="fileUpload" class="btn-upload">
+          <mat-icon class="upload-btn-icon">cloud_upload</mat-icon>
+          <span>Subir Archivo</span>
+        </label>
+        <input type="file" id="fileUpload" (change)="onFileSelected($event)" accept="*" hidden />
+      </div>
+
+      <div class="search-group">
+        <div class="search-input-wrapper">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input type="text" placeholder="Buscar..." class="search-input" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout Principal: Master-Detail -->
+    <div class="master-detail-container">
+      
+      <!-- Columna Principal (Izquierda): Documentos del grupo seleccionado -->
+      <div class="main-content">
+        @if (selectedGroup) {
+          <div class="table-card group-card">
+            <div class="group-header" style="cursor: default;">
+              <div class="group-title">
+                <mat-icon>group</mat-icon>
+                Subido por: {{ selectedGroup.uploader }} ({{ selectedGroup.docs.length }} Documentos)
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Trámite Asociado</th>
+                    <th>Fecha</th>
+                    <th class="actions-header">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (doc of selectedGroup.docs; track doc.id) {
+                    <tr>
+                      <td class="filename-cell">
+                        <mat-icon class="file-type-icon" [style.color]="getFileIconColor(doc.extension)">{{ getFileIcon(doc.extension) }}</mat-icon>
+                        <span class="filename-text" [title]="doc.nombreArchivo">{{ doc.nombreArchivo }}</span>
+                      </td>
+                      <td>{{ doc.extension.toUpperCase() }}</td>
+                      <td class="tramite-cell">{{ doc.procesoInstanciaId || '-' }}</td>
+                      <td>{{ formatDate(doc.createdAt) }}</td>
+                      <td class="actions-cell">
+                        <button class="btn-action-icon" title="Visualizar" (click)="visualizar(doc)">
+                          <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button class="btn-action-icon" title="Descargar" (click)="descargar(doc)">
+                          <mat-icon>download</mat-icon>
+                        </button>
+                        <button class="btn-action-icon" title="Editar en OnlyOffice" (click)="editar(doc)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button class="btn-action-icon delete-btn" title="Borrar" (click)="eliminar(doc)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        } @else {
+          <div class="table-card">
+            <div class="empty-state" style="padding: 40px; text-align: center; color: #64748b;">
+              <mat-icon style="font-size: 48px; width: 48px; height: 48px; margin-bottom: 16px;">inbox</mat-icon>
+              <p>No se encontraron documentos</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Columna Secundaria (Derecha): Lista de Departamentos / Uploaders -->
+      <div class="sidebar-list">
+        <div class="sidebar-card">
+          <div class="sidebar-header">
+            <h3>Departamentos</h3>
+          </div>
+          <div class="sidebar-items">
+            @for (group of groupedDocuments; track group.uploader) {
+              <div class="sidebar-item" 
+                   [class.active]="group.uploader === selectedGroupUploader"
+                   (click)="selectGroup(group.uploader)">
+                <div class="item-icon">
+                  <mat-icon>business</mat-icon>
+                </div>
+                <div class="item-info">
+                  <span class="item-name">{{ group.uploader }}</span>
+                  <span class="item-count">{{ group.docs.length }} docs</span>
+                </div>
+                <mat-icon class="chevron">chevron_right</mat-icon>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Overlay para OnlyOffice -->
+@if (isEditing) {
+  <div class="onlyoffice-modal-overlay">
+    <div class="onlyoffice-modal-content">
+      <div class="modal-header">
+        <h3>Editando: {{ editingDoc?.nombreArchivo }}</h3>
+        <button class="close-btn" (click)="closeOnlyOffice()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="iframeEditor"></div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal Overlay para Vista Previa de Imagen o PDF -->
+@if (isPreviewing) {
+  <div class="preview-modal-overlay">
+    <div class="preview-modal-content">
+      <div class="modal-header">
+        <h3>Visualizando: {{ previewDocName }}</h3>
+        <button class="close-btn" (click)="closePreview()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe [src]="previewUrl | safeUrl" width="100%" height="550px" style="border: none;"></iframe>
+      </div>
+    </div>
+  </div>
+}
+
