@@ -26,6 +26,13 @@ public class FileMetadata {
     private long tamanoBytes;
     private boolean esEvidencia;
     private String descripcion;
+    /**
+     * Clave de sesión para OnlyOffice. Todos los usuarios que abran el mismo documento
+     * deben usar la MISMA key para unirse a la misma sesión colaborativa.
+     * Se regenera con UUID nuevo cada vez que el documento es guardado exitosamente,
+     * forzando a OnlyOffice a recargar desde S3 en la siguiente apertura.
+     */
+    private String versionKey;
 
     @CreatedDate
     private LocalDateTime createdAt;

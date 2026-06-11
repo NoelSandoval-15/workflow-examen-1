@@ -28,6 +28,10 @@ public class SecurityConfig {
     private static final String[] PUBLIC_ENDPOINTS = {
             "/api/auth/**",
             "/api/workflow/collaborate/**",   // acceso por token colaborativo, sin JWT
+            "/api/archivos/descargar/**",
+            "/api/archivos/ver/**",
+            "/api/archivos/presigned/**",
+            "/api/archivos/callback/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/v3/api-docs/**",
@@ -39,6 +43,9 @@ public class SecurityConfig {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .csrf(AbstractHttpConfigurer::disable)
+            // Permitir que se renderice en iframes (ej. visualizador de PDF/imágenes en el frontend)
+            .headers(headers -> headers.frameOptions(frame -> frame.disable()))
+
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(PUBLIC_ENDPOINTS).permitAll()

@@ -10,5 +10,10 @@ public interface FileService {
                          String tareaId, String usuarioId, boolean esEvidencia, String descripcion);
     List<FileDTO> listarPorInstancia(String procesoInstanciaId);
     List<FileDTO> listarPorTarea(String tareaId);
+    List<FileDTO> listarTodos();
+    FileDTO obtenerPorId(String id);
     void eliminarArchivo(String id);
+    void actualizarArchivoDesdeUrl(String id, String url, boolean esCierre);
+    byte[] obtenerContenidoArchivo(String id);
+    String generarPresignedUrl(String id);
 }

@@ -23,5 +23,6 @@ public class CreateTaskRequest {
     private String departamentoAsignadoId;
     private String usuarioAsignadoId;
     private boolean requiereEvidencia;
+    private boolean formularioDinamicoHabilitado;
     private LocalDateTime fechaLimite;
 }

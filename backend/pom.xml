@@ -105,6 +105,13 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
+		<!-- AWS SDK S3 -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+			<version>2.26.26</version>
+		</dependency>
+
 		<!-- Swagger / OpenAPI -->
 		<!-- springdoc 2.6.x es la última compatible con Spring Boot 3.3.x / Spring 6.1.x -->
 		<dependency>

@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.examensw1.backend.modules.user.repository.UserRepository;
+import com.examensw1.backend.modules.user.domain.User;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -44,6 +47,7 @@ public class WorkflowEngineService {
     private final TaskService taskService;            // Camunda TaskService
     private final TaskRepository taskRepository;     // app TaskRepository para tareas de funcionarios
     private final BpmnXmlGenerator bpmnXmlGenerator;
+    private final UserRepository userRepository;
 
     // ───────────────────────────────────────────────────────────────
     // INICIAR PROCESO
@@ -57,8 +61,20 @@ public class WorkflowEngineService {
             throw new BusinessException("El template no está activo. Actívalo antes de iniciar un trámite.");
         }
 
-        // Templates activados antes de la integración Camunda: auto-desplegar ahora
-        if (template.getCamundaProcessDefinitionKey() == null) {
+        // Auto-desplegar si: nunca fue desplegado O Camunda perdió el deployment (ej. reinicio con H2)
+        boolean needsDeploy = template.getCamundaProcessDefinitionKey() == null;
+        if (!needsDeploy) {
+            long count = repositoryService.createProcessDefinitionQuery()
+                    .processDefinitionKey(template.getCamundaProcessDefinitionKey())
+                    .count();
+            needsDeploy = count == 0;
+            if (needsDeploy) {
+                log.warn("Proceso '{}' no encontrado en Camunda (reinicio?), re-desplegando...",
+                        template.getCamundaProcessDefinitionKey());
+            }
+        }
+
+        if (needsDeploy) {
             String xml = (template.getBpmnXml() != null && !template.getBpmnXml().isBlank())
                     ? template.getBpmnXml()
                     : bpmnXmlGenerator.generate(template);
@@ -73,7 +89,7 @@ public class WorkflowEngineService {
                 template.setCamundaDeploymentId(dep.getId());
                 template.setCamundaProcessDefinitionKey(processKey);
                 workflowRepository.save(template);
-                log.info("Auto-deploy de template legacy '{}' → key={}", template.getNombre(), processKey);
+                log.info("Auto-deploy de template '{}' → key={}", template.getNombre(), processKey);
             } catch (Exception e) {
                 log.error("Auto-deploy fallido para '{}': {}", template.getNombre(), e.getMessage(), e);
                 throw new BusinessException("No se pudo desplegar el flujo en el motor: " + e.getMessage());
@@ -408,7 +424,9 @@ public class WorkflowEngineService {
      */
     private void crearTareaYNotificar(ProcesoInstancia instancia, WorkflowNode nodo) {
         if (!NodeType.TAREA.equals(nodo.getTipo())) return;
-        if (nodo.getFuncionarioId() == null || nodo.getFuncionarioId().isBlank()) return;
+        boolean tieneFuncionario = nodo.getFuncionarioId() != null && !nodo.getFuncionarioId().isBlank();
+        boolean tieneDepartamento = nodo.getDepartamentoId() != null && !nodo.getDepartamentoId().isBlank();
+        if (!tieneFuncionario && !tieneDepartamento) return;
 
         // Evitar tarea duplicada para el mismo nodo e instancia
         boolean yaExiste = taskRepository
@@ -429,23 +447,48 @@ public class WorkflowEngineService {
         tarea.setUsuarioAsignadoId(nodo.getFuncionarioId());
         tarea.setDepartamentoAsignadoId(nodo.getDepartamentoId());
         tarea.setRequiereEvidencia(nodo.isRequiereEvidencia());
+        tarea.setFormularioDinamicoHabilitado(nodo.isFormularioDinamicoHabilitado());
+        // ── Permisos documentales: copiar del nodo configurado por el admin ──
+        if (nodo.getFormatosPermitidos() != null) {
+            tarea.setFormatosPermitidos(nodo.getFormatosPermitidos());
+        }
+        tarea.setPermisoDefectoCreador(nodo.getPermisoDefectoCreador());
+        // ─────────────────────────────────────────────────────────────────────
         tarea.setFechaInicio(LocalDateTime.now());
-        if (nodo.getTiempoLimiteHoras() > 0) {
-            tarea.setFechaLimite(LocalDateTime.now().plusHours(nodo.getTiempoLimiteHoras()));
+        if (nodo.getFechaLimite() != null && !nodo.getFechaLimite().isBlank()) {
+            try {
+                tarea.setFechaLimite(LocalDateTime.parse(nodo.getFechaLimite(),
+                        java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+            } catch (Exception ignored) {
+                // Si el formato es inválido, simplemente no se establece fecha límite
+            }
         }
         taskRepository.save(tarea);
 
-        // Notificar al funcionario
-        notificationService.enviarNotificacion(
-                nodo.getFuncionarioId(),
-                "Nueva tarea asignada",
-                "Tienes una nueva tarea: \"" + nodo.getNombre() + "\" en el trámite " + instancia.getCodigo(),
-                "TAREA_ASIGNADA",
-                instancia.getId()
-        );
+        // Notificar al funcionario (o a todo el departamento si es un pool)
+        if (tieneFuncionario) {
+            notificationService.enviarNotificacion(
+                    nodo.getFuncionarioId(),
+                    "Nueva tarea asignada",
+                    "Tienes una nueva tarea: \"" + nodo.getNombre() + "\" en el trámite " + instancia.getCodigo(),
+                    "TAREA_ASIGNADA",
+                    instancia.getId()
+            );
+        } else if (tieneDepartamento) {
+            List<User> usuariosDepto = userRepository.findByDepartamentoId(nodo.getDepartamentoId());
+            for (User user : usuariosDepto) {
+                notificationService.enviarNotificacion(
+                        user.getId(),
+                        "Nueva tarea disponible para tu departamento",
+                        "Hay una nueva tarea disponible para tu área: \"" + nodo.getNombre() + "\" en el trámite " + instancia.getCodigo(),
+                        "TAREA_DISPONIBLE",
+                        instancia.getId()
+                );
+            }
+        }
 
-        log.info("Tarea creada y notificada → funcionario={} nodo='{}' trámite={}",
-                nodo.getFuncionarioId(), nodo.getNombre(), instancia.getCodigo());
+        log.info("Tarea creada → funcionario={} departamento={} nodo='{}' trámite={}",
+                nodo.getFuncionarioId(), nodo.getDepartamentoId(), nodo.getNombre(), instancia.getCodigo());
     }
 
     private ProcesoInstanciaDTO toDTO(ProcesoInstancia p) {

@@ -173,12 +173,12 @@ public class DataInitializer implements CommandLineRunner {
             workflow.setFormularioId("FORM_SOLICITUD_SERVICIO");
             workflow.setCreatedBy(userIdByUsername("admin"));
             workflow.setNodos(List.of(
-                    node("NODO_SOL_INICIO", "Solicitud recibida", NodeType.INICIO, null, null, false, 0, 1),
-                    node("NODO_SOL_REVISION", "Revision inicial", NodeType.TAREA, "ATENCION_CLIENTE", "FUNCIONARIO", false, 24, 2),
-                    node("NODO_SOL_LEGAL", "Revision legal", NodeType.TAREA, "LEGAL", "FUNCIONARIO", true, 48, 3),
-                    node("NODO_SOL_DECISION", "Decision de aprobacion", NodeType.DECISION, "OPERACIONES", "SUPERVISOR", false, 24, 4),
-                    node("NODO_SOL_FINANZAS", "Validacion financiera", NodeType.TAREA, "FINANZAS", "FUNCIONARIO", true, 24, 5),
-                    node("NODO_SOL_FIN", "Solicitud finalizada", NodeType.FIN, null, null, false, 0, 6)
+                    node("NODO_SOL_INICIO", "Solicitud recibida", NodeType.INICIO, null, null, false, null, 1),
+                    node("NODO_SOL_REVISION", "Revision inicial", NodeType.TAREA, "ATENCION_CLIENTE", "FUNCIONARIO", false, "2026-12-31T23:59", 2),
+                    node("NODO_SOL_LEGAL", "Revision legal", NodeType.TAREA, "LEGAL", "FUNCIONARIO", true, "2026-12-31T23:59", 3),
+                    node("NODO_SOL_DECISION", "Decision de aprobacion", NodeType.DECISION, "OPERACIONES", "SUPERVISOR", false, "2026-12-31T23:59", 4),
+                    node("NODO_SOL_FINANZAS", "Validacion financiera", NodeType.TAREA, "FINANZAS", "FUNCIONARIO", true, "2026-12-31T23:59", 5),
+                    node("NODO_SOL_FIN", "Solicitud finalizada", NodeType.FIN, null, null, false, null, 6)
             ));
             workflow.setConexiones(List.of(
                     edge("EDGE_SOL_1", "NODO_SOL_INICIO", "NODO_SOL_REVISION", null, "Iniciar revision"),
@@ -200,10 +200,10 @@ public class DataInitializer implements CommandLineRunner {
             workflow.setFormularioId("FORM_RECLAMO_CLIENTE");
             workflow.setCreatedBy(userIdByUsername("admin"));
             workflow.setNodos(List.of(
-                    node("NODO_REC_INICIO", "Reclamo recibido", NodeType.INICIO, null, null, false, 0, 1),
-                    node("NODO_REC_ATENCION", "Analisis de reclamo", NodeType.TAREA, "ATENCION_CLIENTE", "FUNCIONARIO", false, 24, 2),
-                    node("NODO_REC_OPERACIONES", "Resolucion operativa", NodeType.TAREA, "OPERACIONES", "SUPERVISOR", true, 48, 3),
-                    node("NODO_REC_FIN", "Reclamo cerrado", NodeType.FIN, null, null, false, 0, 4)
+                    node("NODO_REC_INICIO", "Reclamo recibido", NodeType.INICIO, null, null, false, null, 1),
+                    node("NODO_REC_ATENCION", "Analisis de reclamo", NodeType.TAREA, "ATENCION_CLIENTE", "FUNCIONARIO", false, "2026-12-31T23:59", 2),
+                    node("NODO_REC_OPERACIONES", "Resolucion operativa", NodeType.TAREA, "OPERACIONES", "SUPERVISOR", true, "2026-12-31T23:59", 3),
+                    node("NODO_REC_FIN", "Reclamo cerrado", NodeType.FIN, null, null, false, null, 4)
             ));
             workflow.setConexiones(List.of(
                     edge("EDGE_REC_1", "NODO_REC_INICIO", "NODO_REC_ATENCION", null, "Revisar reclamo"),
@@ -226,7 +226,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         WorkflowNode nodoActual = node("NODO_SOL_LEGAL", "Revision legal", NodeType.TAREA, "LEGAL",
-                "FUNCIONARIO", true, 48, 3);
+                "FUNCIONARIO", true, "2026-12-31T23:59", 3);
 
         ProcesoInstancia proceso = new ProcesoInstancia();
         proceso.setId("PROC_SOL_2026_0001");
@@ -259,7 +259,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         WorkflowNode nodoActual = node("NODO_REC_ATENCION", "Analisis de reclamo", NodeType.TAREA,
-                "ATENCION_CLIENTE", "FUNCIONARIO", false, 24, 2);
+                "ATENCION_CLIENTE", "FUNCIONARIO", false, "2026-12-31T23:59", 2);
 
         ProcesoInstancia proceso = new ProcesoInstancia();
         proceso.setId("PROC_REC_2026_0001");
@@ -289,7 +289,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         WorkflowNode nodoActual = node("NODO_SOL_FIN", "Solicitud finalizada", NodeType.FIN, null,
-                null, false, 0, 6);
+                null, false, null, 6);
 
         ProcesoInstancia proceso = new ProcesoInstancia();
         proceso.setId("PROC_SOL_2026_0002");
@@ -491,7 +491,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private WorkflowNode node(String id, String nombre, NodeType tipo, String departamentoId, String rolRequerido,
-                              boolean requiereEvidencia, int tiempoLimiteHoras, int orden) {
+                              boolean requiereEvidencia, String fechaLimite, int orden) {
         WorkflowNode node = new WorkflowNode();
         node.setId(id);
         node.setNombre(nombre);
@@ -499,7 +499,7 @@ public class DataInitializer implements CommandLineRunner {
         node.setDepartamentoId(departamentoId);
         node.setRolRequerido(rolRequerido);
         node.setRequiereEvidencia(requiereEvidencia);
-        node.setTiempoLimiteHoras(tiempoLimiteHoras);
+        node.setFechaLimite(fechaLimite);
         node.setOrden(orden);
         return node;
     }

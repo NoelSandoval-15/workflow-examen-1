@@ -51,8 +51,15 @@ public class WorkflowServiceImpl implements WorkflowService {
                 node.setFormularioId(n.getFormularioId());
                 node.setFuncionarioId(n.getFuncionarioId());
                 node.setRequiereEvidencia(n.isRequiereEvidencia());
-                node.setTiempoLimiteHoras(n.getTiempoLimiteHoras());
+                node.setFechaLimite(n.getFechaLimite());
                 node.setOrden(n.getOrden());
+                node.setFormularioDinamicoHabilitado(n.isFormularioDinamicoHabilitado());
+                node.setPermisoDefectoCreador(n.getPermisoDefectoCreador());
+                node.setNivelVisibilidadGlobal(n.getNivelVisibilidadGlobal());
+                node.setBloquearAlCompletar(n.isBloquearAlCompletar());
+                node.setHabilitarFirmaDigital(n.isHabilitarFirmaDigital());
+                node.setFormatosPermitidos(n.getFormatosPermitidos());
+                node.setMatrizPermisosDocumentos(n.getMatrizPermisosDocumentos());
                 workflow.getNodos().add(node);
             });
         }
@@ -91,7 +98,15 @@ public class WorkflowServiceImpl implements WorkflowService {
                 node.setId(n.getId()); node.setNombre(n.getNombre()); node.setTipo(n.getTipo());
                 node.setDepartamentoId(n.getDepartamentoId()); node.setRolRequerido(n.getRolRequerido());
                 node.setFormularioId(n.getFormularioId()); node.setRequiereEvidencia(n.isRequiereEvidencia());
-                node.setTiempoLimiteHoras(n.getTiempoLimiteHoras()); node.setOrden(n.getOrden());
+                node.setFechaLimite(n.getFechaLimite()); node.setOrden(n.getOrden());
+                node.setFuncionarioId(n.getFuncionarioId());
+                node.setFormularioDinamicoHabilitado(n.isFormularioDinamicoHabilitado());
+                node.setPermisoDefectoCreador(n.getPermisoDefectoCreador());
+                node.setNivelVisibilidadGlobal(n.getNivelVisibilidadGlobal());
+                node.setBloquearAlCompletar(n.isBloquearAlCompletar());
+                node.setHabilitarFirmaDigital(n.isHabilitarFirmaDigital());
+                node.setFormatosPermitidos(n.getFormatosPermitidos());
+                node.setMatrizPermisosDocumentos(n.getMatrizPermisosDocumentos());
                 workflow.getNodos().add(node);
             });
         }
@@ -137,12 +152,12 @@ public class WorkflowServiceImpl implements WorkflowService {
             throw new BusinessException("No se puede activar un template sin nodos");
         }
 
-        // Obtener o generar el BPMN XML
-        String xml = (workflow.getBpmnXml() != null && !workflow.getBpmnXml().isBlank())
-                ? normalizeBpmnXmlForCamunda(workflow)
-                : bpmnXmlGenerator.generate(workflow);
-
         String processKey = bpmnXmlGenerator.sanitizeKey(workflow.getId());
+
+        // Siempre generar BPMN desde el modelo de nodos/conexiones de MongoDB.
+        // El XML de bpmn.js se conserva en BD solo para visualización; puede tener
+        // IDs inconsistentes o namespaces incorrectos que Camunda rechaza al desplegar.
+        String xml = bpmnXmlGenerator.generate(workflow);
 
         // Desplegar en Camunda
         try {
@@ -213,42 +228,6 @@ public class WorkflowServiceImpl implements WorkflowService {
         return result;
     }
 
-    /**
-     * Cuando el XML viene del diseñador bpmn.js, ajusta el process id
-     * para que coincida con la clave sanitizada que usamos en Camunda.
-     */
-    private String normalizeBpmnXmlForCamunda(Workflow workflow) {
-        String xml = workflow.getBpmnXml();
-        String expectedKey = bpmnXmlGenerator.sanitizeKey(workflow.getId());
-
-        // 1. Reemplazar el id del proceso con la clave esperada por Camunda
-        xml = xml.replaceFirst(
-                "(<process[^>]*\\sid=\")[^\"]*\"",
-                "$1" + expectedKey + "\""
-        ).replaceFirst(
-                "(<bpmndi:BPMNPlane[^>]*\\sbpmnElement=\")[^\"]*\"",
-                "$1" + expectedKey + "\""
-        );
-
-        // 2. Agregar historyTimeToLive si no está presente (requerido desde Camunda 7.19)
-        if (!xml.contains("historyTimeToLive")) {
-            xml = xml.replaceFirst(
-                    "(<process[^>]*)(/>|>)",
-                    "$1 camunda:historyTimeToLive=\"P180D\"$2"
-            );
-        }
-
-        // 3. Asegurar que el proceso sea ejecutable
-        if (!xml.contains("isExecutable=\"true\"")) {
-            xml = xml.replaceFirst(
-                    "(<process[^>]*)(/>|>)",
-                    "$1 isExecutable=\"true\"$2"
-            );
-        }
-
-        return xml;
-    }
-
     WorkflowDTO toDTO(Workflow w) {
         WorkflowDTO dto = new WorkflowDTO();
         dto.setId(w.getId());
@@ -272,7 +251,14 @@ public class WorkflowServiceImpl implements WorkflowService {
             nd.setFuncionarioId(n.getFuncionarioId());
             nd.setOrden(n.getOrden());
             nd.setRequiereEvidencia(n.isRequiereEvidencia());
-            nd.setTiempoLimiteHoras(n.getTiempoLimiteHoras());
+            nd.setFechaLimite(n.getFechaLimite());
+            nd.setFormularioDinamicoHabilitado(n.isFormularioDinamicoHabilitado());
+            nd.setPermisoDefectoCreador(n.getPermisoDefectoCreador());
+            nd.setNivelVisibilidadGlobal(n.getNivelVisibilidadGlobal());
+            nd.setBloquearAlCompletar(n.isBloquearAlCompletar());
+            nd.setHabilitarFirmaDigital(n.isHabilitarFirmaDigital());
+            nd.setFormatosPermitidos(n.getFormatosPermitidos());
+            nd.setMatrizPermisosDocumentos(n.getMatrizPermisosDocumentos());
             return nd;
         }).toList());
 

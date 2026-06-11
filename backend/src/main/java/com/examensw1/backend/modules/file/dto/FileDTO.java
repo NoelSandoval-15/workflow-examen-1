@@ -19,5 +19,6 @@ public class FileDTO {
     private long tamanoBytes;
     private boolean esEvidencia;
     private String descripcion;
+    private String versionKey;
     private LocalDateTime createdAt;
 }

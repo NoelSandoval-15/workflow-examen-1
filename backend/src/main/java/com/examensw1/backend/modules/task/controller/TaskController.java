@@ -1,6 +1,7 @@
 package com.examensw1.backend.modules.task.controller;
 
 import com.examensw1.backend.modules.task.dto.CreateTaskRequest;
+import com.examensw1.backend.modules.task.dto.GuardarFormularioRequest;
 import com.examensw1.backend.modules.task.dto.TaskDTO;
 import com.examensw1.backend.modules.task.dto.UpdateTaskRequest;
 import com.examensw1.backend.modules.task.service.TaskService;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import com.examensw1.backend.shared.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -39,13 +42,13 @@ public class TaskController {
         return ResponseEntity.ok(ApiResponse.ok(taskService.obtenerTarea(id)));
     }
 
-    /** Tareas del usuario autenticado — el funcionario ve solo las suyas */
+    /** Tareas del usuario autenticado — el funcionario ve solo las suyas y las de su departamento */
     @GetMapping("/mis-tareas")
     public ResponseEntity<ApiResponse<List<TaskDTO>>> misTareas(
             @AuthenticationPrincipal UserDetails userDetails) {
         return userRepository.findByUsername(userDetails.getUsername())
                 .map(user -> ResponseEntity.ok(
-                        ApiResponse.ok(taskService.listarPorUsuario(user.getId()))))
+                        ApiResponse.ok(taskService.listarPorUsuarioYDepartamento(user.getId(), user.getDepartamentoId()))))
                 .orElse(ResponseEntity.ok(ApiResponse.ok(List.of())));
     }
 
@@ -54,9 +57,10 @@ public class TaskController {
         return ResponseEntity.ok(ApiResponse.ok(taskService.listarPorInstancia(procesoInstanciaId)));
     }
 
-    @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<ApiResponse<List<TaskDTO>>> listarPorUsuario(@PathVariable String usuarioId) {
-        return ResponseEntity.ok(ApiResponse.ok(taskService.listarPorUsuario(usuarioId)));
+    @GetMapping("/usuario/{usuarioId}/departamento/{departamentoId}")
+    public ResponseEntity<ApiResponse<List<TaskDTO>>> listarPorUsuarioYDepartamento(
+            @PathVariable String usuarioId, @PathVariable String departamentoId) {
+        return ResponseEntity.ok(ApiResponse.ok(taskService.listarPorUsuarioYDepartamento(usuarioId, departamentoId)));
     }
 
     @PutMapping("/{id}")
@@ -70,5 +74,25 @@ public class TaskController {
             @PathVariable String id,
             @RequestParam(defaultValue = "") String observacion) {
         return ResponseEntity.ok(ApiResponse.ok("Tarea completada", taskService.completarTarea(id, observacion)));
+    }
+
+    /** Guarda el formulario dinámico llenado por el funcionario */
+    @PutMapping("/{id}/formulario")
+    public ResponseEntity<ApiResponse<TaskDTO>> guardarFormulario(
+            @PathVariable String id,
+            @RequestBody GuardarFormularioRequest request) {
+        return ResponseEntity.ok(ApiResponse.ok("Formulario guardado",
+                taskService.guardarFormulario(id, request.getCampos())));
+    }
+
+    /** Reclama una tarea del pool del departamento asignándosela al usuario logueado */
+    @PutMapping("/{id}/reclamar")
+    public ResponseEntity<ApiResponse<TaskDTO>> reclamar(
+            @PathVariable String id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        return userRepository.findByUsername(userDetails.getUsername())
+                .map(user -> ResponseEntity.ok(
+                        ApiResponse.ok("Tarea reclamada exitosamente", taskService.reclamarTarea(id, user.getId()))))
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", userDetails.getUsername()));
     }
 }

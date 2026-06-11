@@ -1,5 +1,6 @@
 package com.examensw1.backend.modules.task.service;
 
+import com.examensw1.backend.modules.task.domain.CampoFormulario;
 import com.examensw1.backend.modules.task.domain.Task;
 import com.examensw1.backend.modules.task.dto.CreateTaskRequest;
 import com.examensw1.backend.modules.task.dto.TaskDTO;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +31,7 @@ public class TaskServiceImpl implements TaskService {
         task.setDepartamentoAsignadoId(request.getDepartamentoAsignadoId());
         task.setUsuarioAsignadoId(request.getUsuarioAsignadoId());
         task.setRequiereEvidencia(request.isRequiereEvidencia());
+        task.setFormularioDinamicoHabilitado(request.isFormularioDinamicoHabilitado());
         task.setFechaInicio(LocalDateTime.now());
         task.setFechaLimite(request.getFechaLimite());
         return toDTO(taskRepository.save(task));
@@ -47,9 +50,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDTO> listarPorUsuario(String usuarioId) {
-        return taskRepository.findByUsuarioAsignadoId(usuarioId)
-                .stream().map(this::toDTO).toList();
+    public List<TaskDTO> listarPorUsuarioYDepartamento(String usuarioId, String departamentoId) {
+        List<Task> tareas = new ArrayList<>();
+        
+        // Tareas explícitamente asignadas al usuario
+        if (usuarioId != null) {
+            tareas.addAll(taskRepository.findByUsuarioAsignadoId(usuarioId));
+        }
+        
+        // Tareas asignadas a su departamento pero que no tienen usuario asignado
+        if (departamentoId != null && !departamentoId.isBlank()) {
+            List<Task> delDepto = taskRepository.findByDepartamentoAsignadoId(departamentoId).stream()
+                    .filter(t -> t.getUsuarioAsignadoId() == null || t.getUsuarioAsignadoId().isBlank())
+                    .toList();
+            tareas.addAll(delDepto);
+        }
+        
+        return tareas.stream().map(this::toDTO).toList();
     }
 
     @Override
@@ -75,6 +92,26 @@ public class TaskServiceImpl implements TaskService {
         return toDTO(taskRepository.save(task));
     }
 
+    @Override
+    public TaskDTO guardarFormulario(String tareaId, List<CampoFormulario> campos) {
+        Task task = taskRepository.findById(tareaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Tarea", tareaId));
+        task.setDatosFormulario(campos);
+        return toDTO(taskRepository.save(task));
+    }
+
+    @Override
+    public TaskDTO reclamarTarea(String id, String usuarioId) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tarea", id));
+        if (task.getUsuarioAsignadoId() != null && !task.getUsuarioAsignadoId().isBlank()) {
+            throw new BusinessException("La tarea ya ha sido tomada por otro funcionario");
+        }
+        task.setUsuarioAsignadoId(usuarioId);
+        task.setEstado("EN_PROGRESO");
+        return toDTO(taskRepository.save(task));
+    }
+
     private TaskDTO toDTO(Task t) {
         TaskDTO dto = new TaskDTO();
         dto.setId(t.getId());
@@ -88,6 +125,10 @@ public class TaskServiceImpl implements TaskService {
         dto.setUsuarioAsignadoId(t.getUsuarioAsignadoId());
         dto.setRequiereEvidencia(t.isRequiereEvidencia());
         dto.setObservacion(t.getObservacion());
+        dto.setFormularioDinamicoHabilitado(t.isFormularioDinamicoHabilitado());
+        dto.setFormatosPermitidos(t.getFormatosPermitidos() != null ? t.getFormatosPermitidos() : new java.util.ArrayList<>());
+        dto.setPermisoDefectoCreador(t.getPermisoDefectoCreador());
+        dto.setDatosFormulario(t.getDatosFormulario());
         dto.setFechaInicio(t.getFechaInicio());
         dto.setFechaLimite(t.getFechaLimite());
         dto.setFechaCompletado(t.getFechaCompletado());

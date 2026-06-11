@@ -48,9 +48,83 @@ public class FileController {
         return ResponseEntity.ok(ApiResponse.ok(fileService.listarPorTarea(tareaId)));
     }
 
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<FileDTO>>> listarTodos() {
+        return ResponseEntity.ok(ApiResponse.ok(fileService.listarTodos()));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<FileDTO>> obtenerPorId(@PathVariable String id) {
+        return ResponseEntity.ok(ApiResponse.ok("Archivo encontrado", fileService.obtenerPorId(id)));
+    }
+
+    @GetMapping("/descargar/{id}")
+    public ResponseEntity<org.springframework.core.io.Resource> descargar(@PathVariable String id) {
+        FileDTO fileDTO = fileService.obtenerPorId(id);
+        try {
+            byte[] data = fileService.obtenerContenidoArchivo(id);
+            org.springframework.core.io.ByteArrayResource resource = new org.springframework.core.io.ByteArrayResource(data);
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDTO.getNombreArchivo() + "\"")
+                    .contentType(org.springframework.http.MediaType.APPLICATION_OCTET_STREAM)
+                    .contentLength(data.length)
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/ver/{id}")
+    public ResponseEntity<org.springframework.core.io.Resource> ver(@PathVariable String id) {
+        FileDTO fileDTO = fileService.obtenerPorId(id);
+        try {
+            byte[] data = fileService.obtenerContenidoArchivo(id);
+            org.springframework.core.io.ByteArrayResource resource = new org.springframework.core.io.ByteArrayResource(data);
+            org.springframework.http.MediaType contentType = org.springframework.http.MediaType.parseMediaType(fileDTO.getMimeType() != null ? fileDTO.getMimeType() : "application/octet-stream");
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileDTO.getNombreArchivo() + "\"")
+                    .contentType(contentType)
+                    .contentLength(data.length)
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/presigned/{id}")
+    public ResponseEntity<ApiResponse<String>> presigned(@PathVariable String id) {
+        String url = fileService.generarPresignedUrl(id);
+        return ResponseEntity.ok(ApiResponse.ok("URL generada", url));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> eliminar(@PathVariable String id) {
         fileService.eliminarArchivo(id);
         return ResponseEntity.ok(ApiResponse.ok("Archivo eliminado", null));
+    }
+
+    @PostMapping("/callback/{id}")
+    public ResponseEntity<?> callback(@PathVariable String id, @RequestBody java.util.Map<String, Object> body) {
+        if (body.containsKey("status")) {
+            int status = ((Number) body.get("status")).intValue();
+            // status=2: el documento fue cerrado y está listo para guardar
+            // status=6: OnlyOffice hizo un autosave forzado (cada ~10 min por defecto)
+            // Ambos incluyen una URL con el contenido actualizado del documento
+            if ((status == 2 || status == 6) && body.containsKey("url")) {
+                String downloadUrl = (String) body.get("url");
+                try {
+                    fileService.actualizarArchivoDesdeUrl(id, downloadUrl, status == 2);
+                } catch (Exception e) {
+                    // IMPORTANTE: OnlyOffice REQUIERE {"error":0} incluso si el guardado falla internamente.
+                    // Si devolvemos cualquier otro status HTTP, OnlyOffice lo interpreta como
+                    // fallo del callback y puede reintentar o bloquear la sesión colaborativa.
+                    // El error se registra en logs pero NO se propaga al GlobalExceptionHandler.
+                    System.err.println("[FileCallback] Error al guardar documento id=" + id
+                            + " status=" + status + ": " + e.getMessage());
+                }
+            }
+        }
+        // OnlyOffice requiere exactamente { "error": 0 } para confirmar recepción exitosa
+        return ResponseEntity.ok(java.util.Map.of("error", 0));
     }
 }
