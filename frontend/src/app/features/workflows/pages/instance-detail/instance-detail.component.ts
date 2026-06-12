@@ -37,6 +37,7 @@ export class InstanceDetailComponent implements OnInit {
   instancia?: ProcesoInstancia;
   template?: WorkflowTemplate;
   tareaActual?: Task;
+  tareasInstancia: Task[] = [];
   loading = true;
   procesando = false;
 
@@ -73,6 +74,7 @@ export class InstanceDetailComponent implements OnInit {
         }
         this.taskService.listarPorInstancia(inst.id).subscribe({
           next: tareas => {
+            this.tareasInstancia = tareas;
             this.tareaActual = tareas.find(t => t.nodoId === inst.nodoActual?.id && t.estado === 'PENDIENTE');
             this.cdr.detectChanges();
           }
@@ -80,6 +82,15 @@ export class InstanceDetailComponent implements OnInit {
       },
       error: () => { this.loading = false; this.cdr.detectChanges(); }
     });
+  }
+
+  getTareasCompletadasConFormulario(): Task[] {
+    return this.tareasInstancia.filter(t => 
+      t.estado === 'COMPLETADO' && 
+      t.formularioDinamicoHabilitado && 
+      t.datosFormulario && 
+      t.datosFormulario.length > 0
+    );
   }
 
   get conexionesDelNodoActual(): (WorkflowEdge & { labelVisible: string })[] {

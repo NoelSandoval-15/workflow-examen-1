@@ -270,3 +270,179 @@ textarea.valor-input {
   margin-top: 12px;
   mat-icon { font-size: 18px; width: 18px; height: 18px; }
 }
+
+/* ── Configuración de Opciones ── */
+.opciones-config {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 8px 12px;
+
+  label {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+/* ── Select Dropdown / Selector ── */
+.dform-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:focus {
+    border-color: #6366f1;
+    background: #1e293b;
+  }
+
+  &[disabled] {
+    background: rgba(15, 23, 42, 0.2);
+    border-color: transparent;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+}
+
+/* ── Checklist / Casillas Múltiples ── */
+.checklist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #f8fafc;
+  font-size: 14px;
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #6366f1;
+    cursor: pointer;
+  }
+
+  input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &.readonly {
+    cursor: default;
+    color: #cbd5e1;
+  }
+}
+
+/* ── Tabla Dinámica ── */
+.tabla-dinamica-container {
+  margin-top: 10px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.tabla-empty-msg {
+  padding: 16px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.dform-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+
+  th {
+    background: #0f172a;
+    color: #94a3b8;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 1px solid #334155;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+    color: #cbd5e1;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .col-accion {
+    width: 80px;
+    text-align: center;
+  }
+
+  .cell-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #475569;
+    color: #f8fafc;
+    padding: 4px;
+    font-size: 13px;
+    outline: none;
+    transition: border-bottom-color 0.2s;
+
+    &:focus {
+      border-bottom-color: #6366f1;
+      border-bottom-style: solid;
+    }
+
+    &[readonly] {
+      border: none;
+      color: #cbd5e1;
+      pointer-events: none;
+    }
+  }
+}
+
+.btn-add-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  background: rgba(99, 102, 241, 0.05);
+  border: none;
+  border-top: 1px solid #334155;
+  color: #818cf8;
+  font-size: 13px;
+  cursor: pointer;
+  justify-content: center;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+

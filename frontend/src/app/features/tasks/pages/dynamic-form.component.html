@@ -39,7 +39,7 @@
                    maxlength="80" />
 
             <!-- Tipo -->
-            <select class="tipo-select" [(ngModel)]="campo.tipo">
+            <select class="tipo-select" [(ngModel)]="campo.tipo" (ngModelChange)="onTipoChange(campo)">
               @for (opt of tipoOpciones; track opt.valor) {
                 <option [value]="opt.valor">{{ opt.label }}</option>
               }
@@ -74,6 +74,17 @@
             }
           }
         </div>
+
+        <!-- Opciones de Configuración (Solo diseño para select, checklist, tabla) -->
+        @if (!soloLectura && (campo.tipo === 'SELECT' || campo.tipo === 'CHECKLIST' || campo.tipo === 'TABLA')) {
+          <div class="opciones-config">
+            <label>
+              {{ campo.tipo === 'TABLA' ? 'Columnas de la tabla (separadas por comas)' : 'Opciones del selector (separadas por comas)' }}
+            </label>
+            <input class="valor-input" [(ngModel)]="campo.opciones"
+                   [placeholder]="campo.tipo === 'TABLA' ? 'Ej: Nombre, Edad, Rol' : 'Ej: Opción 1, Opción 2, Opción 3'" />
+          </div>
+        }
 
         <!-- Input del valor según tipo -->
         <div class="dform-valor-wrap">
@@ -119,6 +130,77 @@
                    [(ngModel)]="campo.valor"
                    [placeholder]="soloLectura ? '' : 'correo@ejemplo.com'"
                    [readonly]="soloLectura" />
+          }
+          @if (campo.tipo === 'SELECT') {
+            <select class="dform-select" [(ngModel)]="campo.valor" [disabled]="soloLectura">
+              <option value="" disabled selected>-- Seleccione una opción --</option>
+              @for (opt of getParsedOpciones(campo.opciones); track opt) {
+                <option [value]="opt">{{ opt }}</option>
+              }
+            </select>
+          }
+          @if (campo.tipo === 'CHECKLIST') {
+            <div class="checklist-container">
+              @for (opt of getParsedOpciones(campo.opciones); track opt) {
+                <label class="checklist-item" [class.readonly]="soloLectura">
+                  <input type="checkbox"
+                         [checked]="isItemChecked(campo, opt)"
+                         (change)="toggleItemChecked(campo, opt, $any($event.target).checked)"
+                         [disabled]="soloLectura" />
+                  <span>{{ opt }}</span>
+                </label>
+              }
+              @if (getParsedOpciones(campo.opciones).length === 0) {
+                <span style="font-size: 12px; color: #64748b; font-style: italic;">Sin opciones configuradas.</span>
+              }
+            </div>
+          }
+          @if (campo.tipo === 'TABLA') {
+            <div class="tabla-dinamica-container">
+              @if (getColumns(campo).length === 0) {
+                <div class="tabla-empty-msg">Configura las columnas de la tabla arriba para empezar a agregar filas.</div>
+              } @else {
+                <table class="dform-table">
+                  <thead>
+                    <tr>
+                      @for (col of getColumns(campo); track col) {
+                        <th>{{ col }}</th>
+                      }
+                      @if (!soloLectura) {
+                        <th class="col-accion">Acciones</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of parsedTables[campo.id] || []; track $index; let rIndex = $index) {
+                      <tr>
+                        @for (col of getColumns(campo); track col) {
+                          <td>
+                            @if (soloLectura) {
+                              <span>{{ row[col] }}</span>
+                            } @else {
+                              <input class="cell-input" [(ngModel)]="row[col]" (ngModelChange)="actualizarValorTabla(campo)" />
+                            }
+                          </td>
+                        }
+                        @if (!soloLectura) {
+                          <td style="text-align: center;">
+                            <button mat-icon-button type="button" color="warn" (click)="eliminarFila(campo, rIndex)">
+                              <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+                            </button>
+                          </td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+                @if (!soloLectura) {
+                  <button mat-button type="button" class="btn-add-row" (click)="agregarFila(campo)">
+                    <mat-icon>add</mat-icon> Añadir Fila
+                  </button>
+                }
+              }
+            </div>
           }
           @if (campo.tipo === 'ARCHIVO') {
             @if (!soloLectura) {

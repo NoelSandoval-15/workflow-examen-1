@@ -55,8 +55,13 @@ export class DynamicFormComponent implements OnInit {
     { valor: 'CHECKBOX', label: 'Casilla (Sí/No)', icono: 'check_box' },
     { valor: 'TELEFONO', label: 'Teléfono', icono: 'phone' },
     { valor: 'EMAIL', label: 'Correo Electrónico', icono: 'email' },
-    { valor: 'ARCHIVO', label: 'Archivo / Imagen', icono: 'attach_file' }
+    { valor: 'ARCHIVO', label: 'Archivo / Imagen', icono: 'attach_file' },
+    { valor: 'SELECT', label: 'Selector (Menú Desplegable)', icono: 'arrow_drop_down_circle' },
+    { valor: 'CHECKLIST', label: 'Lista de Selección (Checklist)', icono: 'checklist' },
+    { valor: 'TABLA', label: 'Tabla de Datos', icono: 'table_chart' }
   ];
+
+  parsedTables: Record<string, Array<Record<string, string>>> = {};
 
   constructor(
     private taskService: TaskService,
@@ -66,6 +71,118 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit(): void {
     // Clonar campos iniciales para no mutar el Input directamente
     this.campos = this.camposIniciales.map(c => ({ ...c }));
+    this.initializeTables();
+  }
+
+  initializeTables(): void {
+    this.parsedTables = {};
+    for (const campo of this.campos) {
+      if (campo.tipo === 'TABLA') {
+        this.parsedTables[campo.id] = this.getParsedTableRows(campo);
+      }
+    }
+  }
+
+  getParsedTableRows(campo: CampoFormulario): Array<Record<string, string>> {
+    if (!campo.valor) return [];
+    try {
+      const parsed = JSON.parse(campo.valor as string);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  getParsedOpciones(opciones?: string): string[] {
+    if (!opciones) return [];
+    return opciones.split(',').map(o => o.trim()).filter(o => o.length > 0);
+  }
+
+  getColumns(campo: CampoFormulario): string[] {
+    return this.getParsedOpciones(campo.opciones);
+  }
+
+  agregarFila(campo: CampoFormulario): void {
+    const cols = this.getColumns(campo);
+    if (cols.length === 0) return;
+    
+    if (!this.parsedTables[campo.id]) {
+      this.parsedTables[campo.id] = [];
+    }
+    
+    const newRow: Record<string, string> = {};
+    for (const col of cols) {
+      newRow[col] = '';
+    }
+    this.parsedTables[campo.id].push(newRow);
+    this.actualizarValorTabla(campo);
+  }
+
+  eliminarFila(campo: CampoFormulario, rowIndex: number): void {
+    if (this.parsedTables[campo.id]) {
+      this.parsedTables[campo.id].splice(rowIndex, 1);
+      this.actualizarValorTabla(campo);
+    }
+  }
+
+  actualizarValorTabla(campo: CampoFormulario): void {
+    const rows = this.parsedTables[campo.id] || [];
+    campo.valor = JSON.stringify(rows);
+    this.guardadoOk = false;
+  }
+
+  onTipoChange(campo: CampoFormulario): void {
+    if (campo.tipo === 'TABLA') {
+      if (!this.parsedTables[campo.id]) {
+        this.parsedTables[campo.id] = [];
+      }
+      campo.valor = '[]';
+    } else if (campo.tipo === 'CHECKLIST') {
+      campo.valor = '[]';
+    } else {
+      campo.valor = '';
+    }
+    this.guardadoOk = false;
+  }
+
+  // Métodos para Checklist
+  isItemChecked(campo: CampoFormulario, item: string): boolean {
+    if (!campo.valor) return false;
+    try {
+      const selected = JSON.parse(campo.valor as string);
+      return Array.isArray(selected) && selected.includes(item);
+    } catch {
+      return (campo.valor as string).split(',').map(v => v.trim()).includes(item);
+    }
+  }
+
+  toggleItemChecked(campo: CampoFormulario, item: string, checked: boolean): void {
+    let selected: string[] = [];
+    if (campo.valor) {
+      try {
+        selected = JSON.parse(campo.valor as string);
+        if (!Array.isArray(selected)) selected = [];
+      } catch {
+        selected = (campo.valor as string).split(',').map(v => v.trim()).filter(v => v.length > 0);
+      }
+    }
+    if (checked) {
+      if (!selected.includes(item)) selected.push(item);
+    } else {
+      selected = selected.filter(v => v !== item);
+    }
+    campo.valor = JSON.stringify(selected);
+    this.guardadoOk = false;
+  }
+
+  getSelectedItems(campo: CampoFormulario): string[] {
+    if (!campo.valor) return [];
+    try {
+      const selected = JSON.parse(campo.valor as string);
+      return Array.isArray(selected) ? selected : [];
+    } catch {
+      return (campo.valor as string).split(',').map(v => v.trim()).filter(v => v.length > 0);
+    }
   }
 
   agregarCampo(): void {
@@ -121,6 +238,7 @@ export class DynamicFormComponent implements OnInit {
         this.guardando = false;
         this.guardadoOk = true;
         this.campos = tarea.datosFormulario ?? [];
+        this.initializeTables();
         this.formularioGuardado.emit(this.campos);
         this.cdr.detectChanges();
       },
@@ -136,7 +254,8 @@ export class DynamicFormComponent implements OnInit {
     const m: Record<string, string> = {
       TEXTO: 'short_text', TEXTO_LARGO: 'notes', NUMERO: 'numbers',
       FECHA: 'calendar_today', CHECKBOX: 'check_box', TELEFONO: 'phone',
-      EMAIL: 'email', ARCHIVO: 'attach_file'
+      EMAIL: 'email', ARCHIVO: 'attach_file',
+      SELECT: 'arrow_drop_down_circle', CHECKLIST: 'checklist', TABLA: 'table_chart'
     };
     return m[tipo] ?? 'input';
   }

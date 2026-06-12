@@ -8,11 +8,12 @@ import { ApiResponse } from '../../../core/models/api-response.model';
 export interface CampoFormulario {
   id: string;
   etiqueta: string;
-  tipo: 'TEXTO' | 'TEXTO_LARGO' | 'NUMERO' | 'FECHA' | 'CHECKBOX' | 'TELEFONO' | 'EMAIL' | 'ARCHIVO';
+  tipo: 'TEXTO' | 'TEXTO_LARGO' | 'NUMERO' | 'FECHA' | 'CHECKBOX' | 'TELEFONO' | 'EMAIL' | 'ARCHIVO' | 'SELECT' | 'CHECKLIST' | 'TABLA';
   requerido: boolean;
   valor?: string | boolean;
   archivoUrl?: string;
   archivoNombre?: string;
+  opciones?: string;
 }
 
 export interface Task {
