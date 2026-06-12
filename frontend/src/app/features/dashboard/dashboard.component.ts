@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 import { WorkflowInstanceService } from '../workflows/services/workflow-instance.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -139,7 +140,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.errorIA = null;
     this.cdr.detectChanges();
 
-    let url = 'http://localhost:8000/api/ia/cuellos-botella';
+    let url = environment.iaUrl + '/cuellos-botella';
     const params: string[] = [];
     if (this.selectedTemplateId) {
       params.push(`templateId=${this.selectedTemplateId}`);

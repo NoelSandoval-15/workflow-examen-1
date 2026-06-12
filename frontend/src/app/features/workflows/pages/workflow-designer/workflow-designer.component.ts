@@ -23,6 +23,7 @@ import { WorkflowRealtimeService } from '../../services/workflow-realtime.servic
 import { BpmnModelerComponent, NodoSeleccionado } from '../../components/bpmn-modeler/bpmn-modeler.component';
 import { AdminService, Departamento, User } from '../../../admin/services/admin.service';
 import { WorkflowTemplate, WorkflowNode, WorkflowEdge } from '../../models/workflow.model';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-workflow-designer',
@@ -500,7 +501,7 @@ export class WorkflowDesignerComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
     this.snackBar.open('🤖 Procesando cambios con Gemini...', '', { duration: 2500 });
 
-    this.http.post<any>('http://localhost:8000/api/ia/workflow/generate', payload)
+    this.http.post<any>(environment.iaUrl + '/workflow/generate', payload)
       .subscribe({
         next: (res) => {
           this.cargandoIA = false;

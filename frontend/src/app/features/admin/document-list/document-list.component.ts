@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DocumentService, Documento } from '../services/document.service';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-url.pipe';
 import { AuthService, AuthUser } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-document-list',
   standalone: true,
@@ -295,7 +296,7 @@ export class DocumentListComponent implements OnInit {
         return;
       }
       const script = document.createElement('script');
-      script.src = 'http://localhost:8081/web-apps/apps/api/documents/api.js';
+      script.src = environment.onlyOfficeUrl + '/web-apps/apps/api/documents/api.js';
       script.onload = () => resolve();
       document.body.appendChild(script);
     });

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService, Documento } from '../services/document.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 declare const DocsAPI: any;
 
@@ -198,7 +199,7 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
     this.loadOnlyOfficeScript()
       .then(() => this.initEditor())
       .catch(() => {
-        this.error = 'No se pudo conectar con OnlyOffice. ¿Está corriendo en localhost:8081?';
+        this.error = 'No se pudo conectar con OnlyOffice. ¿Está el servicio activo?';
         this.cargando = false;
         this.cdr.detectChanges();
       });
@@ -208,7 +209,7 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
     return new Promise((resolve, reject) => {
       if ((window as any).DocsAPI) { return resolve(); }
       const script = document.createElement('script');
-      script.src = 'http://localhost:8081/web-apps/apps/api/documents/api.js';
+      script.src = environment.onlyOfficeUrl + '/web-apps/apps/api/documents/api.js';
       script.onload = () => resolve();
       script.onerror = () => reject();
       document.body.appendChild(script);
@@ -235,7 +236,7 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
           documentType: this.getDocumentType(ext),
           editorConfig: {
             // host.docker.internal permite a OnlyOffice (en Docker) alcanzar el backend local
-            callbackUrl: `http://host.docker.internal:8080/api/archivos/callback/${this.document!.id}`,
+            callbackUrl: `${environment.onlyOfficeCallbackUrl}/${this.document!.id}`,
             lang: 'es',
             mode: 'edit',
             user: {

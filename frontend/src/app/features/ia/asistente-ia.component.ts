@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../environments/environment';
 
 interface Mensaje {
   texto: string;
@@ -96,7 +97,7 @@ export class AsistenteIaComponent implements OnInit, AfterViewChecked {
   }
 
   verificarConexionFastApi() {
-    this.http.get<any>('http://localhost:8000/').subscribe({
+    this.http.get<any>(environment.iaUrl).subscribe({
       next: (res) => {
         this.fastApiStatus = res.nlp_model_loaded;
         this.cdr.detectChanges();
@@ -140,7 +141,7 @@ export class AsistenteIaComponent implements OnInit, AfterViewChecked {
     this.cdr.detectChanges(); // Refrescar para mostrar el globo del usuario y el spinner
 
     // Petición a FastAPI
-    this.http.post<any>('http://localhost:8000/api/ia/nlp/analizar', { texto: textoConsulta }).subscribe({
+    this.http.post<any>(environment.iaUrl + '/nlp/analizar', { texto: textoConsulta }).subscribe({
       next: (res) => {
         this.cargando = false;
         this.fastApiStatus = true;
@@ -201,7 +202,7 @@ export class AsistenteIaComponent implements OnInit, AfterViewChecked {
           
           nuevoMensajeIA.reporte = {
             nombre: `Reporte_${analisis.categoria}_${analisis.criterio}.${analisis.formato === 'excel' ? 'xlsx' : (analisis.formato === 'word' ? 'docx' : 'pdf')}`,
-            url: `http://localhost:8000/api/ia/nlp/descargar${queryParams}`,
+            url: `${environment.iaUrl}/nlp/descargar${queryParams}`,
             tipo: analisis.formato
           };
         }
