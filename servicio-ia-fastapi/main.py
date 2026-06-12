@@ -111,6 +111,8 @@ class ConsultaNLP(BaseModel):
     texto: str
 
 @app.get("/")
+@app.get("/api/ia")
+@app.get("/api/ia/")
 def read_root():
     return {
         "message": "Microservicio de IA activo y funcionando",
