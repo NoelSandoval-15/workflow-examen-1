@@ -1,0 +1,128 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: mongo_secret
+      MONGO_INITDB_DATABASE: proyectoDB
+    volumes:
+      - mongo_prod_data:/data/db
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: camunda_db
+      POSTGRES_USER: camunda
+      POSTGRES_PASSWORD: camunda_secret
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U camunda -d camunda_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  spring-boot:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: spring-boot
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATA_MONGODB_URI: mongodb://admin:mongo_secret@mongodb:27017/proyectoDB?authSource=admin
+      SPRING_DATA_MONGODB_DATABASE: proyectoDB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/camunda_db
+      SPRING_DATASOURCE_USERNAME: camunda
+      SPRING_DATASOURCE_PASSWORD: camunda_secret
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      CAMUNDA_BPM_DATABASE_SCHEMA_UPDATE: "true"
+      AWS_S3_ACCESS_KEY: ${AWS_S3_ACCESS_KEY}
+      AWS_S3_SECRET_KEY: ${AWS_S3_SECRET_KEY}
+      AWS_S3_BUCKET: examensw1-documentos-2026
+      AWS_S3_REGION: us-east-2
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: always
+
+  fastapi-ia:
+    build:
+      context: ./servicio-ia-fastapi
+      dockerfile: Dockerfile
+    container_name: fastapi-ia
+    environment:
+      MONGO_URI: mongodb://admin:mongo_secret@mongodb:27017/proyectoDB?authSource=admin
+      # Agregar GEMINI_API_KEY en las variables del sistema en EC2
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: always
+
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice
+    environment:
+      - JWT_ENABLED=true
+      - JWT_SECRET=rxCBhCC7gSHd6umXzbOcX4vzgzu9D6qM
+      - USE_UNAUTHORIZED_STORAGE=true
+      - ALLOW_PRIVATE_IP_ADDRESS=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: angular-frontend
+    networks:
+      - app-network
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-reverse-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/nginx/certs:ro
+    depends_on:
+      - spring-boot
+      - fastapi-ia
+      - onlyoffice
+      - frontend
+    networks:
+      - app-network
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_prod_data:
+  mongo_prod_data:
