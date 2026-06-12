@@ -34,3 +34,9 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Documentación local y apuntes del usuario
+/docs/
+/*.txt
+/*.md
+/*.js

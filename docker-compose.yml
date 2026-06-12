@@ -1,0 +1,83 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: mongo_secret
+      MONGO_INITDB_DATABASE: proyectoDB
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: camunda_db
+      POSTGRES_USER: camunda
+      POSTGRES_PASSWORD: camunda_secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U camunda -d camunda_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  spring-boot:
+    image: noel002/backend-proyecto:latest
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: spring-boot
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATA_MONGODB_URI: mongodb://admin:mongo_secret@mongodb:27017/proyectoDB?authSource=admin
+      SPRING_DATA_MONGODB_DATABASE: proyectoDB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/camunda_db
+      SPRING_DATASOURCE_USERNAME: camunda
+      SPRING_DATASOURCE_PASSWORD: camunda_secret
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      CAMUNDA_BPM_DATABASE_SCHEMA_UPDATE: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice
+    ports:
+      - "8081:80" # Lo exponemos en el puerto 8081 para que no choque con nada
+    environment:
+      - JWT_ENABLED=false # Para facilitar pruebas en local; en producción debe ser true
+      - USE_UNAUTHORIZED_STORAGE=true # Permite callbacks a URLs sin HTTPS
+      - ALLOW_PRIVATE_IP_ADDRESS=true # Permite callbacks a IPs privadas (172.x, 192.168.x)
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # Permite resolver el host desde dentro del contenedor
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:
